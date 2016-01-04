@@ -1,0 +1,22 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\begin{document}
+\noindent
+Let $G=\{V, E\}$ such that\\
+$V$ is a set of vertices $v_i = \{x, i\}, x \in \{A, C, G, T\} \cup \{\{S, 0\}, \{E, -1\}\}$ where $S$ is a special start symbol and $E$ is a special stop symbol and\\
+$E$ is a set of edges $e = \{v_x, v_y\}$ where $v_x, v_y \in V$\\
+\\
+Let $S$ be a finite string over the alphabet $\{A, C, G, t\}$ where the individual characters of the string is denoted $S_i$ and substrings from $x$ to $y$ are denoted $S_{x:y}$\\
+\\
+The graph mapping problem can be defined as:\\ For any pair $\{G, S\}$, maximize the recursive formula $f(G, S)$:\\
+\indent$f(G, \epsilon) = 0$,\\
+\indent$f(G, S_{0:x}) = f(G, S_{0:x-1}) + max_{v_j \in V}(\lambda_1 S(S_i, v_j) + \lambda_2 N(S_i, v_j))$\\
+where $\lambda_x$ are tuning parameters,\\
+$S(x, y)$ is a scoring function for the two bases contained in x and y (typically defined by a scoring table) and\\
+$N(x, y)$ is a scoring function for the context around x and y, defined as:\\
+$N(x, y) = max_{c \in C_N(x)}(SW(c, C_N(y))$\\
+where $C_N(x)$ is the set of all possible linear contexts of length N around x. A linear context would for a string be the $N/2$ characters in each direction whereas for a graph it would be every possible combination of every possible path going backwards $N/2$ nodes and forwards $N/2$ nodes from x and\\
+$SW(x, y)$ is the standard Smith-Waterman alignment algorithm
+\end{document}

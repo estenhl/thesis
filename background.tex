@@ -1,0 +1,96 @@
+\documentclass[thesis.tex]{subfiles}
+
+\begin{document}
+\chapter{Background}
+\section{DNA}
+\textit{Deoxyribonucleic acid} (DNA) is a molecule which allows living creatures and viruses to store and pass on genetic information.\textcolor{red}{How/What is stored}
+\par\noindent
+The DNA of an individual is made up by two complementary strands of nucleotides bound together in a double helix, where the nucleotides can contain the bases \textbf{A}denine, \textbf{C}ytosine, \textbf{G}uanine or \textbf{T}hymine. Complementary in this context means that instead of one singular sequence of bases DNA is made up by a sequence of paired bases, A's with T's and C's with G's, called \textit{base pairs}. \textcolor{red}{Reverse}\\
+\par\noindent
+The size of DNA varies across species, from a couple of thousand basepairs (kb) in some viruses to several hundred billion basepairs (gb) in larger, more complex organisms. The human genome comes in at the higher end of this range, with a length of roughly 3 gb. As DNA consists of discrete units, the bases A, C, T and G, the genome of an organism can be represented by a text string. A continuous sequence of bases is called a \textit{contig}, several contigs combined is a \textit{scaffold} which again can be fused to \textit{chromosomes} which makes up the \textit{genome} of an organism.\\
+\par\noindent
+\textcolor{red}{Genes/trash DNA}
+\subsection{Genomic variations}
+Over the span of time DNA is subject to change. Through random mutations and recombination a genetic sequence can be changed either within an individual or as a product of reproduction. The fact that these changes are able to survive and propagate through generations leads to a genepool where even though the DNA comes from a common ancestor, different individuals will have different variants of the original sequence. These variations form the basis for the division into species, but even within species alot of natural variation will occur.\\
+\par\noindent
+The least complex of these variations are \textit{Single Nucleotide Polymorphisms} (SNPs), where a single nucleotide has changed between two individuals, and \textit{insertions} and \textit{deletions} (Indels) where either one or a short sequence of bases have appeared or disappeared from the DNA of an individual. Longer and more complex structural variations can also occur when a larger part of a chromosome breaks free and disappears completely or inserts itself in a different place or the opposite direction.
+\subsection{Alignment}
+The fact that a genome is built by discrete entities, the bases A, C, G and T, means that any DNA sequence can be represented by a text string. The double-stranded nature of DNA could be encoded into the string, but as one side can easily be derived from the other representing one of the strands is usually expressive enough. The process of determining genetic variation between two separate individuals can then be seen as the problem of finding the similarities and differences in the two corresponding text strings.
+\subsubsection{String comparison in computer science}
+There exists several ways of determining the difference, called the edit distance, between two strings mathematically. The main difference between the approaches are which operations are possible on the two strings and how the result is scored. Perhaps the most common technique is called \textit{Levenshtein distance}, which allows the operations deletion, insertion, and substitution. All of the preceding operations works on a single character, and one operation by itself yields a distance of 1. Finding the optimal Levenshtein distance is done by dynamic programming in linear time.
+\subsubsection{DNA sequence comparison}
+When comparing two DNA sequences the goal should be to model the parameters in the edit distance problem in such a way that the most probable evolutionary changes are scored the highest. Most importantly there are two traits to capture: Some substitutions of bases are more common than others, and the fact that \textcolor{red}{it's harder for a part of DNA to break off than it is to actually move around after it has detached}. The first problem can be tackled with a \textit{substitution matrix}: A matrix in which every possible pair of bases has a substitution score. The second trait can be captured either with a pure logarithmic gap penalty, or by an affine gap penalty: A different penalty for opening and extending the gap. In the latter the penalty for extending a gap is constant, but lower than it is for opening a gap. With small modifications the dynamic programming algorithm can encapsulate these ideas and be used to solve DNA sequence comparisons. 
+
+\begin{figure}
+	\begin{mdframed}
+		\begin{center}
+			\begin{tikzpicture}
+    \begin{axis}[domain=-2*pi:2*pi]
+    \addplot[mark=none, samples=100, red] function {sin(x)};
+    \end{axis}
+			\end{tikzpicture}
+		\end{center}
+	\end{mdframed}
+	\label{fig:GapPenalties}
+\end{figure}
+\section{Graph-based genomes}
+\begin{figure}
+	\begin{mdframed}
+		\begin{center}
+			\begin{tikzpicture}[scale=2,->,>=stealth',shorten >=1pt,auto,node distance=1.4cm]
+				\node[state, scale=0.6] (q0) {$A$};
+				\node[state, scale=0.6] [right of=q0] (q1) {$A$};
+				\node[state, scale=0.6] [above right of=q1] (q2) {$C$};
+				\node[state, scale=0.6] [below right of=q1] (q3) {$T$};
+				\node[state, scale=0.6] [below right of=q2] (q4) {$A$};
+				\node[state, scale=0.6] [right of=q4] (q5) {$G$};
+				\node[draw=none, scale=0.6] [below of=q3] (q6) {$AA\textcolor{red}{C}GA$};
+				\node[draw=none, scale=0.6] [below=0cm of q6] (q7) {$AA\textcolor{red}{T}GA$};
+
+				\path (q0) edge node {} (q1)
+				(q1) edge node {} (q2)
+				edge node {} (q3)
+				(q2) edge node {} (q4)
+				(q3) edge node {} (q4)
+				(q4) edge node {} (q5);
+
+			\end{tikzpicture}
+		\end{center}
+	\end{mdframed}
+	\caption{Two sequences with an SNP, and the corresponding graph}
+	\label{fig:SimpleGraphSNP}
+\end{figure}
+
+\begin{figure}
+	\begin{mdframed}
+		\begin{center}
+			\begin{tikzpicture}[scale=2,->,>=stealth',shorten >=1pt,auto,node distance=1.4cm]
+				\node[state, scale=0.6] (q0) {$A$};
+				\node[state, scale=0.6] [right of=q0] (q1) {$T$};
+				\node[state, scale=0.6] [right of=q1] (q2) {$G$};
+				\node[state, scale=0.6] [right of=q2] (q3) {$T$};
+				\node[state, scale=0.6] [right of=q3] (q4) {$G$};
+
+				\path (q0) edge node {} (q1)
+				(q1) edge node {} (q2)
+				edge [bend left=50] node {} (q3)
+				(q2) edge node {} (q3)
+				(q3) edge node {} (q4);
+			\end{tikzpicture}
+			\begin{tikzpicture}[scale=2,->,>=stealth',shorten >=1pt,auto,node distance=1.4cm]
+				\node[state, scale=0.6] (q0) {$A$};
+				\node[state, scale=0.6] [right of=q0] (q1) {$T$};
+				\node[state, scale=0.6] [right of=q1] (q2) {$T$};
+				\node[state, scale=0.6] [right of=q2] (q3) {$G$};
+				\node[state, scale=0.6] [above right=0.3cm and 0cm of q1] {$G$};
+
+				\path (q0) edge node {} (q1)
+				(q1) edge node {} (q2)
+				(q2) edge node {} (q3);
+			\end{tikzpicture}
+		\end{center}
+	\end{mdframed}
+	\caption{Two sequences with a single nucleotide indel, and its two corresponding (equivalent) graph representations}
+	\label{fig:SimpleGraphIndel}
+\end{figure}
+\end{document}
