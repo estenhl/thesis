@@ -4,19 +4,23 @@
 \usepackage{mdframed}
 \usepackage{tikz}
 \usepackage{pgfplots}
+\usepackage{amsthm}
 \urlstyle{sf}
 \usepackage{babel,textcomp,csquotes,ifimasterforside,varioref,graphicx}
 \usepackage[backend=biber,style=numeric-comp]{biblatex}
-\usetikzlibrary{automata,arrows,positioning} 
+\usetikzlibrary{automata,arrows,positioning}
 
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}
+\newtheorem{corollary}{Corollary}
 
 \usepackage{subfiles}
  
 \usepackage{blindtext}
 
-\title{The title of my thesis}        
-\subtitle{Any short subtitle}        
-\author{My Name}                       
+\title{Alignment against a graph-based reference genome}        
+\subtitle{Fuzzy searching in large and complex structures}        
+\author{Esten H{\o}yland Leonardsen}                       
 
 \bibliography{thesis}                  
 
@@ -37,6 +41,7 @@
 \part{Introduction}                   
 
 \subfile{background}
+\subfile{method}
 \backmatter{}
 \printbibliography
 \end{document}

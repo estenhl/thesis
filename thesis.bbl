@@ -1,0 +1,66 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 2.3 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \sortlist{entry}{nty}
+    \entry{extending_reference_assembly_models}{article}{}
+      \name{labelname}{14}{}{%
+        {{hash=d788f85af640697fc74c261ff5e7ea3c}{Church}{C\bibinitperiod}{Deanna\bibnamedelima M.}{D\bibinitperiod\bibinitdelim M\bibinitperiod}{}{}{}{}}%
+        {{hash=1c02d328cd29a7a5e58c4f06a738eab3}{Schneider}{S\bibinitperiod}{Valeria\bibnamedelima A.}{V\bibinitperiod\bibinitdelim A\bibinitperiod}{}{}{}{}}%
+        {{hash=957a9be2843a8c3e921a77a365807ba5}{Steinberg}{S\bibinitperiod}{Karyn\bibnamedelima Meltz}{K\bibinitperiod\bibinitdelim M\bibinitperiod}{}{}{}{}}%
+        {{hash=551bb1aefdf06526c107505b9f92d2ae}{Schatz}{S\bibinitperiod}{Michael\bibnamedelima C.}{M\bibinitperiod\bibinitdelim C\bibinitperiod}{}{}{}{}}%
+        {{hash=e8641ea59d41a0403a45d9767900d346}{Quinlan}{Q\bibinitperiod}{Aaron\bibnamedelima R.}{A\bibinitperiod\bibinitdelim R\bibinitperiod}{}{}{}{}}%
+        {{hash=352e26f8d5ce212924afb3770cb3e198}{Chin}{C\bibinitperiod}{Chen-Shan}{C\bibinithyphendelim S\bibinitperiod}{}{}{}{}}%
+        {{hash=16a098e06f46bcc6040e77aefc97867b}{Kitts}{K\bibinitperiod}{Paul\bibnamedelima A.}{P\bibinitperiod\bibinitdelim A\bibinitperiod}{}{}{}{}}%
+        {{hash=9659bbb3ecce71edf66d952b38956a94}{Aken}{A\bibinitperiod}{Bronwen}{B\bibinitperiod}{}{}{}{}}%
+        {{hash=9dbfe9c80227658fd3ca10db3527ac3a}{Marth}{M\bibinitperiod}{Gabor\bibnamedelima T.}{G\bibinitperiod\bibinitdelim T\bibinitperiod}{}{}{}{}}%
+        {{hash=b912b004172484748c149ea03c61499c}{Hoffman}{H\bibinitperiod}{Michael\bibnamedelima M.}{M\bibinitperiod\bibinitdelim M\bibinitperiod}{}{}{}{}}%
+        {{hash=2431ceb112b984eef24ef9bbe1bdeb7c}{Herrero}{H\bibinitperiod}{Javier}{J\bibinitperiod}{}{}{}{}}%
+        {{hash=c501a5116248889bb63e468152eee523}{Mendoza}{M\bibinitperiod}{M.\bibnamedelimi Lisandra\bibnamedelima Zepeda}{M\bibinitperiod\bibinitdelim L\bibinitperiod\bibinitdelim Z\bibinitperiod}{}{}{}{}}%
+        {{hash=517afe729b2eb59735ba80628d943bb0}{Durbin}{D\bibinitperiod}{Richard}{R\bibinitperiod}{}{}{}{}}%
+        {{hash=91c5fcd648e30cd5b187eac97d23aa03}{Flicek}{F\bibinitperiod}{Paul}{P\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{14}{}{%
+        {{hash=d788f85af640697fc74c261ff5e7ea3c}{Church}{C\bibinitperiod}{Deanna\bibnamedelima M.}{D\bibinitperiod\bibinitdelim M\bibinitperiod}{}{}{}{}}%
+        {{hash=1c02d328cd29a7a5e58c4f06a738eab3}{Schneider}{S\bibinitperiod}{Valeria\bibnamedelima A.}{V\bibinitperiod\bibinitdelim A\bibinitperiod}{}{}{}{}}%
+        {{hash=957a9be2843a8c3e921a77a365807ba5}{Steinberg}{S\bibinitperiod}{Karyn\bibnamedelima Meltz}{K\bibinitperiod\bibinitdelim M\bibinitperiod}{}{}{}{}}%
+        {{hash=551bb1aefdf06526c107505b9f92d2ae}{Schatz}{S\bibinitperiod}{Michael\bibnamedelima C.}{M\bibinitperiod\bibinitdelim C\bibinitperiod}{}{}{}{}}%
+        {{hash=e8641ea59d41a0403a45d9767900d346}{Quinlan}{Q\bibinitperiod}{Aaron\bibnamedelima R.}{A\bibinitperiod\bibinitdelim R\bibinitperiod}{}{}{}{}}%
+        {{hash=352e26f8d5ce212924afb3770cb3e198}{Chin}{C\bibinitperiod}{Chen-Shan}{C\bibinithyphendelim S\bibinitperiod}{}{}{}{}}%
+        {{hash=16a098e06f46bcc6040e77aefc97867b}{Kitts}{K\bibinitperiod}{Paul\bibnamedelima A.}{P\bibinitperiod\bibinitdelim A\bibinitperiod}{}{}{}{}}%
+        {{hash=9659bbb3ecce71edf66d952b38956a94}{Aken}{A\bibinitperiod}{Bronwen}{B\bibinitperiod}{}{}{}{}}%
+        {{hash=9dbfe9c80227658fd3ca10db3527ac3a}{Marth}{M\bibinitperiod}{Gabor\bibnamedelima T.}{G\bibinitperiod\bibinitdelim T\bibinitperiod}{}{}{}{}}%
+        {{hash=b912b004172484748c149ea03c61499c}{Hoffman}{H\bibinitperiod}{Michael\bibnamedelima M.}{M\bibinitperiod\bibinitdelim M\bibinitperiod}{}{}{}{}}%
+        {{hash=2431ceb112b984eef24ef9bbe1bdeb7c}{Herrero}{H\bibinitperiod}{Javier}{J\bibinitperiod}{}{}{}{}}%
+        {{hash=c501a5116248889bb63e468152eee523}{Mendoza}{M\bibinitperiod}{M.\bibnamedelimi Lisandra\bibnamedelima Zepeda}{M\bibinitperiod\bibinitdelim L\bibinitperiod\bibinitdelim Z\bibinitperiod}{}{}{}{}}%
+        {{hash=517afe729b2eb59735ba80628d943bb0}{Durbin}{D\bibinitperiod}{Richard}{R\bibinitperiod}{}{}{}{}}%
+        {{hash=91c5fcd648e30cd5b187eac97d23aa03}{Flicek}{F\bibinitperiod}{Paul}{P\bibinitperiod}{}{}{}{}}%
+      }
+      \strng{namehash}{6d4adccf171c31143a841322a0064a5c}
+      \strng{fullhash}{f212f790ee0e2d9b1e04bacd19155829}
+      \field{sortinit}{C}
+      \field{labeltitle}{Extending reference assembly models}
+      \field{journaltitle}{Genome Biology}
+      \field{title}{Extending reference assembly models}
+      \field{year}{2015}
+    \endentry
+  \endsortlist
+\endrefsection
+\endinput
+

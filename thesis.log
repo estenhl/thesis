@@ -1,8 +1,8 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.2.27)  4 JAN 2016 16:21
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.2.27)  8 JAN 2016 17:33
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**thesis.tex -shell-escape
+**thesis.tex
 (./thesis.tex
 LaTeX2e <2011/06/27>
 Babel <3.9h> and hyphenation patterns for 2 languages loaded.
@@ -1003,6 +1003,18 @@ File: tikzlibraryplotmarks.code.tex 2008/01/09 v2.10 (rcs-revision 1.1)
 (/usr/share/texmf/tex/generic/pgf/libraries/pgflibraryplotmarks.code.tex
 File: pgflibraryplotmarks.code.tex 2010/10/15 v2.10 (rcs-revision 1.12)
 )))
+(/usr/share/texlive/texmf-dist/tex/latex/amscls/amsthm.sty
+Package: amsthm 2004/08/06 v2.20
+\thm@style=\toks33
+\thm@bodyfont=\toks34
+\thm@headfont=\toks35
+\thm@notefont=\toks36
+\thm@headpunct=\toks37
+\thm@preskip=\skip116
+\thm@postskip=\skip117
+\thm@headsep=\skip118
+\dth@everypar=\toks38
+)
 (/usr/share/texlive/texmf-dist/tex/generic/babel/babel.sty
 Package: babel 2013/12/03 3.9h The Babel package
 
@@ -1183,7 +1195,7 @@ Package: csquotes 2011/10/22 v5.1d context-sensitive quotations
 \csq@qlevel=\count160
 \csq@maxlvl=\count161
 \csq@tshold=\count162
-\csq@ltx@everypar=\toks33
+\csq@ltx@everypar=\toks39
 
 (/usr/share/texlive/texmf-dist/tex/latex/csquotes/csquotes.def
 File: csquotes.def 2011/10/22 v5.1d csquotes generic definitions
@@ -1217,12 +1229,12 @@ Package: calc 2007/08/22 v4.3 Infix arithmetic (KKT,FJ)
 \calc@Bcount=\count164
 \calc@Adimen=\dimen195
 \calc@Bdimen=\dimen196
-\calc@Askip=\skip116
-\calc@Bskip=\skip117
+\calc@Askip=\skip119
+\calc@Bskip=\skip120
 LaTeX Info: Redefining \setlength on input line 76.
 LaTeX Info: Redefining \addtolength on input line 77.
 \calc@Ccount=\count165
-\calc@Cskip=\skip118
+\calc@Cskip=\skip121
 )
 (/usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty
 Package: ifthen 2001/05/26 v1.1c Standard LaTeX ifthen package (DPC)
@@ -1294,15 +1306,15 @@ Normal \count register pool exhausted, switching to extended pool.
 \blx@parenlevel@text=\count280
 \blx@parenlevel@foot=\count281
 \blx@sectionciteorder@0=\count282
-\labelnumberwidth=\skip119
-\labelalphawidth=\skip120
-\shorthandwidth=\skip121
-\biblabelsep=\skip122
-\bibitemsep=\skip123
-\bibnamesep=\skip124
-\bibinitsep=\skip125
-\bibparsep=\skip126
-\bibhang=\skip127
+\labelnumberwidth=\skip122
+\labelalphawidth=\skip123
+\shorthandwidth=\skip124
+\biblabelsep=\skip125
+\bibitemsep=\skip126
+\bibnamesep=\skip127
+\bibinitsep=\skip128
+\bibparsep=\skip129
+\bibhang=\skip130
 \blx@bcfin=\read2
 \blx@bcfout=\write4
 \c@mincomprange=\count283
@@ -1487,12 +1499,15 @@ File: pgflibraryarrows.code.tex 2008/10/27 v2.10 (rcs-revision 1.9)
 (/usr/share/texmf/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryposit
 ioning.code.tex
 File: tikzlibrarypositioning.code.tex 2008/10/06 v2.10 (rcs-revision 1.7)
-) (/usr/share/texlive/texmf-dist/tex/latex/subfiles/subfiles.sty
+)
+\c@defn=\count363
+\c@corollary=\count364
+ (/usr/share/texlive/texmf-dist/tex/latex/subfiles/subfiles.sty
 Package: subfiles 2012/05/23 Federico Garcia
 (/usr/share/texlive/texmf-dist/tex/latex/tools/verbatim.sty
 Package: verbatim 2003/08/22 v1.5q LaTeX2e package for verbatim enhancements
-\every@verbatim=\toks34
-\verbatim@line=\toks35
+\every@verbatim=\toks40
+\verbatim@line=\toks41
 \verbatim@in@stream=\read3
 ))
 (/usr/share/texlive/texmf-dist/tex/latex/blindtext/blindtext.sty
@@ -1501,24 +1516,24 @@ Package: blindtext 2012/01/06 V2.0 blindtext-Package
 (/usr/share/texlive/texmf-dist/tex/latex/tools/xspace.sty
 Package: xspace 2009/10/20 v1.13 Space after command names (DPC,MH)
 )
-\c@blindtext=\count363
-\c@Blindtext=\count364
-\c@blind@countparstart=\count365
-\blind@countxx=\count366
-\blindtext@numBlindtext=\count367
-\blind@countyy=\count368
-\c@blindlist=\count369
-\c@blindlistlevel=\count370
-\c@blindlist@level=\count371
-\blind@listitem=\count372
-\c@blind@listcount=\count373
-\c@blind@levelcount=\count374
-\blind@mathformula=\count375
-\blind@Mathformula=\count376
-\c@blind@randomcount=\count377
-\c@blind@randommax=\count378
-\c@blind@pangramcount=\count379
-\c@blind@pangrammax=\count380
+\c@blindtext=\count365
+\c@Blindtext=\count366
+\c@blind@countparstart=\count367
+\blind@countxx=\count368
+\blindtext@numBlindtext=\count369
+\blind@countyy=\count370
+\c@blindlist=\count371
+\c@blindlistlevel=\count372
+\c@blindlist@level=\count373
+\blind@listitem=\count374
+\c@blind@listcount=\count375
+\c@blind@levelcount=\count376
+\blind@mathformula=\count377
+\blind@Mathformula=\count378
+\c@blind@randomcount=\count379
+\c@blind@randommax=\count380
+\c@blind@pangramcount=\count381
+\c@blind@pangrammax=\count382
 )
 Package csquotes Info: Checking for multilingual support...
 Package csquotes Info: ... found 'babel' package.
@@ -1543,25 +1558,25 @@ File: english.lbx 2013/11/25 v2.8a biblatex localization (PK/JW/AB)
 (./thesis.aux)
 \openout1 = `thesis.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 23.
-LaTeX Font Info:    ... okay on input line 23.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 23.
-LaTeX Font Info:    ... okay on input line 23.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 23.
-LaTeX Font Info:    ... okay on input line 23.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 23.
-LaTeX Font Info:    ... okay on input line 23.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 23.
-LaTeX Font Info:    ... okay on input line 23.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 23.
-LaTeX Font Info:    ... okay on input line 23.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 23.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 23.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 27.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 27.
  (/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 23.
-LaTeX Font Info:    Try loading font information for T1+ppl on input line 23.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Try loading font information for T1+ppl on input line 27.
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1ppl.fd
 File: t1ppl.fd 2001/06/04 font definitions for T1/ppl.
@@ -1571,17 +1586,17 @@ File: t1ppl.fd 2001/06/04 font definitions for T1/ppl.
 
 (/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count381
+\scratchcounter=\count383
 \scratchdimen=\dimen199
 \scratchbox=\box80
-\nofMPsegments=\count382
-\nofMParguments=\count383
-\everyMPshowfont=\toks36
-\MPscratchCnt=\count384
+\nofMPsegments=\count384
+\nofMParguments=\count385
+\everyMPshowfont=\toks42
+\MPscratchCnt=\count386
 \MPscratchDim=\dimen200
-\MPnumerator=\count385
-\makeMPintoPDFobject=\count386
-\everyMPtoPDFconversion=\toks37
+\MPnumerator=\count387
+\makeMPintoPDFobject=\count388
+\everyMPtoPDFconversion=\toks43
 ) ABD: EveryShipout initializing macros
 (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
@@ -1602,7 +1617,7 @@ e
 Package pgfplots Warning: running in backwards compatibility mode (unsuitable t
 ick labels; missing features). Consider writing \pgfplotsset{compat=1.9} into y
 our preamble.
- on input line 23.
+ on input line 27.
 
 Package biblatex Info: Input encoding 'utf8' detected.
 Package biblatex Info: Automatic encoding selection.
@@ -1610,17 +1625,18 @@ Package biblatex Info: Automatic encoding selection.
 \openout4 = `thesis.bcf'.
 
 Package biblatex Info: Trying to load bibliographic data...
-Package biblatex Info: ... file 'thesis.bbl' not found.
-No file thesis.bbl.
-Package biblatex Info: Reference section=0 on input line 23.
-Package biblatex Info: Reference segment=0 on input line 23.
+Package biblatex Info: ... file 'thesis.bbl' found.
+(./thesis.bbl)
+Package biblatex Info: Reference section=0 on input line 27.
+Package biblatex Info: Reference segment=0 on input line 27.
+
 <ifi-kompendium-forside-eng.pdf, id=4, 639.66579pt x 887.2046pt>
 File: ifi-kompendium-forside-eng.pdf Graphic file (type pdf)
 
 <use ifi-kompendium-forside-eng.pdf>
-Package pdftex.def Info: ifi-kompendium-forside-eng.pdf used on input line 24.
+Package pdftex.def Info: ifi-kompendium-forside-eng.pdf used on input line 28.
 (pdftex.def)             Requested size: 639.66422pt x 887.20244pt.
-LaTeX Font Info:    Try loading font information for T1+phv on input line 24.
+LaTeX Font Info:    Try loading font information for T1+phv on input line 28.
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1phv.fd
 File: t1phv.fd 2001/06/04 scalable font definitions for T1/phv.
@@ -1628,30 +1644,30 @@ File: t1phv.fd 2001/06/04 scalable font definitions for T1/phv.
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} </home/esten/texmf/tex/late
 x/local/ifikompendium/ifi-kompendium-forside-eng.pdf>] [2]
-LaTeX Font Info:    Try loading font information for OT1+ppl on input line 26.
+LaTeX Font Info:    Try loading font information for OT1+ppl on input line 30.
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1ppl.fd
 File: ot1ppl.fd 2001/06/04 font definitions for OT1/ppl.
 )
-LaTeX Font Info:    Try loading font information for OML+zplm on input line 26.
+LaTeX Font Info:    Try loading font information for OML+zplm on input line 30.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omlzplm.fd
 File: omlzplm.fd 2002/09/08 Fontinst v1.914 font definitions for OML/zplm.
 )
-LaTeX Font Info:    Try loading font information for OMS+zplm on input line 26.
+LaTeX Font Info:    Try loading font information for OMS+zplm on input line 30.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omszplm.fd
 File: omszplm.fd 2002/09/08 Fontinst v1.914 font definitions for OMS/zplm.
 )
-LaTeX Font Info:    Try loading font information for OMX+zplm on input line 26.
+LaTeX Font Info:    Try loading font information for OMX+zplm on input line 30.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omxzplm.fd
 File: omxzplm.fd 2002/09/08 Fontinst v1.914 font definitions for OMX/zplm.
 )
-LaTeX Font Info:    Try loading font information for OT1+zplm on input line 26.
+LaTeX Font Info:    Try loading font information for OT1+zplm on input line 30.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1zplm.fd
@@ -1662,7 +1678,7 @@ File: ot1zplm.fd 2002/09/08 Fontinst v1.914 font definitions for OT1/zplm.
 
 ]
 LaTeX Font Info:    Font shape `T1/ppl/bx/n' in size <24.88> not available
-(Font)              Font shape `T1/ppl/b/n' tried instead on input line 28.
+(Font)              Font shape `T1/ppl/b/n' tried instead on input line 32.
  [3]
 [4
 
@@ -1689,13 +1705,18 @@ LaTeX Font Info:    Font shape `T1/ppl/bx/n' in size <24.88> not available
 
 ]
 LaTeX Font Info:    Font shape `T1/ppl/bx/n' in size <20.74> not available
-(Font)              Font shape `T1/ppl/b/n' tried instead on input line 37.
+(Font)              Font shape `T1/ppl/b/n' tried instead on input line 41.
  [1
 
 ] [2] (./background.tex
 Chapter 1.
 LaTeX Font Info:    Font shape `T1/ppl/bx/n' in size <14.4> not available
 (Font)              Font shape `T1/ppl/b/n' tried instead on input line 5.
+
+Underfull \hbox (badness 10000) in paragraph at lines 6--7
+
+ []
+
 LaTeX Font Info:    Font shape `T1/ppl/bx/n' in size <10.95> not available
 (Font)              Font shape `T1/ppl/b/n' tried instead on input line 8.
 
@@ -1709,52 +1730,73 @@ Underfull \hbox (badness 10000) in paragraph at lines 9--11
  []
 
 LaTeX Font Info:    Font shape `T1/ppl/bx/n' in size <12> not available
-(Font)              Font shape `T1/ppl/b/n' tried instead on input line 13.
+(Font)              Font shape `T1/ppl/b/n' tried instead on input line 11.
 
-Underfull \hbox (badness 10000) in paragraph at lines 14--15
+Underfull \hbox (badness 10000) in paragraph at lines 12--13
 
  []
 
 [3
 
 ]
-Package mdframed Info: mdframed works in twoside mode on input line 26.
 \openout3 = `thesis.pgf-plot.gnuplot'.
 
 runsystem(gnuplot thesis.pgf-plot.gnuplot)...disabled (restricted).
 
+PGFPlots: reading {thesis.pgf-plot.table}
+ [4]
+Package mdframed Info: mdframed works in twoside mode on input line 42.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 42.
+Package mdframed Info: mdframed inside float 
+ mdframed uses option nobreak mdframed on input line 62.
+Package mdframed Info: mdframed inside a box 
+ mdframed uses option nobreak mdframed on input line 62.
+Package mdframed Info: mdframed works in twoside mode on input line 69.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 69.
+Package mdframed Info: mdframed inside float 
+ mdframed uses option nobreak mdframed on input line 95.
+Package mdframed Info: mdframed inside a box 
+ mdframed uses option nobreak mdframed on input line 95.
+) (./method.tex [5] [6]
+Chapter 2.
+[7
+
+]
+Underfull \hbox (badness 10000) in paragraph at lines 51--52
+
+ []
+
+) [8] [9
 
 
-! Package pgfplots Error: Sorry, the gnuplot-result file 'thesis.pgf-plot.table
-' could not be found. Maybe you need to enable the shell-escape feature? For pd
-flatex, this is '>> pdflatex -shell-escape'. You can also invoke '>> gnuplot <f
-ile>.gnuplot' manually on the respective gnuplot file..
+] (./thesis.aux)
+Package logreq Info: Writing requests to 'thesis.run.xml'.
+\openout1 = `thesis.run.xml'.
 
-See the pgfplots package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.29 ...none, samples=100, red] function {sin(x)};
-                                                  
-? x
- 
+ ) 
 Here is how much of TeX's memory you used:
- 32128 strings out of 495028
- 711631 string characters out of 6181497
- 1145869 words of memory out of 5000000
- 34665 multiletter control sequences out of 15000+600000
- 32568 words of font info for 56 fonts, out of 8000000 for 9000
+ 32719 strings out of 495028
+ 723098 string characters out of 6181497
+ 1154514 words of memory out of 5000000
+ 35229 multiletter control sequences out of 15000+600000
+ 44126 words of font info for 86 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 56i,11n,74p,10451b,1427s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texlive/
-texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texlive/texmf-dist/f
-onts/type1/urw/palatino/uplb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/u
-rw/palatino/uplr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/
-uplri8a.pfb>
-Output written on thesis.pdf (17 pages, 5033629 bytes).
+ 56i,12n,85p,10437b,1886s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
+e/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf
+-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/
+fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/
+urw/palatino/uplb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/palatino
+/uplr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb
+>
+Output written on thesis.pdf (23 pages, 5072458 bytes).
 PDF statistics:
- 113 PDF objects out of 1000 (max. 8388607)
- 65 compressed objects within 1 object stream
+ 140 PDF objects out of 1000 (max. 8388607)
+ 87 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 6 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 18 words of extra memory for PDF output out of 10000 (max. 10000000)
 

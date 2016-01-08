@@ -3,37 +3,40 @@
 \begin{document}
 \chapter{Background}
 \section{DNA}
-\textit{Deoxyribonucleic acid} (DNA) is a molecule which allows living creatures and viruses to store and pass on genetic information.\textcolor{red}{How/What is stored}
+\textit{Deoxyribonucleic acid} (DNA) is a molecule which allows living creatures and viruses to store and pass on genetic information.\textcolor{red}{How/What is stored}\\
 \par\noindent
-The DNA of an individual is made up by two complementary strands of nucleotides bound together in a double helix, where the nucleotides can contain the bases \textbf{A}denine, \textbf{C}ytosine, \textbf{G}uanine or \textbf{T}hymine. Complementary in this context means that instead of one singular sequence of bases DNA is made up by a sequence of paired bases, A's with T's and C's with G's, called \textit{base pairs}. \textcolor{red}{Reverse}\\
+The DNA of an individual is made up by two complementary strands of nucleotides bound together in a double helix, where the nucleotides can contain the bases \textbf{A}denine, \textbf{C}ytosine, \textbf{G}uanine or \textbf{T}hymine. Complementary in this context means that instead of one singular sequence of bases DNA is made up by a sequence of paired bases, A's with T's and C's with G's, called base pairs. Due to the chemical structure of the molecules making up a single \textit{red}{strand} of DNA each \textit{strand} can be said to have a direction, upstream towards the 5' end or downstream towards the 3' end. Two complementary strands have opposing directions and are thus called the reverse complements of eachother.\\
 \par\noindent
-The size of DNA varies across species, from a couple of thousand basepairs (kb) in some viruses to several hundred billion basepairs (gb) in larger, more complex organisms. The human genome comes in at the higher end of this range, with a length of roughly 3 gb. As DNA consists of discrete units, the bases A, C, T and G, the genome of an organism can be represented by a text string. A continuous sequence of bases is called a \textit{contig}, several contigs combined is a \textit{scaffold} which again can be fused to \textit{chromosomes} which makes up the \textit{genome} of an organism.\\
-\par\noindent
-\textcolor{red}{Genes/trash DNA}
+The size of DNA varies across species, from a couple of thousand basepairs (kb) in some viruses to several hundred billion basepairs (gb) in larger, more complex organisms. The human genome comes in at the higher end of this range, with a length of roughly 3 gb. A continuous sequence of bases is called a contig, several contigs combined is a scaffold which again sits together into chromosomes, the building block of the genome of an organism.\\
 \subsection{Genomic variations}
 Over the span of time DNA is subject to change. Through random mutations and recombination a genetic sequence can be changed either within an individual or as a product of reproduction. The fact that these changes are able to survive and propagate through generations leads to a genepool where even though the DNA comes from a common ancestor, different individuals will have different variants of the original sequence. These variations form the basis for the division into species, but even within species alot of natural variation will occur.\\
 \par\noindent
-The least complex of these variations are \textit{Single Nucleotide Polymorphisms} (SNPs), where a single nucleotide has changed between two individuals, and \textit{insertions} and \textit{deletions} (Indels) where either one or a short sequence of bases have appeared or disappeared from the DNA of an individual. Longer and more complex structural variations can also occur when a larger part of a chromosome breaks free and disappears completely or inserts itself in a different place or the opposite direction.
+The least complex of these variations are Single Nucleotide Polymorphisms (SNPs), where a single nucleotide has changed between two individuals, and insertions and deletions (Indels) where either one or a short sequence of bases have appeared or disappeared from the DNA of an individual. Longer and more complex structural variations can also occur when a larger part of a chromosome breaks free and disappears completely or inserts itself in a different place or the opposite direction. 
 \subsection{Alignment}
-The fact that a genome is built by discrete entities, the bases A, C, G and T, means that any DNA sequence can be represented by a text string. The double-stranded nature of DNA could be encoded into the string, but as one side can easily be derived from the other representing one of the strands is usually expressive enough. The process of determining genetic variation between two separate individuals can then be seen as the problem of finding the similarities and differences in the two corresponding text strings.
+The fact that a genome is built by discrete entities, the bases A, C, G and T, means that any DNA sequence can be represented by a text string. The double-stranded nature of DNA could be encoded into the string, but as one side can easily be derived from the other representing one of the strands is usually expressive enough. The process of determining genetic variation between two separate individuals can then be seen as the problem of finding the similarities and differences in the two corresponding text strings. \textcolor{red}{Motivation?}
 \subsubsection{String comparison in computer science}
-There exists several ways of determining the difference, called the edit distance, between two strings mathematically. The main difference between the approaches are which operations are possible on the two strings and how the result is scored. Perhaps the most common technique is called \textit{Levenshtein distance}, which allows the operations deletion, insertion, and substitution. All of the preceding operations works on a single character, and one operation by itself yields a distance of 1. Finding the optimal Levenshtein distance is done by dynamic programming in linear time.
+There exists several ways of determining the difference, called the edit distance, between two strings mathematically. The main difference between the approaches are which operations are possible on the two strings and how the result is scored. Perhaps the most common technique is called Levenshtein distance, which allows the operations deletion, insertion, and substitution. All of the preceding operations works on a single character, and one operation by itself yields a distance of 1. Finding the optimal Levenshtein distance can be done by dynamic programming in linear time.
 \subsubsection{DNA sequence comparison}
-When comparing two DNA sequences the goal should be to model the parameters in the edit distance problem in such a way that the most probable evolutionary changes are scored the highest. Most importantly there are two traits to capture: Some substitutions of bases are more common than others, and the fact that \textcolor{red}{it's harder for a part of DNA to break off than it is to actually move around after it has detached}. The first problem can be tackled with a \textit{substitution matrix}: A matrix in which every possible pair of bases has a substitution score. The second trait can be captured either with a pure logarithmic gap penalty, or by an affine gap penalty: A different penalty for opening and extending the gap. In the latter the penalty for extending a gap is constant, but lower than it is for opening a gap. With small modifications the dynamic programming algorithm can encapsulate these ideas and be used to solve DNA sequence comparisons. 
-
+When comparing two DNA sequences the edit distance problem has to be modified in such a way that the most probable evolutionary changes are scored the highest. Most importantly there are two traits to capture: Some substitutions of bases are more common than others, and the fact that \textcolor{red}{it's harder for a part of DNA to break off than it is to actually move around after it has detached}. The first problem can be tackled with a substitution matrix: A matrix in which every possible pair of bases has a substitution score. The second trait can be captured either with a pure logarithmic gap penalty, or by an affine gap penalty: A different penalty for opening and extending the gap. In the latter the penalty for extending a gap is constant, but lower than it is for opening a gap (See figure ~\ref{fig:GapPenalties}). With small modifications the dynamic programming algorithm can encapsulate these ideas and be used to align DNA sequence comparisons. 
+\subsection{Reference genomes}
+To say that an individual of a species deviates from the normal in any way there has to be a standard to compare it to, a reference genome. For humans the current reference genome is the GRCh38 developed and maintained by the Genome Reference Consortium. \textcolor{red}{Something about the represented variation}
 \begin{figure}
-	\begin{mdframed}
-		\begin{center}
-			\begin{tikzpicture}
-    \begin{axis}[domain=-2*pi:2*pi]
-    \addplot[mark=none, samples=100, red] function {sin(x)};
-    \end{axis}
-			\end{tikzpicture}
-		\end{center}
-	\end{mdframed}
+	\begin{center}
+		\begin{tikzpicture}
+    		\begin{axis}[domain=1:10]
+    		\addplot[mark=none, samples=100, red] function {2*log(x)};
+    		\addplot[mark=none, green] coordinates {(0, 0)(1, 2)(10, 5)};
+    		\end{axis}
+		\end{tikzpicture}
+	\end{center}
+	\caption{A logarithmic (red) and an affine gap (green) penalty function}
 	\label{fig:GapPenalties}
 \end{figure}
-\section{Graph-based genomes}
+\section{Graph-based genome representation}
+\textcolor{red}{Motivation}
+\subsection{De Bruijn graphs}
+\subsection{Mapping/Coordinate system}
+\subsection{Alignment}
 \begin{figure}
 	\begin{mdframed}
 		\begin{center}
