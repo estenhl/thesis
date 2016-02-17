@@ -3,9 +3,9 @@
 \begin{document}
 \chapter{Background}
 \section{DNA}
-\textit{Deoxyribonucleic acid} (DNA) is a molecule which allows living creatures and viruses to store and pass on genetic information.\textcolor{red}{How/What is stored}\\
+\textit{Deoxyribonucleic acid} (DNA) is a molecule which allows organisms to store and pass on genetic information. The molecule is stored in the cells and encodes proteins which regulates the vital functions of the organism. DNA is able to replicate itself and can thus live on for generations through reproduction.\\
 \par\noindent
-The DNA of an individual is made up by two complementary strands of nucleotides bound together in a double helix, where the nucleotides can contain the bases \textbf{A}denine, \textbf{C}ytosine, \textbf{G}uanine or \textbf{T}hymine. Complementary in this context means that instead of one singular sequence of bases DNA is made up by a sequence of paired bases, A's with T's and C's with G's, called base pairs. Due to the chemical structure of the molecules making up a single \textit{red}{strand} of DNA each \textit{strand} can be said to have a direction, upstream towards the 5' end or downstream towards the 3' end. Two complementary strands have opposing directions and are thus called the reverse complements of eachother.\\
+The DNA of an individual is made up by two complementary strands of nucleotides bound together in a double helix. The nucleotides of DNA can contain the bases Adenine, Cytosine, Guanine or Thymine, typically denoted A, C, G and T. Complementary in this context means that instead of one singular sequence of bases DNA is made up by a sequence of paired bases, A's with T's and C's with G's, called base pairs (bp). Due to the chemical structure of the molecules making up a single \textcolor{red}{strand} of DNA each \textcolor{red}{strand} can be said to have a direction, upstream towards the 5' end or downstream towards the 3' end. Two complementary strands have opposing directions and are thus called the reverse complements of eachother.\\
 \par\noindent
 The size of DNA varies across species, from a couple of thousand basepairs (kb) in some viruses to several hundred billion basepairs (gb) in larger, more complex organisms. The human genome comes in at the higher end of this range, with a length of roughly 3 gb. A continuous sequence of bases is called a contig, several contigs combined is a scaffold which again sits together into chromosomes, the building block of the genome of an organism.\\
 \subsection{Genomic variations}
@@ -15,85 +15,20 @@ The least complex of these variations are Single Nucleotide Polymorphisms (SNPs)
 \subsection{Alignment}
 The fact that a genome is built by discrete entities, the bases A, C, G and T, means that any DNA sequence can be represented by a text string. The double-stranded nature of DNA could be encoded into the string, but as one side can easily be derived from the other representing one of the strands is usually expressive enough. The process of determining genetic variation between two separate individuals can then be seen as the problem of finding the similarities and differences in the two corresponding text strings. \textcolor{red}{Motivation?}
 \subsubsection{String comparison in computer science}
-There exists several ways of determining the difference, called the edit distance, between two strings mathematically. The main difference between the approaches are which operations are possible on the two strings and how the result is scored. Perhaps the most common technique is called Levenshtein distance, which allows the operations deletion, insertion, and substitution. All of the preceding operations works on a single character, and one operation by itself yields a distance of 1. Finding the optimal Levenshtein distance can be done by dynamic programming in linear time.
+There exists several ways of determining the difference, also called the edit distance, between two strings mathematically. The main difference between the approaches are which operations are possible on the two strings and how the result is scored. The most common technique is called Levenshtein distance, which allows the operations deletion, insertion, and substitution. All of the preceding operations works on a single character, and one operation by itself yields a distance of 1. Finding the optimal Levenshtein distance can be done by dynamic programming in linear time.
 \subsubsection{DNA sequence comparison}
-When comparing two DNA sequences the edit distance problem has to be modified in such a way that the most probable evolutionary changes are scored the highest. Most importantly there are two traits to capture: Some substitutions of bases are more common than others, and the fact that \textcolor{red}{it's harder for a part of DNA to break off than it is to actually move around after it has detached}. The first problem can be tackled with a substitution matrix: A matrix in which every possible pair of bases has a substitution score. The second trait can be captured either with a pure logarithmic gap penalty, or by an affine gap penalty: A different penalty for opening and extending the gap. In the latter the penalty for extending a gap is constant, but lower than it is for opening a gap (See figure ~\ref{fig:GapPenalties}). With small modifications the dynamic programming algorithm can encapsulate these ideas and be used to align DNA sequence comparisons. 
+
 \subsection{Reference genomes}
 To say that an individual of a species deviates from the normal in any way there has to be a standard to compare it to, a reference genome. For humans the current reference genome is the GRCh38 developed and maintained by the Genome Reference Consortium. \textcolor{red}{Something about the represented variation}
-\begin{figure}
-	\begin{center}
-		\begin{tikzpicture}
-    		\begin{axis}[domain=1:10]
-    		\addplot[mark=none, samples=100, red] function {2*log(x)};
-    		\addplot[mark=none, green] coordinates {(0, 0)(1, 2)(10, 5)};
-    		\end{axis}
-		\end{tikzpicture}
-	\end{center}
-	\caption{A logarithmic (red) and an affine gap (green) penalty function}
-	\label{fig:GapPenalties}
-\end{figure}
-\section{Graph-based genome representation}
+\section{Graph-based reference genomes}
+As sequencing technology improves and cost decreases we are able to sequence an increasing number of genomes. A natural consequence of sequencing more genomes is discovering a larger number of variations. When mapping reads against a reference genome, knowledge of possible variants will provide a better basis for completing a correct mapping\ref{improved_genome_inference_in_the_mhc_using_a_population_reference_graph}. A natural way to represent this variation is through a graph, where different sequences share regions they have in common and branch out wherever they diverge from eachother. 
 \textcolor{red}{Motivation}
 \subsection{De Bruijn graphs}
 \subsection{Mapping/Coordinate system}
+When a reference genome is represented by a single sequence of letters, each letter can be uniquely identified by its position. Variations can then be stored based on the position they occur in, or the position they start in if they span several nodes. When using a graph-based reference the nodes are not a part of any naturally occuring coordinate system. If one also imagines the reference should be able to merge in new data at any given point the relationship between nodes might change and yield a fixed mapping scheme generated for the old graph stale and incorrect. In the article \textit{Mapping to a reference genome structure}\ref{mapping_to_a_reference_genome_structure}, Benedict Paten et al. introduce the concept of context-driven mapping. They define a context for a node N in a reference as a triplet (L, B, R) where B is the base contained in the node, L is a set of sequences generated by traversing the paths leading in to N and similarily R is a set of sequences generated by traversal of the paths going out from N. A unique context is a context mapping to exactly one node in the reference genome graph.
+
+Further the authors go on to describe different mapping schemas using different variants of contexts. A general context-driven mapping scheme defines contexts as the sequences achieved by traversing the left context, the base of the node and the right context. A left-right exact mapping scheme requires either the left or the right context to be unique. 
 \subsection{Alignment}
-\begin{figure}
-	\begin{mdframed}
-		\begin{center}
-			\begin{tikzpicture}[scale=2,->,>=stealth',shorten >=1pt,auto,node distance=1.4cm]
-				\node[state, scale=0.6] (q0) {$A$};
-				\node[state, scale=0.6] [right of=q0] (q1) {$A$};
-				\node[state, scale=0.6] [above right of=q1] (q2) {$C$};
-				\node[state, scale=0.6] [below right of=q1] (q3) {$T$};
-				\node[state, scale=0.6] [below right of=q2] (q4) {$A$};
-				\node[state, scale=0.6] [right of=q4] (q5) {$G$};
-				\node[draw=none, scale=0.6] [below of=q3] (q6) {$AA\textcolor{red}{C}GA$};
-				\node[draw=none, scale=0.6] [below=0cm of q6] (q7) {$AA\textcolor{red}{T}GA$};
 
-				\path (q0) edge node {} (q1)
-				(q1) edge node {} (q2)
-				edge node {} (q3)
-				(q2) edge node {} (q4)
-				(q3) edge node {} (q4)
-				(q4) edge node {} (q5);
-
-			\end{tikzpicture}
-		\end{center}
-	\end{mdframed}
-	\caption{Two sequences with an SNP, and the corresponding graph}
-	\label{fig:SimpleGraphSNP}
-\end{figure}
-
-\begin{figure}
-	\begin{mdframed}
-		\begin{center}
-			\begin{tikzpicture}[scale=2,->,>=stealth',shorten >=1pt,auto,node distance=1.4cm]
-				\node[state, scale=0.6] (q0) {$A$};
-				\node[state, scale=0.6] [right of=q0] (q1) {$T$};
-				\node[state, scale=0.6] [right of=q1] (q2) {$G$};
-				\node[state, scale=0.6] [right of=q2] (q3) {$T$};
-				\node[state, scale=0.6] [right of=q3] (q4) {$G$};
-
-				\path (q0) edge node {} (q1)
-				(q1) edge node {} (q2)
-				edge [bend left=50] node {} (q3)
-				(q2) edge node {} (q3)
-				(q3) edge node {} (q4);
-			\end{tikzpicture}
-			\begin{tikzpicture}[scale=2,->,>=stealth',shorten >=1pt,auto,node distance=1.4cm]
-				\node[state, scale=0.6] (q0) {$A$};
-				\node[state, scale=0.6] [right of=q0] (q1) {$T$};
-				\node[state, scale=0.6] [right of=q1] (q2) {$T$};
-				\node[state, scale=0.6] [right of=q2] (q3) {$G$};
-				\node[state, scale=0.6] [above right=0.3cm and 0cm of q1] {$G$};
-
-				\path (q0) edge node {} (q1)
-				(q1) edge node {} (q2)
-				(q2) edge node {} (q3);
-			\end{tikzpicture}
-		\end{center}
-	\end{mdframed}
-	\caption{Two sequences with a single nucleotide indel, and its two corresponding (equivalent) graph representations}
-	\label{fig:SimpleGraphIndel}
-\end{figure}
+\section{Searching graphs}
 \end{document}

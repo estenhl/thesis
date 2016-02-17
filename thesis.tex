@@ -10,7 +10,12 @@
 \usepackage[backend=biber,style=numeric-comp]{biblatex}
 \usetikzlibrary{automata,arrows,positioning}
 
-\theoremstyle{definition}
+\newtheoremstyle{break}
+  {\topsep}{\topsep}%
+  {\itshape}{}%
+  {\bfseries}{}%
+  {\newline}{}%
+\theoremstyle{break}
 \newtheorem{defn}{Definition}
 \newtheorem{corollary}{Corollary}
 

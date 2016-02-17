@@ -2,58 +2,5 @@
 
 \begin{document}
 \chapter{Method}
-In this chapter I will present an algorithm for aligning input sequences against graph-based reference genomes. At first I define some of the terms 
-\section{Definitions}
-\begin{defn}
-	The \textit{input sequence} $I$ is a string over the alphabet ${A, C, G, T}$. Smaller parts of the sequence are called \textit{subsequences}, the subsequence spanning from x to y is denoted $I_{x:y}$. An individual character in the sequence on position $x$ is denoted $I_x$.
-\end{defn}
-\begin{defn}
-\textit{Reference genome graph}, \textit{graph}
-\end{defn}
-\begin{defn}
-\textit{node}
-\end{defn}
-\begin{defn}
-	An \textit{edge} is an ordered pair or nodes, $e=\{v_x, v_y\}$. The nodes are accessible by the notation $(e)_s=v_x$, $(e)_e=v_y$
-\end{defn}
-\begin{defn}
-	A \textit{path} is a series of consecutive nodes. Two nodes $v_x$, $v_y$ are consecutive if there exists an edge $e$ such that $(e)_s = v_x$, $(e)_e=v_y$
-\end{defn}
-\begin{defn}
-	A \textit{complete path} is a path which starts at $S$ and ends in $E$. All sequences represented in the graph has a corresponding complete path. All complete paths are possible sequences.
-\end{defn}
-\begin{defn}
-	A \textit{critical node} is a node $n_x$ which is traversed by every complete path
-\end{defn}
-\begin{defn}
-	A \textit{region} $R_x$ is a subset of nodes from a graph $G$ containing a start-node $S_{R_x}$ and an end-node $E_{R_x}$ and every node on every path between them. Both $S_{R_x}$ and $E_{R_x}$ are critical nodes. $S_{R_x}$ and $E_{R_x}$ can be the same node, yielding a one-node region. Two consecutive regions share exactly one node, such that $E_{R_x}$ = $S_{R{x+1}}$
-\end{defn}
-\begin{defn}
-	A region $R_x$ is a \textit{critical region} if every node $v \in R_x$ is a critical node. Every region that is not critical is called a \textit{non-critical region}
-\end{defn}
-\begin{defn}
-	A critical region $R_x$ is a \textit{maximal critical region} if $S_{R_x}$ has either none or several incoming edges and $E_{R_x}$ has either none or several outgoing edges
-\end{defn}
-\begin{defn}
-	A region $R_x$ is a \textit{minimal non-critical} region if every node $v \in (R_x \backslash \{S_{R_x}, E_{R_x}\})$ is not critical
-\end{defn}
-\begin{corollary}
-	Every graph is a series of consecutive alternating maximal critical and minimal non-critical regions
-\end{corollary}
-\section{The problem}
-\section{The algorithm}
-For any sequence/pair graph there are 3 possible scenarios:
-\begin{enumerate}
-	\item{The entire sequence maps to an already existing complete path in the graph}
-	\item{The sequence maps partially to one or several existing paths in the graph}
-	\item{The sequence does not map to any existing structures in the graph}
-\end{enumerate}
-This is also true for all subsequences of length >= 2. The first main idea behind the algorithm is that for a number of subsequences one can decide whether they are instances of the first or third scenario alot more efficiently than doing a complete search. This is based on the assumption that every input sequence that should be mapped to an existing part of the graph have large subsequences isomorphic to the corresponding region. The notions of both isomorphic and large in this context will be more clearly defined in the following more technical specification of the steps in algorithm. Another important assumption is that whenever the algorithm are unable to find any such isomorphic regions it is correct to represent the sequence by an entirely new path in the graph. The second main idea is that when we have identified these easily mappable parts of the sequence and mapped them to parts of the graph, the remaining, currently unmapped, subsequences of the sequence can be mapped against largely pruned areas of the graph. This comes from the assumptions that we are not interested in mapping an individual character to an individual node, but larger subsequences to larger regions. This is an assumptions which is always true when we are dealing with graphs that have more nodes than legal node values. \\
-\par\noindent
-At this point the algorithm can be mapped as out follows:
-\begin{enumerate}
-	\item{Locate easily mappable regions}
-	\item{Assign unmapped subsequences to regions based on current mappings}
-	\item{Do fine grained mapping of these subsequences against their corresponding regions}
-\end{enumerate}
+
 \end{document}
