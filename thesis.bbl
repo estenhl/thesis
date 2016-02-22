@@ -19,48 +19,48 @@
 
 \refsection{0}
   \sortlist{entry}{nty}
-    \entry{extending_reference_assembly_models}{article}{}
-      \name{labelname}{14}{}{%
-        {{hash=d788f85af640697fc74c261ff5e7ea3c}{Church}{C\bibinitperiod}{Deanna\bibnamedelima M.}{D\bibinitperiod\bibinitdelim M\bibinitperiod}{}{}{}{}}%
-        {{hash=1c02d328cd29a7a5e58c4f06a738eab3}{Schneider}{S\bibinitperiod}{Valeria\bibnamedelima A.}{V\bibinitperiod\bibinitdelim A\bibinitperiod}{}{}{}{}}%
-        {{hash=957a9be2843a8c3e921a77a365807ba5}{Steinberg}{S\bibinitperiod}{Karyn\bibnamedelima Meltz}{K\bibinitperiod\bibinitdelim M\bibinitperiod}{}{}{}{}}%
-        {{hash=551bb1aefdf06526c107505b9f92d2ae}{Schatz}{S\bibinitperiod}{Michael\bibnamedelima C.}{M\bibinitperiod\bibinitdelim C\bibinitperiod}{}{}{}{}}%
-        {{hash=e8641ea59d41a0403a45d9767900d346}{Quinlan}{Q\bibinitperiod}{Aaron\bibnamedelima R.}{A\bibinitperiod\bibinitdelim R\bibinitperiod}{}{}{}{}}%
-        {{hash=352e26f8d5ce212924afb3770cb3e198}{Chin}{C\bibinitperiod}{Chen-Shan}{C\bibinithyphendelim S\bibinitperiod}{}{}{}{}}%
-        {{hash=16a098e06f46bcc6040e77aefc97867b}{Kitts}{K\bibinitperiod}{Paul\bibnamedelima A.}{P\bibinitperiod\bibinitdelim A\bibinitperiod}{}{}{}{}}%
-        {{hash=9659bbb3ecce71edf66d952b38956a94}{Aken}{A\bibinitperiod}{Bronwen}{B\bibinitperiod}{}{}{}{}}%
-        {{hash=9dbfe9c80227658fd3ca10db3527ac3a}{Marth}{M\bibinitperiod}{Gabor\bibnamedelima T.}{G\bibinitperiod\bibinitdelim T\bibinitperiod}{}{}{}{}}%
-        {{hash=b912b004172484748c149ea03c61499c}{Hoffman}{H\bibinitperiod}{Michael\bibnamedelima M.}{M\bibinitperiod\bibinitdelim M\bibinitperiod}{}{}{}{}}%
-        {{hash=2431ceb112b984eef24ef9bbe1bdeb7c}{Herrero}{H\bibinitperiod}{Javier}{J\bibinitperiod}{}{}{}{}}%
-        {{hash=c501a5116248889bb63e468152eee523}{Mendoza}{M\bibinitperiod}{M.\bibnamedelimi Lisandra\bibnamedelima Zepeda}{M\bibinitperiod\bibinitdelim L\bibinitperiod\bibinitdelim Z\bibinitperiod}{}{}{}{}}%
-        {{hash=517afe729b2eb59735ba80628d943bb0}{Durbin}{D\bibinitperiod}{Richard}{R\bibinitperiod}{}{}{}{}}%
-        {{hash=91c5fcd648e30cd5b187eac97d23aa03}{Flicek}{F\bibinitperiod}{Paul}{P\bibinitperiod}{}{}{}{}}%
+    \entry{improved_genome_inference_in_the_mhc_using_a_population_reference_graph}{article}{}
+      \name{labelname}{5}{}{%
+        {{hash=9cd335a785e8b4496d9eba869b877869}{Dilthey}{D\bibinitperiod}{Alexander}{A\bibinitperiod}{}{}{}{}}%
+        {{hash=61d56903f320a2cc11a87d4736958884}{Cox}{C\bibinitperiod}{Charles}{C\bibinitperiod}{}{}{}{}}%
+        {{hash=917bd89718d2fc6f544271776c83dac9}{Iqbal}{I\bibinitperiod}{Zamin}{Z\bibinitperiod}{}{}{}{}}%
+        {{hash=aa64de3421ddba5b68ff1490d8d98a5a}{Nelson}{N\bibinitperiod}{Matthew\bibnamedelima R.}{M\bibinitperiod\bibinitdelim R\bibinitperiod}{}{}{}{}}%
+        {{hash=ee867f7b9dad34099817c34d2a3b4a0e}{McVean}{M\bibinitperiod}{Gil}{G\bibinitperiod}{}{}{}{}}%
       }
-      \name{author}{14}{}{%
-        {{hash=d788f85af640697fc74c261ff5e7ea3c}{Church}{C\bibinitperiod}{Deanna\bibnamedelima M.}{D\bibinitperiod\bibinitdelim M\bibinitperiod}{}{}{}{}}%
-        {{hash=1c02d328cd29a7a5e58c4f06a738eab3}{Schneider}{S\bibinitperiod}{Valeria\bibnamedelima A.}{V\bibinitperiod\bibinitdelim A\bibinitperiod}{}{}{}{}}%
-        {{hash=957a9be2843a8c3e921a77a365807ba5}{Steinberg}{S\bibinitperiod}{Karyn\bibnamedelima Meltz}{K\bibinitperiod\bibinitdelim M\bibinitperiod}{}{}{}{}}%
-        {{hash=551bb1aefdf06526c107505b9f92d2ae}{Schatz}{S\bibinitperiod}{Michael\bibnamedelima C.}{M\bibinitperiod\bibinitdelim C\bibinitperiod}{}{}{}{}}%
-        {{hash=e8641ea59d41a0403a45d9767900d346}{Quinlan}{Q\bibinitperiod}{Aaron\bibnamedelima R.}{A\bibinitperiod\bibinitdelim R\bibinitperiod}{}{}{}{}}%
-        {{hash=352e26f8d5ce212924afb3770cb3e198}{Chin}{C\bibinitperiod}{Chen-Shan}{C\bibinithyphendelim S\bibinitperiod}{}{}{}{}}%
-        {{hash=16a098e06f46bcc6040e77aefc97867b}{Kitts}{K\bibinitperiod}{Paul\bibnamedelima A.}{P\bibinitperiod\bibinitdelim A\bibinitperiod}{}{}{}{}}%
-        {{hash=9659bbb3ecce71edf66d952b38956a94}{Aken}{A\bibinitperiod}{Bronwen}{B\bibinitperiod}{}{}{}{}}%
-        {{hash=9dbfe9c80227658fd3ca10db3527ac3a}{Marth}{M\bibinitperiod}{Gabor\bibnamedelima T.}{G\bibinitperiod\bibinitdelim T\bibinitperiod}{}{}{}{}}%
-        {{hash=b912b004172484748c149ea03c61499c}{Hoffman}{H\bibinitperiod}{Michael\bibnamedelima M.}{M\bibinitperiod\bibinitdelim M\bibinitperiod}{}{}{}{}}%
-        {{hash=2431ceb112b984eef24ef9bbe1bdeb7c}{Herrero}{H\bibinitperiod}{Javier}{J\bibinitperiod}{}{}{}{}}%
-        {{hash=c501a5116248889bb63e468152eee523}{Mendoza}{M\bibinitperiod}{M.\bibnamedelimi Lisandra\bibnamedelima Zepeda}{M\bibinitperiod\bibinitdelim L\bibinitperiod\bibinitdelim Z\bibinitperiod}{}{}{}{}}%
-        {{hash=517afe729b2eb59735ba80628d943bb0}{Durbin}{D\bibinitperiod}{Richard}{R\bibinitperiod}{}{}{}{}}%
-        {{hash=91c5fcd648e30cd5b187eac97d23aa03}{Flicek}{F\bibinitperiod}{Paul}{P\bibinitperiod}{}{}{}{}}%
+      \name{author}{5}{}{%
+        {{hash=9cd335a785e8b4496d9eba869b877869}{Dilthey}{D\bibinitperiod}{Alexander}{A\bibinitperiod}{}{}{}{}}%
+        {{hash=61d56903f320a2cc11a87d4736958884}{Cox}{C\bibinitperiod}{Charles}{C\bibinitperiod}{}{}{}{}}%
+        {{hash=917bd89718d2fc6f544271776c83dac9}{Iqbal}{I\bibinitperiod}{Zamin}{Z\bibinitperiod}{}{}{}{}}%
+        {{hash=aa64de3421ddba5b68ff1490d8d98a5a}{Nelson}{N\bibinitperiod}{Matthew\bibnamedelima R.}{M\bibinitperiod\bibinitdelim R\bibinitperiod}{}{}{}{}}%
+        {{hash=ee867f7b9dad34099817c34d2a3b4a0e}{McVean}{M\bibinitperiod}{Gil}{G\bibinitperiod}{}{}{}{}}%
       }
-      \strng{namehash}{6d4adccf171c31143a841322a0064a5c}
-      \strng{fullhash}{f212f790ee0e2d9b1e04bacd19155829}
-      \field{sortinit}{C}
-      \field{labeltitle}{Extending reference assembly models}
-      \field{journaltitle}{Genome Biology}
-      \field{title}{Extending reference assembly models}
+      \strng{namehash}{e2934fe5f2bf0bfecc48f1dec1083511}
+      \strng{fullhash}{cab3dea7f7978de24e08a79e7ef421a4}
+      \field{sortinit}{D}
+      \field{labeltitle}{Improved genome inference in the MHC using a population reference graph}
+      \field{title}{Improved genome inference in the MHC using a population reference graph}
       \field{year}{2015}
     \endentry
+    \entry{mapping_to_a_reference_genome_structure}{article}{}
+      \name{labelname}{3}{}{%
+        {{hash=aa56b0e2f2e2486ac021b9e9acbb63a7}{Paten}{P\bibinitperiod}{Benedict}{B\bibinitperiod}{}{}{}{}}%
+        {{hash=40a1bd64d92fb35c1a40847549fe38a9}{Novak}{N\bibinitperiod}{Adam}{A\bibinitperiod}{}{}{}{}}%
+        {{hash=b2ab6c3825f7511e8096e515df23c7e7}{Haussler}{H\bibinitperiod}{David}{D\bibinitperiod}{}{}{}{}}%
+      }
+      \name{author}{3}{}{%
+        {{hash=aa56b0e2f2e2486ac021b9e9acbb63a7}{Paten}{P\bibinitperiod}{Benedict}{B\bibinitperiod}{}{}{}{}}%
+        {{hash=40a1bd64d92fb35c1a40847549fe38a9}{Novak}{N\bibinitperiod}{Adam}{A\bibinitperiod}{}{}{}{}}%
+        {{hash=b2ab6c3825f7511e8096e515df23c7e7}{Haussler}{H\bibinitperiod}{David}{D\bibinitperiod}{}{}{}{}}%
+      }
+      \strng{namehash}{9546b5ad22038f6fa1f03dd8f6b4bffd}
+      \strng{fullhash}{9546b5ad22038f6fa1f03dd8f6b4bffd}
+      \field{sortinit}{P}
+      \field{labeltitle}{Mapping to a Reference Genome Structure}
+      \field{title}{Mapping to a Reference Genome Structure}
+      \field{year}{2014}
+    \endentry
   \endsortlist
+  \missing{Citation needed?}
 \endrefsection
 \endinput
 

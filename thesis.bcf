@@ -1964,6 +1964,9 @@
     <bcf:datasource type="file" datatype="bibtex">thesis.bib</bcf:datasource>
   </bcf:bibdata>
   <bcf:section number="0">
+    <bcf:citekey order="1">Citation needed?</bcf:citekey>
+    <bcf:citekey order="2">improved_genome_inference_in_the_mhc_using_a_population_reference_graph</bcf:citekey>
+    <bcf:citekey order="3">mapping_to_a_reference_genome_structure</bcf:citekey>
   </bcf:section>
   <bcf:sortlist section="0" type="entry" label="nty">
   <bcf:sorting>
