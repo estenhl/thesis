@@ -2,13 +2,7 @@
 
 \begin{document}
 \chapter{Discussion}
-\section{The concept}
-The main motivation behind the algorithm is the fact that a reference genome graph is a structure with possibly huge amounts of data, where the relationship between the data can be very complex. This complexity coupled with the size makes a fine-grained, exhaustive search of the problem space computationally infeasible. The proposition behind the algorithm is that there should however be \texit{hotspots}: subsequences of the input matched with sub-paths of the graph with a high matching score, which can be unambiguously found within a reasonable time. As the entire algorithm is built on this assumption one could destroy the foundation by presenting cases where no such hotspots exists, but I think its fair to say that if the algorithm is good enough and still not able to locate any hotspots, the input sequence is so different from anything represented by the existing graph that it should be represented by a distinct new path. Following from this assumption the next logical step is to determine what is a hotspot, and how do we know when we see one. The previous definition contains several vague terms, such as the threshold for the length of the subsequence, what does a matching score have to be for it to be considered high and how good does a complete match of a subsequence/sub-path pair have to be before it is unambiguous. These are parameters which are likely to be highly dependant on the size of the input sequence, the size of the graph, the complexity of the graph and the assumed similarity between the input and the current data, all of which are properties of a given problem instance. To handle this versatility I would propose an approach where this tuning is done dynamically, i.e. one would use 80\% of the highest score as a threshold instead of any fixed integer. Using this kind of fluid algorithm will optimally make the diversity of the problem instances manageable, but will also come at the cost of measureability and can cause deteriation as the complexity increases.
-\section{The algorithm}
-Conceptually the algorithm has four steps
-\begin{itemize}
-	\item{Map single nodes from the input sequence to single nodes in the graph}
-	\item{Combine mappings into longer sections, \textit{hotspots}}
-	\item{Based on located hotspots, map ambiguous subsequences of the input to regions of the graph}
-	\item{Perform detailed, \"slow\" mapping where needed}
+\section{Context lengths}
+\section{Improved suffix search}
+\section{Heuristics based on mapping scores}
 \end{document}

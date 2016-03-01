@@ -29,18 +29,32 @@
 \@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {1.2.5}Alignment against a graph}{5}}
 \@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsubsection}{Dynamic programming}{5}}
 \@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsubsection}{Context driven alignment}{6}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {chapter}{\numberline {2}Method}{7}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {chapter}{\numberline {2}Algorithm}{7}}
 \@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\defcounter {refsection}{0}\relax }\@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {2.1}Overview}{7}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {2.1.1}Definitions}{7}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {2.1.2}Scoring schema}{8}}
-\newlabel{fig:edit_distance_variant}{{2.1.2}{8}}
-\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\contentsline {figure}{\numberline {2.1}{\ignorespaces The scoring matrix used in the experiments}}{8}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {2.1.3}Data}{8}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {2.1.4}PO-MSA implementation}{8}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {2.1.5}Validation}{8}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {2.2}Algorithm}{9}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.1}Overview}{9}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.2}Creating a searchable index}{9}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.3}Creating the new graph}{9}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {2.0.6}Definitions}{7}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {2.0.7}Overview}{8}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {2.0.8}Precomputation of the graph}{8}}
+\zref@newlabel{mdf@pagelabel-1}{\default{\caption@xref {??}{ on input line 66}}\page{9}\abspage{23}\mdf@pagevalue{9}}
+\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\contentsline {figure}{\numberline {2.1}{\ignorespaces A small reference graph with left contexts (top) and right contexts (bottom) and $|c|$=2 explicitly shown\relax }}{9}}
+\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
+\newlabel{fig:explicit_contexts}{{2.1}{9}}
+\zref@newlabel{mdf@pagelabel-2}{\default{\caption@xref {??}{ on input line 91}}\page{9}\abspage{23}\mdf@pagevalue{9}}
+\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\contentsline {figure}{\numberline {2.2}{\ignorespaces The left suffix tree corresponding to the graph in \ref  {fig:explicit_left_contexts}\relax }}{9}}
+\newlabel{fig:left_suffix_tree}{{2.2}{9}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {2.0.9}Generating the new graph G'}{9}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {2.0.10}Searching $G'$ with the modified PO-MSA}{11}}
+\zref@newlabel{mdf@pagelabel-3}{\default{\caption@xref {??}{ on input line 126}}\page{11}\abspage{25}\mdf@pagevalue{11}}
+\zref@newlabel{mdf@pagelabel-4}{\default{\caption@xref {??}{ on input line 152}}\page{11}\abspage{25}\mdf@pagevalue{11}}
+\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\contentsline {figure}{\numberline {2.3}{\ignorespaces The resulting candidate sets for mapping the string "ATA" against the reference genome from ~\ref  {fig:explicit_contexts} with varying threshold T values)\relax }}{11}}
+\newlabel{fig:candidate_nodes}{{2.3}{11}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {2.0.11}Handling invalid threshold values}{12}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {chapter}{\numberline {3}Method}{13}}
+\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\defcounter {refsection}{0}\relax }\@writefile{lot}{\addvspace {10\p@ }}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {3.0.12}Scoring schema}{13}}
+\newlabel{fig:edit_distance_variant}{{\caption@xref {fig:edit_distance_variant}{ on input line 18}}{13}}
+\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\contentsline {figure}{\numberline {3.1}{\ignorespaces The scoring matrix used in the experiments\relax }}{13}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {3.0.13}Data}{13}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {3.0.14}PO-MSA implementation}{14}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {3.0.15}Validation}{14}}

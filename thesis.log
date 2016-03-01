@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.2.27)  25 FEB 2016 15:42
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.2.27)  1 MAR 2016 18:04
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1082,6 +1082,77 @@ LaTeX Info: Redefining \] on input line 2666.
 \WF@everypar=\toks44
 Package: wrapfig 2003/01/31  v 3.6
 )
+(/usr/share/texlive/texmf-dist/tex/latex/caption/subcaption.sty
+Package: subcaption 2013/02/03 v1.1-62 Sub-captions (AR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/caption/caption.sty
+Package: caption 2013/05/02 v3.3-89 Customizing captions (AR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/caption/caption3.sty
+Package: caption3 2013/05/02 v1.6-88 caption3 kernel (AR)
+Package caption3 Info: TeX engine: e-TeX on input line 57.
+\captionmargin=\dimen259
+\captionmargin@=\dimen260
+\captionwidth=\dimen261
+\caption@tempdima=\dimen262
+\caption@indent=\dimen263
+\caption@parindent=\dimen264
+\caption@hangindent=\dimen265
+)
+\c@ContinuedFloat=\count169
+Package caption Info: wrapfig package is loaded.
+)
+\c@subfigure=\count170
+\c@subtable=\count171
+)
+(/usr/share/texlive/texmf-dist/tex/latex/floatrow/floatrow.sty
+Package: floatrow 2008/08/02 v0.3b floatrow: float package extension
+\c@float@type=\count172
+\float@exts=\toks45
+\float@box=\box62
+\@floatcapt=\box63
+Package floatrow Info: Modified float package code loaded on input line 455.
+Package floatrow Info: Modified rotfloat package code loaded on input line 473.
+
+\FR@everyfloat=\toks46
+\flrow@foot=\insert233
+\FB@wd=\dimen266
+\FBo@wd=\dimen267
+\FBc@wd=\dimen268
+\FBo@ht=\skip122
+\FBc@ht=\skip123
+\FBf@ht=\skip124
+\FBo@max=\skip125
+\FBc@max=\skip126
+\FBf@max=\skip127
+\c@FBl@b=\count173
+\floatbox@depth=\count174
+\c@FRobj=\count175
+\c@FRsobj=\count176
+\Xhsize=\skip128
+\sXhsize=\skip129
+\Zhsize=\skip130
+\sZhsize=\skip131
+\flrow@rowbox=\box64
+\FR@Zunitlength=\dimen269
+\c@FBcnt=\count177
+\FPOScnt=\count178
+\LTleft=\skip132
+\LTright=\skip133
+\LTleft=\skip134
+\LTright=\skip135
+\flrow@types=\toks47
+)
+(/usr/share/texlive/texmf-dist/tex/latex/subfig/subfig.sty
+Package: subfig 2005/06/28 ver: 1.3 subfig package
+\c@KVtest=\count179
+\sf@farskip=\skip136
+\sf@captopadj=\dimen270
+\sf@capskip=\skip137
+\sf@nearskip=\skip138
+\sf@top=\skip139
+\sf@bottom=\skip140
+)
 (/usr/share/texlive/texmf-dist/tex/generic/babel/babel.sty
 Package: babel 2013/12/03 3.9h The Babel package
 
@@ -1090,8 +1161,8 @@ Language: english 2012/08/20 v3.3p English support from the babel system
 
 (/usr/share/texlive/texmf-dist/tex/generic/babel/babel.def
 File: babel.def 2013/12/03 3.9h Babel common definitions
-\babel@savecnt=\count169
-\U@D=\dimen259
+\babel@savecnt=\count180
+\U@D=\dimen271
 )
 \l@british = a dialect from \language\l@english 
 \l@UKenglish = a dialect from \language\l@english 
@@ -1256,13 +1327,13 @@ Package textcomp Info: Setting ptmj sub-encoding to TS1/4 on input line 340.
 )
 (/usr/share/texlive/texmf-dist/tex/latex/csquotes/csquotes.sty
 Package: csquotes 2011/10/22 v5.1d context-sensitive quotations
-\csq@reset=\count170
-\csq@gtype=\count171
-\csq@glevel=\count172
-\csq@qlevel=\count173
-\csq@maxlvl=\count174
-\csq@tshold=\count175
-\csq@ltx@everypar=\toks45
+\csq@reset=\count181
+\csq@gtype=\count182
+\csq@glevel=\count183
+\csq@qlevel=\count184
+\csq@maxlvl=\count185
+\csq@tshold=\count186
+\csq@ltx@everypar=\toks48
 
 (/usr/share/texlive/texmf-dist/tex/latex/csquotes/csquotes.def
 File: csquotes.def 2011/10/22 v5.1d csquotes generic definitions
@@ -1292,16 +1363,16 @@ Package: xifthen 2009/04/17 v1.3 Extended ifthen features
 
 (/usr/share/texlive/texmf-dist/tex/latex/tools/calc.sty
 Package: calc 2007/08/22 v4.3 Infix arithmetic (KKT,FJ)
-\calc@Acount=\count176
-\calc@Bcount=\count177
-\calc@Adimen=\dimen260
-\calc@Bdimen=\dimen261
-\calc@Askip=\skip122
-\calc@Bskip=\skip123
+\calc@Acount=\count187
+\calc@Bcount=\count188
+\calc@Adimen=\dimen272
+\calc@Bdimen=\dimen273
+\calc@Askip=\skip141
+\calc@Bskip=\skip142
 LaTeX Info: Redefining \setlength on input line 76.
 LaTeX Info: Redefining \addtolength on input line 77.
-\calc@Ccount=\count178
-\calc@Cskip=\skip124
+\calc@Ccount=\count189
+\calc@Cskip=\skip143
 )
 (/usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty
 Package: ifthen 2001/05/26 v1.1c Standard LaTeX ifthen package (DPC)
@@ -1313,12 +1384,12 @@ Package: ifmtarg 2009/09/02 v1.2a check for an empty argument
 Package: type1cm 2002/09/05 v0.04 BlueSky/Y&Y Type1 CM font definitions (DPC, p
 atched RF)
 )
-\c@IfiF@cur@year=\count179
-\c@IfiF@cur@month=\count180
+\c@IfiF@cur@year=\count190
+\c@IfiF@cur@month=\count191
 ))
 (/usr/share/texlive/texmf-dist/tex/latex/tools/varioref.sty
 Package: varioref 2011/10/02 v1.4z package for extended references (FMi)
-\c@vrcnt=\count181
+\c@vrcnt=\count192
 )
 (/usr/share/texlive/texmf-dist/tex/latex/biblatex/biblatex.sty
 Package: biblatex 2013/11/25 v2.8a programmable bibliographies (PK/JW/AB)
@@ -1329,64 +1400,64 @@ AB)
 
 (/usr/share/texlive/texmf-dist/tex/latex/logreq/logreq.sty
 Package: logreq 2010/08/04 v1.0 xml request logger
-\lrq@indent=\count182
+\lrq@indent=\count193
 
 (/usr/share/texlive/texmf-dist/tex/latex/logreq/logreq.def
 File: logreq.def 2010/08/04 v1.0 logreq spec v1.0
 ))
-\c@tabx@nest=\count183
-\c@listtotal=\count184
-\c@listcount=\count185
-\c@liststart=\count186
-\c@liststop=\count187
-\c@citecount=\count188
-\c@citetotal=\count189
-\c@multicitecount=\count190
-\c@multicitetotal=\count191
-\c@instcount=\count192
-\c@maxnames=\count193
-\c@minnames=\count194
-\c@maxitems=\count195
-\c@minitems=\count196
-\c@citecounter=\count197
-\c@savedcitecounter=\count198
-\c@uniquelist=\count199
-\c@uniquename=\count200
-\c@refsection=\count201
+\c@tabx@nest=\count194
+\c@listtotal=\count195
+\c@listcount=\count196
+\c@liststart=\count197
+\c@liststop=\count198
+\c@citecount=\count199
+\c@citetotal=\count200
+\c@multicitecount=\count201
 Normal \count register pool exhausted, switching to extended pool.
-\c@refsegment=\count277
-\c@maxextratitle=\count278
-\c@maxextratitleyear=\count279
-\c@maxextrayear=\count280
-\c@maxextraalpha=\count281
-\c@abbrvpenalty=\count282
-\c@highnamepenalty=\count283
-\c@lownamepenalty=\count284
-\c@maxparens=\count285
-\c@parenlevel=\count286
-\blx@tempcnta=\count287
-\blx@tempcntb=\count288
-\blx@tempcntc=\count289
-\blx@maxsection=\count290
-\blx@maxsegment@0=\count291
-\blx@notetype=\count292
-\blx@parenlevel@text=\count293
-\blx@parenlevel@foot=\count294
-\blx@sectionciteorder@0=\count295
-\labelnumberwidth=\skip125
-\labelalphawidth=\skip126
-\shorthandwidth=\skip127
-\biblabelsep=\skip128
-\bibitemsep=\skip129
-\bibnamesep=\skip130
-\bibinitsep=\skip131
-\bibparsep=\skip132
-\bibhang=\skip133
+\c@multicitetotal=\count277
+\c@instcount=\count278
+\c@maxnames=\count279
+\c@minnames=\count280
+\c@maxitems=\count281
+\c@minitems=\count282
+\c@citecounter=\count283
+\c@savedcitecounter=\count284
+\c@uniquelist=\count285
+\c@uniquename=\count286
+\c@refsection=\count287
+\c@refsegment=\count288
+\c@maxextratitle=\count289
+\c@maxextratitleyear=\count290
+\c@maxextrayear=\count291
+\c@maxextraalpha=\count292
+\c@abbrvpenalty=\count293
+\c@highnamepenalty=\count294
+\c@lownamepenalty=\count295
+\c@maxparens=\count296
+\c@parenlevel=\count297
+\blx@tempcnta=\count298
+\blx@tempcntb=\count299
+\blx@tempcntc=\count300
+\blx@maxsection=\count301
+\blx@maxsegment@0=\count302
+\blx@notetype=\count303
+\blx@parenlevel@text=\count304
+\blx@parenlevel@foot=\count305
+\blx@sectionciteorder@0=\count306
+\labelnumberwidth=\skip144
+\labelalphawidth=\skip145
+\shorthandwidth=\skip146
+\biblabelsep=\skip147
+\bibitemsep=\skip148
+\bibnamesep=\skip149
+\bibinitsep=\skip150
+\bibparsep=\skip151
+\bibhang=\skip152
 \blx@bcfin=\read2
 \blx@bcfout=\write4
-\c@mincomprange=\count296
-\c@maxcomprange=\count297
-\c@mincompwidth=\count298
+\c@mincomprange=\count307
+\c@maxcomprange=\count308
+\c@mincompwidth=\count309
 Package biblatex Info: Trying to load biblatex default data model...
 Package biblatex Info: ... file 'blx-dm.def' found.
 
@@ -1395,72 +1466,72 @@ Package biblatex Info: Trying to load biblatex style data model...
 Package biblatex Info: ... file 'numeric-comp.dbx' not found.
 Package biblatex Info: Trying to load biblatex custom data model...
 Package biblatex Info: ... file 'biblatex-dm.cfg' not found.
-\c@afterword=\count299
-\c@savedafterword=\count300
-\c@annotator=\count301
-\c@savedannotator=\count302
-\c@author=\count303
-\c@savedauthor=\count304
-\c@bookauthor=\count305
-\c@savedbookauthor=\count306
-\c@commentator=\count307
-\c@savedcommentator=\count308
-\c@editor=\count309
-\c@savededitor=\count310
-\c@editora=\count311
-\c@savededitora=\count312
-\c@editorb=\count313
-\c@savededitorb=\count314
-\c@editorc=\count315
-\c@savededitorc=\count316
-\c@foreword=\count317
-\c@savedforeword=\count318
-\c@holder=\count319
-\c@savedholder=\count320
-\c@introduction=\count321
-\c@savedintroduction=\count322
-\c@namea=\count323
-\c@savednamea=\count324
-\c@nameb=\count325
-\c@savednameb=\count326
-\c@namec=\count327
-\c@savednamec=\count328
-\c@shortauthor=\count329
-\c@savedshortauthor=\count330
-\c@shorteditor=\count331
-\c@savedshorteditor=\count332
-\c@translator=\count333
-\c@savedtranslator=\count334
-\c@labelname=\count335
-\c@savedlabelname=\count336
-\c@institution=\count337
-\c@savedinstitution=\count338
-\c@lista=\count339
-\c@savedlista=\count340
-\c@listb=\count341
-\c@savedlistb=\count342
-\c@listc=\count343
-\c@savedlistc=\count344
-\c@listd=\count345
-\c@savedlistd=\count346
-\c@liste=\count347
-\c@savedliste=\count348
-\c@listf=\count349
-\c@savedlistf=\count350
-\c@location=\count351
-\c@savedlocation=\count352
-\c@organization=\count353
-\c@savedorganization=\count354
-\c@origlocation=\count355
-\c@savedoriglocation=\count356
-\c@origpublisher=\count357
-\c@savedorigpublisher=\count358
-\c@publisher=\count359
-\c@savedpublisher=\count360
-\c@language=\count361
-\c@savedlanguage=\count362
-\c@pageref=\count363
-\c@savedpageref=\count364
+\c@afterword=\count310
+\c@savedafterword=\count311
+\c@annotator=\count312
+\c@savedannotator=\count313
+\c@author=\count314
+\c@savedauthor=\count315
+\c@bookauthor=\count316
+\c@savedbookauthor=\count317
+\c@commentator=\count318
+\c@savedcommentator=\count319
+\c@editor=\count320
+\c@savededitor=\count321
+\c@editora=\count322
+\c@savededitora=\count323
+\c@editorb=\count324
+\c@savededitorb=\count325
+\c@editorc=\count326
+\c@savededitorc=\count327
+\c@foreword=\count328
+\c@savedforeword=\count329
+\c@holder=\count330
+\c@savedholder=\count331
+\c@introduction=\count332
+\c@savedintroduction=\count333
+\c@namea=\count334
+\c@savednamea=\count335
+\c@nameb=\count336
+\c@savednameb=\count337
+\c@namec=\count338
+\c@savednamec=\count339
+\c@shortauthor=\count340
+\c@savedshortauthor=\count341
+\c@shorteditor=\count342
+\c@savedshorteditor=\count343
+\c@translator=\count344
+\c@savedtranslator=\count345
+\c@labelname=\count346
+\c@savedlabelname=\count347
+\c@institution=\count348
+\c@savedinstitution=\count349
+\c@lista=\count350
+\c@savedlista=\count351
+\c@listb=\count352
+\c@savedlistb=\count353
+\c@listc=\count354
+\c@savedlistc=\count355
+\c@listd=\count356
+\c@savedlistd=\count357
+\c@liste=\count358
+\c@savedliste=\count359
+\c@listf=\count360
+\c@savedlistf=\count361
+\c@location=\count362
+\c@savedlocation=\count363
+\c@organization=\count364
+\c@savedorganization=\count365
+\c@origlocation=\count366
+\c@savedoriglocation=\count367
+\c@origpublisher=\count368
+\c@savedorigpublisher=\count369
+\c@publisher=\count370
+\c@savedpublisher=\count371
+\c@language=\count372
+\c@savedlanguage=\count373
+\c@pageref=\count374
+\c@savedpageref=\count375
 Package biblatex Info: Trying to load compatibility code...
 Package biblatex Info: ... file 'blx-compat.def' found.
 
@@ -1472,13 +1543,13 @@ Package biblatex Info: ... file 'biblatex.def' found.
 
 (/usr/share/texlive/texmf-dist/tex/latex/biblatex/biblatex.def
 File: biblatex.def 
-\c@textcitecount=\count365
-\c@textcitetotal=\count366
-\c@textcitemaxnames=\count367
-\c@biburlnumpenalty=\count368
-\c@biburlucpenalty=\count369
-\c@biburllcpenalty=\count370
-\c@smartand=\count371
+\c@textcitecount=\count376
+\c@textcitetotal=\count377
+\c@textcitemaxnames=\count378
+\c@biburlnumpenalty=\count379
+\c@biburlucpenalty=\count380
+\c@biburllcpenalty=\count381
+\c@smartand=\count382
 )
 Package biblatex Info: Trying to load bibliography style 'numeric-comp'...
 Package biblatex Info: ... file 'numeric-comp.bbx' found.
@@ -1495,16 +1566,16 @@ Package biblatex Info: ... file 'standard.bbx' found.
 
 (/usr/share/texlive/texmf-dist/tex/latex/biblatex/bbx/standard.bbx
 File: standard.bbx 2013/11/25 v2.8a biblatex bibliography style (PK/JW/AB)
-\c@bbx:relatedcount=\count372
-\c@bbx:relatedtotal=\count373
+\c@bbx:relatedcount=\count383
+\c@bbx:relatedtotal=\count384
 )))
 Package biblatex Info: Trying to load citation style 'numeric-comp'...
 Package biblatex Info: ... file 'numeric-comp.cbx' found.
 
 (/usr/share/texlive/texmf-dist/tex/latex/biblatex/cbx/numeric-comp.cbx
 File: numeric-comp.cbx 2013/11/25 v2.8a biblatex citation style (PK/JW/AB)
-\c@cbx@tempcnta=\count374
-\c@cbx@tempcntb=\count375
+\c@cbx@tempcnta=\count385
+\c@cbx@tempcntb=\count386
 Package biblatex Info: Redefining '\cite'.
 Package biblatex Info: Redefining '\parencite'.
 Package biblatex Info: Redefining '\footcite'.
@@ -1534,26 +1605,26 @@ File: tikzlibraryshapes.multipart.code.tex 2008/01/09 v2.10 (rcs-revision 1.1)
 (/usr/share/texmf/tex/generic/pgf/libraries/shapes/pgflibraryshapes.multipart.c
 ode.tex
 File: pgflibraryshapes.multipart.code.tex 2010/01/07 v2.10 (rcs-revision 1.2)
-\pgfnodepartlowerbox=\box62
-\pgfnodeparttwobox=\box63
-\pgfnodepartthreebox=\box64
-\pgfnodepartfourbox=\box65
-\pgfnodeparttwentybox=\box66
-\pgfnodepartnineteenbox=\box67
-\pgfnodeparteighteenbox=\box68
-\pgfnodepartseventeenbox=\box69
-\pgfnodepartsixteenbox=\box70
-\pgfnodepartfifteenbox=\box71
-\pgfnodepartfourteenbox=\box72
-\pgfnodepartthirteenbox=\box73
-\pgfnodeparttwelvebox=\box74
-\pgfnodepartelevenbox=\box75
-\pgfnodeparttenbox=\box76
-\pgfnodepartninebox=\box77
-\pgfnodeparteightbox=\box78
-\pgfnodepartsevenbox=\box79
-\pgfnodepartsixbox=\box80
-\pgfnodepartfivebox=\box81
+\pgfnodepartlowerbox=\box65
+\pgfnodeparttwobox=\box66
+\pgfnodepartthreebox=\box67
+\pgfnodepartfourbox=\box68
+\pgfnodeparttwentybox=\box69
+\pgfnodepartnineteenbox=\box70
+\pgfnodeparteighteenbox=\box71
+\pgfnodepartseventeenbox=\box72
+\pgfnodepartsixteenbox=\box73
+\pgfnodepartfifteenbox=\box74
+\pgfnodepartfourteenbox=\box75
+\pgfnodepartthirteenbox=\box76
+\pgfnodeparttwelvebox=\box77
+\pgfnodepartelevenbox=\box78
+\pgfnodeparttenbox=\box79
+\pgfnodepartninebox=\box80
+\pgfnodeparteightbox=\box81
+\pgfnodepartsevenbox=\box82
+\pgfnodepartsixbox=\box83
+\pgfnodepartfivebox=\box84
 )))
 (/usr/share/texmf/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryarrow
 s.code.tex
@@ -1561,20 +1632,20 @@ File: tikzlibraryarrows.code.tex 2008/01/09 v2.10 (rcs-revision 1.1)
 
 (/usr/share/texmf/tex/generic/pgf/libraries/pgflibraryarrows.code.tex
 File: pgflibraryarrows.code.tex 2008/10/27 v2.10 (rcs-revision 1.9)
-\arrowsize=\dimen262
+\arrowsize=\dimen274
 ))
 (/usr/share/texmf/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryposit
 ioning.code.tex
 File: tikzlibrarypositioning.code.tex 2008/10/06 v2.10 (rcs-revision 1.7)
 )
-\c@defn=\count376
-\c@corollary=\count377
+\c@defn=\count387
+\c@corollary=\count388
  (/usr/share/texlive/texmf-dist/tex/latex/subfiles/subfiles.sty
 Package: subfiles 2012/05/23 Federico Garcia
 (/usr/share/texlive/texmf-dist/tex/latex/tools/verbatim.sty
 Package: verbatim 2003/08/22 v1.5q LaTeX2e package for verbatim enhancements
-\every@verbatim=\toks46
-\verbatim@line=\toks47
+\every@verbatim=\toks49
+\verbatim@line=\toks50
 \verbatim@in@stream=\read3
 ))
 (/usr/share/texlive/texmf-dist/tex/latex/blindtext/blindtext.sty
@@ -1583,24 +1654,24 @@ Package: blindtext 2012/01/06 V2.0 blindtext-Package
 (/usr/share/texlive/texmf-dist/tex/latex/tools/xspace.sty
 Package: xspace 2009/10/20 v1.13 Space after command names (DPC,MH)
 )
-\c@blindtext=\count378
-\c@Blindtext=\count379
-\c@blind@countparstart=\count380
-\blind@countxx=\count381
-\blindtext@numBlindtext=\count382
-\blind@countyy=\count383
-\c@blindlist=\count384
-\c@blindlistlevel=\count385
-\c@blindlist@level=\count386
-\blind@listitem=\count387
-\c@blind@listcount=\count388
-\c@blind@levelcount=\count389
-\blind@mathformula=\count390
-\blind@Mathformula=\count391
-\c@blind@randomcount=\count392
-\c@blind@randommax=\count393
-\c@blind@pangramcount=\count394
-\c@blind@pangrammax=\count395
+\c@blindtext=\count389
+\c@Blindtext=\count390
+\c@blind@countparstart=\count391
+\blind@countxx=\count392
+\blindtext@numBlindtext=\count393
+\blind@countyy=\count394
+\c@blindlist=\count395
+\c@blindlistlevel=\count396
+\c@blindlist@level=\count397
+\blind@listitem=\count398
+\c@blind@listcount=\count399
+\c@blind@levelcount=\count400
+\blind@mathformula=\count401
+\blind@Mathformula=\count402
+\c@blind@randomcount=\count403
+\c@blind@randommax=\count404
+\c@blind@pangramcount=\count405
+\c@blind@pangrammax=\count406
 )
 Package csquotes Info: Checking for multilingual support...
 Package csquotes Info: ... found 'babel' package.
@@ -1625,44 +1696,44 @@ File: english.lbx 2013/11/25 v2.8a biblatex localization (PK/JW/AB)
 (./thesis.aux)
 \openout1 = `thesis.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 34.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 34.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 37.
+LaTeX Font Info:    ... okay on input line 37.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 37.
+LaTeX Font Info:    ... okay on input line 37.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 37.
+LaTeX Font Info:    ... okay on input line 37.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 37.
+LaTeX Font Info:    ... okay on input line 37.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 37.
+LaTeX Font Info:    ... okay on input line 37.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 37.
+LaTeX Font Info:    ... okay on input line 37.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 37.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 37.
  (/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Try loading font information for T1+ppl on input line 34.
+LaTeX Font Info:    ... okay on input line 37.
+LaTeX Font Info:    Try loading font information for T1+ppl on input line 37.
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1ppl.fd
 File: t1ppl.fd 2001/06/04 font definitions for T1/ppl.
 )
-\AtBeginShipoutBox=\box82
+\AtBeginShipoutBox=\box85
 
 (/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count396
-\scratchdimen=\dimen263
-\scratchbox=\box83
-\nofMPsegments=\count397
-\nofMParguments=\count398
-\everyMPshowfont=\toks48
-\MPscratchCnt=\count399
-\MPscratchDim=\dimen264
-\MPnumerator=\count400
-\makeMPintoPDFobject=\count401
-\everyMPtoPDFconversion=\toks49
+\scratchcounter=\count407
+\scratchdimen=\dimen275
+\scratchbox=\box86
+\nofMPsegments=\count408
+\nofMParguments=\count409
+\everyMPshowfont=\toks51
+\MPscratchCnt=\count410
+\MPscratchDim=\dimen276
+\MPnumerator=\count411
+\makeMPintoPDFobject=\count412
+\everyMPtoPDFconversion=\toks52
 ) ABD: EveryShipout initializing macros
 (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
@@ -1679,12 +1750,20 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
+Package pgfplots notification 'compat/show suggested version=true': document ha
+s been generated with the most recent feature set (\pgfplotsset{compat=1.9}).
 
-Package pgfplots Warning: running in backwards compatibility mode (unsuitable t
-ick labels; missing features). Consider writing \pgfplotsset{compat=1.9} into y
-our preamble.
- on input line 34.
-
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: subfig package v1.3 is loaded.
+Package caption Info: floatrow package is loaded.
+Package caption Info: float package is loaded.
+Package caption Info: floatrow package is loaded.
+Package caption Info: End \AtBeginDocument code.
+(/usr/share/texlive/texmf-dist/tex/latex/floatrow/fr-subfig.sty
+Package: fr-subfig 2007/12/24 v0.1g (beta) floatrow: additions for subfig
+\FBsc@max=\skip153
+\FBso@max=\skip154
+)
 Package biblatex Info: Input encoding 'utf8' detected.
 Package biblatex Info: Automatic encoding selection.
 (biblatex)             Assuming data encoding 'utf8'.
@@ -1692,24 +1771,16 @@ Package biblatex Info: Automatic encoding selection.
 
 Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file 'thesis.bbl' found.
-(./thesis.bbl
-
-Package biblatex Warning: The following entry could not be found
-(biblatex)                in the database:
-(biblatex)                Citation needed?
-(biblatex)                Please verify the spelling and rerun
-(biblatex)                LaTeX afterwards.
-
-)
-Package biblatex Info: Reference section=0 on input line 34.
-Package biblatex Info: Reference segment=0 on input line 34.
- <ifi-kompendium-forside-eng.pdf, id=4, 639.66579pt x 887.2046pt>
+ (./thesis.bbl)
+Package biblatex Info: Reference section=0 on input line 37.
+Package biblatex Info: Reference segment=0 on input line 37.
+<ifi-kompendium-forside-eng.pdf, id=4, 639.66579pt x 887.2046pt>
 File: ifi-kompendium-forside-eng.pdf Graphic file (type pdf)
 
 <use ifi-kompendium-forside-eng.pdf>
-Package pdftex.def Info: ifi-kompendium-forside-eng.pdf used on input line 35.
+Package pdftex.def Info: ifi-kompendium-forside-eng.pdf used on input line 38.
 (pdftex.def)             Requested size: 639.66422pt x 887.20244pt.
-LaTeX Font Info:    Try loading font information for T1+phv on input line 35.
+LaTeX Font Info:    Try loading font information for T1+phv on input line 38.
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1phv.fd
 File: t1phv.fd 2001/06/04 scalable font definitions for T1/phv.
@@ -1717,30 +1788,30 @@ File: t1phv.fd 2001/06/04 scalable font definitions for T1/phv.
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} </home/esten/texmf/tex/late
 x/local/ifikompendium/ifi-kompendium-forside-eng.pdf>] [2]
-LaTeX Font Info:    Try loading font information for OT1+ppl on input line 37.
+LaTeX Font Info:    Try loading font information for OT1+ppl on input line 40.
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1ppl.fd
 File: ot1ppl.fd 2001/06/04 font definitions for OT1/ppl.
 )
-LaTeX Font Info:    Try loading font information for OML+zplm on input line 37.
+LaTeX Font Info:    Try loading font information for OML+zplm on input line 40.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omlzplm.fd
 File: omlzplm.fd 2002/09/08 Fontinst v1.914 font definitions for OML/zplm.
 )
-LaTeX Font Info:    Try loading font information for OMS+zplm on input line 37.
+LaTeX Font Info:    Try loading font information for OMS+zplm on input line 40.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omszplm.fd
 File: omszplm.fd 2002/09/08 Fontinst v1.914 font definitions for OMS/zplm.
 )
-LaTeX Font Info:    Try loading font information for OMX+zplm on input line 37.
+LaTeX Font Info:    Try loading font information for OMX+zplm on input line 40.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omxzplm.fd
 File: omxzplm.fd 2002/09/08 Fontinst v1.914 font definitions for OMX/zplm.
 )
-LaTeX Font Info:    Try loading font information for OT1+zplm on input line 37.
+LaTeX Font Info:    Try loading font information for OT1+zplm on input line 40.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1zplm.fd
@@ -1751,17 +1822,27 @@ File: ot1zplm.fd 2002/09/08 Fontinst v1.914 font definitions for OT1/zplm.
 
 ]
 LaTeX Font Info:    Font shape `T1/ppl/bx/n' in size <24.88> not available
-(Font)              Font shape `T1/ppl/b/n' tried instead on input line 39.
+(Font)              Font shape `T1/ppl/b/n' tried instead on input line 42.
  [3]
 [4
 
-] (./thesis.toc)
+] (./thesis.toc
+LaTeX Font Info:    Font shape `T1/ppl/bx/n' in size <12> not available
+(Font)              Font shape `T1/ppl/b/n' tried instead on input line 5.
+LaTeX Font Info:    Font shape `T1/ppl/bx/n' in size <10.95> not available
+(Font)              Font shape `T1/ppl/b/n' tried instead on input line 7.
+)
 \tf@toc=\write5
 \openout5 = `thesis.toc'.
 
  [5] [6
 
-] (./thesis.lof)
+] (./thesis.lof
+
+LaTeX Warning: Reference `fig:explicit_left_contexts' on page vii undefined on 
+input line 11.
+
+)
 \tf@lof=\write6
 \openout6 = `thesis.lof'.
 
@@ -1773,12 +1854,11 @@ LaTeX Font Info:    Font shape `T1/ppl/bx/n' in size <24.88> not available
 
  [9] [10
 
-]
-[11] [12
+] [11] [12
 
 ]
 LaTeX Font Info:    Font shape `T1/ppl/bx/n' in size <20.74> not available
-(Font)              Font shape `T1/ppl/b/n' tried instead on input line 48.
+(Font)              Font shape `T1/ppl/b/n' tried instead on input line 51.
  [1
 
 ] [2] (./background.tex
@@ -1795,10 +1875,10 @@ Underfull \hbox (badness 10000) in paragraph at lines 7--9
 
  []
 
-LaTeX Font Info:    Font shape `T1/ppl/bx/n' in size <10.95> not available
-(Font)              Font shape `T1/ppl/b/n' tried instead on input line 10.
-LaTeX Font Info:    Font shape `T1/ppl/bx/n' in size <12> not available
-(Font)              Font shape `T1/ppl/b/n' tried instead on input line 11.
+
+LaTeX Warning: Citation 'Citation needed?' on page 3 undefined on input line 10
+.
+
 
 Underfull \hbox (badness 10000) in paragraph at lines 12--13
 
@@ -1811,59 +1891,216 @@ Underfull \hbox (badness 10000) in paragraph at lines 12--13
 LaTeX Warning: Reference `multiple_sequence_alignment_using_partial_order_graph
 s' on page 5 undefined on input line 37.
 
-[5]) (./method.tex [6]
+[5]) (./algorithm.tex [6]
 Chapter 2.
 [7
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 43--56
-\T1/ppl/m/n/10.95 SION[].
+
+LaTeX Warning: Reference `SUPPLEMENTARY' on page 8 undefined on input line 42.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 42--43
+
  []
 
 
-LaTeX Warning: Reference `REFERENCE' on page 8 undefined on input line 58.
+Underfull \hbox (badness 10000) in paragraph at lines 43--45
+
+ []
+
+Package mdframed Info: mdframed works in twoside mode on input line 50.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 50.
+
+Overfull \hbox (2.09686pt too wide) in paragraph at lines 65--66
+[][] 
+ []
+
+Package mdframed Info: mdframed inside float 
+ mdframed uses option nobreak mdframed on input line 66.
+Package mdframed Info: mdframed inside a box 
+ mdframed uses option nobreak mdframed on input line 66.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+Package mdframed Info: mdframed works in twoside mode on input line 74.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 74.
+
+Overfull \hbox (4.1239pt too wide) in paragraph at lines 90--91
+[][] 
+ []
+
+Package mdframed Info: mdframed inside float 
+ mdframed uses option nobreak mdframed on input line 91.
+Package mdframed Info: mdframed inside a box 
+ mdframed uses option nobreak mdframed on input line 91.
+
+LaTeX Warning: Reference `fig:explicit_left_contexts' on page 8 undefined on in
+put line 92.
 
 
-LaTeX Warning: Reference `canonical_stable_general_mapping' on page 8 undefined
- on input line 58.
+LaTeX Warning: Reference `fig:explicit_left_contexts' on page 8 undefined on in
+put line 92.
 
 [8]
-Underfull \hbox (badness 10000) in paragraph at lines 65--66
+
+LaTeX Warning: Reference `TOOL' on page 9 undefined on input line 95.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 97--98
 
  []
 
-) [9] [10
+[9]
+Underfull \hbox (badness 10000) in paragraph at lines 98--100
 
-] [11
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 100--104
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 104--106
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 106--109
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 109--111
+
+ []
+
+Package mdframed Info: mdframed works in twoside mode on input line 117.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 117.
+
+Overfull \hbox (7.6778pt too wide) in paragraph at lines 125--126
+[][] 
+ []
+
+Package mdframed Info: mdframed inside float 
+ mdframed uses option nobreak mdframed on input line 126.
+Package mdframed Info: mdframed inside a box 
+ mdframed uses option nobreak mdframed on input line 126.
+Package mdframed Info: mdframed works in twoside mode on input line 131.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 131.
+
+Overfull \hbox (7.68433pt too wide) in paragraph at lines 151--152
+[][] 
+ []
+
+Package mdframed Info: mdframed inside float 
+ mdframed uses option nobreak mdframed on input line 152.
+Package mdframed Info: mdframed inside a box 
+ mdframed uses option nobreak mdframed on input line 152.
+
+Package wrapfig Warning: Stationary wrapfigure forced to float on input line 15
+8.
+
+
+Underfull \vbox (badness 1163) has occurred while \output is active []
+
+ [10]
+Underfull \hbox (badness 7291) in paragraph at lines 159--160
+\T1/ppl/m/n/10.95 in-ter-ested in align-ments which
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 159--160
+
+ []
+
+
+Underfull \hbox (badness 5022) in paragraph at lines 160--162
+\T1/ppl/m/n/10.95 The im-ple-mented search solves
+ []
+
+[11]) (./method.tex [12]
+Chapter 3.
+
+Package caption Warning: \label without proper \caption on input line 18.
+See the caption package documentation for explanation.
+
+
+LaTeX Warning: Reference `fig:edit_distance_variant' on page 13 undefined on in
+put line 7.
+
+
+Overfull \hbox (10.93167pt too wide) in paragraph at lines 7--20
+\T1/ppl/m/n/10.95 The al-go-rithm is gen-eral enough
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 7--20
+\T1/ppl/m/n/10.95 THE DIS-CUS-SION[].
+ []
+
+
+LaTeX Warning: Reference `REFERENCE' on page 13 undefined on input line 22.
+
+
+LaTeX Warning: Reference `canonical_stable_general_mapping' on page 13 undefine
+d on input line 22.
+
+[13
+
+]) [14] (./thesis.lof)
+\tf@lof=\write8
+\openout8 = `thesis.lof'.
+
+ [15
+
+] [16
+
+] [17
 
 ] (./thesis.aux)
 
 LaTeX Warning: There were undefined references.
+
+
+Package biblatex Warning: Please (re)run Biber on the file:
+(biblatex)                thesis
+(biblatex)                and rerun LaTeX afterwards.
 
 Package logreq Info: Writing requests to 'thesis.run.xml'.
 \openout1 = `thesis.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 32831 strings out of 495028
- 715925 string characters out of 6181497
- 1162193 words of memory out of 5000000
- 35321 multiletter control sequences out of 15000+600000
- 45821 words of font info for 91 fonts, out of 8000000 for 9000
+ 34760 strings out of 495028
+ 749340 string characters out of 6181497
+ 1202487 words of memory out of 5000000
+ 37212 multiletter control sequences out of 15000+600000
+ 58328 words of font info for 120 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 56i,11n,74p,10437b,1397s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 56i,12n,81p,10437b,1467s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
 e/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texm
 f-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/
 fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/
-type1/public/mathpazo/fplmri.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw
-/helvetic/uhvr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/up
-lb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></u
-sr/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on thesis.pdf (25 pages, 5086737 bytes).
+type1/public/mathpazo/fplmr.pfb></usr/share/texlive/texmf-dist/fonts/type1/publ
+ic/mathpazo/fplmri.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/
+uhvr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb><
+/usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></usr/share/t
+exlive/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
+Output written on thesis.pdf (31 pages, 5110276 bytes).
 PDF statistics:
- 155 PDF objects out of 1000 (max. 8388607)
- 98 compressed objects within 1 object stream
+ 179 PDF objects out of 1000 (max. 8388607)
+ 114 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
  18 words of extra memory for PDF output out of 10000 (max. 10000000)
 

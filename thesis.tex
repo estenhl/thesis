@@ -7,10 +7,13 @@
 \usepackage{amsthm}
 \usepackage{amsmath}
 \usepackage{wrapfig}
+\usepackage{subcaption}
+\usepackage{floatrow,subfig,caption}
 \urlstyle{sf}
 \usepackage{babel,textcomp,csquotes,ifimasterforside,varioref,graphicx}
 \usepackage[backend=biber,style=numeric-comp]{biblatex}
 \usetikzlibrary{automata,arrows,positioning}
+\pgfplotsset{compat=1.9}
 
 \newtheoremstyle{break}
   {\topsep}{\topsep}%
@@ -48,7 +51,10 @@
 \part{Introduction}                   
 
 \subfile{background}
+\subfile{algorithm}
 \subfile{method}
+\listoffigures
 \backmatter{}
+\nocite{*}
 \printbibliography
 \end{document}
