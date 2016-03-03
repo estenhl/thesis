@@ -2,6 +2,7 @@
 
 \begin{document}
 \chapter{Algorithm}
+In this section I will present the algorithm ``Fuzzy context-based search'' both as a conceptual idea and as a more precise implementation. The implementation details refers to the tool \textit{Graph Genome ALignment} (See Supplementary section XXX). Before the algorithm is described the problem is defined formally. \textcolor{red}{BLABLABLA}
 \subsection{Definitions}
 \begin{defn}[Graph-based reference genome (graph)]
 	A pair $G=\{V,E\}$ where $V$ is a set of vertices and $E$ is a set of edges. $|G|$ denotes the number of vertices of $G$.
@@ -38,12 +39,13 @@
 	\textcolor{red}{If multiple max scores: Provide all or chose one?}
 \end{defn}
 \subsection{Overview}
+
 \subsection{Precomputation of the graph}
-There are two data structures needed for aligning a string against the graph, a suffix tree for left contexts and a suffix tree for right contexts. Before either of the two are built the algorithm needs to decide a length for the contexts. Currently in the tool\ref{SUPPLEMENTARY} there are two ways of setting the context length: A user given parameter or an approximation based on the probability of sharing contexts \textcolor{red}{SUPPLEMENTARY?}. The length of a context does not impact the quality of the alignments found by the algorithm \textcolor{red}{PROOF IN SUPPLEMENTARY?} but will have an impact on the runtime. A further discussion on context lengths can be found in \textcolor{red}{DISCUSSION SOMEWHERE}\\
+There are two data structures needed for aligning a string against the graph, a suffix tree for left contexts and a suffix tree for right contexts. Before either of the two are built the algorithm needs to decide a length for the contexts. Currently in the tool there are two ways of setting the context length: A user given parameter or an approximation based on the probability of sharing contexts \textcolor{red}{SUPPLEMENTARY?}. The length of a context does not impact the quality of the alignments found by the algorithm \textcolor{red}{PROOF IN SUPPLEMENTARY?} but will have an impact on the runtime. A further discussion on context lengths can be found in \textcolor{red}{DISCUSSION SOMEWHERE}\\
 \par\noindent
-When a context length $|c|$ is set, the algorithm can start building the index. Two sets of strings, a left context set and a right context set, is generated for every node in the graph $G$. The generation of the two sets happen by the same procedure, by swapping around the starting point and the direction of the iteration. When creating left contexts the algorithm starts in the start-node of $G$ and traverses following the direction of the edges, for right contexts the opposite is done. Apart from this the two are equal. To generate the context set $c(n_x)$ for a given node $n_x$ the algorithm looks at every string $c \in c(n_y)$ for every incoming neighbouring node $n_y$. Every $c$ is modified into a new context string $c'$ by trimming away the last character and prefixing the context with \textcolor{red}{the character $b$ stored in $n_y$}. All the generated $c'$ is then added to $c(n_x)$. As sets per definition does not allow duplicates the impact of a branching occuring in the graph will fade away after exactly $|c|$ steps as the difference is trimmed away (see Fig. \ref{fig:explicit_contexts}), and thus avoid explosive exponentiality in the context set sizes.\\
+When a context length $|c|$ is set, the algorithm can start building the index. Two sets of strings, a left context set and a right context set, is generated for every node in the graph $G$. The generation of the two sets happen by the same procedure, by swapping around the starting point and the direction of the iteration. When creating left contexts the algorithm starts in the start-node of $G$ and traverses following the direction of the edges, for right contexts the opposite is done. Apart from this the two are equal. To generate the context set $c(n_x)$ for a given node $n_x$ the algorithm looks at every string $c \in c(n_y)$ for every incoming neighbouring node $n_y$. Every $c$ is modified into a new context string $c'$ by trimming away the last character and prefixing the context with \textcolor{red}{the character $b$ stored in $n_y$}. All the generated strings $c'$ is added to $c(n_x)$. As sets per definition does not allow duplicates the impact of a branching occuring in the graph will fade away after exactly $|c|$ steps as the difference is trimmed away (see Fig. \ref{fig:explicit_contexts}), and thus avoid explosive exponentiality in the context set sizes.\\
 \par\noindent
-The iteration starts in the node defined as the starting point which has the empty string $\epsilon$ as its only context and whenever a node is finished it enqueues everyone of its outgoing neighbours in a regular FIFO queue. If a node has more actual incoming neighbours than incoming neighbours which are finished generating contexts, the node puts itself back in the queue. The algorithm halts when the queue is empty. Every node has to be visited exactly once to generate its context and as the procedure runs twice to generate both sets the total runtime for the operation is $O(2|G|)$.\\
+The iteration starts in the node defined as the starting point which has the empty string $\epsilon$ as its only context. Whenever a node has finished producing its contexts it enqueues everyone of its outgoing neighbours in a regular FIFO queue. If a node has more actual incoming neighbours than incoming neighbours which are finished generating contexts, the node puts itself back in the queue. The algorithm halts when the queue is empty. Every node has to be visited exactly once to generate its context and as the procedure runs twice to generate both sets the total runtime for the operation is $O(2|G|)$.\\
 \begin{figure}[h]
 	\begin{center}
 		\begin{mdframed}
@@ -65,7 +67,7 @@ The iteration starts in the node defined as the starting point which has the emp
 			\end{tikzpicture}
 		\end{mdframed}
 	\end{center}
-	\caption{A small reference graph with left contexts (top) and right contexts (bottom) and $|c|$=2 explicitly shown}
+	\caption{A small reference graph with left contexts (top) and right contexts (bottom) of length 2 explicitly shown}
 	\label{fig:explicit_contexts}
 \end{figure}
 \par\noindent
@@ -89,28 +91,30 @@ The iteration starts in the node defined as the starting point which has the emp
 			(q3) edge node {} (q6);
 		\end{tikzpicture}
 	\end{mdframed}
-	\caption{The left suffix tree corresponding to the graph in \ref{fig:explicit_left_contexts}}
+	\caption{The left suffix tree corresponding to the graph in \ref{fig:explicit_contexts}}
 	\label{fig:left_suffix_tree}
 \end{wrapfigure}
-After generating the two context sets for every node, the elements of each one is inserted into their corresponding suffix tree. In theory every node can have $4^{|c|}$ contexts in each set. When the graph is more or less linear with few branches a more fair approximation is $B*|c|$ where $B$ is the observed branching factor. The current implementation in the tool \ref{TOOL} uses a naive suffix tree where insertion is $O(|c|)$. This is done for every node in the graph, yielding a total time complexity of $O(|G|B|c|^2)$. A discussion on more efficient suffix structures can be found in \textcolor{red}{SOMEWHERE IN DISCUSSION}. Every suffix is stored as a key with the index of it's originating node as a value. The total runtime for building a searchable index for a graph is $O(3|G||c|^2B)$
+After generating the two context sets for every node, the elements of each one is inserted into their corresponding suffix tree. In theory every node can have $4^{|c|}$ contexts in each set. When the graph is more or less linear with few branches a more fair approximation is $B*|c|$ where $B$ is the observed branching factor. The current implementation in the tool uses a naive suffix tree where insertion is $O(|c|)$. This is done for every node in the graph, yielding a total time complexity of $O(|G|B|c|^2)$. A discussion on more efficient suffix structures can be found in \textcolor{red}{SOMEWHERE IN DISCUSSION}. Every suffix is stored as a key with the index of it's originating node as a value. The total runtime for building a searchable index for a graph is $O(3|G||c|^2B)$
 \subsection{Generating the new graph G'}
-Creating $G'$ is the process of determining which nodes qualifies as candidate nodes for a given input string $s$ and combining them correctly. For every character $s_x \in s$ a left-context string and a right-context string is generated by looking at the $|c| + maxPossibleGapGivenThreshold(T)$ surrounding characters. The two strings are treated as contexts, one left and one right, and used as a basis for a fuzzy search in it's corresponding suffix tree.\\
+Creating $G'$ is the process of determining which nodes qualifies as candidate nodes for a given input string $s$ and combining them correctly. In order to determine actual candidates for the given string, the algorithm needs to know how much \textit{fuzzyness} to allow. This is a measure which decides how different a read can be from its optimal counterpart in the graph before it is categorized as not mappable. The algorithm takes in a fuzzyness parameter $\lambda$ and decides this by setting a threshold $T=maxPossibleScore(s)-\lambda$. The maximal score is found by mapping the string, be it the entire input string or a context string, against itself with a scoring function provided by the scoring schema. $T$ is used throughout the entire process as a cutoff variable.\\
 \par\noindent
-The search is a recursive function based on PO-MSA. The root node is supplied with a one-dimensional scoring array corresponding to the context string $c$, which is initialized with all zeroes. Then, for every child, a new scoring array is computed by regular edit distance rules: For each index $i$ take the maximal score for either a gap in the graph, a gap in the string or matching the character $c_i$ with the character contained in the child node \textcolor{red}{(Reference actual code in supplementary?), (more explanation needed?)}. This newly created array is supplemented to the same recursive function in the child. When a leaf node is reached the last index of the supplied scoring array corresponds to mapping the entire string $c$ against the entire context achieved by concatenating the path traversed by the recursion. If the score is within the threshold $T$ the indexes contained in the leaf node is added to the set of candidates.\\
+For every character $s_x \in s$ a left-context string and a right-context string is generated by looking at the $|c| + maxPossibleGapGivenThreshold(T)$ surrounding characters. The two strings are treated as contexts, one left and one right, and used as a basis for a fuzzy search in it's corresponding suffix tree. The search is a recursive function based on PO-MSA. The root node is supplied with a one-dimensional scoring array corresponding to the context string $c$, which is initialized with all zeroes. Then, for every child, a new scoring array is computed by regular edit distance rules: For each index $i$ take the maximal score for either a gap in the graph, a gap in the string or matching the character $c_i$ with the character contained in the child node \textcolor{red}{(Reference actual code in supplementary?), (more explanation needed?)}. This newly created array is supplemented to the same recursive function in the child. When a leaf node is reached the last index of the supplied scoring array corresponds to mapping the entire string $c$ against the entire context achieved by concatenating the characters contained in the path traversed by the recursion. If the score is within the threshold $T$ the indexes contained in the leaf node is added to the set of candidates.\\
 \par\noindent
-The newly formed graph $G'$ can be thus be defined formally as:\\
-$G'(G, s) = \{V', E'\}$ 
+The newly formed graph $G'$ can be defined formally:\\
+$G'(G, s, T) = \{V', E'\}$ 
 where $V'$ is an ordered set of sets of length $|s|$ where each set $V'_i$ is a set of nodes such that\\
-\par\noindent
-$V'_i=\{v_x|v_x \in G \wedge contextScore(v_x, s_i) > contextScore(s_i, s_i) - T\}$\\
+\par
+$V'_i=\{v_x|v_x \in G \wedge contextScore(v_x, s_i) >= T\}$\\
 \par\noindent
 and $E'$ is a list of weighted edges such that\\
-$E'=\{e'=\{i_s, i_e, w\}|i_s \in V'_x \wedge i_e \wedge V'_y \wedge gapPenalty(x, y) < T \wedge gapPenantly(distance(i_s, i_e)) < T\}$\\
+\par
+$E'=\{e'=\{i_s, i_e, w\}|i_s \in V'_x \wedge i_e \wedge V'_y \wedge$\par$gapPenalty(y - x) <= T \wedge gapPenalty(distance(i_s, i_e)) <= T\}$\\
 \par\noindent
-In theory every leaf node has to be visited in order to check the score for every represented context in the tree. In practice the tree can be pruned by cutting off the search whenever the \textit{maximal potential score}\textcolor{red}{(clumsy name)} falls outside the threshold. The maximal potential score for a node is found by adding together the currently highest score in the scoring array with the maximal matching score for the remainder of the string. This reduces the number of nodes to be searched from $O(4^c)$ to \textcolor{red}{(something alot smaller. Needs calculations)}.\\
+where $contextScore(x, y)$ and $gapPenalty(x, y)$ are scoring functions provided by the scoring schema and $distance(x, y)$ is the distance of the shortest path from node $x$ to node $y$ in the graph. \textcolor{red}{(Mixing up nodes and indexes in the definitions). (Something wrong in the definition of $E'$ regarding gap penalties. Figure out what)}\\
 \par\noindent
-After the fuzzy search is concluded there are two sets of candidates for every index, one containing the nodes matching the left context and an equivalent for nodes matching the right context. These two sets are joined by combining the scores for every node present in both sets and simply keeping the scores for nodes only present in one of the sets. During this combination operation the set is again pruned to remove all the nodes which falls under the scoring threshold when combined. The resulting set is the final candidate set for an index $i$. Intuitively these nodes needs to be connected to produce an actual graph. In the implementation this is done in real time by the following search algorithm by connecting every node in the candidate set for index $i$ with every node on every other index $j$ which can be reached without letting the gap penalty for moving from $i$ to $j$ exceed the threshold $T$.
-
+In theory every leaf node has to be visited in order to check the score for every represented context in the tree. In practice the tree can be pruned by cutting off the search whenever the \textit{maximal potential score}\textcolor{red}{(clumsy name)} falls below the threshold. The maximal potential score for a node is found by adding together the currently highest score in the scoring array with the maximal matching score for the remainder of the string. This reduces the number of nodes to be searched from $O(4^c)$ to \textcolor{red}{(something alot smaller. Needs calculations)}.\\
+\par\noindent
+\par
 \begin{wrapfigure}{r}{0.5\textwidth} 
 	\begin{subfigure}[t]{\textwidth}
 		\begin{mdframed}
@@ -152,12 +156,42 @@ After the fuzzy search is concluded there are two sets of candidates for every i
 		\end{mdframed}
 		\caption{$T=1$}
 	\end{subfigure}
-	\caption{The resulting candidate sets for mapping the string "ATA" against the reference genome from ~\ref{fig:explicit_contexts} with varying threshold T values)}
+	\caption{The resulting candidate sets for mapping the string "ATA" against the reference genome from ~\ref{fig:explicit_contexts} with varying T values}
 	\label{fig:candidate_nodes}
 \end{wrapfigure}
+After the fuzzy search is concluded there are two sets of candidates for every index, one containing the nodes matching the left context and an equivalent for nodes matching the right context. These two sets are joined by combining the scores for every node present in both sets and simply keeping the scores for nodes only present in one of the sets. During this combination operation the set is again pruned to remove all the nodes which falls under the scoring threshold when combined. The resulting set is the final candidate set for an index $i$. Intuitively these nodes needs to be connected to produce an actual graph. In the implementation this is done in real time by the following search algorithm by connecting every node in the candidate set for index $i$ with every node on every other index $j$ which can be reached without letting the gap penalty for moving from $i$ to $j$ exceed the threshold $T$. The weights of the edges are also computed in real time in the next step.\\
 \subsection{Searching $G'$ with the modified PO-MSA}
-When the candidate nodes for each position has been chosen there remains one final step: How to combine them in the best possible way. This corresponds with finding the path through $G'$ which traversal gives an optimal score within the scoring schema. Conceptually this is in many ways similar to a regular PO-MSA search where instead of searching through the reference graph with an input string we are searching through a graph of the string with the graph as our input. Instead of giving every node a score for every index in the string we give every index of the string a score for every candidate node. This presents one problem: We need to decide the gap score for jumping between arbitrary nodes in our graph. In the regular case with strings this is easily done by taking the differences in the indexes of two elements, whereas for graphs we need to find the distance between nodes through searching for shortest paths. We do however know we are not interested in alignments which does not have a score within our given threshold, which means we can bound the search to every node which is reachable without overstepping the score boundary $T$.\\
+When the candidate nodes for each position has been chosen there remains one final step: How to combine them in the best possible way to produce an actual path. This corresponds with finding the path through $G'$ which traversal gives an optimal score within the scoring schema. Conceptually this is in many ways similar to a regular PO-MSA search where instead of searching through the reference graph with an input string we are searching through a graph of the string with the graph as our input. Instead of giving every node a score for every index in the string we give every index of the string a score for every candidate node. This presents one problem: We need to decide the gap score for jumping between arbitrary nodes in our graph. In the regular case with strings this is easily done by taking the differences in the indexes of two elements, whereas for graphs we need to find the distance between nodes through searching for shortest paths. We do however know we are not interested in alignments which does not have a score within our given threshold, which means we can bound the search to every node which is reachable without overstepping the score boundary $T$.\\
 \par\noindent
-The implemented search solves the problem through dynamic programming. For every index $i$ look at every node $n_x$ in the candidate set. For each of these nodes make pairs with every node $n_y$ of every candidate set for the preceding $T$ indexes $j$. Once again we know scores higher than $T$ is not interesting and can bound the search backwards. For each of these pairs make a score by combining the score in the previous node with the mapping score for the character $b$ stored in $n$ and $s_i$ aswell as the gap penalty for traversing from index $j$ to $i$ and for traversing the graph from $n_x$ to $n_y$. The score for a node is the maximal attainable score found by making these pairs. In order to store the scores we need an array of integer arrays the same size as the array of arrays of candidate nodes. To handle non-linear gap penalties we need a boolean array the same size to store gap-information. Lastly, in order to backtrack to find the path yielding the highest score we need a backpointer array consisting of pairs of integers. The resulting space complexity is $O(5\textcolor{red}{SIZE OF CANDIDATE SETS})$. The average case time complexity of the search is $O(\dfrac{|s|T^4c^2|G|^2}{4^{|c|^2}})$ \textcolor{red}{Reference supplementary}.
+\begin{wrapfigure}{l}{0.5\textwidth}
+  \begin{subfigure}[t]{0.49\textwidth}
+    \begin{tabular}{ccc}
+      1 & 1 & 1 & 1 & X & X\\
+      1 & 1 & 1 & 1 & 1 & 1\\
+      1 & 1 & 1 & X & X & X
+    \end{tabular}
+    \caption{Indexes}
+  \end{subfigure}
+  \begin{subfigure}[t]{0.49\textwidth}
+      1 & 1 & 1 & 1 & X & X\\
+      1 & 1 & 1 & 1 & 1 & 1\\
+      1 & 1 & 1 & X & X & X 
+    \caption{Scores}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.49\textwidth}
+      1 & 1 & 1 & 1 & X & X\\
+      1 & 1 & 1 & 1 & 1 & 1\\
+      1 & 1 & 1 & X & X & X
+    \caption{Gaps}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.49\textwidth}
+      1 & 1 & 1 & 1 & X & X\\
+      1 & 1 & 1 & 1 & 1 & 1\\
+      1 & 1 & 1 & X & X & X
+    \caption{Backpointers}
+  \end{subfigure}
+\end{wrapfigure}
+The implemented search solves the problem through dynamic programming. For every index $i$ look at every node $n_x$ in the candidate set. For each of these nodes make pairs with every node $n_y$ of every candidate set for the preceding $T$ indexes $j$. Once again we know scores higher than $T$ is not interesting and can bound the distance of the search backwards. For each of these pairs make a score by combining the score in the previous node with the mapping score for the character $b$ stored in $n_x$ and $s_i$ aswell as the gap penalty for traversing from index $j$ to $i$ and for traversing the graph from $n_x$ to $n_y$. For all scoring schemas where the penalty for a gap is larger than the worst possible SNP the two preceding cases will never happen at the same time. The score for a node is the maximal attainable score found by making these pairs. In order to store the scores we need an array of integer arrays the same size as the array of arrays of candidate nodes. To handle non-linear gap penalties we need a boolean array the same size to store gap-information. Lastly, in order to backtrack to find the path yielding the highest score we need a backpointer array consisting of pairs of integers. The resulting space complexity is $O(5\textcolor{red}{SIZE OF CANDIDATE SETS})$. The average case time complexity of the search is $O(\dfrac{|s|T^4c^2|G|^2}{4^{|c|^2}})$ \textcolor{red}{Reference supplementary}.
 \subsection{Handling invalid threshold values}
+Whenever a read is aligned and the score threshold $T$ is set to a value higher than the best possible score, the read is deemed unmappable and no resulting alignment is provided. There are two possible scenarios in which this can happen: There exists no valid paths through the graph, or the highest scoring path yields a value lower than $T$. The algorithm recognizes the first case whenever its sees a subset of the ordered set containing candidate node sets spanning indexes $i$ to $j$, such that the gap penalty for gapping $i-1$ to $j+1$ is lower than $T$, where there are no paths from any node in candidate set $V'_i$ to any node in $V'_j$. The second case handles itself by actually providing an alignment and a score, but the result is overwritten as the optimality of the alignment can no longer be guaranteed. \textcolor{red}{SOMETHING ABOUT HOW INVALID ALIGNMENTS CAN CONTAIN VALID SEGMENTS}
 \end{document}
