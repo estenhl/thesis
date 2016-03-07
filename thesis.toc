@@ -1,0 +1,23 @@
+\boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}\boolfalse {backtracker}\relax 
+\defcounter {refsection}{0}\relax 
+\select@language {UKenglish}
+\defcounter {refsection}{0}\relax 
+\contentsline {part}{I\hspace {1em}Introduction}{1}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {1}Algorithm}{3}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {1.0.1}Definitions}{3}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {1.0.2}The graph}{4}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {1.0.3}Overview}{5}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {1.0.4}Precomputation of the graph}{5}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {1.0.5}Generating the new graph G'}{7}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {1.0.6}Searching G' with the modified PO-MSA}{9}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {1.0.7}Handling invalid threshold values}{10}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {1.0.8}Merging}{10}
