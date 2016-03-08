@@ -6,10 +6,12 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {figure}{\numberline {1.1}{\ignorespaces A graph made from the three sequences ``ATATA'', ``AGAGA'' and ``ACAA'' with 9 valid complete paths\relax }}{5}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {1.4}{\ignorespaces The left suffix tree corresponding to the graph in \ref {fig:explicit_contexts}\relax }}{6}
+\contentsline {figure}{\numberline {1.2}{\ignorespaces Different scoring thresholds $T$ yields different reference graphs\relax }}{6}
 \defcounter {refsection}{0}\relax 
 \contentsline {figure}{\numberline {1.3}{\ignorespaces A small reference graph with left contexts (top) and right contexts (bottom) of length 2 shown\relax }}{7}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {1.5}{\ignorespaces The resulting candidate sets for mapping the string "ATA" against the reference genome from ~\ref {fig:explicit_contexts} with varying T values\relax }}{8}
+\contentsline {figure}{\numberline {1.4}{\ignorespaces The left suffix tree corresponding to the graph in \ref {fig:explicit_contexts}\relax }}{8}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {1.5}{\ignorespaces The resulting candidate sets for mapping the string "ATA" against the reference genome from fig. ~\ref {fig:explicit_contexts} with varying T values\relax }}{9}
 \defcounter {refsection}{0}\relax 
 \contentsline {figure}{\numberline {1.6}{\ignorespaces The 4 arrays used by the searching algorithm when using the candidate sets from Fig \ref {fig:canditate_nodes} and $T=1$\relax }}{10}
