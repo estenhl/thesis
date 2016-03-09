@@ -1,20 +1,20 @@
 [0] Config.pm:327> INFO - This is Biber 2.3
 [0] Config.pm:330> INFO - Logfile is 'thesis.blg'
-[48] biber:287> INFO - === Tue Mar  8, 2016, 13:01:57
-[107] Biber.pm:346> INFO - Reading 'thesis.bcf'
-[213] Biber.pm:686> INFO - Using all citekeys in bib section 0
-[218] Biber.pm:3066> INFO - Processing section 0
-[232] Biber.pm:3206> INFO - Looking for bibtex format file 'thesis.bib' for section 0
-[262] bibtex.pm:1062> INFO - Decoding LaTeX character macros into UTF-8
-[263] bibtex.pm:923> INFO - Found BibTeX data source 'thesis.bib'
-[321] Utils.pm:147> WARN - BibTeX subsystem: warning: comma(s) at end of name (removing)
-[321] Utils.pm:147> WARN - BibTeX subsystem: author, warning: comma(s) at end of name (removing)
-[321] Utils.pm:147> WARN - BibTeX subsystem: warning: comma(s) at end of name (removing)
-[322] Utils.pm:147> WARN - BibTeX subsystem: author, warning: comma(s) at end of name (removing)
-[541] UCollate.pm:66> INFO - Overriding locale 'en-UK' defaults 'normalization = NFD' with 'normalization = prenormalized'
-[541] UCollate.pm:66> INFO - Overriding locale 'en-UK' defaults 'variable = shifted' with 'variable = non-ignorable'
-[541] Biber.pm:2943> INFO - Sorting list 'nty' of type 'entry' with scheme 'nty' and locale 'en-UK'
-[541] Biber.pm:2947> INFO - No sort tailoring available for locale 'en-UK'
-[571] bbl.pm:505> INFO - Writing 'thesis.bbl' with encoding 'UTF-8'
-[573] bbl.pm:596> INFO - Output to thesis.bbl
-[623] Biber.pm:107> INFO - WARNINGS: 4
+[51] biber:287> INFO - === Wed Mar  9, 2016, 13:21:29
+[100] Biber.pm:346> INFO - Reading 'thesis.bcf'
+[200] Biber.pm:686> INFO - Using all citekeys in bib section 0
+[205] Biber.pm:3066> INFO - Processing section 0
+[218] Biber.pm:3206> INFO - Looking for bibtex format file 'thesis.bib' for section 0
+[322] bibtex.pm:1062> INFO - Decoding LaTeX character macros into UTF-8
+[323] bibtex.pm:923> INFO - Found BibTeX data source 'thesis.bib'
+[367] Utils.pm:147> WARN - BibTeX subsystem: warning: comma(s) at end of name (removing)
+[368] Utils.pm:147> WARN - BibTeX subsystem: author, warning: comma(s) at end of name (removing)
+[368] Utils.pm:147> WARN - BibTeX subsystem: warning: comma(s) at end of name (removing)
+[368] Utils.pm:147> WARN - BibTeX subsystem: author, warning: comma(s) at end of name (removing)
+[570] UCollate.pm:66> INFO - Overriding locale 'en-UK' defaults 'variable = shifted' with 'variable = non-ignorable'
+[570] UCollate.pm:66> INFO - Overriding locale 'en-UK' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[571] Biber.pm:2943> INFO - Sorting list 'nty' of type 'entry' with scheme 'nty' and locale 'en-UK'
+[571] Biber.pm:2947> INFO - No sort tailoring available for locale 'en-UK'
+[597] bbl.pm:505> INFO - Writing 'thesis.bbl' with encoding 'UTF-8'
+[599] bbl.pm:596> INFO - Output to thesis.bbl
+[600] Biber.pm:107> INFO - WARNINGS: 4

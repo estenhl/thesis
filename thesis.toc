@@ -1,0 +1,69 @@
+\boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}\boolfalse {backtracker}\relax 
+\defcounter {refsection}{0}\relax 
+\select@language {UKenglish}
+\defcounter {refsection}{0}\relax 
+\contentsline {part}{I\hspace {1em}Introduction}{1}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {1}Background}{3}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {1.1}DNA}{3}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {1.1.1}The human genome}{4}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{Major Histocompatibility Complex}{4}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {1.1.2}Sequencing}{4}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {1.1.3}Mapping}{4}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {1.1.4}Alignment}{4}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {1.2}Sequence graphs}{4}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {1.2.1}Representation}{4}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {1.2.2}Mapping}{4}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {1.2.3}Alignment}{4}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {1.3}Techniques and tools}{4}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {1.3.1}Suffix trees}{4}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {1.3.2}Graph representations}{4}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {1.3.3}Visualization of graphs}{4}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {2}Algorithm}{5}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {2.1}Definitions}{5}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {2.2}The graph}{6}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {2.3}Aligning sequences with the algorithm ``Fuzzy context-based search''}{7}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {2.3.1}Overview}{7}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {2.3.2}Building the index}{7}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {2.3.3}Generating the modified graph G'}{9}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {2.3.4}Searching G' with a modified PO-MSA search}{12}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {2.3.5}Handling invalid threshold values}{13}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {2.4}Merging aligned sequences}{13}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {3}Method}{15}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {3.1}Test data}{15}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {3.2}Scoring schema}{15}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {3.3}Validation}{15}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {4}Results}{17}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {5}Conclusion}{19}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {6}Discussion}{21}

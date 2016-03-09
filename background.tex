@@ -3,37 +3,22 @@
 \begin{document}
 \chapter{Background}
 \section{DNA}
-\textit{Deoxyribonucleic acid} (DNA) is a molecule which allows organisms to store and pass on genetic information. The molecule is stored in the cells and encodes proteins which regulates the vital functions of the organism. DNA is able to replicate itself and can thus live on for generations through reproduction.\\
+\textit{Deoxyribonucleic acid} (DNA) is a molecule in which living organisms store genetic information. The information is encoded by \textit{nucleotides} bound together by a sugar-phosphate backbone into strands. The nucleotides are smaller molecules which can contain one of the nitrogenous bases \textit{\textbf{A}denine}, \textit{\textbf{C}ytosine}, \textit{\textbf{G}uanine} or \textit{\textbf{T}hymine}. Each of the bases are complementary to another base, A with T and C with G. Due to the chemical structure of the nucleotides, a DNA strand can be said to have a direction: Upstream towards the 5' end or downstream towards the 3' end. DNA strands can be connected with a \textit{reverse complementary} strand in a double helix. The two strands will have opposing directions, and every base in one of the strands will be connected to its complement in the other. Because either of the strands are easily deduced from the other, DNA is usually represented by only of them. Because DNA can be seen as a linear sequence of discrete units it can be represented by text strings containing the four leading letters of each nucleotide. The text strings representations often also contain the letter N, referencing \textit{aNy base}.
 \par\noindent
-The DNA of an individual is made up by two complementary strands of nucleotides bound together in a double helix. The nucleotides of DNA can contain the bases Adenine, Cytosine, Guanine or Thymine, typically denoted A, C, G and T. Complementary in this context means that instead of one singular sequence of bases DNA is made up by a sequence of paired bases, A's with T's and C's with G's, called base pairs (bp). Due to the chemical structure of the molecules making up a single \textcolor{red}{strand} of DNA each \textcolor{red}{strand} can be said to have a direction, upstream towards the 5' end or downstream towards the 3' end. Two complementary strands have opposing directions and are thus called the reverse complements of eachother.\\
-\par\noindent
-\textcolor{blue}{The size of DNA varies across species, from a couple of thousand basepairs (kb) in some viruses to several hundred billion basepairs (gb) in larger, more complex organisms}\cite{Citation needed?}. The human genome \textcolor{red}{comes in at the higher end of this range}, with a length of roughly 3 gb. \textcolor{red}{MORE}
-\subsection{Genomic variations}
-Over the span of time DNA is subject to change. Through random mutations and recombination a genetic sequence can be changed either within an individual or as a product of reproduction. The fact that these changes are able to survive and propagate through generations leads to a genepool where even though the DNA comes from a common ancestor, different individuals will have different variants of the original sequence. These variations form the basis for the division into species, but even within species alot of natural variation will occur.\\
-\par\noindent
-The least complex of these variations are Single Nucleotide Polymorphisms (SNPs), where a single nucleotide has changed between two individuals, and insertions and deletions (Indels) where either one or a short sequence of bases have appeared or disappeared in the DNA of an individual. Longer and more complex structural variations can also occur when a larger part of a chromosome breaks free and disappears completely or inserts itself in a different place or the opposite direction. 
+The smallest unit used for representing DNA is the nucleotide. Several continuous nucleotides make up a \textit{contig}. Several contigs, not necessarily overlapping or continuous, make up a \textit{scaffold}. Several scaffolds can again be combined into \textit{chromosomes} which are the building blocks of a complete \textit{genome}. The genome is the unit containing the genetic information for a single individual.
+\subsection{Variation}
+
+\subsection{The human genome}
+\subsubsection{Major Histocompatibility Complex}
+\subsection{Sequencing}
+\subsection{Mapping}
 \subsection{Alignment}
-The fact that a genome is built by discrete entities, the bases A, C, G and T, means that any DNA sequence can be represented by a text string. The double-stranded nature of DNA could be encoded into the string, but as one side can easily be derived from the other representing one of the strands is usually expressive enough. The process of determining genetic variation between two separate individuals can then be seen as the problem of finding the similarities and differences in the two corresponding text strings. \textcolor{red}{Motivation?}
-\subsubsection{Levensthein difference}
-There exists several ways of determining the difference, also called the edit distance, between two strings mathematically. The main difference between the approaches are which operations are possible on the two strings and how the result is scored. The most common technique is called Levenshtein distance, which allows the operations deletion, insertion, and substitution. All of the preceding operations works on a single character, and one operation by itself yields a distance of 1. Finding the optimal Levenshtein distance can be done by dynamic programming in linear time.
-\subsubsection{DNA sequence comparison}
-(Needleman-Wunsch)
-
-\subsection{Reference genomes}
-To say that an individual of a species deviates from the norm in any way there has to be a standard to compare it to, a reference genome. For humans the current reference genome is GRCh38, developed and maintained by the Genome Reference Consortium. \textcolor{red}{Something about the represented variation}
-\section{Graph-based reference genomes}
-As sequencing technology improves and cost decreases we are able to sequence an increasing number of genomes. A natural consequence of sequencing more genomes is discovering a larger number of variations. When mapping reads against a reference genome, knowledge of possible variants will provide a better basis for completing a correct mapping of new sequences\cite{improved_genome_inference_in_the_mhc_using_a_population_reference_graph}. A natural way to represent this variation is through a graph, where different sequences share regions they have in common and branch out wherever they diverge from eachother. \textcolor{red}{Motivation}
-\subsection{De Bruijn graphs}
-\subsection{Mapping to a graph}
-When a reference genome is represented by a single sequence of letters, each letter can be uniquely identified by its position. Variations can then be stored based on the position they occur in, or the position they start in if they span several bases. When using a graph-based reference the nodes are not a part of any naturally occuring coordinate system. If one also imagines the reference should be able to merge in new data at any given point the relationship between nodes might change and yield a fixed mapping scheme generated for the old graph stale and incorrect.
-\subsection{Context driven mapping}
-In the article \textit{Mapping to a reference genome structure}\cite{mapping_to_a_reference_genome_structure}, Benedict Paten et al. introduce the concept of context-driven mapping. They define a context for a node $N$ in a reference as a triplet $(L, B, R)$ where $B$ is the base contained in the node, $L$ is a set of strings generated by traversing the paths leading in to $N$ and similarily $R$ is a set of strings generated by traversal of the paths going out from $N$. A unique context is a context mapping to exactly one node in the reference genome graph.
-\subsection{\textcolor{red}{SOMETHING FROM VG}}
-
-\textcolor{red}{MORE}
-\subsection{Alignment against a graph}
-Aligning two sequences against eachother can as mentioned be done by dynamic programming in linear time by searching a 2-dimensional search space. A naive approach to the alignment problem could be to do such linear searches against all possible sequences present in the graph, represented by traversal of all complete paths from the start-node to the end-node. However the number of possible paths would grow exponentially in relation to the variants represented in the graph and the complexity of this approach would quickly grow out of control. 
-\subsubsection{Dynamic programming}
-The most obvious problem with the naive solution is that many nodes are visited several times as they are traversed as members of separate paths. Lee, Grasso and Sharlow propose an algorithm for multiple sequence alignment on Partial Order Graphs (MO-PSA) in their paper \textit{Multiple sequence alignment using Partial Order Graphs}\ref{multiple_sequence_alignment_using_partial_order_graphs}. The general idea is to use a regular string alignment algorithm, Needleman-Wunsch, extended to multiple dimensions. When determining the score for a given position for a node in the graph, instead of looking at the previous indexes MO-PSA looks at paths from preceding nodes. 
-\subsubsection{Context driven alignment}
+\section{Sequence graphs}
+\subsection{Representation}
+\subsection{Mapping}
+\subsection{Alignment}
+\section{Techniques and tools}
+\subsection{Suffix trees}
+\subsection{Graph representations}
+\subsection{Visualization of graphs}
 \end{document}
