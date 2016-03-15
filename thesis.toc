@@ -2,39 +2,43 @@
 \defcounter {refsection}{0}\relax 
 \select@language {UKenglish}
 \defcounter {refsection}{0}\relax 
-\contentsline {part}{I\hspace {1em}Introduction}{1}
+\contentsline {chapter}{\numberline {1}Background}{1}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {1}Background}{3}
+\contentsline {section}{\numberline {1.1}Genetics}{1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {1.1}DNA}{3}
+\contentsline {subsection}{\numberline {1.1.1}Gene}{1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {1.1.1}The human genome}{4}
+\contentsline {subsection}{\numberline {1.1.2}Variation}{1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Major Histocompatibility Complex}{4}
+\contentsline {subsection}{\numberline {1.1.3}Reference genomes}{2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {1.1.2}Sequencing}{4}
+\contentsline {subsection}{\numberline {1.1.4}The human genome}{2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {1.1.3}Mapping}{4}
+\contentsline {subsubsection}{Major Histocompatibility Complex}{2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {1.1.4}Alignment}{4}
+\contentsline {subsection}{\numberline {1.1.5}Sequencing}{2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {1.2}Sequence graphs}{4}
+\contentsline {subsection}{\numberline {1.1.6}Alignment}{2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {1.2.1}Representation}{4}
+\contentsline {section}{\numberline {1.2}Sequence graphs}{3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {1.2.2}Mapping}{4}
+\contentsline {subsection}{\numberline {1.2.1}Representation}{3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {1.2.3}Alignment}{4}
+\contentsline {subsection}{\numberline {1.2.2}Mapping}{3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {1.3}Techniques and tools}{4}
+\contentsline {subsection}{\numberline {1.2.3}Alignment}{3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {1.3.1}Suffix trees}{4}
+\contentsline {section}{\numberline {1.3}Techniques and tools}{3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {1.3.2}Graph representations}{4}
+\contentsline {subsection}{\numberline {1.3.1}Dynamic programming}{3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {1.3.3}Visualization of graphs}{4}
+\contentsline {subsection}{\numberline {1.3.2}Implementing graphs}{3}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {2}Algorithm}{5}
+\contentsline {subsection}{\numberline {1.3.3}Suffix trees}{3}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {1.3.4}Visualization of graphs}{3}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {2}Implementation}{5}
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {2.1}Definitions}{5}
 \defcounter {refsection}{0}\relax 
