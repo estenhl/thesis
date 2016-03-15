@@ -3,42 +3,42 @@
 \begin{document}
 \chapter{Background}
 \section{Genetics}
-\textit{Deoxyribonucleic acid} (DNA) is a molecule in which living organisms store genetic information. The information is encoded by \textit{nucleotides} bound together by a sugar-phosphate backbone into strands. The nucleotides are smaller molecules which contain one of the nitrogenous bases \textit{\textbf{A}denine}, \textit{\textbf{C}ytosine}, \textit{\textbf{G}uanine} or \textit{\textbf{T}hymine}. Each of the bases are complementary to another, A with T and C with G. Due to the chemical structure of the nucleotides, a DNA strand can be said to have a direction: Upstream towards the 5' end or downstream towards the 3' end. DNA strands can be connected with a \textit{reverse complementary} strand in a double helix. The two strands will have opposing directions, and every base in one of the strands will be connected to its complement. The paired nucleotides are called \textit{base pairs}. Because either of the strands are easily deduced from the other, DNA is usually represented by only of them. DNA can be seen as a linear sequence of discrete units and can thus be represented by text strings, containing the four leading letters representing nucleotides. The text strings representations often also contain the letter N, referencing \textit{aNy base}.
-\subsection{Gene}
+\textit{Deoxyribonucleic acid} (DNA) is a molecule in which living organisms store genetic information. The information is encoded by \textit{nucleotides} bound together by a sugar-phosphate backbone into strands. The nucleotides are smaller molecules which contain one of the nitrogenous bases \textit{Adenine} (A), \textit{Cytosine} (C), \textit{Guanine} (G) or \textit{Thymine} (T). Each of the bases are complementary to another, A with T and C with G. Due to the chemical structure of the nucleotides, a DNA strand can be said to have a direction: Upstream towards the 5' end or downstream towards the 3' end. DNA strands can be connected with a \textit{reverse complementary} strand in a double helix. The two strands will have opposing directions, and every base in one of the strands will be connected to its complement. The paired nucleotides are called \textit{base pairs}. Because either of the strands are easily deduced from the other, DNA is usually represented by only of them. DNA can be seen as a linear sequence of discrete units and can thus be represented by text strings, containing the four leading letters representing nucleotides. The text strings representations often also contain the letter N, referencing \textit{aNy base}.
+\subsection{Genes}
 \textcolor{red}{"What is a gene?" Helen Pearson}
 \subsection{Variation}
 Genetic information is prone to mutations, either as a result of environmental influence or as a consequence of imperfections in reproduction. The simplest mutations are \textit{point mutations} which affect a single nucleotide base. Point mutations can either be \textit{Single-nucleotide polymorphisms} (SNPs) where a single base is substituted for another, or \textit{insertions} or \textit{deletions} (indels) where a single nucleotide is removed or inserted into the genetic sequence. Mutations can also occur over larger areas of the genome, where longer subsequences can be deleted, inserted, moved or reversed. A final type of mutations is \textit{Copy number variations} where a longer sequence of DNA, typically at least 1 kb \cite{copy_number_variation_new_insights_in_genome_diversity}, is repeated a variable number of times.\\
-\subsection{Reference genomes}
+\subsection{A reference genome}
 \subsection{The human genome}
 The human genome consists of roughly 3 billion base pairs (bp). These base pairs are spread over 22 paired chromosomes and is assumed to contain about 23 000 genes \cite{introduction_to_genomics}. The current human reference genome is GRCh38, developed and maintained by the \textit{Genome Reference Consortium} \textcolor{red}{HOWTO: reference websites}. GRCh38 contains 261 alternate loci, spread over 178 out of a total of 238 regions. An average human is estimated to deviate from the reference genome in 10.000-11.000 synonymous sites and 10.000-12.000 non-synonymous sites.
 \subsubsection{Major Histocompatibility Complex}
 The \textit{Major Histocompatibility Complex} (MHC) is a genetic region spanning approximately 4 million base pairs (mb) \cite{immunobiology_the_immune_system_in_health_and_disease}. In humans it is located on chromosome 6 and contains about 200 genes. MHC is a region known to contain genes which affect the functionality of the immune system \cite{the_importance_of_immune_gene_variability_in_evolutionary_ecology_and_conservation}. Even more so MHC is known to be a highly variable region, containing variants that are directly associated with disease \cite{variation_analysis_and_gene_annotation_of_eight_mhc_haplotypes}.
 \subsection{Sequencing}
 \subsection{Alignment}
-\textit{Sequence alignment} is the process of determining correspondence between text strings, in this case representing DNA, by mapping the elements from one to the elements of the other. The score of an alignment is determined by a \textit{scoring schema}, which provides scores for mapping characters against characters through a \textit{substitution matrix} and penalties for introducing \textit{gaps}. A gap refers to an element in one of the strings which has no counterpart in the other string when aligned (Fig. \ref{fig:alignments}). The scoring schemas can be based around simple match/mismatch scores, which corresponds to the mathematical \textit{Edit distance problem}, or more complex scores (Fig. \ref{fig:substitution_matrix}). These complex models typically try to model the probabilities behind the physical processes responsible for change. The computational sequence alignment problem consists of finding the highest scoring alignment for any two strings. There exists two main variants of the problem, \textit{global alignments} where to entire strings are aligned against each other and \textit{local alignments} where a string is aligned against a substring of another. The two are traditionally solved respectively by the \textit{Needleman-Wunsch} and \textit{Smith-Waterman} algorithms which both are based on \textit{dynamic programming} (Section \ref{sec:dynamic_programming}).
+\textit{Sequence alignment} is the process of determining correspondence between text strings, in this case representing DNA, by mapping the elements from one to the elements of the other. The score of an alignment is determined by a \textit{scoring schema}, which provides scores for mapping characters against characters through a \textit{substitution matrix} and penalties for introducing \textit{gaps}. A gap refers to an element in one of the strings which has no counterpart in the other string when aligned (Fig. \ref{fig:alignments}). The scoring schemas can be based around simple match/mismatch scores, which corresponds to the mathematical \textit{Edit distance problem}, or more complex scores (Fig. \ref{fig:substitution_matrix}). These complex models typically try to model the probabilities behind the physical processes responsible for change. The computational sequence alignment problem consists of finding the highest scoring alignment for any two strings. There exists two main variants of the problem, \textit{global alignments} where to entire strings are aligned against each other and \textit{local alignments} where a string is aligned against a substring of another. The two are traditionally solved respectively by the Needleman-Wunsch and Smith-Waterman algorithms which both are based on \textit{dynamic programming} (Section \ref{sec:dynamic_programming}).
 \begin{wrapfigure}{L}{0.3\textwidth}
-		\begin{subfigure}[t]{\textwidth}
-			\begin{mdframed}
-				\begin{center}
-					\texttt{ACGGGCCTA}\\
-					\texttt{||||\space||||}\\
-					\texttt{ACGGACCTA}
-				\end{center}
-			\end{mdframed}
-			\caption{An alignment with no gaps, but one mismatch}
-		\end{subfigure}
-		\begin{subfigure}[b]{\textwidth}
-			\begin{mdframed}
-				\begin{center}
-					\texttt{ACGGGCCTA}\\
-					\texttt{||||\space\space|||}\\
-					\texttt{ACGG---CTA}
-				\end{center}
-			\end{mdframed}
-			\caption{An alignment with a single gap of length 2}
-		\end{subfigure}
-	\caption{Examples of aligned text strings}
-	\label{fig:alignments}
+  \begin{subfigure}[t]{\textwidth}
+    \begin{mdframed}
+      \begin{center}
+        \texttt{ACGGGCCTA}\\
+        \texttt{||||\space||||}\\
+        \texttt{ACGGACCTA}
+      \end{center}
+    \end{mdframed}
+    \caption{An alignment with no gaps, but one mismatch}
+  \end{subfigure}
+  \begin{subfigure}[b]{\textwidth}
+    \begin{mdframed}
+      \begin{center}
+        \texttt{ACGGGCCTA}\\
+        \texttt{||||\space\space|||}\\
+        \texttt{ACGG---CTA}
+      \end{center}
+    \end{mdframed}
+    \caption{An alignment with a single gap of length 2}
+  \end{subfigure}
+  \caption{Examples of aligned text strings}
+  \label{fig:alignments}
 \end{wrapfigure}
 \par\noindent
 If more than two sequences are aligned the result is a \textit{Multiple sequence alignment} (MSA). This is typically done on sequences which is expected to share a common ancestor to determine which traits of the individuals arised from the same origins and how the involved species have diverged over time. A final variant of the alignment problem is one involving large databases of sequences, where the algorithms does not only need to find the best alignment between two sequences, but also determine which sequence should be chosen in order to maximize the result. Both of the preceding techniques utilize heuristical methods to decrease the computational complexity.
@@ -46,7 +46,7 @@ If more than two sequences are aligned the result is a \textit{Multiple sequence
   \begin{mdframed}
     \begin{center}
       \begin{tabularx}{\linewidth}{ccccc}
-          &\texttt{A}&\texttt{C}&\texttt{G}&\texttt{T}\\ \cline{2-5}
+        &\texttt{A}&\texttt{C}&\texttt{G}&\texttt{T}\\ \cline{2-5}
         \texttt{A}&\multicolumn{1}{|c|}{\texttt{91}}&\texttt{-114}&\multicolumn{1}{|c|}{\texttt{-31}}&\multicolumn{1}{c|}{\texttt{-123}}\\ \cline{2-5}
         \texttt{C}&\multicolumn{1}{|c|}{\texttt{-114}}&\texttt{100}&\multicolumn{1}{|c|}{\texttt{-125}}&\multicolumn{1}{c|}{\texttt{-31}}\\ \cline{2-5}
         \texttt{G}&\multicolumn{1}{|c|}{\texttt{-31}}&\texttt{-125}&\multicolumn{1}{|c|}{\texttt{100}}&\multicolumn{1}{c|}{\texttt{-114}}\\ \cline{2-5}
@@ -63,8 +63,8 @@ Representing genetic information as graphs instead of the traditional linear rep
   A pair $G=\{V,E\}$ where $V$ is a set of vertices and $E$ is a set of edges. $|G|$ denotes the number of vertices in $G$.
 \end{defn}
 \subsection{Representation}
-Deciding upon the representation of the graph consists of defining the structure of the elements involved, namely the vertices and edges. As the graphs are built from genetic information the basic building blocks, the nucleotides, should obviously be represented. If the input data are more complex than single nucleotides, we must represent the relationships. Because the input data has variation, the structure needs to tolerate flexibility. There is however a risk of making the structures so flexible they present no consistency, and a flexibility/rigidness-tradeoff becomes apparent (fig. \ref{fig:flexibility_rigidness}). How the structures are defined in detailed should be determined through the operations which are desirable to perform on them.
-
+Deciding upon the representation of the graph consists of defining the structure of the elements involved, namely the vertices and edges. As the graphs are built from genetic information the basic building blocks, the nucleotides, should obviously be represented. If the input data are more complex than single nucleotides, we must represent the relationships. Because the input data has variation, the structure needs to tolerate flexibility. There is however a risk of making the structures so flexible they present no consistency, and a flexibility/rigidness-tradeoff becomes apparent (fig. \ref{fig:flexibility_rigidness_tradeoff}). How the structures are defined in detailed should be determined through the operations which are desirable to perform on them.\\
+\par\noindent
 \begin{wrapfigure}{L}{0.65\textwidth}
   \begin{mdframed}
     \begin{subfigure}[t]{\textwidth}
@@ -147,8 +147,26 @@ Deciding upon the representation of the graph consists of defining the structure
   \caption{Two graphs with vertices representing nucleotides and edges representing sequences displaying too much flexibility (a) and (arguably) too much rigidity (b)}
   \label{fig:flexibility_rigidness_tradeoff}
 \end{wrapfigure}
-In the article ``An Eulerian path approach to DNA fragment assembly''\cite{an_eulerian_path_approach_to_dna_fragment_assembly}, Pevzner, Tang and Waterman proposes using \textit{de Bruijn graphs} as a solution to find the correct assembly of repeats during fragment assembly. A de Bruijn graph is a structure where vertices represent \textit{k-mers} from an alphabet and edges represent relationships between the k-mers of two vertices. Pevzner et al. lets the vertices contain strings of length $l-1$ and connects vertices with an edge wherever there exists a read of length $l$ containing the two substrings. Formulating the problem in this fashion lets the problem be formulated as a \textit{Eulerian path} problem, solvable in polynomial time, rather than the traditional ``overlap-layout-consensus'' method which is equivalent to the NP-complete problem of finding a \textit{Hamiltonian path}.
+\subsubsection{de Bruijn graphs}
+In the article ``An Eulerian path approach to DNA fragment assembly''\cite{an_eulerian_path_approach_to_dna_fragment_assembly}, Pevzner, Tang and Waterman proposes \textit{de Bruijn} graphs as a solution to find the correct assembly of repeats during fragment assembly. A de Bruijn graph is a structure where vertices represent \textit{k-mers} from an alphabet and edges represent relationships between the k-mers of two vertices. Pevzner et al. lets the vertices contain strings of length $l-1$ and connects vertices with an edge wherever there exists a read of length $l$ containing the two substrings. Formulating the problem in this fashion lets the problem be formulated as a \textit{Eulerian path} problem, solvable in polynomial time, rather than the traditional ``overlap-layout-consensus'' method which is equivalent to the NP-complete problem of finding a \textit{Hamiltonian path}. A great benefit with de Bruijn graphs is that there is no disambiguity: Any legal k-mer has at no point more than one vertice representing it. \\
+\clearpage
+\par\noindent
+A more detailed type of de Bruijn graphs is the colored variant where the origins of edges and vertices are stored as colors. The entire sequence originating from a single individual sample can be seen by following a path with a given color. Similarities between samples can be seen as multicolored stretches, variation take the form of bubbles. Colored de Bruijn graphs can be used for de novo assembly as a more powerful method for detecting variation, compared to traditional assembly techniques\cite{de_novo_assembly_and_genotyping_of_variants_using_colored_de_bruijn_graphs}.
+\subsubsection{Sequence graphs}
+The term \textit{sequence graph} stems from the article ``Mapping to a Reference Genome structure''\cite{mapping_to_a_reference_genome_structure} and describe a graph structure which is possibly more intuitively pleasing. Every vertice in the graph corresponds to a single nucleotide from one or more genetic sequences used in building the graph. An edge represents two nucleotides which are consecutive in one of the original sequences. Paths symbolize subsequences of the originating input sequences. To handle the arising problem that the contents of nodes are no longer unique each vertice can be given an index which is exclusive for their associated graph. \\
+\begin{defn}[Vertice]
+  A pair $v=\{b, i\}$ where $b \in \{A, C, T, G\}$ and $i$ is a unique index. Every graph $G$ also has two special vertices $s_G=\{s, 0\}$ and $t_G=\{e, -1\}$ which represents unique start and end vertices. The notation $b(v_i)$ references the first element in the pair (the nucleotide).
+\end{defn}
+\begin{defn}[Edge]
+  An ordered pair $e=\{i_s, i_e\}$ where both elements are indexes for vertices. 
+\end{defn}
 \subsection{Mapping}
+Although the two terms are often used isomorphically we will in this thesis define mapping and alignment as two separate terms. Mapping is the process of finding relationships between single elements of a genetic string and single elements of a reference genome. Alignment is concerned with finding relationships between consecutive nucleotides in an input string and substructures in the reference genome. A mapping score is defined as the score achieved by referencing the index denoted by the two bases in a substitution matrix. 
+\begin{defn}[Mapping score]
+  A score produced by mapping two characters $b_1, b_2 \in \{A, C, G, T\}$ against a substitution matrix contained by a scoring schema.
+\end{defn}
+\noindent
+For de Bruijn graphs mapping is an easy process: Either a k-mer has a corresponding vertice or it does not. For a sequence graph any nucleotide has the same amount of equally scoring mappings as there are vertices containing the same base in a graph.
 \subsection{Alignment}
 \section{Techniques and tools}
 \subsection{Dynamic programming}

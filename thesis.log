@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.2.19)  15 MAR 2016 15:38
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.2.19)  15 MAR 2016 19:48
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2147,27 +2147,22 @@ LaTeX Font Info:    Font shape `T1/jgi/bx/n' in size <24.88> not available
 LaTeX Font Info:    Font shape `T1/jgi/bx/n' in size <10.95> not available
 (Font)              Font shape `T1/jgi/b/n' tried instead on input line 5.
 LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
-(Font)              scaled to size 10.07397pt on input line 7.
+(Font)              scaled to size 10.07397pt on input line 9.
 LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
-(Font)              scaled to size 7.63599pt on input line 7.
+(Font)              scaled to size 7.63599pt on input line 9.
 LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
-(Font)              scaled to size 5.51999pt on input line 7.
+(Font)              scaled to size 5.51999pt on input line 9.
 LaTeX Font Info:    Font shape `U/futm/m/n' will be
-(Font)              scaled to size 10.07397pt on input line 7.
+(Font)              scaled to size 10.07397pt on input line 9.
 LaTeX Font Info:    Font shape `U/futm/m/n' will be
-(Font)              scaled to size 7.63599pt on input line 7.
+(Font)              scaled to size 7.63599pt on input line 9.
 LaTeX Font Info:    Font shape `U/futm/m/n' will be
-(Font)              scaled to size 5.51999pt on input line 7.
+(Font)              scaled to size 5.51999pt on input line 9.
  [5])
 \tf@toc=\write5
 \openout5 = `thesis.toc'.
 
- [6] (./thesis.lof
-
-LaTeX Warning: Reference `fig:canditate_nodes' on page vii undefined on input l
-ine 25.
-
-)
+ [6] (./thesis.lof)
 \tf@lof=\write6
 \openout6 = `thesis.lof'.
 
@@ -2187,14 +2182,18 @@ showing defn
 
 ] [13] [14
 
-] (./background.tex
+] (./introduction.tex
 Chapter 1.
 LaTeX Font Info:    Font shape `T1/jgi/bx/n' in size <20.74> not available
 (Font)              Font shape `T1/jgi/b/n' tried instead on input line 4.
+) (./background.tex [1
+
+] [2
+
+]
+Chapter 2.
 LaTeX Font Info:    Font shape `T1/jgi/bx/n' in size <14.4> not available
 (Font)              Font shape `T1/jgi/b/n' tried instead on input line 5.
-LaTeX Font Info:    Font shape `T1/jgi/bx/it' in size <10.95> not available
-(Font)              Font shape `T1/jgi/b/it' tried instead on input line 6.
 LaTeX Font Info:    Font shape `T1/jgi/bx/n' in size <12> not available
 (Font)              Font shape `T1/jgi/b/n' tried instead on input line 7.
 
@@ -2202,9 +2201,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 10--11
 
  []
 
-[1
-
-]
+[3]
 Package mdframed Info: mdframed works in twoside mode on input line 22.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
@@ -2225,7 +2222,7 @@ Package mdframed Info: mdframed inside float
  mdframed uses option nobreak mdframed on input line 37.
 Package mdframed Info: mdframed inside a box 
  mdframed uses option nobreak mdframed on input line 37.
- [2]
+ [4]
 Package mdframed Info: mdframed works in twoside mode on input line 47.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
@@ -2245,10 +2242,11 @@ Overfull \hbox (0.39995pt too wide) in paragraph at lines 61--62
  []
 
 
-LaTeX Warning: Reference `fig:flexibility_rigidness' on page 3 undefined on inp
-ut line 66.
+Underfull \hbox (badness 10000) in paragraph at lines 66--67
 
-[3]
+ []
+
+[5]
 Package mdframed Info: mdframed works in twoside mode on input line 70.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
@@ -2274,317 +2272,282 @@ Package mdframed Info: mdframed inside float
 Package mdframed Info: mdframed inside a box 
  mdframed uses option nobreak mdframed on input line 146.
 
-Overfull \hbox (15.2903pt too wide) in paragraph at lines 150--151
-\T1/jgi/m/n/10.95 sembly''[18], Pevzner, Tang
+Overfull \hbox (27.7376pt too wide) in paragraph at lines 151--152
+\T1/jgi/m/n/10.95 DNA frag-ment as-sembly''[18],
  []
 
 
-Overfull \hbox (1.2283pt too wide) in paragraph at lines 150--151
-\T1/jgi/m/n/10.95 and Wa-ter-man pro-poses
+Overfull \hbox (11.61986pt too wide) in paragraph at lines 151--152
+\T1/jgi/m/n/10.95 ter-man pro-poses \T1/jgi/m/it/10.95 de Bruijn
  []
 
 
-Overfull \hbox (7.30554pt too wide) in paragraph at lines 150--151
-\T1/jgi/m/n/10.95 graph is a struc-ture where
+Overfull \hbox (3.04604pt too wide) in paragraph at lines 151--152
+\T1/jgi/m/n/10.95 find the cor-rect as-sembly
  []
 
 
-Overfull \hbox (5.71776pt too wide) in paragraph at lines 150--151
-\T1/jgi/m/n/10.95 ver-tices rep-res-ent \T1/jgi/m/it/10.95 k-mers
+Overfull \hbox (21.45288pt too wide) in paragraph at lines 151--152
+\T1/jgi/m/n/10.95 res-ent re-la-tion-ships between
  []
 
 
-Overfull \hbox (3.13354pt too wide) in paragraph at lines 150--151
-\T1/jgi/m/n/10.95 edges rep-res-ent re-la-tion-
- []
-
-
-Underfull \hbox (badness 6445) in paragraph at lines 150--151
-\FML/futmi/m/it/10.95 l$ \T1/jgi/m/n/10.95 con-tain-ing the two
- []
-
-) (./algorithm.tex
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [4]
-[5] [6
-
-]
-Chapter 2.
-[7]
-
-LaTeX Warning: Reference `fig:example_reference' on page 8 undefined on input l
-ine 42.
-
-[8]
-Package mdframed Info: mdframed works in twoside mode on input line 46.
-Package mdframed Info: mdframed detected package amsthm 
- changed the theorem header of amsthm
-(mdframed)              on input line 46.
-Package mdframed Info: mdframed inside float 
- mdframed uses option nobreak mdframed on input line 75.
-Package mdframed Info: mdframed inside a box 
- mdframed uses option nobreak mdframed on input line 75.
-
-Overfull \hbox (10.33871pt too wide) in paragraph at lines 78--78
-[]\T1/jgi/b/n/14.4 Aligning se-quences with the al-gorithm ``Fuzzy
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 82--83
+Underfull \hbox (badness 10000) in paragraph at lines 151--152
 
  []
 
+[6]
+Underfull \hbox (badness 10000) in paragraph at lines 156--157
+
+ []
+
+) (./algorithm.tex [7
+
+] [8]
+Chapter 3.
 [9
 
-]
-Package mdframed Info: mdframed works in twoside mode on input line 86.
+] [10]
+Package mdframed Info: mdframed works in twoside mode on input line 40.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 86.
-Package mdframed Info: mdframed works in twoside mode on input line 88.
-Package mdframed Info: mdframed detected package amsthm 
- changed the theorem header of amsthm
-(mdframed)              on input line 88.
-
-Underfull \hbox (badness 10000) in alignment at lines 95--95
-[][][][][] 
- []
-
+(mdframed)              on input line 40.
 Package mdframed Info: mdframed inside float 
- mdframed uses option nobreak mdframed on input line 97.
+ mdframed uses option nobreak mdframed on input line 69.
 Package mdframed Info: mdframed inside a box 
- mdframed uses option nobreak mdframed on input line 97.
-Package mdframed Info: mdframed works in twoside mode on input line 102.
-Package mdframed Info: mdframed detected package amsthm 
- changed the theorem header of amsthm
-(mdframed)              on input line 102.
-Package mdframed Info: mdframed inside float 
- mdframed uses option nobreak mdframed on input line 128.
-Package mdframed Info: mdframed inside a box 
- mdframed uses option nobreak mdframed on input line 128.
-LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
-(Font)              scaled to size 6.99199pt on input line 129.
-LaTeX Font Info:    Font shape `U/futm/m/n' will be
-(Font)              scaled to size 6.99199pt on input line 129.
-Package mdframed Info: mdframed works in twoside mode on input line 133.
-Package mdframed Info: mdframed detected package amsthm 
- changed the theorem header of amsthm
-(mdframed)              on input line 133.
-Package mdframed Info: mdframed inside float 
- mdframed uses option nobreak mdframed on input line 153.
-Package mdframed Info: mdframed inside a box 
- mdframed uses option nobreak mdframed on input line 153.
-Package mdframed Info: mdframed inside float 
- mdframed uses option nobreak mdframed on input line 156.
-Package mdframed Info: mdframed inside a box 
- mdframed uses option nobreak mdframed on input line 156.
+ mdframed uses option nobreak mdframed on input line 69.
 
-Underfull \hbox (badness 10000) in paragraph at lines 157--157
-[]\T1/jgi/m/n/10.95 Figure 2.2: |Dif-fer-ent scor-ing
- []
-
-
-Underfull \hbox (badness 5147) in paragraph at lines 159--161
-\T1/jgi/m/n/10.95 er-ate the con-text set $\FML/futmi/m/it/10.95 c\T1/futs/m/n/
-10.95 (\FML/futmi/m/it/10.95 n[]\T1/futs/m/n/10.95 )$ \T1/jgi/m/n/10.95 for
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 159--161
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 161--163
-
- []
-
-[10]
-Package mdframed Info: mdframed works in twoside mode on input line 167.
-Package mdframed Info: mdframed detected package amsthm 
- changed the theorem header of amsthm
-(mdframed)              on input line 167.
-LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
-(Font)              scaled to size 13.24796pt on input line 168.
-LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
-(Font)              scaled to size 9.19998pt on input line 168.
-LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
-(Font)              scaled to size 7.35999pt on input line 168.
-LaTeX Font Info:    Font shape `U/futm/m/n' will be
-(Font)              scaled to size 13.24796pt on input line 168.
-LaTeX Font Info:    Font shape `U/futm/m/n' will be
-(Font)              scaled to size 9.19998pt on input line 168.
-LaTeX Font Info:    Font shape `U/futm/m/n' will be
-(Font)              scaled to size 7.35999pt on input line 168.
-LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
-(Font)              scaled to size 6.25598pt on input line 168.
-LaTeX Font Info:    Font shape `U/futm/m/n' will be
-(Font)              scaled to size 6.25598pt on input line 168.
-
-Overfull \hbox (2.09686pt too wide) in paragraph at lines 182--183
-[][] 
- []
-
-Package mdframed Info: mdframed inside float 
- mdframed uses option nobreak mdframed on input line 183.
-Package mdframed Info: mdframed inside a box 
- mdframed uses option nobreak mdframed on input line 183.
-Package mdframed Info: mdframed works in twoside mode on input line 191.
-Package mdframed Info: mdframed detected package amsthm 
- changed the theorem header of amsthm
-(mdframed)              on input line 191.
-
-Overfull \hbox (4.1239pt too wide) in paragraph at lines 207--208
-[][] 
- []
-
-Package mdframed Info: mdframed inside float 
- mdframed uses option nobreak mdframed on input line 208.
-Package mdframed Info: mdframed inside a box 
- mdframed uses option nobreak mdframed on input line 208.
-
-Underfull \hbox (badness 10000) in paragraph at lines 214--215
+Underfull \hbox (badness 10000) in paragraph at lines 77--78
 
  []
 
 [11
 
 ]
-Overfull \hbox (44.33928pt too wide) in paragraph at lines 217--219
-\T1/jgi/m/n/10.95 the $\FMS/futm/m/n/10.95 j\FML/futmi/m/it/10.95 c\FMS/futm/m/
-n/10.95 j Ä \FML/futmi/m/it/10.95 maxPossibleGapGivenFuzzyness\T1/futs/m/n/10.9
-5 (\FML/futmi/m/it/10.95 ^^U\T1/futs/m/n/10.95 )$
+Package mdframed Info: mdframed works in twoside mode on input line 81.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 81.
+Package mdframed Info: mdframed works in twoside mode on input line 83.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 83.
+
+Underfull \hbox (badness 10000) in alignment at lines 90--90
+[][][][][] 
+ []
+
+Package mdframed Info: mdframed inside float 
+ mdframed uses option nobreak mdframed on input line 92.
+Package mdframed Info: mdframed inside a box 
+ mdframed uses option nobreak mdframed on input line 92.
+Package mdframed Info: mdframed works in twoside mode on input line 97.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 97.
+Package mdframed Info: mdframed inside float 
+ mdframed uses option nobreak mdframed on input line 123.
+Package mdframed Info: mdframed inside a box 
+ mdframed uses option nobreak mdframed on input line 123.
+LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
+(Font)              scaled to size 6.99199pt on input line 124.
+LaTeX Font Info:    Font shape `U/futm/m/n' will be
+(Font)              scaled to size 6.99199pt on input line 124.
+Package mdframed Info: mdframed works in twoside mode on input line 128.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 128.
+Package mdframed Info: mdframed inside float 
+ mdframed uses option nobreak mdframed on input line 148.
+Package mdframed Info: mdframed inside a box 
+ mdframed uses option nobreak mdframed on input line 148.
+Package mdframed Info: mdframed inside float 
+ mdframed uses option nobreak mdframed on input line 151.
+Package mdframed Info: mdframed inside a box 
+ mdframed uses option nobreak mdframed on input line 151.
+
+Underfull \hbox (badness 10000) in paragraph at lines 152--152
+[]\T1/jgi/m/n/10.95 Figure 3.2: |Dif-fer-ent scor-ing
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 217--219
+Underfull \hbox (badness 10000) in paragraph at lines 154--156
 
  []
 
+Package mdframed Info: mdframed works in twoside mode on input line 161.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 161.
+LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
+(Font)              scaled to size 13.24796pt on input line 162.
+LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
+(Font)              scaled to size 9.19998pt on input line 162.
+LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
+(Font)              scaled to size 7.35999pt on input line 162.
+LaTeX Font Info:    Font shape `U/futm/m/n' will be
+(Font)              scaled to size 13.24796pt on input line 162.
+LaTeX Font Info:    Font shape `U/futm/m/n' will be
+(Font)              scaled to size 9.19998pt on input line 162.
+LaTeX Font Info:    Font shape `U/futm/m/n' will be
+(Font)              scaled to size 7.35999pt on input line 162.
+LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
+(Font)              scaled to size 6.25598pt on input line 162.
+LaTeX Font Info:    Font shape `U/futm/m/n' will be
+(Font)              scaled to size 6.25598pt on input line 162.
 
-Underfull \hbox (badness 10000) in paragraph at lines 221--222
-
+Overfull \hbox (2.09686pt too wide) in paragraph at lines 176--177
+[][] 
  []
 
+Package mdframed Info: mdframed inside float 
+ mdframed uses option nobreak mdframed on input line 177.
+Package mdframed Info: mdframed inside a box 
+ mdframed uses option nobreak mdframed on input line 177.
 [12]
-Package mdframed Info: mdframed works in twoside mode on input line 226.
+Package mdframed Info: mdframed works in twoside mode on input line 186.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 226.
+(mdframed)              on input line 186.
 
-Overfull \hbox (6.2315pt too wide) in paragraph at lines 234--235
+Overfull \hbox (4.1239pt too wide) in paragraph at lines 202--203
 [][] 
  []
 
 Package mdframed Info: mdframed inside float 
- mdframed uses option nobreak mdframed on input line 235.
+ mdframed uses option nobreak mdframed on input line 203.
 Package mdframed Info: mdframed inside a box 
- mdframed uses option nobreak mdframed on input line 235.
-Package mdframed Info: mdframed works in twoside mode on input line 240.
+ mdframed uses option nobreak mdframed on input line 203.
+
+Underfull \hbox (badness 10000) in paragraph at lines 209--210
+
+ []
+
+[13]
+Underfull \hbox (badness 10000) in paragraph at lines 210--212
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 214--216
+
+ []
+
+[14]
+Underfull \hbox (badness 10000) in paragraph at lines 218--219
+
+ []
+
+[15]
+Package mdframed Info: mdframed works in twoside mode on input line 223.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 240.
+(mdframed)              on input line 223.
 
-Overfull \hbox (6.23799pt too wide) in paragraph at lines 258--259
+Overfull \hbox (6.2315pt too wide) in paragraph at lines 231--232
 [][] 
  []
 
 Package mdframed Info: mdframed inside float 
- mdframed uses option nobreak mdframed on input line 259.
+ mdframed uses option nobreak mdframed on input line 232.
 Package mdframed Info: mdframed inside a box 
- mdframed uses option nobreak mdframed on input line 259.
+ mdframed uses option nobreak mdframed on input line 232.
+Package mdframed Info: mdframed works in twoside mode on input line 237.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 237.
 
-Underfull \hbox (badness 6032) in paragraph at lines 265--266
+Overfull \hbox (6.23799pt too wide) in paragraph at lines 255--256
+[][] 
+ []
+
+Package mdframed Info: mdframed inside float 
+ mdframed uses option nobreak mdframed on input line 256.
+Package mdframed Info: mdframed inside a box 
+ mdframed uses option nobreak mdframed on input line 256.
+
+Underfull \hbox (badness 6032) in paragraph at lines 262--263
 \T1/jgi/m/n/10.95 nodes match-ing the right con-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 265--266
+Underfull \hbox (badness 10000) in paragraph at lines 262--263
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 266--268
+Underfull \hbox (badness 10000) in paragraph at lines 263--265
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 269--270
+Underfull \hbox (badness 10000) in paragraph at lines 266--267
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 270--272
+Underfull \hbox (badness 10000) in paragraph at lines 267--269
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 273--274
+Underfull \hbox (badness 10000) in paragraph at lines 270--271
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 274--276
+Underfull \hbox (badness 10000) in paragraph at lines 271--273
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 277--278
+Underfull \hbox (badness 10000) in paragraph at lines 274--275
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 278--280
+Underfull \hbox (badness 10000) in paragraph at lines 275--277
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 282--283
+Underfull \hbox (badness 10000) in paragraph at lines 279--280
 
  []
 
-[13
+[16
 
 ]
-Package mdframed Info: mdframed works in twoside mode on input line 286.
+Package mdframed Info: mdframed works in twoside mode on input line 283.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 286.
+(mdframed)              on input line 283.
 
-Underfull \hbox (badness 10000) in alignment at lines 294--294
+Underfull \hbox (badness 10000) in alignment at lines 291--291
 [][][] 
  []
 
 
-Underfull \hbox (badness 10000) in alignment at lines 306--306
+Underfull \hbox (badness 10000) in alignment at lines 303--303
 [][][] 
  []
 
 
-Underfull \hbox (badness 10000) in alignment at lines 318--318
+Underfull \hbox (badness 10000) in alignment at lines 315--315
 [][][] 
  []
 
 Package mdframed Info: mdframed inside float 
- mdframed uses option nobreak mdframed on input line 322.
+ mdframed uses option nobreak mdframed on input line 319.
 Package mdframed Info: mdframed inside a box 
- mdframed uses option nobreak mdframed on input line 322.
+ mdframed uses option nobreak mdframed on input line 319.
 
-LaTeX Warning: Reference `fig:canditate_nodes' on page 14 undefined on input li
-ne 323.
-
-
-LaTeX Warning: Reference `fig:canditate_nodes' on page 14 undefined on input li
-ne 323.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 325--327
+Underfull \hbox (badness 10000) in paragraph at lines 322--324
 
  []
 
 
-Overfull \hbox (33.63062pt too wide) in paragraph at lines 329--329
+Overfull \hbox (33.63062pt too wide) in paragraph at lines 326--326
 []$\FML/futmi/m/it/10.95 scores\T1/futs/m/n/10.95 [0][\FML/futmi/m/it/10.95 j\T
 1/futs/m/n/10.95 ] \FMS/futm/m/n/10.95 Å \FML/futmi/m/it/10.95 mappingScore\T1/
 futs/m/n/10.95 (\FML/futmi/m/it/10.95 b\T1/futs/m/n/10.95 (\FML/futmi/m/it/10.9
@@ -2592,17 +2555,17 @@ futs/m/n/10.95 (\FML/futmi/m/it/10.95 b\T1/futs/m/n/10.95 (\FML/futmi/m/it/10.9
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 330--331
+Underfull \hbox (badness 10000) in paragraph at lines 327--328
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 331--333
+Underfull \hbox (badness 10000) in paragraph at lines 328--330
 
  []
 
-[14]
-Overfull \hbox (8.50006pt too wide) in paragraph at lines 335--335
+[17]
+Overfull \hbox (8.50006pt too wide) in paragraph at lines 332--332
 []$\FML/futmi/m/it/10.95 scores\T1/futs/m/n/10.95 [\FML/futmi/m/it/10.95 i\T1/f
 uts/m/n/10.95 ][\FML/futmi/m/it/10.95 j\T1/futs/m/n/10.95 ] \FMS/futm/m/n/10.95
  Å []$ $\FML/futmi/m/it/10.95 ^^R\T1/futs/m/n/10.95 ((\FML/futmi/m/it/10.95 i; 
@@ -2616,12 +2579,12 @@ futs/m/n/10.95 (\FML/futmi/m/it/10.95 scores\T1/futs/m/n/10.95 [\FML/futmi/m/it
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 337--339
+Underfull \hbox (badness 10000) in paragraph at lines 334--336
 
  []
 
 
-Overfull \hbox (90.77066pt too wide) in paragraph at lines 340--341
+Overfull \hbox (90.77066pt too wide) in paragraph at lines 337--338
 []$\FML/futmi/m/it/10.95 gapPenalty\T1/futs/m/n/10.95 (\FML/futmi/m/it/10.95 di
 stance\T1/futs/m/n/10.95 (\FML/futmi/m/it/10.95 n[]; n[]\T1/futs/m/n/10.95 )) \
 FMS/futm/m/n/10.95 Ä \FML/futmi/m/it/10.95 mappingScore\T1/futs/m/n/10.95 (\FML
@@ -2629,61 +2592,57 @@ FMS/futm/m/n/10.95 Ä \FML/futmi/m/it/10.95 mappingScore\T1/futs/m/n/10.95 (\FML
 .95 )\FML/futmi/m/it/10.95 ; s[]\T1/futs/m/n/10.95 ))$ 
  []
 
-) (./method.tex [15] [16
-
-]
-Chapter 3.
-) (./results.tex [17] [18
-
-]
+) (./method.tex [18]
 Chapter 4.
-) (./conclusion.tex [19] [20
+) (./results.tex [19
+
+] [20
 
 ]
 Chapter 5.
-) (./discussion.tex [21] [22
+) (./conclusion.tex [21] [22
 
 ]
 Chapter 6.
-) [23] [24
+) (./discussion.tex [23] [24
 
-] [25
+]
+Chapter 7.
+) [25] [26
 
-] [26]
+] [27
+
+] [28]
 \tf@loe=\write8
 \openout8 = `thesis.loe'.
 
  (./thesis.aux)
-
-LaTeX Warning: There were undefined references.
-
 Package logreq Info: Writing requests to 'thesis.run.xml'.
 \openout1 = `thesis.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 42576 strings out of 493033
- 955210 string characters out of 6121489
- 1437813 words of memory out of 5000000
- 45308 multiletter control sequences out of 15000+600000
- 116223 words of font info for 152 fonts, out of 8000000 for 9000
+ 42573 strings out of 493033
+ 955159 string characters out of 6121489
+ 1442941 words of memory out of 5000000
+ 45304 multiletter control sequences out of 15000+600000
+ 115293 words of font info for 150 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  55i,14n,83p,10412b,1536s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/opt/texlive/uio-texmf/texmf-dist/fonts/enc/dvips/base/8r.enc}</opt/texlive/
 uio-texmf/texmf-dist/fonts/type1/public/fourier/fourier-mlit.pfb></opt/texlive/
 uio-texmf/texmf-dist/fonts/type1/public/fourier/fourier-ms.pfb></opt/texlive/ui
 o-texmf/texmf-local/fonts/type1/private/microsoft/georgia/jgib8a.pfa></opt/texl
-ive/uio-texmf/texmf-local/fonts/type1/private/microsoft/georgia/jgibi8a.pfa></o
-pt/texlive/uio-texmf/texmf-local/fonts/type1/private/microsoft/georgia/jgir8a.p
-fa></opt/texlive/uio-texmf/texmf-local/fonts/type1/private/microsoft/georgia/jg
-iri8a.pfa></opt/texlive/uio-texmf/texmf-dist/fonts/type1/adobe/utopia/putr8a.pf
-b></opt/texlive/uio-texmf/texmf-dist/fonts/type1/adobe/utopia/putri8a.pfb></opt
-/texlive/uio-texmf/texmf-local/fonts/type1/urw/arial/ua1r8a.pfb></opt/texlive/u
-io-texmf/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb>
-Output written on thesis.pdf (42 pages, 5183341 bytes).
+ive/uio-texmf/texmf-local/fonts/type1/private/microsoft/georgia/jgir8a.pfa></op
+t/texlive/uio-texmf/texmf-local/fonts/type1/private/microsoft/georgia/jgiri8a.p
+fa></opt/texlive/uio-texmf/texmf-dist/fonts/type1/adobe/utopia/putr8a.pfb></opt
+/texlive/uio-texmf/texmf-dist/fonts/type1/adobe/utopia/putri8a.pfb></opt/texliv
+e/uio-texmf/texmf-local/fonts/type1/urw/arial/ua1r8a.pfb></opt/texlive/uio-texm
+f/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb>
+Output written on thesis.pdf (44 pages, 5180172 bytes).
 PDF statistics:
- 219 PDF objects out of 1000 (max. 8388607)
- 142 compressed objects within 2 object streams
+ 222 PDF objects out of 1000 (max. 8388607)
+ 144 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
  18 words of extra memory for PDF output out of 10000 (max. 10000000)
 

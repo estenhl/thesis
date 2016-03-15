@@ -4,25 +4,27 @@
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {1.1}{\ignorespaces Examples of aligned text strings\relax }}{3}
+\addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {1.2}{\ignorespaces The HOXD70 substitution matrix\relax }}{3}
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Examples of aligned text strings\relax }}{5}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {1.3}{\ignorespaces Two graphs with vertices representing nucleotides and edges representing sequences displaying too much flexibility (a) and (arguably) too much rigidity (b)\relax }}{4}
+\contentsline {figure}{\numberline {2.2}{\ignorespaces The HOXD70 substitution matrix\relax }}{5}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Two graphs with vertices representing nucleotides and edges representing sequences displaying too much flexibility (a) and (arguably) too much rigidity (b)\relax }}{6}
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {2.1}{\ignorespaces A graph made from the three sequences ``ATATA'', ``AGAGA'' and ``ACAA'' with 9 valid complete paths\relax }}{9}
+\contentsline {figure}{\numberline {3.1}{\ignorespaces A graph made from the three sequences ``ATATA'', ``AGAGA'' and ``ACAA'' with 9 valid complete paths\relax }}{11}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {2.2}{\ignorespaces Different scoring thresholds $T$ yields different reference graphs\relax }}{10}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Different scoring thresholds $T$ yields different reference graphs\relax }}{12}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {2.3}{\ignorespaces A small reference graph with left contexts (top) and right contexts (bottom) of length 2 shown\relax }}{11}
+\contentsline {figure}{\numberline {3.3}{\ignorespaces A small reference graph with left contexts (top) and right contexts (bottom) of length 2 shown\relax }}{13}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {2.4}{\ignorespaces The left suffix tree corresponding to the graph in \ref {fig:explicit_contexts}\relax }}{12}
+\contentsline {figure}{\numberline {3.4}{\ignorespaces The left suffix tree corresponding to the graph in \ref {fig:explicit_contexts}\relax }}{14}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {2.5}{\ignorespaces The resulting candidate sets for mapping the string "ATA" against the reference genome from fig. ~\ref {fig:explicit_contexts} with varying T values\relax }}{13}
+\contentsline {figure}{\numberline {3.5}{\ignorespaces The resulting candidate sets for mapping the string "ATA" against the reference genome from fig. ~\ref {fig:explicit_contexts} with varying T values\relax }}{16}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {2.6}{\ignorespaces The 4 arrays used by the searching algorithm when using the candidate sets from Fig \ref {fig:canditate_nodes} and $T=1$\relax }}{14}
+\contentsline {figure}{\numberline {3.6}{\ignorespaces The 4 arrays used by the searching algorithm when using the candidate sets from Fig \ref {fig:candidate_nodes} and $T=1$\relax }}{17}
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 

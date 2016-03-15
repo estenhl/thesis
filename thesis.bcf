@@ -2244,6 +2244,9 @@
     <bcf:citekey order="4">the_importance_of_immune_gene_variability_in_evolutionary_ecology_and_conservation</bcf:citekey>
     <bcf:citekey order="5">variation_analysis_and_gene_annotation_of_eight_mhc_haplotypes</bcf:citekey>
     <bcf:citekey order="6">an_eulerian_path_approach_to_dna_fragment_assembly</bcf:citekey>
+    <bcf:citekey order="7">de_novo_assembly_and_genotyping_of_variants_using_colored_de_bruijn_graphs</bcf:citekey>
+    <bcf:citekey order="8">mapping_to_a_reference_genome_structure</bcf:citekey>
+    <bcf:citekey order="9">mapping_to_a_reference_genome_structure</bcf:citekey>
     <bcf:citekey order="0">*</bcf:citekey>
   </bcf:section>
   <bcf:sortlist section="0" name="nty" type="entry" sortscheme="nty">
