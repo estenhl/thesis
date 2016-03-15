@@ -4,9 +4,6 @@
 \chapter{Implementation}
 In this section we will present the algorithm ``Fuzzy context-based search'' as an approach for mapping text strings against graph-based reference genomes. First the elements involved will be described in order to precisely define the problem. Then the syntax of the reference graphs used are explained in more detail. Finally, the algorithm is presented both through a conceptual overview and in specific detail. The implementation details refers to the tool \textit{Graph Genome Alignment} (See Supplementary XXX).
 \section{Definitions}
-\begin{defn}[Graph-based reference genome (graph)]
-  A pair $G=\{V,E\}$ where $V$ is a set of vertices and $E$ is a set of edges. $|G|$ denotes the number of vertices of $G$.
-\end{defn}
 \begin{defn}[Vertice]
   A pair $v=\{b, i\}$ where $b \in \{A, C, T, G\}$ and $i$ is a unique index. Every graph $G$ also has two special vertices $s_G=\{s, 0\}$ and $t_G=\{e, -1\}$ which represents unique start and end vertices. The notation $b(v_i)$ references the first element in the pair (the nucleotide).
 \end{defn}
