@@ -5,9 +5,5 @@
 *.blg
 *.dvi
 *.loe
-*.lof
 *.xml
 *.blg
-*.lot
-*.gnuplot
-*.table
