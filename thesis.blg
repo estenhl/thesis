@@ -1,15 +1,15 @@
 [0] Config.pm:327> INFO - This is Biber 2.3
 [1] Config.pm:330> INFO - Logfile is 'thesis.blg'
-[72] biber:287> INFO - === Tue Mar 15, 2016, 18:41:16
-[100] Biber.pm:346> INFO - Reading 'thesis.bcf'
-[220] Biber.pm:686> INFO - Using all citekeys in bib section 0
-[226] Biber.pm:3066> INFO - Processing section 0
-[240] Biber.pm:3206> INFO - Looking for bibtex format file 'thesis.bib' for section 0
-[242] bibtex.pm:1062> INFO - Decoding LaTeX character macros into UTF-8
-[243] bibtex.pm:923> INFO - Found BibTeX data source 'thesis.bib'
-[490] UCollate.pm:66> INFO - Overriding locale 'en-UK' defaults 'normalization = NFD' with 'normalization = prenormalized'
-[490] UCollate.pm:66> INFO - Overriding locale 'en-UK' defaults 'variable = shifted' with 'variable = non-ignorable'
-[490] Biber.pm:2943> INFO - Sorting list 'nty' of type 'entry' with scheme 'nty' and locale 'en-UK'
-[490] Biber.pm:2947> INFO - No sort tailoring available for locale 'en-UK'
-[534] bbl.pm:505> INFO - Writing 'thesis.bbl' with encoding 'UTF-8'
-[537] bbl.pm:596> INFO - Output to thesis.bbl
+[81] biber:287> INFO - === Wed Mar 16, 2016, 12:46:47
+[115] Biber.pm:346> INFO - Reading 'thesis.bcf'
+[245] Biber.pm:686> INFO - Using all citekeys in bib section 0
+[250] Biber.pm:3066> INFO - Processing section 0
+[264] Biber.pm:3206> INFO - Looking for bibtex format file 'thesis.bib' for section 0
+[281] bibtex.pm:1062> INFO - Decoding LaTeX character macros into UTF-8
+[283] bibtex.pm:923> INFO - Found BibTeX data source 'thesis.bib'
+[618] UCollate.pm:66> INFO - Overriding locale 'en-UK' defaults 'variable = shifted' with 'variable = non-ignorable'
+[618] UCollate.pm:66> INFO - Overriding locale 'en-UK' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[618] Biber.pm:2943> INFO - Sorting list 'nty' of type 'entry' with scheme 'nty' and locale 'en-UK'
+[619] Biber.pm:2947> INFO - No sort tailoring available for locale 'en-UK'
+[660] bbl.pm:505> INFO - Writing 'thesis.bbl' with encoding 'UTF-8'
+[663] bbl.pm:596> INFO - Output to thesis.bbl

@@ -24,56 +24,56 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {2.2}Graph-based genome representations}{5}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.2.1}Representation}{5}
+\contentsline {subsection}{\numberline {2.2.1}Representation}{6}
 \defcounter {refsection}{0}\relax 
 \contentsline {subsubsection}{de Bruijn graphs}{6}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Sequence graphs}{7}
+\contentsline {subsubsection}{Sequence graphs}{8}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.2.2}Mapping}{7}
+\contentsline {subsection}{\numberline {2.2.2}Mapping}{8}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.2.3}Alignment}{8}
+\contentsline {subsection}{\numberline {2.2.3}Alignment}{9}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2.3}Techniques and tools}{8}
+\contentsline {section}{\numberline {2.3}Techniques and tools}{9}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.3.1}Dynamic programming}{8}
+\contentsline {subsection}{\numberline {2.3.1}Dynamic programming}{9}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.3.2}Implementing graphs}{8}
+\contentsline {subsection}{\numberline {2.3.2}Implementing graphs}{9}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.3.3}Suffix trees}{8}
+\contentsline {subsection}{\numberline {2.3.3}Suffix trees}{9}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.3.4}Visualization of graphs}{8}
+\contentsline {subsection}{\numberline {2.3.4}Visualization of graphs}{9}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {3}Implementation}{9}
+\contentsline {chapter}{\numberline {3}Implementation}{11}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.1}Definitions}{9}
+\contentsline {section}{\numberline {3.1}Definitions}{11}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.2}The graph}{10}
+\contentsline {section}{\numberline {3.2}The graph}{12}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.3}Aligning sequences}{11}
+\contentsline {section}{\numberline {3.3}Aligning sequences}{13}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.3.1}Overview}{11}
+\contentsline {subsection}{\numberline {3.3.1}Overview}{13}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.3.2}Building the index}{11}
+\contentsline {subsection}{\numberline {3.3.2}Building the index}{13}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.3.3}Generating the modified graph G'}{13}
+\contentsline {subsection}{\numberline {3.3.3}Generating the modified graph G'}{15}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.3.4}Searching G' with a modified PO-MSA search}{17}
+\contentsline {subsection}{\numberline {3.3.4}Searching G' with a modified PO-MSA search}{19}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.3.5}Handling invalid threshold values}{18}
+\contentsline {subsection}{\numberline {3.3.5}Handling invalid threshold values}{20}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.4}Merging aligned sequences}{18}
+\contentsline {section}{\numberline {3.4}Merging aligned sequences}{20}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {4}Method}{19}
+\contentsline {chapter}{\numberline {4}Method}{21}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.1}Test data}{19}
+\contentsline {section}{\numberline {4.1}Test data}{21}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.2}Scoring schema}{19}
+\contentsline {section}{\numberline {4.2}Scoring schema}{21}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.3}Validation}{19}
+\contentsline {section}{\numberline {4.3}Validation}{21}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {5}Results}{21}
+\contentsline {chapter}{\numberline {5}Results}{23}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {6}Conclusion}{23}
+\contentsline {chapter}{\numberline {6}Conclusion}{25}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {7}Discussion}{25}
+\contentsline {chapter}{\numberline {7}Discussion}{27}

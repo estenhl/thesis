@@ -5,10 +5,11 @@
 \section{Genetics}
 \textit{Deoxyribonucleic acid} (DNA) is a molecule in which living organisms store genetic information. The information is encoded by \textit{nucleotides} bound together by a sugar-phosphate backbone into strands. The nucleotides are smaller molecules which contain one of the nitrogenous bases \textit{Adenine} (A), \textit{Cytosine} (C), \textit{Guanine} (G) or \textit{Thymine} (T). Each of the bases are complementary to another, A with T and C with G. Due to the chemical structure of the nucleotides, a DNA strand can be said to have a direction: Upstream towards the 5' end or downstream towards the 3' end. DNA strands can be connected with a \textit{reverse complementary} strand in a double helix. The two strands will have opposing directions, and every base in one of the strands will be connected to its complement. The paired nucleotides are called \textit{base pairs}. Because either of the strands are easily deduced from the other, DNA is usually represented by only of them. DNA can be seen as a linear sequence of discrete units and can thus be represented by text strings, containing the four leading letters representing nucleotides. The text strings representations often also contain the letter N, referencing \textit{aNy base}.
 \subsection{Genes}
-\textcolor{red}{"What is a gene?" Helen Pearson}
+\textcolor{red}{"What is a gene?" Helen Pearson. Coding/non-coding, synonymous/non-synonymous}
 \subsection{Variation}
-Genetic information is prone to mutations, either as a result of environmental influence or as a consequence of imperfections in reproduction. The simplest mutations are \textit{point mutations} which affect a single nucleotide base. Point mutations can either be \textit{Single-nucleotide polymorphisms} (SNPs) where a single base is substituted for another, or \textit{insertions} or \textit{deletions} (indels) where a single nucleotide is removed or inserted into the genetic sequence. Mutations can also occur over larger areas of the genome, where longer subsequences can be deleted, inserted, moved or reversed. A final type of mutations is \textit{Copy number variations} where a longer sequence of DNA, typically at least 1 kb \cite{copy_number_variation_new_insights_in_genome_diversity}, is repeated a variable number of times.\\
+Genetic information is prone to mutations, either as a result of environmental influence or as a consequence of imperfections in reproduction. The simplest mutations are \textit{point mutations} which affect a single nucleotide base. Point mutations can either be \textit{Single-nucleotide polymorphisms} (SNPs) where a single base is substituted for another, or \textit{insertions} or \textit{deletions} (indels) where a single nucleotide is removed or inserted into the genetic sequence. Mutations can also occur over larger areas of the genome, where longer subsequences can be deleted, inserted, moved or reversed. A final type of mutations is \textit{Copy number variations} where a longer sequence of DNA, typically at least 1 kb \cite{copy_number_variation_new_insights_in_genome_diversity}, is repeated a variable number of times. CNVs are also called \textit{repeats}\\
 \subsection{A reference genome}
+\textcolor{red}{contigs, scaffold, chromosomes. Haplotypes}
 \subsection{The human genome}
 The human genome consists of roughly 3 billion base pairs (bp). These base pairs are spread over 22 paired chromosomes and is assumed to contain about 23 000 genes \cite{introduction_to_genomics}. The current human reference genome is GRCh38, developed and maintained by the \textit{Genome Reference Consortium} \textcolor{red}{HOWTO: reference websites}. GRCh38 contains 261 alternate loci, spread over 178 out of a total of 238 regions. An average human is estimated to deviate from the reference genome in 10.000-11.000 synonymous sites and 10.000-12.000 non-synonymous sites.
 \subsubsection{Major Histocompatibility Complex}
@@ -70,7 +71,7 @@ Deciding upon the representation of the graph consists of defining the structure
     \begin{subfigure}[t]{\textwidth}
       \begin{mdframed}
         \begin{center}
-          \begin{tikzpicture}[>=stealth',shorten >=1pt,auto,node distance=1.4cm]
+          \begin{tikzpicture}[-,>=stealth',shorten >=1pt,auto,node distance=1.4cm]
             \node[state] (q0) {$start$};
             \node[state] [above right of=q0] (q1) {$A$};
             \node[state] [below right of=q0] (q2) {$C$};
@@ -78,25 +79,29 @@ Deciding upon the representation of the graph consists of defining the structure
             \node[state] [right of=q2] (q4) {$T$};
             \node[state] [below right of=q3] (q5) {$end$};
 
-            \path (q0) edge node {} (q1)
-            edge node {} (q2)
-            edge node {} (q3)
-            edge node {} (q4)
-            edge node {} (q5)
-            (q1) edge node {} (q2)
-            edge node {} (q3)
-            edge node {} (q4)
-            edge node {} (q5)
-            (q2) edge node {} (q3)
-            edge node {} (q4)
-            edge node {} (q5)
-            (q3) edge node {} (q4)
-            edge node {} (q5)
-            (q4) edge node {} (q5);
+            \path (q0) edge[->] node {} (q1)
+            edge[->] node {} (q2)
+            edge[->] node {} (q3)
+            edge[->] node {} (q4)
+            edge[->] node {} (q5)
+            (q1) edge[<->] node {} (q2)
+            edge[loop above] node {} (q1)
+            edge[<->] node {} (q3)
+            edge[<->] node {} (q4)
+            edge[->] node {} (q5)
+            (q2) edge[<->] node {} (q3)
+            edge[loop below] node {} (q2)
+            edge[<->] node {} (q4)
+            edge[->] node {} (q5)
+            (q3) edge[<->] node {} (q4)
+            edge[loop above] node {} (q3)
+            edge[->] node {} (q5)
+            (q4) edge[->] node {} (q5)
+            edge[loop below] node {} (q4);
           \end{tikzpicture}
         \end{center}
       \end{mdframed}
-      \caption{A graph with a path corresponding to every possible DNA string}
+      \caption{A graph with paths corresponding to every possible DNA string}
     \end{subfigure}
     \begin{subfigure}[t]{\textwidth}
       \begin{mdframed}
@@ -148,25 +153,54 @@ Deciding upon the representation of the graph consists of defining the structure
   \label{fig:flexibility_rigidness_tradeoff}
 \end{wrapfigure}
 \subsubsection{de Bruijn graphs}
-In the article ``An Eulerian path approach to DNA fragment assembly''\cite{an_eulerian_path_approach_to_dna_fragment_assembly}, Pevzner, Tang and Waterman proposes \textit{de Bruijn} graphs as a solution to find the correct assembly of repeats during fragment assembly. A de Bruijn graph is a structure where vertices represent \textit{k-mers} from an alphabet and edges represent relationships between the k-mers of two vertices. Pevzner et al. lets the vertices contain strings of length $l-1$ and connects vertices with an edge wherever there exists a read of length $l$ containing the two substrings. Formulating the problem in this fashion lets the problem be formulated as a \textit{Eulerian path} problem, solvable in polynomial time, rather than the traditional ``overlap-layout-consensus'' method which is equivalent to the NP-complete problem of finding a \textit{Hamiltonian path}. A great benefit with de Bruijn graphs is that there is no disambiguity: Any legal k-mer has at no point more than one vertice representing it. \\
+In the article ``An Eulerian path approach to DNA fragment assembly''\cite{an_eulerian_path_approach_to_dna_fragment_assembly}, Pevzner, Tang and Waterman proposes \textit{de Bruijn} graphs as a solution to find the correct assembly of repeats during fragment assembly. A de Bruijn graph is a structure where vertices represent \textit{k-mers} from an alphabet and edges represent relationships between the k-mers of two vertices (Fig. \ref{fig:de_bruijn_graph}). Pevzner et al. lets the vertices contain strings of length $l-1$ and connects vertices with an edge wherever there exists a read of length $l$ containing the two substrings. Formulating the problem in this fashion lets the problem be formulated as a \textit{Eulerian path} problem, solvable in polynomial time, rather than the traditional ``overlap-layout-consensus'' method which is equivalent to the NP-complete problem of finding a \textit{Hamiltonian path}. A great benefit with de Bruijn graphs is that there is no disambiguity: Any legal k-mer has at no point more than one vertice representing it.
 \clearpage
+\begin{figure}
+    \begin{mdframed}
+      \begin{center}
+        \begin{tikzpicture}[->,auto,node distance=1.5cm]
+          \node[state] (q0) {$ACG$};
+          \node[state] [right of=q0] (q1) {$CGT$};
+          \node[state] [right of=q1] (q2) {$GTT$};
+          \node[state] [right of=q2] (q3) {$TTT$};
+          \node[state] [right of=q3] (q4) {$TTA$};
+          \node[state] [right of=q4] (q5) {$TAC$};
+          \node[state] [right of=q5] (q6) {$ACG$};
+
+          \path (q0) edge node {} (q1)
+          (q1) edge node {} (q2)
+          (q2) edge node {} (q3)
+          (q3) edge node {} (q4)
+          (q4) edge node {} (q5)
+          (q5) edge node {} (q6);
+        \end{tikzpicture}
+      \end{center}
+    \end{mdframed}
+  \caption{A de Bruijn graph with $k=3$ corresponding to the sequence ACGTTTACG}
+  \label{fig:de_bruijn_graph}
+\end{figure}
 \par\noindent
 A more detailed type of de Bruijn graphs is the colored variant where the origins of edges and vertices are stored as colors. The entire sequence originating from a single individual sample can be seen by following a path with a given color. Similarities between samples can be seen as multicolored stretches, variation take the form of bubbles. Colored de Bruijn graphs can be used for de novo assembly as a more powerful method for detecting variation, compared to traditional assembly techniques\cite{de_novo_assembly_and_genotyping_of_variants_using_colored_de_bruijn_graphs}.
 \subsubsection{Sequence graphs}
-The term \textit{sequence graph} stems from the article ``Mapping to a Reference Genome structure''\cite{mapping_to_a_reference_genome_structure} and describe a graph structure which is possibly more intuitively pleasing. Every vertice in the graph corresponds to a single nucleotide from one or more genetic sequences used in building the graph. An edge represents two nucleotides which are consecutive in one of the original sequences. Paths symbolize subsequences of the originating input sequences. To handle the arising problem that the contents of nodes are no longer unique each vertice can be given an index which is exclusive for their associated graph. \\
+The term \textit{sequence graph} stems from the article ``Mapping to a Reference Genome structure''\cite{mapping_to_a_reference_genome_structure} and describes a graph structure which is possibly more intuitively pleasing. Every vertice in the graph corresponds to a single nucleotide from one or more genetic sequences used in building the graph. An edge represents two nucleotides which are consecutive in one of the original sequences. Paths symbolize subsequences of the originating input sequences. To handle the arising problem that the contents of nodes are no longer unique each vertice can be given an index which is exclusive for their associated graph. Whenever a graph is referenced without being specifically classified the following definitions are assumed:\\
 \begin{defn}[Vertice]
-  A pair $v=\{b, i\}$ where $b \in \{A, C, T, G\}$ and $i$ is a unique index. Every graph $G$ also has two special vertices $s_G=\{s, 0\}$ and $t_G=\{e, -1\}$ which represents unique start and end vertices. The notation $b(v_i)$ references the first element in the pair (the nucleotide).
+  A pair $v=\{b, i\}$ where $b \in \{A, C, T, G\}$ and $i$ is a unique index. The vertice at index $i$ is denoted $v_i$. Every graph $G$ also has two special vertices $s_G=\{s, 0\}$ and $t_G=\{e, -1\}$ which represents unique start and end vertices. The notation $b(v_i)$ references the first element in the pair (the nucleotide).
 \end{defn}
 \begin{defn}[Edge]
   An ordered pair $e=\{i_s, i_e\}$ where both elements are indexes for vertices. 
 \end{defn}
+\begin{defn}[Path]
+  An ordered list $P$ of indexes such that for all consecutive ordered pairs $\{i_x, i_{x+1}\} \in P$ there exists an edge $e=\{i_x, i_{x+1}\}$.
+\end{defn}
 \subsection{Mapping}
-Although the two terms are often used isomorphically we will in this thesis define mapping and alignment as two separate terms. Mapping is the process of finding relationships between single elements of a genetic string and single elements of a reference genome. Alignment is concerned with finding relationships between consecutive nucleotides in an input string and substructures in the reference genome. A mapping score is defined as the score achieved by referencing the index denoted by the two bases in a substitution matrix. 
+Although the two terms are often used isomorphically we will in this thesis define mapping and alignment as two separate concepts. Mapping is the process of finding relationships between single characters of a string and single elements of a reference genome. Alignment is concerned with finding relationships between consecutive elements of an input string and substructures in the reference genome. A mapping score is defined as the score achieved by looking up two bases in a substitution matrix.  
 \begin{defn}[Mapping score]
-  A score produced by mapping two characters $b_1, b_2 \in \{A, C, G, T\}$ against a substitution matrix contained by a scoring schema.
+  A score produced by mapping two characters $b_1, b_2 \in \{A, C, G, T\}$ against a substitution matrix contained in a scoring schema.
 \end{defn}
 \noindent
-For de Bruijn graphs mapping is an easy process: Either a k-mer has a corresponding vertice or it does not. For a sequence graph any nucleotide has the same amount of equally scoring mappings as there are vertices containing the same base in a graph.
+For linear strings mapping is easy. Every string has the same underlying coordinate system, represented by the positions of the characters, and two elements from two separate sequences are either in the same position or they are not. If they are not the difference in position can be derived from the difference between the indexes. Because the indexes of a graph has only one property, uniqueness, they do not hold the intrinsic value of describing relationships between vertices. Any mapping system which uses fixed coordinates would face problems when dealing with a fluent graph able to merge in new information, as the internal relations are bound to change. In de Bruijn graphs the problem is solved by moving the mappable quality away from positions and into the data: For any possible k-mer there either is a corresponding vertice or there is not. In sequence graphs, where nucleotides are the most basic information, there exists an equal number of identically scoring positions for every base as there are vertices containing that vertice in the graph.\\
+\par\noindent
+Paten et al.\cite{mapping_to_a_reference_genome_structure} introduce the concept of \textit{context-based mapping} as a solution to the mapping problem when the reference is modeled as a graph. Context-based mapping is an approach where a vertice is identified by the surrounding environment in the graph. More technically a vertice has a set of \textit{contexts} which are paths that pass through the vertice. Because these paths are linear and passing through vertices containing characters, the contexts can be seen as strings. 
 \subsection{Alignment}
 \section{Techniques and tools}
 \subsection{Dynamic programming}

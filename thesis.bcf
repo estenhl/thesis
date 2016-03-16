@@ -2247,6 +2247,7 @@
     <bcf:citekey order="7">de_novo_assembly_and_genotyping_of_variants_using_colored_de_bruijn_graphs</bcf:citekey>
     <bcf:citekey order="8">mapping_to_a_reference_genome_structure</bcf:citekey>
     <bcf:citekey order="9">mapping_to_a_reference_genome_structure</bcf:citekey>
+    <bcf:citekey order="10">mapping_to_a_reference_genome_structure</bcf:citekey>
     <bcf:citekey order="0">*</bcf:citekey>
   </bcf:section>
   <bcf:sortlist section="0" name="nty" type="entry" sortscheme="nty">
