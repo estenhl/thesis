@@ -16,7 +16,14 @@ The human genome consists of roughly 3 billion base pairs (bp). These base pairs
 The \textit{Major Histocompatibility Complex} (MHC) is a genetic region spanning approximately 4 million base pairs (mb) \cite{immunobiology_the_immune_system_in_health_and_disease}. In humans it is located on chromosome 6 and contains about 200 genes. MHC is a region known to contain genes which affect the functionality of the immune system \cite{the_importance_of_immune_gene_variability_in_evolutionary_ecology_and_conservation}. Even more so MHC is known to be a highly variable region, containing variants that are directly associated with disease \cite{variation_analysis_and_gene_annotation_of_eight_mhc_haplotypes}.
 \subsection{Sequencing}
 \subsection{Alignment}
-\textit{Sequence alignment} is the process of determining correspondence between text strings, in this case representing DNA, by mapping the elements from one to the elements of the other. The score of an alignment is determined by a \textit{scoring schema}, which provides scores for mapping characters against characters through a \textit{substitution matrix} and penalties for introducing \textit{gaps}. A gap refers to an element in one of the strings which has no counterpart in the other string when aligned (Fig. \ref{fig:alignments}). The scoring schemas can be based around simple match/mismatch scores, which corresponds to the mathematical \textit{Edit distance problem}, or more complex scores (Fig. \ref{fig:substitution_matrix}). These complex models typically try to model the probabilities behind the physical processes responsible for change. The computational sequence alignment problem consists of finding the highest scoring alignment for any two strings. There exists two main variants of the problem, \textit{global alignments} where to entire strings are aligned against each other and \textit{local alignments} where a string is aligned against a substring of another. The two are traditionally solved respectively by the Needleman-Wunsch and Smith-Waterman algorithms which both are based on \textit{dynamic programming} (Section \ref{sec:dynamic_programming}).
+\textit{Sequence alignment} is the process of determining correspondence between text strings, in this case representing DNA, by mapping the elements from one to the elements of the other. The score of an alignment is determined by a \textit{scoring schema}, which provides scores for mapping characters against characters through a \textit{substitution matrix} and penalties for introducing \textit{gaps}. 
+\begin{defn}[Scoring schema]
+A structure which provides functionality for mapping bases against bases with a function $mappingScore(c_1, c_2)$ and for penalizing gaps with a function $gapPenalty(distance)$. The structure is defined through a substitution matrix, a gap opening penalty and a gap extension penalty
+\end{defn}
+\begin{defn}[Consistent scoring schema]
+A scoring schema is consistent if $mappingScore(c, c) = \underset{a \in \Sigma}{max} (mappingScore(c, a))$ for all $c \in \Sigma$.
+\end{defn}
+A gap refers to an element in one of the strings which has no counterpart in the other string when aligned (Fig. \ref{fig:alignments}). The scoring schemas can be based around simple match/mismatch scores, which corresponds to the mathematical \textit{Edit distance problem}, or more complex scores (Fig. \ref{fig:substitution_matrix}). These complex models typically try to model the probabilities behind the physical processes responsible for change. The computational sequence alignment problem consists of finding the highest scoring alignment for any two strings. There exists two main variants of the problem, \textit{global alignments} where to entire strings are aligned against each other and \textit{local alignments} where a string is aligned against a substring of another. The two are traditionally solved respectively by the Needleman-Wunsch and Smith-Waterman algorithms which both are based on \textit{dynamic programming} (Section \ref{sec:dynamic_programming}).
 \begin{wrapfigure}{L}{0.3\textwidth}
   \begin{subfigure}[t]{\textwidth}
     \begin{mdframed}
@@ -43,8 +50,7 @@ The \textit{Major Histocompatibility Complex} (MHC) is a genetic region spanning
 \end{wrapfigure}
 \par\noindent
 If more than two sequences are aligned the result is a \textit{Multiple sequence alignment} (MSA). This is typically done on sequences which is expected to share a common ancestor to determine which traits of the individuals arised from the same origins and how the involved species have diverged over time. A final variant of the alignment problem is one involving large databases of sequences, where the algorithms does not only need to find the best alignment between two sequences, but also determine which sequence should be chosen in order to maximize the result. Both of the preceding techniques utilize heuristical methods to decrease the computational complexity.
-\begin{wrapfigure}{R}{0.80\linewidth}
-  \begin{mdframed}
+\begin{figure}[b]
     \begin{center}
       \begin{tabularx}{\linewidth}{ccccc}
         &\texttt{A}&\texttt{C}&\texttt{G}&\texttt{T}\\ \cline{2-5}
@@ -54,13 +60,13 @@ If more than two sequences are aligned the result is a \textit{Multiple sequence
         \texttt{T}&\multicolumn{1}{|c|}{\texttt{-123}}&\texttt{-31}&\multicolumn{1}{|c|}{\texttt{-114}}&\multicolumn{1}{c|}{\texttt{91}}\\ \cline{2-5}
       \end{tabularx}
     \end{center}
-  \end{mdframed}
   \caption{The HOXD70 substitution matrix}
   \label{fig:substitution_matrix}
-\end{wrapfigure}
+\end{figure}
+\clearpage
 \section{Graph-based genome representations}
 Representing genetic information as graphs instead of the traditional linear representations have some major advantages. Graphs are far more expressive structures compared to text strings, able to represent more complex relationships between the elements involved. Secondly, if biological questions can be rephrased to graph theoretical settings, the extensive mathematical field of graph theory can present more feasible approaches to previously hard problems. There is however a major problem: A more complex structure calls for more sophisticated variants of existing methods. Graph-based approaches have been used for some time in the assembly process, and more recently in relation to reference genomes. This section will present both of these approaches alongside some of the remaining unsolved problems. No graph theoretical foreknowledge is needed as all the involved elements will be defined before they are used, but for interested readers there are exists good sources \textcolor{red}{(FIND SOME SOURCES)}.
-\begin{defn}[Graph]
+\begin{defn}[Graph-based reference genome (Graph)]
   A pair $G=\{V,E\}$ where $V$ is a set of vertices and $E$ is a set of edges. $|G|$ denotes the number of vertices in $G$.
 \end{defn}
 \subsection{Representation}
@@ -154,7 +160,6 @@ Deciding upon the representation of the graph consists of defining the structure
 \end{wrapfigure}
 \subsubsection{de Bruijn graphs}
 In the article ``An Eulerian path approach to DNA fragment assembly''\cite{an_eulerian_path_approach_to_dna_fragment_assembly}, Pevzner, Tang and Waterman proposes \textit{de Bruijn} graphs as a solution to find the correct assembly of repeats during fragment assembly. A de Bruijn graph is a structure where vertices represent \textit{k-mers} from an alphabet and edges represent relationships between the k-mers of two vertices (Fig. \ref{fig:de_bruijn_graph}). Pevzner et al. lets the vertices contain strings of length $l-1$ and connects vertices with an edge wherever there exists a read of length $l$ containing the two substrings. Formulating the problem in this fashion lets the problem be formulated as a \textit{Eulerian path} problem, solvable in polynomial time, rather than the traditional ``overlap-layout-consensus'' method which is equivalent to the NP-complete problem of finding a \textit{Hamiltonian path}. A great benefit with de Bruijn graphs is that there is no disambiguity: Any legal k-mer has at no point more than one vertice representing it.
-\clearpage
 \begin{figure}
     \begin{mdframed}
       \begin{center}
@@ -183,10 +188,10 @@ In the article ``An Eulerian path approach to DNA fragment assembly''\cite{an_eu
 A more detailed type of de Bruijn graphs is the colored variant where the origins of edges and vertices are stored as colors. The entire sequence originating from a single individual sample can be seen by following a path with a given color. Similarities between samples can be seen as multicolored stretches, variation take the form of bubbles. Colored de Bruijn graphs can be used for de novo assembly as a more powerful method for detecting variation, compared to traditional assembly techniques\cite{de_novo_assembly_and_genotyping_of_variants_using_colored_de_bruijn_graphs}.
 \subsubsection{Sequence graphs}
 The term \textit{sequence graph} stems from the article ``Mapping to a Reference Genome structure''\cite{mapping_to_a_reference_genome_structure} and describes a graph structure which is possibly more intuitively pleasing. Every vertice in the graph corresponds to a single nucleotide from one or more genetic sequences used in building the graph. An edge represents two nucleotides which are consecutive in one of the original sequences. Paths symbolize subsequences of the originating input sequences. To handle the arising problem that the contents of nodes are no longer unique each vertice can be given an index which is exclusive for their associated graph. Whenever a graph is referenced without being specifically classified the following definitions are assumed:\\
-\begin{defn}[Vertice]
+\begin{defn}[Graph genome vertice (Vertice)]
   A pair $v=\{b, i\}$ where $b \in \{A, C, T, G\}$ and $i$ is a unique index. The vertice at index $i$ is denoted $v_i$. Every graph $G$ also has two special vertices $s_G=\{s, 0\}$ and $t_G=\{e, -1\}$ which represents unique start and end vertices. The notation $b(v_i)$ references the first element in the pair (the nucleotide).
 \end{defn}
-\begin{defn}[Edge]
+\begin{defn}[Graph genome edge (Edge)]
   An ordered pair $e=\{i_s, i_e\}$ where both elements are indexes for vertices. 
 \end{defn}
 \begin{defn}[Path]
@@ -200,11 +205,14 @@ Although the two terms are often used isomorphically we will in this thesis defi
 \noindent
 For linear strings mapping is easy. Every string has the same underlying coordinate system, represented by the positions of the characters, and two elements from two separate sequences are either in the same position or they are not. If they are not the difference in position can be derived from the difference between the indexes. Because the indexes of a graph has only one property, uniqueness, they do not hold the intrinsic value of describing relationships between vertices. Any mapping system which uses fixed coordinates would face problems when dealing with a fluent graph able to merge in new information, as the internal relations are bound to change. In de Bruijn graphs the problem is solved by moving the mappable quality away from positions and into the data: For any possible k-mer there either is a corresponding vertice or there is not. In sequence graphs, where nucleotides are the most basic information, there exists an equal number of identically scoring positions for every base as there are vertices containing that vertice in the graph.\\
 \par\noindent
-Paten et al.\cite{mapping_to_a_reference_genome_structure} introduce the concept of \textit{context-based mapping} as a solution to the mapping problem when the reference is modeled as a graph. Context-based mapping is an approach where a vertice is identified by the surrounding environment in the graph. More technically a vertice has a set of \textit{contexts} which are paths that pass through the vertice. Because these paths are linear and passing through vertices containing characters, the contexts can be seen as strings. 
+Paten et al.\cite{mapping_to_a_reference_genome_structure} introduce the concept of \textit{context-based mapping} as a solution to the mapping problem when the reference is modeled as a graph. Context-based mapping is an approach where a vertice is identified by the surrounding environment in the graph. More technically a vertice has a set of \textit{contexts} which are paths that pass through the vertice. Because these paths are linear and passes through vertices containing characters, the contexts can be treated as text strings. There are two concrete examples of approaches presented in the article: The \textit{general left-right exact match mapping scheme} and the \textit{central exact match mapping scheme}. The key words left-right and central refer to how a vertice defines it's contexts based on the surrondings. The former defines separate contexts for incoming and outcoming paths whereas the latter defines the vertice as a center of a path where the differences of the lengths of the two contexts are minimized. A  \textit{balanced central exact match mapping scheme} is a special case of the latter where both contexts are the same length, and the vertice thus is the center of a k-mer. This is a concept closely related to de Bruijn graphs.\\
+\par\noindent
+Both of the examples use the word \textit{exact} in their definitions. The term refers to the fact that every context is \textit{unique} to a single vertice which means every possible context either maps unambiguously to a single vertice or does not map at all. Because the graphs have the possibility of branching a vertice can have several contexts contained in \textit{context sets}. Because every context is unique a collection of such will also be unique, which means context-based mapping leads to a two-way unique mapping schema. This is an even strong notion of mappability than positions is strings, as a character of a string does not necessarily map uniquely back to its position. This strong notion has a drawback: There exists situations where a vertice does not have a unique context which yields it unmappable.
 \subsection{Alignment}
 \section{Techniques and tools}
 \subsection{Dynamic programming}
 \label{sec:dynamic_programming}
+Dynamic programming is a 
 \subsection{Implementing graphs}
 \subsection{Suffix trees}
 \subsection{Visualization of graphs}

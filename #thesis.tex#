@@ -1,0 +1,67 @@
+\documentclass[UKenglish]{ifimaster}  
+\usepackage[utf8]{inputenc}           
+\usepackage[T1]{fontenc,url}
+\usepackage{mdframed}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{wrapfig}
+\usepackage{subcaption}
+\usepackage{listings}
+\usepackage{floatrow,subfig,caption}
+\usepackage{tabularx}
+\usepackage{listings}
+\usepackage{thmtools}
+\urlstyle{sf}
+\usepackage{babel,textcomp,csquotes,ifimasterforside,varioref,graphicx}
+\usepackage[backend=biber,style=numeric-comp]{biblatex}
+\usetikzlibrary{automata,arrows,positioning}
+\pgfplotsset{compat=1.9}
+
+\newtheoremstyle{break}
+  {\topsep}{\topsep}%
+  {\itshape}{}%
+  {\bfseries}{}%
+  {\newline}{}%
+\theoremstyle{break}
+\newtheorem{defn}{Definition}
+\newtheorem{corollary}{Corollary}
+
+\usepackage{subfiles}
+ 
+\usepackage{blindtext}
+
+\title{}        
+\subtitle{}        
+\author{Esten H{\o}yland Leonardsen}                       
+
+\bibliography{thesis}                  
+
+\begin{document}
+\ififorside{}
+\frontmatter{}
+\maketitle{}
+
+\chapter*{Abstract}                   
+
+\tableofcontents{}
+\listoffigures{}
+\listoftables{}
+\listoftheorems[ignoreall,show={defn}]
+
+\chapter*{Preface}                    
+
+\mainmatter{}
+\subfile{introduction}
+\subfile{background}
+\subfile{methodology}
+\subfile{algorithm}
+\subfile{method}
+\subfile{results}
+\subfile{discussion}
+\subfile{conclusion}
+\backmatter{}
+\nocite{*}
+\printbibliography
+\end{document}

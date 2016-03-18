@@ -1,8 +1,15 @@
 \documentclass[thesis.tex]{subfiles}
 
 \begin{document}
-\chapter{Method}
-\section{Test data}
-\section{Scoring schema}
-\section{Validation}
+\chapter{Methods}
+The following chapter describes the details of the experiments conducted to produce the results in the succeeding chapter. There is a natural division of the experiments into two groups, qualitative and quantitative, and the two will be separated into different sections. The motivation being doing the approaches can be found in the first paragraphs of their corresponding sections. The specifics common to both types of experiment will come as a final section. 
+\section{Qualitative}
+\subsection{Test data}
+\subsection{Validation}
+\section{Quantitative}
+\subsection{Test data}
+\subsection{Validation}
+\section{Common elements}
+\subsection{Scoring schema}
+The scoring schema used in all the experiments will be regular edit distance where mismatches and gaps yield a penalty of -1. The reason for the negation compared to ``regular'' edit distance is that the implemented algorithm seeks to maximalize a score, not minimalize a loss. Edit distance is used because of the intuitive nature of the scores involved. A final result of $-x$ means there is something wrong exactly $x$ places. This provides a good foundation for validating the qualitative tests visually.
 \end{document}
