@@ -65,7 +65,7 @@ If more than two sequences are aligned the result is a \textit{Multiple sequence
 \end{figure}
 \clearpage
 \section{Graph-based genome representations}
-Representing genetic information as graphs instead of the traditional linear representations have some major advantages. Graphs are far more expressive structures compared to text strings, able to represent more complex relationships between the elements involved. Secondly, if biological questions can be rephrased to graph theoretical settings, the extensive mathematical field of graph theory can present more feasible approaches to previously hard problems. There is however a major problem: A more complex structure calls for more sophisticated variants of existing methods. Graph-based approaches have been used for some time in the assembly process, and more recently in relation to reference genomes. This section will present both of these approaches alongside some of the remaining unsolved problems. No graph theoretical foreknowledge is needed as all the involved elements will be defined before they are used, but for interested readers there are exists good sources \textcolor{red}{(FIND SOME SOURCES)}.
+Representing genetic information as graphs instead of the traditional linear representations have some major advantages. Graphs are far more expressive structures compared to text strings, able to represent more complex relationships between the elements involved. Secondly, if biological questions can be rephrased to graph theoretical settings, the extensive mathematical field of graph theory can present more feasible approaches to previously hard problems. There is however a major problem: A more complex structure calls for more sophisticated variants of existing methods. Graph-based approaches have been used for some time in the assembly process, and more recently in relation to reference genomes. This section will present both of these approaches alongside some of the remaining unsolved problems. No graph theoretical foreknowledge is needed as all the involved elements will be defined before they are used, but for interested readers there exists good sources in the bibliography \cite[Chapter 0]{introduction_to_the_theory_of_computation} \cite[Chapter 9]{data_structures_and_algorithm_analysis_in_java} \cite[Chapter 11]{algorithms_sequential_parallell_and_distributed}. Complexity in regards to the graphs and their operations is discussed using \textit{big-O} notation \cite[Chapter 2]{data_structures_and_algorithm_analysis_in_java}\cite[Section 3.1]{algorithms_sequential_parallell_and_distributed}
 \begin{defn}[Graph-based reference genome (Graph)]
   A pair $G=\{V,E\}$ where $V$ is a set of vertices and $E$ is a set of edges. $|G|$ denotes the number of vertices in $G$.
 \end{defn}
@@ -159,7 +159,7 @@ Deciding upon the representation of the graph consists of defining the structure
   \label{fig:flexibility_rigidness_tradeoff}
 \end{wrapfigure}
 \subsubsection{de Bruijn graphs}
-In the article ``An Eulerian path approach to DNA fragment assembly''\cite{an_eulerian_path_approach_to_dna_fragment_assembly}, Pevzner, Tang and Waterman proposes \textit{de Bruijn} graphs as a solution to find the correct assembly of repeats during fragment assembly. A de Bruijn graph is a structure where vertices represent \textit{k-mers} from an alphabet and edges represent relationships between the k-mers of two vertices (Fig. \ref{fig:de_bruijn_graph}). Pevzner et al. lets the vertices contain strings of length $l-1$ and connects vertices with an edge wherever there exists a read of length $l$ containing the two substrings. Formulating the problem in this fashion lets the problem be formulated as a \textit{Eulerian path} problem, solvable in polynomial time, rather than the traditional ``overlap-layout-consensus'' method which is equivalent to the NP-complete problem of finding a \textit{Hamiltonian path}. A great benefit with de Bruijn graphs is that there is no disambiguity: Any legal k-mer has at no point more than one vertice representing it.
+In the article ``An Eulerian path approach to DNA fragment assembly''\cite{an_eulerian_path_approach_to_dna_fragment_assembly}, Pevzner, Tang and Waterman proposes \textit{de Bruijn} graphs as a solution to find the correct assembly of repeats during fragment assembly. A de Bruijn graph is a structure where vertices represent \textit{k-mers} from an alphabet and edges represent relationships between the k-mers of two vertices (Fig. \ref{fig:de_bruijn_graph}). Pevzner et al. lets the vertices contain strings of length $l-1$ and connects vertices with an edge wherever there exists a read of length $l$ containing the two substrings. Formulating the problem in this fashion lets the problem be formulated as a \textit{Eulerian path} problem, solvable in polynomial time, rather than the traditional ``overlap-layout-consensus'' method which is equivalent to the NP-complete problem of finding a \textit{Hamiltonian path}\cite[Section 11.1]{algorithms_sequential_parallell_and_distributed}. A great benefit with de Bruijn graphs is that there is no disambiguity: Any legal k-mer has at no point more than one vertice representing it.
 \begin{figure}
     \begin{mdframed}
       \begin{center}
@@ -200,7 +200,8 @@ The term \textit{sequence graph} stems from the article ``Mapping to a Reference
 \subsection{Mapping}
 Although the two terms are often used isomorphically we will in this thesis define mapping and alignment as two separate concepts. Mapping is the process of finding relationships between single characters of a string and single elements of a reference genome. Alignment is concerned with finding relationships between consecutive elements of an input string and substructures in the reference genome. A mapping score is defined as the score achieved by looking up two bases in a substitution matrix.  
 \begin{defn}[Mapping score]
-  A score produced by mapping two characters $b_1, b_2 \in \{A, C, G, T\}$ against a substitution matrix contained in a scoring schema.
+  \label{def:mapping_score}
+  A score produced by mapping two characters $b_1, b_2 \in \{A, C, G, T\}$ against a substitution matrix contained in a scoring schema. Referenced by $mappingScore(b_1, b_2)$.
 \end{defn}
 \noindent
 For linear strings mapping is easy. Every string has the same underlying coordinate system, represented by the positions of the characters, and two elements from two separate sequences are either in the same position or they are not. If they are not the difference in position can be derived from the difference between the indexes. Because the indexes of a graph has only one property, uniqueness, they do not hold the intrinsic value of describing relationships between vertices. Any mapping system which uses fixed coordinates would face problems when dealing with a fluent graph able to merge in new information, as the internal relations are bound to change. In de Bruijn graphs the problem is solved by moving the mappable quality away from positions and into the data: For any possible k-mer there either is a corresponding vertice or there is not. In sequence graphs, where nucleotides are the most basic information, there exists an equal number of identically scoring positions for every base as there are vertices containing that vertice in the graph.\\
@@ -209,13 +210,148 @@ Paten et al.\cite{mapping_to_a_reference_genome_structure} introduce the concept
 \par\noindent
 Both of the examples use the word \textit{exact} in their definitions. The term refers to the fact that every context is \textit{unique} to a single vertice which means every possible context either maps unambiguously to a single vertice or does not map at all. Because the graphs have the possibility of branching a vertice can have several contexts contained in \textit{context sets}. Because every context is unique a collection of such will also be unique, which means context-based mapping leads to a two-way unique mapping schema. This is an even strong notion of mappability than positions is strings, as a character of a string does not necessarily map uniquely back to its position. This strong notion has a drawback: There exists situations where a vertice does not have a unique context which yields it unmappable.
 \subsection{Alignment}
+\textcolor{red}{Intro}
+\textcolor{red}{Multiple sequence alignment using partial order graphs}
+\textcolor{red}{Canonical, Stable, General Mapping using Context Schemes}
+\clearpage
 \section{Techniques and tools}
 \subsection{Dynamic programming}
 \label{sec:dynamic_programming}
-Dynamic programming is a 
+\textit{Dynamic programming} (DP) is a problem-solving technique where a problem instance is solved by combining the results of smaller subproblems. DP is similar to recursion in that every instance is solved by a \textit{recurrence relation} (Equation \ref{eq:ed_recurrence_relation}) which recurses on smaller and smaller problems until a \textit{base case} is found. A base case represent the bottom of the recursion and is a value which can easily be computed without further lookups. The main difference between recursion and DP is that the latter usually stores its intermediate results to allow for fast lookups for reoccuring instances. DP is often used as an approach for optimization problems in order to minimize computational complexity while giving a guarantee for optimal results \cite[Chapter 9]{algorithms_sequential_parallell_and_distributed}.
+\begin{wrapfigure}{r}{0.67\textwidth}
+  \begin{mdframed}
+    \begin{center}
+      \begin{tabularx}{\textwidth}{ccccccccccc}
+        &&a&l&g&o&r&i&t&h&m \\ \cline{2-11}
+         &\multicolumn{1}{|c|}{0}&1&\multicolumn{1}{|c|}{2}&3&\multicolumn{1}{|c|}{4}&5&\multicolumn{1}{|c|}{6}&7&\multicolumn{1}{|c|}{8}&\multicolumn{1}{c|}{9}\\ \cline{2-11}
+        l &\multicolumn{1}{|c|}{1}&1&\multicolumn{1}{|c|}{1}&2&\multicolumn{1}{|c|}{3}&4&\multicolumn{1}{|c|}{5}&6&\multicolumn{1}{|c|}{7}&\multicolumn{1}{c|}{8}\\ \cline{2-11}
+        o &\multicolumn{1}{|c|}{2}&2&\multicolumn{1}{|c|}{2}&2&\multicolumn{1}{|c|}{2}&3&\multicolumn{1}{|c|}{4}&5&\multicolumn{1}{|c|}{6}&\multicolumn{1}{c|}{7}\\ \cline{2-11}
+        g &\multicolumn{1}{|c|}{3}&3&\multicolumn{1}{|c|}{3}&2&\multicolumn{1}{|c|}{3}&4&\multicolumn{1}{|c|}{5}&6&\multicolumn{1}{|c|}{7}&\multicolumn{1}{c|}{8}\\ \cline{2-11}
+        a &\multicolumn{1}{|c|}{4}&3&\multicolumn{1}{|c|}{4}&3&\multicolumn{1}{|c|}{3}&4&\multicolumn{1}{|c|}{5}&6&\multicolumn{1}{|c|}{7}&\multicolumn{1}{c|}{8}\\ \cline{2-11}
+        r &\multicolumn{1}{|c|}{5}&4&\multicolumn{1}{|c|}{4}&4&\multicolumn{1}{|c|}{4}&3&\multicolumn{1}{|c|}{4}&5&\multicolumn{1}{|c|}{6}&\multicolumn{1}{c|}{7}\\ \cline{2-11}
+        i &\multicolumn{1}{|c|}{6}&5&\multicolumn{1}{|c|}{5}&5&\multicolumn{1}{|c|}{5}&4&\multicolumn{1}{|c|}{3}&4&\multicolumn{1}{|c|}{5}&\multicolumn{1}{c|}{6}\\ \cline{2-11}
+        t &\multicolumn{1}{|c|}{7}&6&\multicolumn{1}{|c|}{6}&6&\multicolumn{1}{|c|}{6}&5&\multicolumn{1}{|c|}{4}&3&\multicolumn{1}{|c|}{4}&\multicolumn{1}{c|}{5}\\ \cline{2-11}
+        h &\multicolumn{1}{|c|}{8}&7&\multicolumn{1}{|c|}{7}&7&\multicolumn{1}{|c|}{7}&6&\multicolumn{1}{|c|}{5}&4&\multicolumn{1}{|c|}{3}&\multicolumn{1}{c|}{4}\\ \cline{2-11}
+        m &\multicolumn{1}{|c|}{9}&8&\multicolumn{1}{|c|}{8}&8&\multicolumn{1}{|c|}{8}&7&\multicolumn{1}{|c|}{6}&5&\multicolumn{1}{|c|}{4}&\multicolumn{1}{c|}{3}\\ \cline{2-11}
+      \end{tabularx}
+    \end{center}
+  \end{mdframed}
+  \caption{The 2-dimensional array used for solving the edit distance problem for the strings S=``algorithm'' and P=``logarithm'' (Note: This follows regular ED scoring where every operation is penalized +1)}
+  \label{fig:edit_distance_array}
+\end{wrapfigure}
+A problem which is typically solved by dynamic programming is the previously mentioned edit distance problem which utilizes a 2-dimensional array to store the computed values (Fig. \ref{fig:edit_distance_array}).For two strings $S$ and $P$, every index $[i,j]$ in the edit distance table represents the problem instance of the strings $S[0:i],P[0:j]$. The base cases can be seen in the first row and column. There are often dropped from the table itself due to the simple nature of their computations. The remainder of the table is filled out with the following recurrence relation:
+\begin{equation}
+  D[i,j] = min
+  \begin{cases}
+    D[i-1,j] + 1\\
+    D[i,j-1] + 1\\
+    D[i-1,j-1] + score(S[i], P[j])
+  \end{cases}
+  \label{eq:ed_recurrence_relation}
+\end{equation}
+where $score(x, y)$ is the identity function. The score for the entire problem instance can be found in the cell with the highest indexes in the bottom right corner.\\
+\par\noindent
+There are two separate ways of using Dynamic Programming. A \textit{bottom-up} approach starts at the smallest cases and computes everything until it reaches the actual given problem instances. This corresponds to starting in the top left corner of the edit distance array and computing the cells iteratively moving downwards to the right. A \textit{top-down} procedure starts at the given problem instance and recursively computes every subproblem that is needed. This means starting in the bottom right corner of the 2-dimensional array and recursing upwards to the right. For the edit distance problem the choice of approach bears no big significance as every cell has to be computed either way, but there are problems where using top-down can avoid some computations which are irrelevant to the final result. The latter can also be efficient for heuristical methods where an area of the search space can be overlooked.
 \subsection{Implementing graphs}
 \subsection{Suffix trees}
-\subsection{Visualization of graphs}
+A \textit{suffix trie} is a special tree constructed for specifically for strings of text, containing vertices representing characters (Fig. \ref{fig:suffix_trie}). Every suffix of a string has a corresponding leaf vertice, where the vertices along path from the root to the vertice contains the characters in the suffix. From this it follows that every substring has a matching path starting in the root node. A \textit{suffix tree}, or \textit{compressed suffix trie}, is a suffix trie in which every linear path is compressed into a single vertice (Fig. \ref{fig:suffix_tree}). Suffix trees can easily be extended to hold collections of strings\cite[Chapter 20]{algorithms_sequential_parallell_and_distributed}. An elementary solution has a space complexity of $O(s)$, where $s$ is the length of the string (or the total length of all strings if the tree is built from a collection), and a string of length $m$ can be looked up in $O(km)$ time for an alphabet of size $k$\cite[Section 20.6.1]{algorithms_sequential_parallell_and_distributed}\\
+\begin{figure}[b]
+  \begin{subfigure}[t]{0.49\textwidth}
+    \begin{mdframed}
+      \begin{center}
+        \begin{tikzpicture}
+          \node[state,scale=0.8] (q0) {};
+          \node[state,scale=0.8] [below left=0.6cm and -0.05cm of q0] (q1) {$a$};
+          \node[state,scale=0.8] [below right=0.6cm and -0.05cm of q0] (q2) {$n$};
+          \node[state,scale=0.8] [left=0.25cm of q1] (q3) {$b$};
+          \node[state,scale=0.8] [right=0.25cm of q2] (q4) {$s$};
+          \node[state,scale=0.8] [below left=0.6 and -0.05cm of q3] (q5) {$a$};
+          \node[state,scale=0.8] [below left=0.6 and -0.05cm of q1] (q6) {$n$};
+          \node[state,scale=0.8] [below right=0.6 and -0.05cm of q1] (q7) {$s$};
+          \node[state,scale=0.8] [below right=0.6cm and -0.05cm of q2] (q8) {$a$};
+          \node[state,scale=0.8] [below left=0.6cm and -0.05cm of q5] (q9) {$n$};
+          \node[state,scale=0.8] [below=0.36cm of q6] (q10) {$a$};
+          \node[state,scale=0.8] [below left=0.6cm and -0.05cm of q8] (q11) {$n$};
+          \node[state,scale=0.8] [below right=0.6cm and -0.05cm of q8] (q12) {$s$};
+          \node[state,scale=0.8] [below=0.36cm of q9] (q13) {$a$};
+          \node[state,scale=0.8] [below left=0.6cm and -0.05cm of q10] (q14) {$n$};
+          \node[state,scale=0.8] [below right=0.6cm and -0.05cm of q10] (q15) {$s$};
+          \node[state,scale=0.8] [below=0.36cm of q11] (q16) {$a$};
+          \node[state,scale=0.8] [below=0.36cm of q13] (q17) {$n$};
+          \node[state,scale=0.8] [below=0.36cm of q14] (q18) {$a$};
+          \node[state,scale=0.8] [below=0.36cm of q16] (q19) {$s$};
+          \node[state,scale=0.8] [below=0.36cm of q17] (q20) {$a$};
+          \node[state,scale=0.8] [below=0.36cm of q18] (q21) {$s$};
+          \node[state,scale=0.8] [below=0.36cm of q20] (q22) {$s$};
+
+          \path 
+          (q0) edge node {} (q1)
+          edge node {} (q2)
+          edge node {} (q3)
+          edge node {} (q4)
+          (q3) edge node {} (q5)
+          (q1) edge node {} (q6)
+          edge node {} (q7)
+          (q2) edge node {} (q8)
+          (q5) edge node {} (q9)
+          (q6) edge node {} (q10)
+          (q8) edge node {} (q11)
+          edge node {} (q12)
+          (q9) edge node {} (q13)
+          (q10) edge node {} (q14)
+          edge node {} (q15)
+          (q11) edge node {} (q16)
+          (q13) edge node {} (q17)
+          (q14) edge node {} (q18)
+          (q16) edge node {} (q19)
+          (q17) edge node {} (q20)
+          (q18) edge node {} (q21)
+          (q20) edge node {} (q22);
+        \end{tikzpicture}
+      \end{center}
+    \end{mdframed}
+    \caption{}
+    \label{fig:suffix_trie}
+  \end{subfigure}
+  \begin{subfigure}[t]{0.49\textwidth}
+    \begin{mdframed}
+      \begin{center}
+        \begin{tikzpicture}
+          \node[state,scale=0.8] (q0) {};
+          \node[state,scale=0.8] [below left=0.6cm and -0.05cm of q0] (q1) {$a$};
+          \node[rectangle,draw,inner sep=0.2cm,scale=0.8] [left=0.25cm of q1] (q3) {$bananas$};
+          \node[state,scale=0.8] (q3) [below right=0.6cm and -0.05cm of q0] (q4) {$s$};
+          \node[rectangle,draw,inner sep=0.2cm,scale=0.8] [right=0.5cm of q4] (q2) {$na$};
+          \node[rectangle,draw,inner sep=0.2cm,scale=0.8] [below left=0.67cm and -0.05cm of q1] (q5) {$na$};
+          \node[state,scale=0.8] (q6) [below right=0.6cm and -0.05cm of q1]{$s$};
+          \node[rectangle,draw,inner sep=0.2cm,scale=0.8] [below left=0.67cm and -0.05cm of q2] (q7) {$nas$};
+          \node[state,scale=0.8] [below right=0.6cm and -0.05cm of q2] (q8) {$s$};
+          \node[rectangle,draw,inner sep=0.2cm,scale=0.8] [below left=0.67cm and -0.05cm of q5] (q9) {$nas$};
+          \node[state,scale=0.8] [below right=0.6cm and -0.05cm of q5] (q10) {$s$};
+
+          \path
+          (q0) edge node {} (q1)
+          edge node {} (q2)
+          edge node {} (q3)
+          edge node {} (q4)
+          (q1) edge node {} (q5)
+          edge node {} (q6)
+          (q2) edge node {} (q7)
+          edge node {} (q8)
+          (q5) edge node {} (q9)
+          edge node {} (q10);
+        \end{tikzpicture}
+      \end{center}
+    \end{mdframed}
+    \caption{}
+    \label{fig:suffix_tree}
+  \end{subfigure}
+  \caption{The suffix tree and suffix trie of the string ``bananas''}
+  \label{fig:suffix_trees}
+\end{figure}
+\par\noindent
+\textcolor{red}{A Block-sorting Lossless Data Compression Algorithm}
+\subsection{Visualization of graphs: The dot-format}
 \end{document}
 
 
