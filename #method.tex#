@@ -1,0 +1,19 @@
+\documentclass[thesis.tex]{subfiles}
+
+\begin{document}
+\chapter{Experiments}
+The following chapter describes the details of the experiments conducted to produce the results in the succeeding chapter. The experiments are divided along a natural border, decided by the size of the input data, into two classes. Each class has its own section describing the motivation behind the experiments and the details specific to that class. Elements which are common to both classes are described once in the section preceding the class-specific sections.
+\section{Proof of concept}
+Whenever a graph is built from a set of sequences one can get an intuition concering what the final result should look like. These experiments are attempts to formalize the notion of intuition into stable, testable results. Due to readability and shortcomings of printed media only a small set of the experiments are presented here. A more exhaustive set of tests can be found as unit tests in the tool \textcolor{red}{ref tool}.
+\subsection{Test data}
+Because the motivation behind these tests are to determine the behaviour of the algorithm, the input data consists of small, handcrafted sequences which for each experiment contains exactly one easily identifiable trait. These traits are crafted in a way which reflects the nature of variation in genetic sequences. Because the negated edit distance scoring schema is a flat scoring schema which penalizes all errors the same it is prone to display order of operations characteristics of the underlying algorithm. Because the order of operations of the implementation is well known to the authors this is taken into account when creating the data.
+\subsection{Validation}
+There are two main concepts which the validation of this experiment class wish to capture: The intuition and the formalization. The intuition is captured through visualizable results. Every experiment will be provided with a visualization of both the inputs and the outputs. The output visualizations will be directly produced by the tool using the -print parameter, by porting the resulting dot-file to the tikz syntax used in this thesis. The formalization is carried out through a set of statements from first order logic concerning the state of the visual output. The previously mentioned unit tests are created be representing these statements through Java syntax.
+\section{Efficiency}
+In order to determine the usefulness of an approach it should be compared to other approaches. The goal of these experiments is to run the implementation in the tool against similar applications to determine the grade of correctness and the computational feasibility of the approach. Because of its guarantee for optimality PO-MSA (Section \ref{sec:po_msa}) is chosen as a baseline, through an own implementation in Java. 
+\subsection{Test data}
+\subsection{Validation}
+\section{Common elements}
+\subsection{Scoring schema}
+The scoring schema used in all the experiments will be regular edit distance where mismatches and gaps yield a penalty of -1. The reason for the negation compared to ``regular'' edit distance is that the implemented algorithm seeks to maximalize a score, not minimalize a loss. Edit distance is used because of the intuitive nature of the scores involved. A final result of $-x$ means there is something wrong exactly $x$ places. This provides a good foundation for validating the qualitative tests visually.
+\end{document}
