@@ -13,6 +13,8 @@
 \usepackage{tabularx}
 \usepackage{listings}
 \usepackage{thmtools}
+\usepackage[toc,page]{appendix}
+\usepackage{subcaption}
 \urlstyle{sf}
 \usepackage{babel,textcomp,csquotes,ifimasterforside,varioref,graphicx}
 \usepackage[backend=biber,style=numeric-comp]{biblatex}
@@ -63,6 +65,12 @@
 \subfile{discussion}
 \subfile{conclusion}
 \subfile{further_work}
+\begin{appendices}
+\subfile{proof}
+\subfile{analysis}
+\subfile{tool}
+\subfile{birthday_problem}
+\end{appendices}
 \backmatter{}
 \nocite{*}
 \printbibliography

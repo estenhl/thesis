@@ -1,9 +1,97 @@
 \documentclass[thesis.tex]{subfiles}
 
 \begin{document}
-\chapter{Methodology}
+\chapter{The algorithm ``Fuzzy context-based search''}
+{\parindent0pt
 This chapter will present a formal definition of the problem of aligning DNA strings against a graph-based reference genome and the remaining constituents which have not previously been defined. We will also present a the algorithm ``Fuzzy context-based search'' as solution to the problem through a conceptual overview.
-\section{The problem}
-\section{An overview of the involved components}
-\section{The solution}
+The main concern of this chapter is to introduce the algorithm ``Fuzzy context-based search'' as a solution to the problem of aligning text strings against graph-based reference genomes. In order to do this we will first present formal definitions of the elements and structures involved aswell as the problem itself. The following description of the approach will be as an conceptual overview where the motivation behind the steps taken are also described. A more detailed introduction to a possible implementation of the algorithm will follow in the succeeding chapter, in which space and time complexity will also be discussed. In order to avoid ambiguity when dealing with already existing concepts, the terms which are defined are given problem-specific names. For several of the terms there also follows a shorthand notation behind the original name in the definition title. Whenever these shorthand names are used in the subsequent explanatory sections we refer exclusively to the definitions done in this thesis.
+\section{The graphs}
+The graphs used as reference genome graphs will be built iteratively by starting out with an empty graph and sequentially merging in input sequences aligned against the existing graph. How the sequences are merged, and thus what the graphs look like, are decided entirely through the alignment procedure, which in part relies on the scoring schema. This section will precisely define the elements involved to provide an intuition as to what the reference graphs used look like and how they relate to the text strings used in regular alignments. 
+\begin{defn}[Graph-based reference genome (Graph)]
+  A pair $G=\{V,E\}$ where $V$ is a set of vertices and $E$ is a set of edges. $|G|$ denotes the number of vertices in $G$.
+\end{defn}
+The involved graphs will be sequence graphs (Section \ref{sec:sequence_graphs}) where every vertice correspond to a single nucleotide from a one or more input sequence used to build the graph. Whether the vertice originates from a single or several sequences is based on whether any new bases has been mapped, and consecutively merged into the vertice. In addition to the nucleobase the vertices will contain an index which is unique within the surrounding graph. Every graph $G$ will also contain two special vertices $s_G=\{s, 0\}$ and $t_G=\{e, -1\}$ which represents unique start and end vertices. 
+\begin{defn}[Graph genome vertice (Vertice)]
+  A pair $v=\{b, i\}$ where $b \in \{A, C, T, G\}$ and $i$ is a unique index. The vertice at index $i$ is denoted $v_i$. The notation $b(v_i)$ references the first element in the pair (the nucleotide).
+\end{defn}
+The edges model the relationships between the vertices and thus the relationships between the elements of the input sequences. Every edge has its origin from a consecutive pair of nucleotides in atleast one input sequence.
+\begin{defn}[Graph genome edge (Edge)]
+  An ordered pair $e=\{i_s, i_e\}$ where both elements are indexes for vertices. 
+\end{defn}
+There exists no information storing the origin of an edge, or whether an edge originates from one or more input sequences, and all edges are thus seen as equally probable when aligning a sequence. A sequence of vertices where there exists an edge for every pair of consecutive vertices is called a path. A path is a a way of capturing the transition from individual characters to text strings within the domain of graphs.
+\begin{defn}[Graph genome path (Path)]
+  A list $p$ of indexes such that for all consecutive pairs $p_x, p_{x+1}\ \in p$ there exists an edge $e=\{p_x, p_{x+1}\}$, where $p_x$ denotes the index in position $x$ in the set. The notation $p_{-1}$ denotes the last element in the list. The length of $p$, $l(p)$, is equal to the number of indexes in the list.
+\end{defn}
+Paths spanning the entire length of a graph $G$, from $s_G$ to $t_G$ are named full paths. Every input sequence used to build the graph has a corresponding full path.
+\begin{defn}[Full path]
+  A path $p$ through a graph $G$ where $p_0=0$ and $p_{-1}=-1$
+\end{defn}
+There is no correspondence the other way, meaning there can exist full paths which does not originate from a single input sequence (Fig. \ref{fig:example_reference}). When aligning regular text strings the introduction of gaps is a key element. The concept of strings with gaps are translated to graphs through paths with gaps, called incomplete paths.
+\begin{defn}[Incomplete path]
+  An list $p*$ of indexes such that for all consecutive pairs $\{p*_x, p*_{x+1}\} \in p*$ there exists a path $p$ such that $p_0=p*_x$ and $p_{-1}=p*_{x+1}$.
+\end{defn}
+We can score an incomplete path by looking solely at the present gaps. This results in a score which does not take into account the mapping score (Definition \ref{def:scoring_schema}) of any of the elements contained in the vertice.
+\begin{defn}[Path score]
+  A score produced by traversing an incomplete path $P*$ and summing up the gap penalties for a gap corresponding to the length of the shortest path between every consecutive index pair.
+\end{defn}
+\begin{figure}
+  \begin{mdframed}
+    \begin{center}
+      \begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=1.4cm,scale=0.5]
+        \node[state,align=center] (q0) {$s$\\ \scriptsize{0}};
+        \node[state,align=center] [right of=q0] (q1) {$A$\\ \scriptsize{1}};
+        \node[state,align=center] [above right=0.6cm and 0.63cm of q1] (q2) {$T$\\ \scriptsize{2}};
+        \node[state,align=center] [right of=q1] (q3) {$G$\\ \scriptsize{6}};
+        \node[state,align=center] [below right=0.6cm and 0.63cm of q1] (q4) {$C$\\ \scriptsize{8}};
+        \node[state,align=center] [right of=q3] (q5) {$A$\\ \scriptsize{3}};
+        \node[state,align=center] [above right of=q5] (q6) {$T$\\ \scriptsize{4}};
+        \node[state,align=center] [below right of=q5] (q7) {$G$\\ \scriptsize{7}};
+        \node[state,align=center] [below right of=q6] (q8) {$A$\\ \scriptsize{5}};
+        \node[state,align=center] [right of=q8] (q9) {$e$\\ \scriptsize{-1}};
+
+        \path
+        (q0) edge node {} (q1)
+        (q1) edge node {} (q2)
+        edge node {} (q3)
+        edge node {} (q4)
+        (q2) edge node {} (q5)
+        (q3) edge node {} (q5)
+        (q4) edge node {} (q5)
+        (q5) edge node {} (q6)
+        edge node {} (q7)
+        edge node {} (q8)
+        (q6) edge node {} (q8)
+        (q7) edge node {} (q8)
+        (q8) edge node {} (q9);
+      \end{tikzpicture}
+    \end{center}
+  \end{mdframed}
+  \caption{An example reference graph $G$ made from the three sequences ``ATATA'', ``AGAGA'' and ``ACAA''. Although the graph is made from 3 sequences, 9 full paths can be found}
+  \label{fig:example_reference}
+\end{figure}
+}
+\section{The alignment problem}
+\begin{defn}[Input sequence]
+  A string $s$ over the alphabet $\{A, C, T, G\}$. The length of the string is given by $|s|$. An individual character on position $x$ is referenced by $s_x$
+\end{defn}
+\begin{defn}[Alignment score]
+  Given a sequence $s$, a graph $G$ and an alignment $A$, the score produced by combining mapping scores for the pairs $\{a_x, s_x\} for 0<=x<|s|$ with the path score for the incomplete path(s) provided by $A$ aligned against both $G$ and $s$. \textit{red}{NOT PRECISE}
+\end{defn}
+\begin{defn}[The optimal alignment score problem]
+  For any pair $\{G, s\}$, where $G$ is a graph and $s$ is a sequence, find one of the alignments $A$ which produces the highest possible alignment score.
+\end{defn}
+\begin{defn}[The bounded optimal alignment score problem]
+  \label{def:bounded_alignment_problem}
+  Given a triplet $\{G, s, T\}$ where $G$ and $s$ are as before and $T$ is a numeric value, find the alignment $A$ which produces the highest alignment score, if and only if the alignment score for $A$ is higher than $T$. If no such alignment exists, $s$ should be classified as unalignable.
+\end{defn}
+\section{``Fuzzy context-based search''}
+We now present the algorithm we propose as a solution to the bounded optimal alignment score problem. The algorithm consists of two distinct subproblems which are solved in consecutive steps:
+\begin{enumerate}
+  \item Create a new graph $G$ for an input pair $\{G, s\}$
+  \item Search $G'$ for an optimal alignment
+\end{enumerate}
+Both the motivation behind each step and the conceptual approach for solving the subproblem will be explained in its corresponding subsection.
+\subsection{``Creating a new graph''}
+The motivation behind building an entirely new graph is the realization that whenever reads are mapped against a reference genome the read is typically vastly shorter than the reference. We can therefore do a \textit{horizontal pruning} where we determine which parts along the horizontal direction of the graphs are interesting for the alignment. The same argument can be made for extremely complex graphs, where only a small number of the branches are relevant, in a process we have called a \textit{vertical pruning}. The result of both kinds of pruning is a graph $G'$ with a vertice set $V'$ consisting of \textit{candidate vertices}, vertices which are deemed relevant for the final alignment. The candidate vertices are grouped even further in \textit{candidate  sets $V'_X$} where the set with index $x$ corresponds to the character $s_x \in s$. The conceptual idea here is that every vertice which has a possibility of being referenced by $a_x \in A$ where $A$ is an optimal alignment exists in $V'_x$. Finding out which vertices should be in the candidate sets is done through \textit{fuzzy context-based mapping}. Fuzzy context-based mapping is based on introducing \textit{fuzzyness} to the mapping schema proposed by Paten et al. \cite{mapping_to_a_reference_genome_structure}. The fuzzyness denotes how different the contexts can be and still be considered as viable candidates. The search for candidate vertices can be done as a fuzzy search on efficient suffix structures 
+\subsection{``Searching the newly formed graph''}
 \end{document}

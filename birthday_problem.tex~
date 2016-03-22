@@ -1,0 +1,5 @@
+\documentclass[thesis.tex]{subfiles}
+
+\begin{document}
+\chapter{The birthday problem}
+\end{document}
