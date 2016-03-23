@@ -26,21 +26,19 @@ The \textit{Major Histocompatibility Complex} (MHC) is a genetic region spanning
 During \textit{sequencing} a \textit{sequencing machine} is used on a physical DNA fragment to find the underlying nucleotide sequence. The machines produce short \textit{reads}, typically in the order of a hundred bp\cite{sequencing_platforms}, which are combined into longer sequences through a process called \textit{assembly}. When the sequenced individual belongs to a specie with a reference genome, reads are typically mapped to positions in the reference to determine their underlying order in what is called \textit{mapping assembly}. In the opposing case overlap techniques\cite{an_eulerian_path_approach_to_dna_fragment_assembly} or de Bruijn graphs (Section \ref{sec:de_bruijn_graphs}) are often used in what is known as \textit{de novo assembly}\cite[Chapter 1, p. 19]{introduction_to_genomics}.\\
 \par\noindent
 The different sequencing technologies have varying degrees of errors introduced in their reads, often closely related to the sequencing cost\cite{sequencing_platforms}. The errors can take the form of both point mutations and larger structural variations. Reads produced by sequencing machines are typically prone to contain more errors in their peripherals. There exists efficient strategies for both estimating error rates \cite{estimation_of_sequencing_error_rates_in_short_reads} and correct the reads\cite{error_correction_of_datasets_with_non_uniform_coverage} \textcolor{red}{Can probably provide more citations}.
-\textcolor{red}{Read errors and correction}
 \subsection{Alignment}
-\textit{Sequence alignment} is the process of determining correspondence between text strings, in this case representing DNA, by mapping the elements from one to the elements of the other. The score of an alignment is determined by a \textit{scoring schema}, which provides scores for mapping characters against characters through a \textit{substitution matrix} and penalties for introducing \textit{gaps}.
+\textit{Sequence alignment} is the process of determining correspondence between text strings, in this case representing DNA, by mapping the elements from one to the elements of the other according to a \textit{substitution matrix} (Fig. \ref{fig:substitution matrix}).
 \begin{defn}[Mapping score]
   A score retrieved by mapping to characters $c_1, c_2$ against a substitution matrix. Referenced by $mappingScore(c_1, c_2)$
 \end{defn}
+The alignment prodecure is never allowed to change the order of the elements in the two strings, but can introduce \textit{gaps}. A gap occurs when one element in one string does not have a counterpart in the opposing string (Fig. \ref{fig:alignments}). When a gap occurs the resulting is penalized according to the length of the gap, by a \textit{gap penalty}. 
 \begin{defn}[Gap penalty]
-  The penalty recieved for a gap of a given length $l$. \textcolor{red}{FIX THIS}.
+  The penalty recieved for a gap of a given length $l$. Referenced by $gapPenalty(l)$.
 \end{defn}
+Gap penalties come in different shapes, often according to the origin of the data involved. A \textit{linear gap penalty} gives linear penalties related to the gap length. An \textit{affine gap penalty} distinguishes between opening and continuing a gap. A \textit{logarithmic gap penalty} lets the increase in penalty fade as the gap expands. A schema which provides functionality for mapping bases and penalizing gaps is called a \textit{scoring schema}.
 \begin{defn}[Scoring schema]
 \label{def:scoring_schema}
-A structure which provides functionality for mapping bases against bases with a function $mappingScore(c_1, c_2)$ and for penalizing gaps with a function $gapPenalty(distance)$. A distance of $1$ represents no gap. The alphabet $\Sigma$ of a scoring schema is defined by the characters present in the scoring schema.
-\end{defn}
-\begin{defn}[Consistent scoring schema]
-A scoring schema is consistent if $mappingScore(c, c) = \underset{a \in \Sigma}{max} (mappingScore(c, a))$ for all $c \in \Sigma$, and $gapPenalty(1)=0$
+A structure which provides a $mappingScore(c_1, c_2)$-function and a $gapPenalty(distance)$-function. The alphabet $\Sigma$ of a scoring schema is defined by the characters present in the scoring schema.
 \end{defn}
 A gap refers to an element in one of the strings which has no counterpart in the other string when aligned (Fig. \ref{fig:alignments}). The scoring schemas can be based around simple match/mismatch scores, which corresponds to the mathematical \textit{Edit distance problem}, or more complex scores (Fig. \ref{fig:substitution_matrix}). These complex models typically try to model the probabilities behind the physical processes responsible for change. The computational sequence alignment problem consists of finding the highest scoring alignment for any two strings. There exists two main variants of the problem: Finding  \textit{global alignments}, where two entire strings are aligned against each other, and finding \textit{local alignments}, where a string is aligned against a substring of another. The two are traditionally solved respectively by the Needleman-Wunsch and Smith-Waterman algorithms which both are based on \textit{dynamic programming} (Section \ref{sec:dynamic_programming}).\\
 \clearpage\noindent

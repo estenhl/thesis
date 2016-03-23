@@ -19,22 +19,24 @@ The edges model the relationships between the vertices and thus the relationship
 \end{defn}
 There exists no information storing the origin of an edge, or whether an edge originates from one or more input sequences, and all edges are thus seen as equally probable when aligning a sequence. A sequence of vertices where there exists an edge for every pair of consecutive vertices is called a \textit{path}. Paths is a a way of capturing the combination of several individual characters into text strings in the domain of our graphs.
 \begin{defn}[Graph genome path (Path)]
-  A list $p$ of indexes such that for all consecutive pairs $p_x, p_{x+1}\ \in p$, where $p_n$ denotes the n-th element of the list, there exists an edge $e=\{p_x, p_{x+1}\}$. The notation $p_{-1}$ denotes the last element in the list. The length of $p$, $l(p)$, is equal to the number of indexes in the list - 1.
+  A list $P$ of indexes such that for all consecutive pairs $p_x, p_{x+1}\ \in P$, where $p_n$ denotes the n-th element of the list, there exists an edge $e=\{p_x, p_{x+1}\}$. The notation $p_{-1}$ denotes the last element in the list. The length of $P$, $l(P)$, is equal to the number of indexes in the list. The distance $d(P)$ between $p_0$ and $p_{-1}$ is $l(P) - 2$.
 \end{defn}
+\begin{corollary}
+  Every edge $e$ is also a path $P$ with $l(P)=2$ and $d(P)=0$.
+\end{corollary}
 Paths spanning the entire length of a graph $G$, from $s_G$ to $t_G$ are named full paths. Every input sequence used to build the graph has a corresponding full path.
 \begin{defn}[Full path]
-  A path $p$ through a graph $G$ where $p_0=0$ and $p_{-1}=-1$
+  A path $P$ through a graph $G$ where $p_0=0$ and $p_{-1}=-1$
 \end{defn}
 There is no correspondence the other way, meaning there can exist full paths which does not originate from a single input sequence (Fig. \ref{fig:example_reference}). When aligning regular text strings the introduction of gaps is a key element. The concept of strings with gaps are translated to graphs through \textit{incomplete paths}.
 \begin{defn}[Incomplete path]
-  An list $p*$ of indexes such that for all consecutive pairs $\{p*_x, p*_{x+1}\} \in p*$ there exists a path $p$ such that $p_0=p*_x$ and $p_{-1}=p*_{x+1}$.
+  An list $P*$ of indexes such that for all consecutive pairs $\{p*_x, p*_{x+1}\} \in P*$ there exists a path $P$ such that $p_0=p*_x$ and $p_{-1}=p*_{x+1}$.
 \end{defn}
-Conceptually incomplete paths can be seen as regular paths where some of the vertices are removed. We can score an incomplete path by looking solely at the gaps present and avoiding the nucleobases contained in the vertices to produce a \textit{path score}.
+Conceptually incomplete paths can be seen as regular paths where some of the vertices are removed to reflect gaps. We can score an incomplete path by looking solely at the gaps present and avoiding the nucleobases contained in the vertices to produce a \textit{path score}. In an incomplete path there exists two possible relationships between consecutive elements: Either they are neighbours and there exists an edge between them, or they are not neighbours and are at the beginning and end of a path. Because the edges have distance $0$ and are thus not penalized, the path score of an incomplete path can be found by summing up the gap penalties for a gap with the distance of the shortest path between every two consecutive vertices.
 \begin{defn}[Path score]
-  The path score for an incomplete path $P*$ is found by combining the gap penalties for every gap in $P*$
+  $pathScore(P*)=\Sigma^(|P*|-2)_{i=0} gapPenalty(distance(p*_i, p*_{i+1}))$ where $distance(x, y)$ denotes the distance of the shortest path $p$ which starts in $x$ and ends in $y$.
 \end{defn}
-Whenever we are using aconsistent scoring schema (Definition \ref{def:consistent_scoring_schemas}), which overlooks gaps with a distance of 1, we can sum up the gap penalties for a gap of the distance equal to the length $l(p)$ of the shortest path $p$ between every pair of consecutive nodes in an incomplete path.
-\begin{figure}
+\begin{figure}[b]
   \begin{mdframed}
     \begin{center}
       \begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=1.4cm,scale=0.5]
@@ -71,33 +73,54 @@ Whenever we are using aconsistent scoring schema (Definition \ref{def:consistent
 \end{figure}
 }
 \section{The alignment problem}
+{\parindent0pt
+Because the alignment problem is concerned with aligning text strings against graphs we need to define another component: The input sequences.
 \begin{defn}[Input sequence]
-  A string $s$ over the alphabet $\{A, C, T, G\}$. The length of the string is given by $|s|$. An individual character on position $x$ is referenced by $s_x$
+  A string $s$ over the alphabet $\{A, C, T, G\}$. The length of the string is given by $|s|$. The individual character on position $0<=x<|s|$ is referenced by $s_x$
 \end{defn}
+\textcolor{red}{SOMETHING SMOOTH}. We are trying to find \textit{alignments} which model the relationships between a graph $G$ and an input sequence $s$. The alignments should provide relations between the smallest constituents of the two input structures, the vertices of the graph and the characters of the string, in a way such that the interal structures of the two are reflected against eachother. We can model an alignment as a special variant of an incomplete path, which allows for \textit{unmapped elements}. These elements are recognized as being mapped to $0$ which is the index of the start-vertice and thus always an invalid mapping. The remaining elements of $s$ is mapped to indexes of valid vertices of $G$ which form an incomplete path. Moving forward through the individual positions $s_x$ which are mapped does then correspond to moving through the incomplete path in $G$.
+\begin{defn}[Alignment]
+  Given a graph $G$ and a string $s$, an alignment $A$ is an ordered list of length $|s|$ such that every element $a_x \in A$ is either $0$ or the index for a valid vertice of $G$ such that for every consecutive pair of valid indexes $a_n, a_m$ there exists a path $P$ where $p_0=a_n$ and $p_{-1}=a_m$. A $0$ represents an unmapped character in $s$.
+\end{defn}
+When we have defined the alignments we can start scoring them. The scoring happens according to a scoring schema and should be the sum of three different scores:
+\begin{enumerate}
+  \item The mapping scores of the mapped elements
+  \item The gap penalties for gaps in the graph, modelled the distance of the shortest path between consecutive pairs of mapped elements
+  \item The gap penalties for gaps in the string, represented by unmapped positions
+\end{enumerate}
+We already know how to find the first two. The last can be found by summing up the gap penalties for all the gaps in the input sequence. A gap in the input sequence can be identified by a subsequence $A*_{x:y} \in A$ spanning the indexes $x$ to $y-1$ where every element is unmapped. An important aspect here is that every unmapped element should only be considered part of exactly one gap. We cover this aspect by only considering maximal unmapped subsequences $A*_{x:y}$, such that every $a*=0$ for every $a* \in A*$ and $x$ is either $0$ or $a_{x-1} \neq 0$ and $y$ is either $|s|-1$ or $a_{y+1} \neq 0$. The gap penalties for gaps in the string is then defined as $\Sigma_{A* \in A} gapPenalty(|A*|)$ where $A*$ is the maximal unmapped subsequences of $A$.
 \begin{defn}[Alignment score]
-  Given a sequence $s$, a graph $G$ and an alignment $A$, the score produced by combining mapping scores for the pairs $\{a_x, s_x\} for 0<=x<|s|$ with the path score for the incomplete path(s) provided by $A$ aligned against both $G$ and $s$. \textit{red}{NOT PRECISE}
+  Given a sequence $s$, a graph $G$ and an alignment $A$, the score produced by combining mapping scores for the pairs $\{b(v_{a_x}), s_x\} for 0<=x<|s|$ with the path score for the incomplete path provided by consecutive mapped indexes of $A$ and the gap penalties for the gaps in $A$.
 \end{defn}
+We can then easily define the alignment problem itself:
 \begin{defn}[The optimal alignment score problem]
-  For any pair $\{G, s\}$, where $G$ is a graph and $s$ is a sequence, find one of the alignments $A$ which produces the highest possible alignment score.
+  For any pair $\{G, s\}$, where $G$ is a graph and $s$ is an input sequence, find one of the alignments $A$ which produces the highest possible alignment score.
 \end{defn}
+Notice that the definition only calls for finding one of the alignments which produce a highest possible score. This is done in order to simplify the explanations of the algorithm and implementations can trivially be changed to find all optimal alignments. The necessary adjustments is discussed as a part of the Implementation chapter in section \ref{sec:all_optimal_alignments}. Additionally we have defined a bounded version of the problem, called \textit{The bounded optimal alignment score problem}. This second version also considers a score threshold value $T$ and deems a string $s$ \textit{unalignable} if the optimal alignment produces a score lower than T.
 \begin{defn}[The bounded optimal alignment score problem]
   \label{def:bounded_alignment_problem}
   Given a triplet $\{G, s, T\}$ where $G$ and $s$ are as before and $T$ is a numeric value, find the alignment $A$ which produces the highest alignment score, if and only if the alignment score for $A$ is higher than $T$. If no such alignment exists, $s$ should be classified as unalignable.
 \end{defn}
+Defining a bounded adaptation of the problem is obviously done in order to reduce the computational complexity, but it also present a powerful notion of control to the model: We can choose the degree of similarity required for elements to be considered equal. This simplifies the concept of equality into a classification problem where the border between the two classes can be easily manipulated through the threshold variable.
+}
 \section{``Fuzzy context-based search''}
 We now present the algorithm we propose as a solution to the bounded optimal alignment score problem. The algorithm consists of two distinct subproblems which are solved in consecutive steps:
 \begin{enumerate}
   \item Create a new graph $G'$ for an input triplet $\{G, s, T\}$
   \item Search $G'$ for an optimal alignment
 \end{enumerate}
-Both the motivation behind each step and the conceptual approach for solving the subproblem will be explained in its corresponding subsection. In presenting the algorithm we introduce a new variable $\lambda$. $\lambda$ represents the \textit{error margin} allowed in an alignment and is computed by taking the difference between the highest possible alignment score for $s$ and the scoring threshold $T$
-\subsection{``Creating a new graph''}
-The motivation behind building an entirely new graph is the realization that whenever reads are mapped against a reference genome the read is typically vastly shorter than the reference. We can therefore do a \textit{horizontal pruning} where we determine which parts along the horizontal direction of the graphs are interesting for the alignment. The same argument can be made for extremely complex graphs, where only a small number of the branches are relevant, in an operation we have called a \textit{vertical pruning}. The result of both kinds of pruning is a vertice set $V'$ consisting of \textit{candidate vertices}, vertices which are deemed relevant for the final alignment. The candidate vertices are grouped into \textit{candidate sets $V'_x$} where the set with index $x$ corresponds to the character $s_x \in s$. The conceptual idea is that every vertice which has a possibility of being mapped to the $x-th$ element in the optimal alignment exists in $V'_x$. Finding out which vertices should be in the candidate sets is done through \textit{fuzzy context-based mapping}. Fuzzy context-based mapping is based on introducing \textit{fuzzyness} to the mapping schema proposed by Paten et al. \cite{mapping_to_a_reference_genome_structure}. The fuzzyness denotes how different the contexts can be and still be considered as viable candidates, the exact amount of fuzzyness is given by $\lambda$. The elements of every candidate set can be found by fuzzy searches on efficient tree-structures containing the contexts of the vertices.\\
+Both the motivation behind each step and the conceptual approach for solving the subproblem will be explained in its corresponding subsection.\\
 \par\noindent
-When the vertices of the new graph has been found we move on to create the set of edges $E'$. The goal of the edges in $E'$ is to provide a relation between two vertices $v'_x, v'_y \in V'$ which can be used in finding an optimal alignment. Explicitly there are two relationships which should be modelled: The relationship between the vertices in the original graph $G$ and the relationship between the candidate sets containing the vertices. As the candidate sets are directly connected to the indexes of $s$ they follow a natural ordering where distances can be easily measured. The relationship between the two vertices in the graph is the length of the shortest path which starts in $v_x$ and ends in $v_y$. In order to incoorporate this information into our model we introduce \textit{weighted edges}.
+In presenting the algorithm we introduce a new variable $\lambda$. $\lambda$ represents the \textit{error margin} allowed in an alignment and is computed by taking the difference between the highest possible alignment score for $s$ and the scoring threshold $T$. The highest possible score for any string can be found by aligning the string against itself with regular two-dimensional alignment procedures, using the same scoring schema as for the remainder of the procedure. Introducing $\lambda$ gives us the opportunity to do strict pruning throughout the entire process of alignment: Any alignment which contains a single element, be it a gap or a sequence of mappings, which is penalized more than $lambda$ compared to the corresponding element in an optimal alignment can never have a total alignment score higher than $T$\ref{sec:proof}.
+\subsection{Creating a new graph}
+The motivation behind building an entirely new graph is the realization that whenever reads are mapped against a reference genome the read is typically vastly shorter than the reference. We can therefore do a \textit{horizontal pruning} where we determine which parts along the horizontal direction of the graphs are interesting for the alignment. The same argument can be made for extremely complex graphs, where only a small number of the branches are relevant, in an operation we have called a \textit{vertical pruning}. The result of both kinds of pruning is a vertice set $V'$ consisting of \textit{candidate vertices}, vertices which are deemed relevant for the final alignment. The candidate vertices are grouped into \textit{candidate sets $V'_x$} where the set with index $x$ corresponds to the character $s_x \in s$. The conceptual idea is that every vertice which has a possibility of being mapped to the $x-th$ element in the optimal alignment exists in $V'_x$. Finding out which vertices should be in the candidate sets is done through \textit{fuzzy context-based mapping}. Fuzzy context-based mapping is based on introducing \textit{fuzzyness} to the context-based mapping schema proposed by Paten et al. \cite{mapping_to_a_reference_genome_structure}. The context set of a vertice $v_x$ is denoted $c(v_x)$ and refers to every path which passes through $v$. The fuzzyness denotes how different the contexts can be and still be considered as viable candidates, the exact amount of fuzzyness is given by $\lambda$. The elements of every candidate set can be found by fuzzy searches on efficient tree-structures containing the contexts of the vertices, represented as strings.\\
+\par\noindent
+When the vertices of the new graph has been found we move on to create the set of edges $E'$. The goal of the edges in $E'$ is to provide a relation between two vertices $v'_x, v'_y \in V'$ which can be used in finding an optimal alignment. Explicitly there are two relationships which should be modelled: The relationship between the vertices in the original graph $G$ and the relationship between the positions of the candidate sets containing the vertices. As the candidate sets are directly connected to the indexes of $s$ they follow a natural ordering where distances can be easily measured. The relationship between the two vertices in the graph is the distance $d(P$ of shortest path $P$ which starts in $v_x$ and ends in $v_y$. In order to incorporate this information into our model we introduce \textit{weighted edges}.
 \begin{defn}[Graph genome weighted edge (Weighted edge)]
 	A triplet $e'={i_s, i_e, w}$ where the two first elements are indexes for vertices in the graph $G'$ and the last element is an integer value.
 \end{defn}
-\textcolor{red}{DOUBLE GAPS}
-\subsection{``Searching the newly formed graph''}
+Merging both these relationships would seem to present some conceptual problems. Firstly, whenever considering non-linear gap penalties the two should be considered as separate distances. Secondly, allowing ``double gaps'', aligned gaps in the input sequence and the path in the graph, should not be allowed in the optimal alignment. This is partially handled by the searching step of the algorithm: Because the distances, and thus the penalties, are combined the algorithm will always prefer a path going through a vertice as this only introduces a single gap penalty. The remaining cases all involve gaps which are not prefixing or suffixing the alignment, i.e. gaps where there is a vertice $v_s$ and before the gap and a vertice $v_e$ after the gap. Because the algorithm always choses a path through a vertice when it can, this means there are no viable vertices between $v_s$ and $v_e$ chosen as candidates. Viable in this case refers to every vertice on every path starting in $v_s$ ending in $v_e$. Because there are no candidates, every context for every vertice on every path between the two is penalized more than $\lambda$ in regards to an optimal alignment. This means no incomplete path which traverses these paths can ever possibly score higher than $T$, and the algorithm recognizes the path as not interesting.\\
+\par\noindent
+In order to represent the transitions between the positions of the text strings every vertice in every candidate set should be connected to every vertice
+\subsection{Searching the newly formed graph}
 \end{document}
