@@ -207,7 +207,7 @@ $E'=\{e'=\{i_s, i_e, w\}|v_{i_s} \in V'_x \wedge v_{i_e} \in V'_y \wedge$ $gapPe
 where $alignmentScore(x, y)$ and $gapPenalty(x, y)$ are scoring functions provided by the scoring schema and $distance(x, y)$ is the distance of the shortest path from node $x$ to node $y$ in the graph. \textcolor{red}{(Mixing up nodes and indexes in the definitions)}\\
 \par\noindent
 \subsection{Searching G' with a modified PO-MSA search}
-\textcolor{red}{SOMETHING ABOUT SCORES}\\
+The first thing done in the search is to move the indexes of the vertices in the candidate sets over to a two-dimensional array $indexes$ where we let one dimension represent the indexes of the string and the second the individual vertices in the candidate set. This is done in order to have the vertices in a structure where we can reference them solely by an index. In addition to the $indexes$ array we create a floating point array $scores$ with exactly the same dimensions, to contain the scores for the individual vertices. Additionally, in order to backtrack and find the optimal alignment, we create an equally sized $backpointer$ array. Conceptually this should store pairs of integers referencing the other indexes in the array, in the tool this is implemented by Strings.
 \par\noindent
 \begin{wraptable}{l}{0.5\textwidth}
   \begin{mdframed}
@@ -267,7 +267,7 @@ where $\theta$ is a scoring function defined as:\\
 \par
 $\theta((x_1, y_1), (x_2, y_2))=scores[x_2][y_2] + gapPenalty(x_1-x_2) +$\par$ gapPenalty(distance(n_{indexes[x_2][y_2]}, n_{indexes[x_1][y_1]})) + mappingScore(b(n_{indexes[x_1][y_1]}), s_{x_1}))$
 \par\noindent
-\textcolor{red}{SOMETHING ABOUT FINDING THE HIGHEST SCORE AND BACKPOINTERS. COMPLEXITY ANALYSIS}
+When the iteration ends we will have a score for every candidate vertice in every candidate set. We can iterate over the indexes corresponding to the last candidate set, identify the highest score and set the index in the corresponding cell in $indexes$ as the last vertice in our alignment. We then move backwards along the backpointers, storing the indexes along the way, to end up with the final alignment. The total complexity of the operation is $O(\textcolor{red}{something i didnt push to GIT})$.
 \subsubsection{Finding all optimal alignments}
 \label{sec:all_optimal_alignments}
 \subsection{Handling invalid threshold values}
