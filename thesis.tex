@@ -16,6 +16,8 @@
 \usepackage[toc,page]{appendix}
 \usepackage{subcaption}
 \usepackage{float}
+\usepackage{mathtools}
+\usepackage[]{algorithm2e}
 \urlstyle{sf}
 \usepackage{babel,textcomp,csquotes,ifimasterforside,varioref,graphicx}
 \usepackage[backend=biber,style=numeric-comp]{biblatex}
@@ -46,15 +48,13 @@
 \frontmatter{}
 \maketitle{}
 
-\chapter*{Abstract}
-\subfile{abstract}                   
+\subfile{abstract}
+\subfile{acknowledgements}               
 
 \tableofcontents{}
 \listoffigures{}
 \listoftables{}
 \listoftheorems[ignoreall,show={defn}]
-
-\chapter*{Preface}                    
 
 \mainmatter{}
 \subfile{introduction}

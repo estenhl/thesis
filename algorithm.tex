@@ -2,16 +2,246 @@
 
 \begin{document}
 \chapter{Implementation}
-In this section we will present the implementation of the algorithm ``Fuzzy context-based search'' which is found in the \textit{GraphGenome} tool (Appendix \ref{sec:tool}). The algorithm will be coupled by a concrete example which is found in figures \ref{fig:explicit_contexts}-\ref{fig:candidate_nodes} and table \ref{fig:scoring_arrays}. Throughout this chapter, and in the example, the scoring schema is assumed to be the \textit{negated edit distance} schema. This scoring schema is chosen due to its intuitive nature: A final score of $-x$ means there is something wrong in exactly $x$ places. The scoring schema is also practical for doing complexity analysis: A gap which is penalized by $y$ means traversing exactly $y$ vertices or indexes.
+In this section we will present the implementation of the algorithm ``Fuzzy context-based search'' which is found in the \textit{GraphGenome} tool (Appendix \ref{sec:tool}). The algorithm will be coupled by a concrete example which is found in figures \ref{fig:explicit_contexts}-\ref{fig:candidate_nodes} and table \ref{fig:scoring_arrays}. Throughout this chapter, and in the example, the scoring schema is assumed to be the \textit{negated edit distance} schema.
 \begin{defn}[Negated edit distance scoring schema]
-  A scoring schema where the substitution matrix is a variant of an identity matrix where matches are scored 0 and mismatches are scored -1. Both the gap opening and gap extension penalty is -1
+  A scoring schema where the substitution matrix is a variant of an identity matrix scoring equal characters 0 and mismatches -1. Both the gap opening and gap extension penalty is -1
 \end{defn}
+\noindent
+The reason for the negation compared to regular edit distance is that the tool is implented for generalized scoring schemas which attempt to maximize alignment scores.  Otherwise, the scoring schema is chosen due to its intuitive nature: A final score of $-x$ means there are exactly $x$ differences. The scoring schema is also practical for doing complexity analysis, a gap which is penalized by $y$ means traversing exactly $y$ vertices or indexes.\\
+\par\noindent
 The chapter is divided into two sections. The first explains the implementation of the algorithm corresponding to the previous chapter. The second is a brief overview of how the tool merges sequences into the graph after they have been aligned. This section is included to better provide an intuition as to how the graphs are built and what readers can expect when seeing the results and using the tool themselves.
 \section{Aligning sequences}
-The alignment process consists of the two steps described in the previous chapter which each has their corresponding subsection. In addition to this the tool needs to do a precomputation of the original graph in order to build a searchable index. This is not counted as a step in the alignment process as theprecomputation is determined by only the graph and the index is thus reusable.
+The alignment process consists of the two steps described in the previous chapter, which each has their corresponding subsection. In addition to these the tool needs to do a precomputation of the graph in order to build a searchable index. This is not counted as a step in the alignment process as theprecomputation is dependant only on the graph and the index is thus reusable for several alignments.
 \subsection{Building the index}
-There are two data structures needed for aligning a string against the graph: a suffix tree for left contexts and a suffix tree for right contexts. Before either of the two are built the algorithm needs to decide a length for the contexts. Currently in the tool there are two ways of setting the context length: A user given parameter or an approximation based on the probability of sharing contexts (Appendix \ref{sec:birthday_problem}). The length of the contexts does not impact the quality of the alignments found by the algorithm (Appendix \ref{sec:proof}) but will have an impact on the runtime (Appendix \ref{sec:complexity_analysis}).\\
+There are two data structures needed for aligning a string against the graph: a suffix trie for left contexts and a suffix trie for right contexts. Before either of the two are built the algorithm needs to decide a length for the contexts. Currently in the tool there are two ways of setting the context length: A user given parameter or an approximation based on the probability of sharing contexts (Appendix \ref{sec:birthday_problem}). The length of the contexts does not impact the quality of the alignments found by the algorithm (Appendix \ref{sec:proof}) but will have an impact on the runtime (Appendix \ref{sec:complexity_analysis}).\\
 \par\noindent
+When a context length $|c|$ is set, the algorithm can start building the index itself. Two sets of strings, a left context set and a right context set, is generated for every vertice in the graph $G$. Because the algorithms for the two are equal, aside from the starting point and the direction of the traversal, the following explanation only describes one of them.\\
+\par\noindent
+The generation of the left contexts start out by adding an empty context to the context set $c(v_i)$ for every vertice $v_i$ which is a neighbour to $s_G$ and inserting these vertices in a FIFO-queue. The contexts are stored in an individual array of sets of strings where the indexes correspond to the indexes of the vertices. The algorithm marks $s_G$ as finished in a boolean table and starts iterating over the elements of the queue.\\
+\par\noindent
+When a vertice $v_x$ is popped from the top of the queue the first operation consists of checking whether the context set of the vertice is done. A context set is complete if every vertice in the incoming neighbour set $n_i(v_x)$ of the vertice is marked as finished \textcolor{red}{Improve im implementation}. If the context set is not complete the vertice reinserts itself at the end of the queue. In the opposite case, when a vertice is deemed as ready, it starts generating contexts for its outgoing neighbours $n_o(v_x)$. The vertice takes every context $c$ belonging to its own context set $c(v_x)$ and creates a new context $c'$ by prepending the base $b(v_x)$ to the string. If necessary, when the length of a new context exceeds $|c|$, the trailing character of the string is also removed. Each of these newly created contexts are added to the context sets of every outgoing neighbour $v_y \in n_o(v_x)$ and $v_y$ is added to the queue. Every vertice should be enqueued at most once to avoid an exponential growth in queue size. This is enforced through efficient lookup of currently enqueued vertices in a hash set. The final step for the vertice is marking itself as finished.\\
+\begin{center}
+  \begin{algorithm}[!t]
+    \begin{mdframed}
+      \While{queue does not consist of $t_G$}{
+        current = queue.pop\\
+        \If{all incoming neighbours are not done}{
+          enqueue current;\\
+          continue;
+        }
+        \For{every context $c$}{
+          \For{all outgoing neighbours}{
+            suffixes[outgoing.index].put($b(current)$ + $c$);\\
+            \If{outgoing not in queue}{
+              enqueue outgoing;
+            }
+          }
+        }
+        finished[current.index] = True;
+      }
+    \end{mdframed}
+    \caption{The loop which generates left contexts for a graph}
+  \end{algorithm}
+\end{center}
+\par\noindent
+In order to avoid making the end vertice $t_G$ mappable the algorithm directly puts it back at the end of the queue whenever it is seen. When the queue contains a single element, and this element is $t_G$, the algorithm halts. At this point every vertice along every path leading up to $t_G$ has generated its context, and as we know every vertice stems from an input sequence and every input sequence ends in $t_G$ we know every vertice has been visited. $s_G$ and $t_G$ swaps places as start and end-vertices, the definitions of what is an incoming and an outgoing neighbour is switched and the algorithm starts again to generate right contexts.\\
+\par\noindent
+As sets per definition does not allow duplicates the impact of a branching occuring in the graph will fade away after exactly $|c|$ steps as the difference is trimmed away (Fig. \ref{fig:explicit_contexts}), and thus avoid explosive exponentiality in the context set sizes. Unlike Paten et al. \cite{mapping_to_a_reference_genome_structure} there are no requirements for contexts to be uniquely mappable to exactly one vertice. Because the last step of the algorithm does a search for an incomplete path through all the candidate vertices this presents no difficulties when finding the alignment. Furthermore, dropping this precondition assures every node has two valid contexts and are thus present in both suffix trees.\\
+\begin{figure}[H]
+  \begin{center}
+    \begin{mdframed}
+      \begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=3.5cm]
+        \node[state,align=center,minimum size=3cm,scale=0.75] (q0) {\footnotesize{\{"$G$", "$T$"\}}\\\Large{\textbf{$A$}}\\\footnotesize{\{"$TA$"\}}\\\scriptsize{$2$}};
+        \node[state,align=center,minimum size=3cm,scale=0.75] [below left of=q0] (q1) {\footnotesize{$\{\epsilon\}$}\\$G$\\\footnotesize{\{"$AT$"\}}\\\scriptsize{$6$}};
+        \node[state,align=center,minimum size=3cm,scale=0.75] [above left of=q0] (q2) {\footnotesize{$\{\epsilon\}$}\\$T$\\\footnotesize{\{"$AT$"\}}\\\scriptsize{$1$}};
+        \node[state,align=center,minimum size=3cm,scale=0.75] [right of=q0] (q3) {\\\footnotesize{\{"$AG$", "$AT$"\}}\\$T$\\\footnotesize{\{"$AG$"\}}\\\scriptsize{$3$}};
+        \node[state,align=center,minimum size=3cm,scale=0.75] [right of=q3] (q4) {\footnotesize{\{"$TA$"\}}\\$A$\\\footnotesize{\{"$G$"\}}\\\scriptsize{$4$}};
+        \node[state,align=center,minimum size=3cm,scale=0.75] [right of=q4] (q5) {\footnotesize{\{"$AT$"\}}\\$G$\\\footnotesize{$\{\epsilon\}$}\\\scriptsize{$5$}};
+
+        \path
+        (q1) edge node {} (q0)
+        (q2) edge node {} (q0)
+        (q0) edge node {} (q3)
+        (q3) edge node {} (q4)
+        (q4) edge node {} (q5);
+
+      \end{tikzpicture}
+    \end{mdframed}
+  \end{center}
+  \caption{A small reference graph with left contexts (top) and right contexts (bottom) of length 2 shown}
+  \label{fig:explicit_contexts}
+\end{figure}
+\par\noindent
+After generating the two context sets for every node, the elements of each one is inserted into their corresponding suffix tree. Every suffix is stored as a key with the index of it's originating node as a value (fig. \ref{fig:left_suffix_tree}). In theory every node can have $4^{|c|}$ contexts in each set, in practice a more fair approximation is $b^{|c|}$ where $b$ is the observed branching factor for the graph. \textcolor{red}{Should contain something about probable values of B. Find an article on it}. 
+The current implementation uses a naive suffix tree implementation where insertion is $O(|c|)$, giving a total time complexity of $O(b^{|c|}|c|)$ per node per context set and $O(2|G|b^{|c|}|c|)$ for the entire graph. The generation process visits $|G|$ vertices once in each direction, looking up approximately $b$ neighbours. Building the entire index can thus be done in $O(2|G|b + 2|G|b^{|c|}|c|)$. \textcolor{red}{compress more?}
+\begin{wrapfigure}{R}{0.49\textwidth}
+  \begin{mdframed}
+    \begin{tikzpicture}
+      \node[state,align=center,minimum size=1.4cm] (q0) {$\epsilon$\\\scriptsize{\{$1,6$\}}};
+      \node[state,align=center,minimum size=1.4cm] [below left=0.6cm and 0.6cm of q0] (q1) {$A$\\\scriptsize{$\emptyset$}};
+      \node[state,align=center,minimum size=1.4cm] [below=0.21cm of q0] (q2) {$G$\\\scriptsize{\{$2$\}}};
+      \node[state,align=center,minimum size=1.4cm] [below right=0.6cm and 0.6cm of q0] (q3) {$T$\\\scriptsize{\{$2$\}}};
+      \node[state,align=center,minimum size=1.4cm] [below left=0.6cm and 0cm of q1] (q4) {$G$\\\scriptsize{\{$3$\}}};
+      \node[state,align=center,minimum size=1.4cm] [below right=0.6cm and 0cm of q1] (q5) {$T$\\\scriptsize{\{$3,5$\}}};
+      \node[state,align=center,minimum size=1.4cm] [below=0.2cm of q3] (q6) {$A$\\\scriptsize{\{$4$\}}};
+
+      \path
+      (q0) edge node {} (q1)
+      edge node {} (q2)
+      edge node {} (q3)
+      (q1) edge node {} (q4)
+      edge node {} (q5)
+      (q3) edge node {} (q6);
+    \end{tikzpicture}
+  \end{mdframed}
+  \caption{The left suffix tree corresponding to the graph in \ref{fig:explicit_contexts}}
+  \label{fig:left_suffix_tree}
+\end{wrapfigure}
+\subsection{Generating the modified graph}
+Unlike the index built in the previous step, the produced graph $G'$ is a function of both the original graph $G$, the input sequence $s$ and the threshold $T$. For every character $s_x \in s$ a left-context string and a right-context string is generated by looking at the $|c|$ surrounding characters. The two context strings are used as a basis for a fuzzy search in it's corresponding suffix trie, where search is a recursive function based on PO-MSA. The root node is supplied with a one-dimensional scoring array corresponding to the context string $c$, which is initialized with all zeroes. Then, for every child, a new scoring array is computed by regular edit distance rules: For each index $i$ take the maximal score for either a gap in the graph, a gap in the string or matching the character $c_i$ with the character $b$ contained in the child node:
+\begin{equation}
+  scores_b[i] = max \begin{dcases}
+    scores_b[i - 1] + gapPenalty(1) & \text{\texttt{\# String gap}}\\
+    scores[i] + gapPenalty(1) & \text{\texttt{\# Graph gap}}\\
+    scores[i - 1] + mappingScore(c_i, b) & \text{\texttt{\# Mapping}}\\
+  \end{dcases}
+\end{equation} 
+\textcolor{red}{(Reference actual code in supplementary?), (more explanation needed?)}. This newly created array is supplemented to the same recursive function in the child. When a leaf node is reached the last index of the supplied scoring array corresponds to mapping the entire string $c$ against the entire context achieved by concatenating the characters contained in the path through the tree traversed by the recursion. If the score is higher than the context threshold $T_c$ for the given context string, every index contained in the node is stored as a pair on the form $\{index, score\}$. The candidate sets are implemented as maps with the index as a key, which allows us to store the index of every candidate exactly vertice once by only saving the pair which produces the highest value.\\
+\par\noindent
+In order to also be able to look up contexts which are shorter than the contexts stored in the tree, the suffix tree search implementation has built in a concept which we called \textcolor{red}{something smart}. This concepts allows all suffix trie vertices at a depth greater than the length of the string which is looked up to inherit a maximum score from their parenting node. Doing this we can avoid deterioration of the scores as the searched contexts no longer needs to introduce gaps to align against the longer, stored contexts.
+\par\noindent
+In theory every leaf node has to be visited in order to check the score for every represented context in the tree. In practice the tree can be pruned by cutting off the search whenever the \textit{maximal potential score} falls below the threshold $T_c$ for the provided context. The maximal potential score for a node is found by adding together the currently highest score in the scoring array with the maximal matching score for the remainder of the string. This reduces the number of nodes to be searched from $O(4^c)$ to \textcolor{red}{(something alot smaller. Needs calculations)}.\\
+\begin{wrapfigure}{L}{0.5\textwidth} 
+  \begin{subfigure}[t]{\textwidth}
+    \begin{mdframed}
+      \begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=3.5cm]
+        \node[state,draw=none,align=center] (q0) {$A$\\\scriptsize{LC=$\epsilon$}\\\scriptsize{RC="$TA$"}};
+        \node[state,draw=none,align=center] [right=-0.15cm of q0] (q1) {$T$\\\scriptsize{LC="$A$""}\\\scriptsize{RC="$A$"}};
+        \node[state,draw=none,align=center] [right=-0.15cm of q1] (q2) {$A$\\\scriptsize{LC="$TA$""}\\\scriptsize{RC=$\epsilon$}};
+
+        \node[state,align=center] [below=0cm of q0] (q3) {$A$\\\scriptsize{$2$}};
+        \node[state,align=center] [below=0cm of q1] (q4) {$T$\\\scriptsize{$3$}};
+        \node[state,align=center] [below=0cm of q2] (q5) {$A$\\\scriptsize{$4$}};
+      \end{tikzpicture}
+    \end{mdframed}
+    \caption{$T=0$}
+  \end{subfigure}	
+  \begin{subfigure}[t]{\textwidth}
+    \begin{mdframed}
+      \begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=3.5cm,scale=0.6]
+        \node[state,draw=none,align=center] (q0) {$A$\\\scriptsize{LC=$\epsilon$}\\\scriptsize{RC="$TA$"}};
+        \node[state,draw=none,align=center] [right=-0.15cm of q0] (q1) {$T$\\\scriptsize{LC="$A$""}\\\scriptsize{RC="$A$"}};
+        \node[state,draw=none,align=center] [right=-0.15cm of q1] (q2) {$A$\\\scriptsize{LC="$TA$""}\\\scriptsize{RC=$\epsilon$}};
+
+        \node[state,align=center] [below=-0.04cm of q0] (q3) {$T$\\\scriptsize{$1$}};
+        \node[state,align=center] [below=0.3cm of q3] (q4) {$A$\\\scriptsize{$2$}};
+        \node[state,align=center] [below=0.3cm of q4] (q5) {$T$\\\scriptsize{$3$}};
+        \node[state,align=center] [below=0.3cm of q5] (q6) {$G$\\\scriptsize{$6$}};
+
+        \node[state,align=center] [below=0cm of q1] (q7) {$T$\\\scriptsize{$1$}};
+        \node[state,align=center] [below=0.3cm of q7] (q9) {$T$\\\scriptsize{$3$}};
+        \node[state,align=center] [below=0.3cm of q9] (q11) {$G$\\\scriptsize{$5$}};
+        \node[state,align=center] [below=0.3cm of q11] (q12) {$G$\\\scriptsize{$6$}};
+
+        \node[state,align=center] [below=-0.07cm of q2] (q13) {$T$\\\scriptsize{$3$}};
+        \node[state,align=center] [below=0.3cm of q13] (q14) {$A$\\\scriptsize{$4$}};
+        \node[state,align=center] [below=0.3cm of q14] (q15) {$G$\\\scriptsize{$5$}};
+      \end{tikzpicture}
+    \end{mdframed}
+    \caption{$T=1$}
+  \end{subfigure}
+  \caption{The resulting candidate sets for mapping the string "ATA" against the reference genome from fig. ~\ref{fig:explicit_contexts} with varying T values}
+  \label{fig:candidate_nodes}
+\end{wrapfigure}
+\par\noindent
+After the fuzzy search is concluded there are two maps of candidates for every index, one containing the vertices matching the left context and an equivalent for vertices matching the right context. The keysets of these maps are intersected to produce a final candidate set for the index $i$, where the score is created by adding together the scores from the two original sets. During the intersection process the final set can again be pruned by removing all vertices which has a combined score that is lower than the combined threshold $T_c$ for both contexts. Formally we can define the new vertice set $V'$ as an ordered list of sets $V'_i$ for $0 \leq i < |s|$ where
+\begin{equation}
+  V'_i=\{v_x|v_x \in G \land \exists [c \in c(v_x)](alignmentScore(c, c(s_i)) >= T_{c(s_i)})\}
+\end{equation}
+\par\noindent
+Intuitively this should be the place where the edges are created in order to finish up $G'$. As mentioned there are two relationships between the vertices which should be represented: The distance between the elements in $s$ and the distance between the vertices in $G$. The first relationship is inherently contained in the indexation of the candidate sets. The second relationship is found through graph searches in $G$. Finding the weights of these edges are however not necessary before the involved vertices are scored in the next step, and the searches can therefore be delayed until that point. This is done in order to avoid having to use space storing data which is only necessary at a single point during the computation.
+\subsection{Searching G' with a modified PO-MSA search}
+The first thing done in the search is to move the indexes of the vertices in the candidate sets over to a two-dimensional array $indexes$ where we let one dimension represent the indexes of the string and the second the individual vertices in the candidate set. This is done in order to have the vertices in a structure where we can reference them solely by an index. In addition to the $indexes$ array we create a floating point array $scores$ with exactly the same dimensions, to contain the scores for the individual vertices. Additionally, in order to backtrack and find the optimal alignment, we create an equally sized $backpointer$ array. Conceptually this should store pairs of integers referencing the other indexes in the array, in the tool this is implemented by Strings.
+\par\noindent
+\begin{wraptable}{l}{0.5\textwidth}
+  \begin{mdframed}
+    \begin{subfigure}[t]{0.49\textwidth}
+      \begin{center}
+        \begin{tabularx}{\textwidth}{ccc}
+          A & T & A \\ \cline{1-3}
+          \multicolumn{1}{|c|}{1} & 1 & \multicolumn{1}{|c|}{3} \\ \cline{1-3}
+          \multicolumn{1}{|c|}{2} & 3 & \multicolumn{1}{|c|}{4} \\ \cline{1-3}
+          \multicolumn{1}{|c|}{3} & 5 & \multicolumn{1}{|c|}{5} \\ \cline{1-3}
+          \multicolumn{1}{|c|}{6} & 6 & \multicolumn{1}{|c}{ }  \\ \cline{1-2}
+        \end{tabularx}
+        \caption{Indexes}
+      \end{center}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.49\textwidth}
+      \begin{center}
+        \begin{tabularx}{\textwidth}{ccc}
+          A & T & A \\ \cline{1-3}
+          \multicolumn{1}{|c|}{-1} & -2 & \multicolumn{1}{|c|}{-2} \\ \cline{1-3}
+          \multicolumn{1}{|c|}{0} & 0 & \multicolumn{1}{|c|}{0} \\ \cline{1-3}
+          \multicolumn{1}{|c|}{-1} & -3 & \multicolumn{1}{|c|}{-2} \\ \cline{1-3}
+          \multicolumn{1}{|c|}{-1} & -3 & \multicolumn{1}{|c}{ }  \\ \cline{1-2}
+        \end{tabularx}
+        \caption{Scores}
+      \end{center}
+    \end{subfigure}
+    \begin{subfigure}[b]{\textwidth}
+      \begin{center}
+        \begin{tabularx}{\textwidth}{ccc}
+          A & T & A \\ \cline{1-3}
+          \multicolumn{1}{|c|}{-1:-1} & 0:0 & \multicolumn{1}{|c|}{1:1} \\ \cline{1-3}
+          \multicolumn{1}{|c|}{-1:-1} & 0:1 & \multicolumn{1}{|c|}{1:1} \\ \cline{1-3}
+          \multicolumn{1}{|c|}{-1:-1} & 0:2 & \multicolumn{1}{|c|}{1:1} \\ \cline{1-3}
+          \multicolumn{1}{|c|}{-1:-1} & 0:3 & \multicolumn{1}{|c}{ }  \\ \cline{1-2}
+        \end{tabularx}
+        \caption{Backpointers}
+      \end{center}
+    \end{subfigure}
+  \end{mdframed}
+  \caption{The 4 arrays used by the searching algorithm when using the candidate sets from Fig \ref{fig:candidate_nodes} and $T=-1$}
+  \label{fig:scoring_arrays}
+\end{wraptable}
+The search is initialized by looping over every node $v_x \in V'_0$ with a counter $j$, setting\\
+\par
+$indexes[0][j] = x$\par
+$scores[0][j] = mappingScore(b(v_x), s_0)$\par
+$backPointers[0][j] = -1:-1$\\
+\par\noindent
+The iteration over the elements of the set with the counter $j$ will not be according to any ordering as the elements of the set are inherently not ordered. This is not important to us as the elements of a single candidate set have no relation which we want to contain. However, from this point onward, we have given the elements an order. Although this internal ordering does not hold any value this is important as we now know the same index in the three separate arrays reference the same index.\\
+\par\noindent
+After setting the values in the easily discoverable base cases we start computing scores for the paths in our graph. The nodes $v_x \in V'_i$ for the remaining candidate sets at the indexes $1 \leq i < |s|$ are looped over with $j$ as a counter, and $indexes[i][j]$ is set to $x$. For every such entry a list of pairs is made with other indexes $(i', j')$ such that $i'$ is a preceding index $i'<i$ and $j'$ is another counter variable looping over $indexes[i']$. For every entry-pair $((i, j), (i', j'))$ we produce a score by the scoring function $\theta((i, j), (i', j'))$. The scoring function works by combining the score contained in the preceding entry, $scores[i'][j']$, the gap penalties, and a mapping score for the current index $mappingScore(v_{indexes[i][j]}, s_i)$. The gap penalty is found by combining a gap penalty for a gap of length $i-i'$ and for a gap of length $distance(v_{indexes[i'][j']}, v_{indexes[i][j]})$. The computation of the last gap penalty corresponds to finding the edges, which up to this point have been without interest to the algorithm. We search for these distances by a breadth-first regular graph search which starts in the vertice $(n_{indexes[i'][j']}$ and is concluded when we find $n_{indexes[i][j]}$. Whenever we search for more than $\lambda$ steps without finding the target vertice, we can return the current distance multiplied by 2. When a gap penalty is computed for a gap this length the score will always be $2*\lambda$ which means the edge can never be part of any final alignments and is thus not interesting. \\
+\par\noindent
+The final score stored in $scores[i][j]$ is the maximal achievable score produced by the function $\theta$ for one of the vertice pairs ending in the vertice with index $indexes[i][j]$. $backpointers[i][j]$ is set to the to the index-pair $(i', j')$ responsible for producing this score. The recurrence formulas for the three arrays are thus:\\
+\begin{equation}
+  \begin{array}{ll}
+    indexes[i][j] = x & n_x \in V'_i\\
+    scores[i][j] = \underset{i', j'}{max} \theta((i, j), (i', j')) & 0 \leq i' < i, 0 \leq j' < |scores[i']|\\
+    backPointers[i][j] = \underset{i', j'}{argmax} \theta((i, j), (i', j')) & 0 \leq i' < i, 0 \leq j' < |scores[i']|\\
+  \end{array}
+\end{equation}
+where $\theta$ is a scoring function defined as:\\
+\begin{equation}
+  \begin{array}{l}
+    \theta((x_1, y_1), (x_2, y_2))=scores[x_2][y_2] \\\quad\quad + gapPenalty(x_1-x_2) \\\quad\quad + gapPenalty(distance(n_{indexes[x_2][y_2]}, n_{indexes[x_1][y_1]})) \\\quad\quad + mappingScore(b(n_{indexes[x_1][y_1]}), s_{x_1}))
+  \end{array}
+\end{equation}
+\par\noindent
+When the iteration ends we will have a score for every candidate vertice in every candidate set. We can iterate over the scores corresponding to the last candidate set, $scores[|s|-1]$ to find the highest alignment score. The optimal alignment ends in the vertice with the index in the corresponding cell in the $indexes$ array. We can then backtrack backwards through the $backPointers$ array, storing the corresponding indexes of the vertices from the $indexes$ array along the way to produce the actual alignment. The entire operation can be done in $O(\textcolor{red}{INSERT})$ (Appendix \ref{complexity_analysis}).
+\subsubsection{Finding all optimal alignments}
+\label{sec:all_optimal_alignments}
+There is only a small adjusment necessary to produce all optimal alignments instead of a single one, but it makes the explanation of and reasoning around the procedure considerably more complex. Briefly, the first step needed is storing a list of backpointers for every index to every preceding index which produces the same highest score. Then, when backtracking, the algorithm needs to find every maximal score for the last candidate set. For each one of these the algorithm must start a computational branch which corresponds to each final alignment. These branches are further split up whenever faced with a backpointer consisting of more than one index. Every resulting branch corresponds to a single, equally scoring, optimal alignment.
+\subsection{Handling invalid threshold values}
+Whenever the algorithm is not able to find any alignments with a score higher than $T$ it classifies the input string $|s|$ as unalignable. There are two scenarios where this would happen: Either the path yielding the highest score consists of a series of steps in which each individual step is considered legal (Is not penalized more than $\lambda$), but the combination is not good enough, or the path goes through a step in which there are no legal possibilities for traversal. The last would happen when a every path goes through an edge which was not found due to pruning and has been given the distance of $2*lambda$. Both the cases are identified through not finding any paths scoring high enough and both result in an \textit{empty alignment}, an alignment where every element of $s$ is unmappable. \\
+\par\noindent
+Yielding an empty alignment for the first case might seem strange as the algorithm does a full computation and finds a legal path. There is however one important consideration: Vertices which are parts of an optimal path might have been dropped during the pruning of the candidate sets. There is one very interesting case where this occurs, namely when the difference between the threshold $T$ and the highest scoring alignment is exactly 1 (or the minimal penalty possible for generalized context shemes). In this case we know there are no paths which yield a score of $T$, because we would have found them, and there are no unfound alignments scoring higher than the one we found because there exists no such possible scores. In order to stay in line with the strict problem definition these cases are also classified unmappable.\\
+\par\noindent
+The second case is often less interesting as it usually leads to vastly less coherent alignments and as a result typically lower scores. Even so, there are interesting concepts touched upon also here: Because of the distinct penalty given to invalid edges we have no real way of knowing how the proposed alignment is really scored. Thus it can, much like the case discussed above, contain interesting sections which are aligned well within the threshold.
+\clearpage
+\section{Merging aligned sequences}
 \begin{wrapfigure}{r}{0.5\textwidth}
   \begin{mdframed}
     \begin{subfigure}[t]{\textwidth}
@@ -88,188 +318,26 @@ There are two data structures needed for aligning a string against the graph: a 
   \caption{Different scoring thresholds $T$ yields different reference graphs}
   \label{fig:separate_paths}
 \end{wrapfigure}
-When a context length $|c|$ is set, the algorithm can start building the index. Two sets of strings, a left context set and a right context set, is generated for every vertice in the graph $G$. The generation of the two sets happen by the same procedure by swapping around the starting point and the direction of the iteration. When creating left contexts the algorithm starts in the start-node of $G$ and traverses following the direction of the edges, for right contexts the opposite is done. Apart from this the two are equal. To generate the context set $c(n_x)$ for a given node $n_x$ the algorithm looks at every string $c \in c(n_y)$ for every incoming neighbouring node $n_y$. Every $c$ is modified into a new context string $c'$ by trimming away the last character and prefixing the context with the character $b(n_y)$. All the generated strings $c'$ is added to $c(n_x)$. As sets per definition does not allow duplicates the impact of a branching occuring in the graph will fade away after exactly $|c|$ steps as the difference is trimmed away (see Fig. \ref{fig:explicit_contexts}), and thus avoid explosive exponentiality in the context set sizes. Unlike Paten et al. \cite{mapping_to_a_reference_genome_structure} there are no requirements for contexts to be uniquely mappable to exactly one vertice. Because the last step of the algorithm does a search for an incomplete path through all the candidate vertices this presents no difficulties when finding the alignment. Furthermore, dropping this precondition assures every node has two valid contexts and are thus present in both suffix trees.\\
+Whenever a graph is made from a set of genetic sequences there is an expectation of what the graph should look like, where there should be branches, common sequences and so on. This is decided by how the input sequences are merged together to produce graphs. Although the merge can be seen as the key element in this process, these are desicions which are made purely by the alignment process, which in turn relies on the scoring schema and scoring threshold. Varying these two components can create a variety of graphs (Fig. \ref{separate_paths}). Too avoid confusion we have split the two completey apart, letting the alignment algorithm do all the heavy lifting to keep the merge as as much of a straight forward procedure as possible.\\
 \par\noindent
-The iteration starts in the node defined as the starting point which has the empty string $\epsilon$ as its only context. Whenever a node has finished producing its contexts it enqueues everyone of its outgoing neighbours in a regular FIFO queue. If a vertice has more actual incoming neighbours than incoming neighbours which are finished generating contexts, the node puts itself back in the queue. Thus happens to ensure that when a vertice is finished generating context, both the vertice itself and all preceding vertices are finished, and the remaining nodes can safely fetch contexts from its neighbours knowing they are finished. The algorithm halts when the queue is empty. Every node has to be visited exactly once to generate its context, looking up its approximately $b$ neighbours, and as the procedure runs twice to generate both sets the total runtime for the operation is $O(2|G|b)$.\\
-\begin{figure}[t!]
-  \begin{center}
-    \begin{mdframed}
-      \begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=3.5cm]
-        \node[state,align=center,minimum size=3cm,scale=0.75] (q0) {\footnotesize{\{"$G$", "$T$"\}}\\\Large{\textbf{$A$}}\\\footnotesize{\{"$TA$"\}}\\\scriptsize{$2$}};
-        \node[state,align=center,minimum size=3cm,scale=0.75] [below left of=q0] (q1) {\footnotesize{$\{\epsilon\}$}\\$G$\\\footnotesize{\{"$AT$"\}}\\\scriptsize{$6$}};
-        \node[state,align=center,minimum size=3cm,scale=0.75] [above left of=q0] (q2) {\footnotesize{$\{\epsilon\}$}\\$T$\\\footnotesize{\{"$AT$"\}}\\\scriptsize{$1$}};
-        \node[state,align=center,minimum size=3cm,scale=0.75] [right of=q0] (q3) {\\\footnotesize{\{"$AG$", "$AT$"\}}\\$T$\\\footnotesize{\{"$AG$"\}}\\\scriptsize{$3$}};
-        \node[state,align=center,minimum size=3cm,scale=0.75] [right of=q3] (q4) {\footnotesize{\{"$TA$"\}}\\$A$\\\footnotesize{\{"$G$"\}}\\\scriptsize{$4$}};
-        \node[state,align=center,minimum size=3cm,scale=0.75] [right of=q4] (q5) {\footnotesize{\{"$AT$"\}}\\$G$\\\footnotesize{$\{\epsilon\}$}\\\scriptsize{$5$}};
-
-        \path
-        (q1) edge node {} (q0)
-        (q2) edge node {} (q0)
-        (q0) edge node {} (q3)
-        (q3) edge node {} (q4)
-        (q4) edge node {} (q5);
-
-      \end{tikzpicture}
-    \end{mdframed}
-  \end{center}
-  \caption{A small reference graph with left contexts (top) and right contexts (bottom) of length 2 shown}
-  \label{fig:explicit_contexts}
-\end{figure}
+Whenever an input string $s$ is aligned against a graph $G$ we can do a merge, a procedure which should result in the internal structure of $s$ being present in the merged graph $G*$. To make reasoning around the procedure we visualize $s$ as a special sequence graph $G_s$ where every individual character is represented by a single vertice and every consecutive pair of characters is connected with an edge. This is a convenient representations for several reasons: For one the graph has a strict internal direction which we can use to number the vertices according to their position in the string. We let $s_x$ denote the vertice in $G_s$ with position $x$. An important note is that this is a simplified type of the previously defined graphs which does not require start and end-vertices, which means the indexation begins at 0. The reason for this simplification is that we can use the alignment $A$ to create an equality operator:
+\begin{equation}
+  eq(s_x, v_y) =
+  \begin{dcases}
+    True & If a_x=v_y\\
+    False & Else
+  \end{dcases}
+\end{equation}
+When we have this way of checking equality between the two graphs we can simply let the vertice set $V*$ of the merged graph be the union of the original vertice set $V$ and the vertice set of $G_s$, where every ``new'' vertice is given a new index when merged in. For the edges there are three cases to consider: An edge between two existing vertices, an edge from a new vertice to an existing edge (and its opposite) and an edge between two new vertices. To simplify the procedure the three latter cases can all generalized as cases where the edge does not already exist, and needs to be created.\\
 \par\noindent
-After generating the two context sets for every node, the elements of each one is inserted into their corresponding suffix tree. Every suffix is stored as a key with the index of it's originating node as a value (fig. \ref{fig:left_suffix_tree}). In theory every node can have $4^{|c|}$ contexts in each set, in practice a more fair approximation is $b^{|c|}$ where $b$ is the observed branching factor for the graph. \textcolor{red}{Should contain something about probable values of B. Find an article on it}. 
-\begin{wrapfigure}{R}{0.49\textwidth}
-  \begin{mdframed}
-    \begin{tikzpicture}
-      \node[state,align=center,minimum size=1.4cm] (q0) {$\epsilon$\\\scriptsize{\{$1,6$\}}};
-      \node[state,align=center,minimum size=1.4cm] [below left=0.6cm and 0.6cm of q0] (q1) {$A$\\\scriptsize{$\emptyset$}};
-      \node[state,align=center,minimum size=1.4cm] [below=0.21cm of q0] (q2) {$G$\\\scriptsize{\{$2$\}}};
-      \node[state,align=center,minimum size=1.4cm] [below right=0.6cm and 0.6cm of q0] (q3) {$T$\\\scriptsize{\{$2$\}}};
-      \node[state,align=center,minimum size=1.4cm] [below left=0.6cm and 0cm of q1] (q4) {$G$\\\scriptsize{\{$3$\}}};
-      \node[state,align=center,minimum size=1.4cm] [below right=0.6cm and 0cm of q1] (q5) {$T$\\\scriptsize{\{$3,5$\}}};
-      \node[state,align=center,minimum size=1.4cm] [below=0.2cm of q3] (q6) {$A$\\\scriptsize{\{$4$\}}};
-
-      \path
-      (q0) edge node {} (q1)
-      edge node {} (q2)
-      edge node {} (q3)
-      (q1) edge node {} (q4)
-      edge node {} (q5)
-      (q3) edge node {} (q6);
-    \end{tikzpicture}
-  \end{mdframed}
-  \caption{The left suffix tree corresponding to the graph in \ref{fig:explicit_contexts}}
-  \label{fig:left_suffix_tree}
-\end{wrapfigure}
-The current implementation uses a naive suffix tree implementation where insertion is $O(|c|)$, giving a total time complexity of $O(b^{|c|}|c|)$ per node per context set and $O(2|G|b^{|c|}|c|)$ for the entire graph. Building the entire index can thus be done in $O(2|G|b + 2|G|b^{|c|}|c|)$.
-\subsection{Generating the modified graph}
-The produced graph $G'$ is a function of both the original graph $G$, the input sequence $s$ and the threshold $T$. For every character $s_x \in s$ a left-context string and a right-context string is generated by looking at the $|c| + maxPossibleGapGivenFuzzyness(\lambda)$ surrounding characters. The two context strings are used as a basis for a fuzzy search in it's corresponding suffix tree. The search is a recursive function based on PO-MSA. The root node is supplied with a one-dimensional scoring array corresponding to the context string $c$, which is initialized with all zeroes. Then, for every child, a new scoring array is computed by regular edit distance rules: For each index $i$ take the maximal score for either a gap in the graph, a gap in the string or matching the character $c_i$ with the character contained in the child node \textcolor{red}{(Reference actual code in supplementary?), (more explanation needed?)}. This newly created array is supplemented to the same recursive function in the child. When a leaf node is reached the last index of the supplied scoring array corresponds to mapping the entire string $c$ against the entire context achieved by concatenating the characters contained in the path through the tree traversed by the recursion. If the score is higher than the context threshold $T_c$ for the given context string, every index contained in the node is stored as a pair on the form $\{index, score\}$ in the candidate set. If an index is stored several times, only the pair containing the highest score is saved.\\
+The implementation of this procedure is done even more smoothly. Because the string and alignment both have a direction we can move along this direction and merge or create new vertices iteratively. We let a pointer $prev$ denote the index of the previous element in the graph. Because every input sequence which is represented in the graph should have a full path we initialize this to $s_G$. We then iterate over the elements of the alignment. For every index $i$ we start by creating a new vertice $curr$ if $a_i = 0$ and thus unmapped. This vertice contains the character $s_i$ and is given a unique index $x$ by the graph. If the index $i$ is mapped we let $curr$ be the vertice $v_{a_i}$. At this point we have a pair of vertices, $prev$ and $curr$, which representes consecutive characters in $s$ and should thus have an edge between them. We create this edge by inserting $curr$ in the neighbour set of $prev$, and move set $prev=curr$ to move the backpointer. When the iteration finishes we have the last vertice in the alignment contained in the backpointer and create and edge from $prev$ to $t_G$ to finish off the full path.\\
 \par\noindent
-In order to also be able to look up contexts which are shorter than the contexts stored in the tree, the suffix tree search implementation has built in a concept which we called \textcolor{red}{something smart}. This concepts allow all vertices at a depth greater than the length of the string which is looked up to pass on their highest possible score, and avoids deteroriation of context scores due to different length and are typically used for the shorter contexts at the beginning and end of reads.\\
-\par\noindent
-In theory every leaf node has to be visited in order to check the score for every represented context in the tree. In practice the tree can be pruned by cutting off the search whenever the \textit{maximal potential score} falls below the threshold $T_c$ for the provided context. The maximal potential score for a node is found by adding together the currently highest score in the scoring array with the maximal matching score for the remainder of the string. This reduces the number of nodes to be searched from $O(4^c)$ to \textcolor{red}{(something alot smaller. Needs calculations)}.\\
-\clearpage
-\begin{wrapfigure}{L}{0.5\textwidth} 
-  \begin{subfigure}[t]{\textwidth}
-    \begin{mdframed}
-      \begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=3.5cm]
-        \node[state,draw=none,align=center] (q0) {$A$\\\scriptsize{LC=$\epsilon$}\\\scriptsize{RC="$TA$"}};
-        \node[state,draw=none,align=center] [right=-0.15cm of q0] (q1) {$T$\\\scriptsize{LC="$A$""}\\\scriptsize{RC="$A$"}};
-        \node[state,draw=none,align=center] [right=-0.15cm of q1] (q2) {$A$\\\scriptsize{LC="$TA$""}\\\scriptsize{RC=$\epsilon$}};
-
-        \node[state,align=center] [below=0cm of q0] (q3) {$A$\\\scriptsize{$2$}};
-        \node[state,align=center] [below=0cm of q1] (q4) {$T$\\\scriptsize{$3$}};
-        \node[state,align=center] [below=0cm of q2] (q5) {$A$\\\scriptsize{$4$}};
-      \end{tikzpicture}
-    \end{mdframed}
-    \caption{$T=0$}
-  \end{subfigure}	
-  \begin{subfigure}[t]{\textwidth}
-    \begin{mdframed}
-      \begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=3.5cm,scale=0.6]
-        \node[state,draw=none,align=center] (q0) {$A$\\\scriptsize{LC=$\epsilon$}\\\scriptsize{RC="$TA$"}};
-        \node[state,draw=none,align=center] [right=-0.15cm of q0] (q1) {$T$\\\scriptsize{LC="$A$""}\\\scriptsize{RC="$A$"}};
-        \node[state,draw=none,align=center] [right=-0.15cm of q1] (q2) {$A$\\\scriptsize{LC="$TA$""}\\\scriptsize{RC=$\epsilon$}};
-
-        \node[state,align=center] [below=-0.04cm of q0] (q3) {$T$\\\scriptsize{$1$}};
-        \node[state,align=center] [below=0.3cm of q3] (q4) {$A$\\\scriptsize{$2$}};
-        \node[state,align=center] [below=0.3cm of q4] (q5) {$T$\\\scriptsize{$3$}};
-        \node[state,align=center] [below=0.3cm of q5] (q6) {$G$\\\scriptsize{$6$}};
-
-        \node[state,align=center] [below=0cm of q1] (q7) {$T$\\\scriptsize{$1$}};
-        \node[state,align=center] [below=0.3cm of q7] (q9) {$T$\\\scriptsize{$3$}};
-        \node[state,align=center] [below=0.3cm of q9] (q11) {$G$\\\scriptsize{$5$}};
-        \node[state,align=center] [below=0.3cm of q11] (q12) {$G$\\\scriptsize{$6$}};
-
-        \node[state,align=center] [below=-0.07cm of q2] (q13) {$T$\\\scriptsize{$3$}};
-        \node[state,align=center] [below=0.3cm of q13] (q14) {$A$\\\scriptsize{$4$}};
-        \node[state,align=center] [below=0.3cm of q14] (q15) {$G$\\\scriptsize{$5$}};
-      \end{tikzpicture}
-    \end{mdframed}
-    \caption{$T=1$}
-  \end{subfigure}
-  \caption{The resulting candidate sets for mapping the string "ATA" against the reference genome from fig. ~\ref{fig:explicit_contexts} with varying T values}
-  \label{fig:candidate_nodes}
-\end{wrapfigure}
-After the fuzzy search is concluded there are two sets of candidates for every index, one containing the nodes matching the left context and an equivalent for nodes matching the right context. These two sets are intersected to produce a final candidate set for the index $i$, where the score is created by adding together the scores from the two original sets. When the intersection happens the final set can again be pruned by removing all vertices which has a combined score that is lower than the combined threshold $T$ for both contexts. When the vertices are found the edges need to be generated in order to finish the graph. Intuitively there should be an edge whereever there is a gap which is traversable without having the gap penalty exceeding $\lambda$. In practice this is a step which is done during the next step of the algorithm.\\
-\par\noindent
-The newly formed graph $G'$ can be defined formally:\\
-\par
-$G'(G, s, T) = \{V', E'\}$\\
-\par\noindent
-where $V'$ is an ordered set of sets of length $|s|$ where each set $V'_i$ is a set of nodes such that\\
-\par
-$V'_i=\{v_x|v_x \in G \land \exists [c \in c(v_x)](alignmentScore(c, c(s_i)) >= T)\}$\\
-\par\noindent
-and $E'$ is a list of weighted edges such that\\
-\par
-$E'=\{e'=\{i_s, i_e, w\}|v_{i_s} \in V'_x \wedge v_{i_e} \in V'_y \wedge$ $gapPenalty(y - x) <= \lambda \wedge $\par$w=distance(v_{i_s}, v_{i_e}) \wedge gapPenalty(w) <= \lambda\}$\\
-\par\noindent
-where $alignmentScore(x, y)$ and $gapPenalty(x, y)$ are scoring functions provided by the scoring schema and $distance(x, y)$ is the distance of the shortest path from node $x$ to node $y$ in the graph. \textcolor{red}{(Mixing up nodes and indexes in the definitions)}\\
-\par\noindent
-\subsection{Searching G' with a modified PO-MSA search}
-The first thing done in the search is to move the indexes of the vertices in the candidate sets over to a two-dimensional array $indexes$ where we let one dimension represent the indexes of the string and the second the individual vertices in the candidate set. This is done in order to have the vertices in a structure where we can reference them solely by an index. In addition to the $indexes$ array we create a floating point array $scores$ with exactly the same dimensions, to contain the scores for the individual vertices. Additionally, in order to backtrack and find the optimal alignment, we create an equally sized $backpointer$ array. Conceptually this should store pairs of integers referencing the other indexes in the array, in the tool this is implemented by Strings.
-\par\noindent
-\begin{wraptable}{l}{0.5\textwidth}
-  \begin{mdframed}
-    \begin{subfigure}[t]{0.49\textwidth}
-      \begin{center}
-        \begin{tabularx}{\textwidth}{ccc}
-          A & T & A \\ \cline{1-3}
-          \multicolumn{1}{|c|}{1} & 1 & \multicolumn{1}{|c|}{3} \\ \cline{1-3}
-          \multicolumn{1}{|c|}{2} & 3 & \multicolumn{1}{|c|}{4} \\ \cline{1-3}
-          \multicolumn{1}{|c|}{3} & 5 & \multicolumn{1}{|c|}{5} \\ \cline{1-3}
-          \multicolumn{1}{|c|}{6} & 6 & \multicolumn{1}{|c}{ }  \\ \cline{1-2}
-        \end{tabularx}
-        \caption{Indexes}
-      \end{center}
-    \end{subfigure}
-    \begin{subfigure}[t]{0.49\textwidth}
-      \begin{center}
-        \begin{tabularx}{\textwidth}{ccc}
-          A & T & A \\ \cline{1-3}
-          \multicolumn{1}{|c|}{-1} & -2 & \multicolumn{1}{|c|}{-2} \\ \cline{1-3}
-          \multicolumn{1}{|c|}{0} & 0 & \multicolumn{1}{|c|}{0} \\ \cline{1-3}
-          \multicolumn{1}{|c|}{-1} & -3 & \multicolumn{1}{|c|}{-2} \\ \cline{1-3}
-          \multicolumn{1}{|c|}{-1} & -3 & \multicolumn{1}{|c}{ }  \\ \cline{1-2}
-        \end{tabularx}
-        \caption{Scores}
-      \end{center}
-    \end{subfigure}
-    \begin{subfigure}[b]{\textwidth}
-      \begin{center}
-        \begin{tabularx}{\textwidth}{ccc}
-          A & T & A \\ \cline{1-3}
-          \multicolumn{1}{|c|}{-1:-1} & 0:0 & \multicolumn{1}{|c|}{1:1} \\ \cline{1-3}
-          \multicolumn{1}{|c|}{-1:-1} & 0:1 & \multicolumn{1}{|c|}{1:1} \\ \cline{1-3}
-          \multicolumn{1}{|c|}{-1:-1} & 0:2 & \multicolumn{1}{|c|}{1:1} \\ \cline{1-3}
-          \multicolumn{1}{|c|}{-1:-1} & 0:3 & \multicolumn{1}{|c}{ }  \\ \cline{1-2}
-        \end{tabularx}
-        \caption{Backpointers}
-      \end{center}
-    \end{subfigure}
-  \end{mdframed}
-  \caption{The 4 arrays used by the searching algorithm when using the candidate sets from Fig \ref{fig:candidate_nodes} and $T=-1$}
-  \label{fig:scoring_arrays}
-\end{wraptable}
-The search is initialized by looping over every node $n_x \in V'_0$ with a counter $j$, setting\\
-\par
-$indexes[0][j] = x$\par
-$scores[0][j] = mappingScore(b(n_x), s_0)$\par
-$backPointers[0][j] = -1:-1$\\
-\par\noindent
-Then the nodes $n_x \in V'_i$ for the remaining candidate sets at the indexes $1<=i<=|s|$ are looped over with $j$ as a counter, and $indexes[i][j]$ is set to $x$. For every such entry a list of pairs is made with other indexes $(i', j')$ such that $i'$ is a preceding index $i'<i$ and $j'$ is variable looping over $indexes[i']$. Every entry-pair $((i, j), (i', j'))$ can be scored by a scoring function $\theta((i, j), (i', j'))$. The scoring function works by combining the score contained in the preceding entry, $scores[i'][j']$, a gap penalty, and a mapping score for the current index $mappingScore(n_{indexes[i][j]}, s_i)$. The gap penalty is found by combining a gap penalty for a gap of length $i-i'$ and for a gap of length $distance(n_{indexes[i'][j']}, n_{indexes[i][j]})$. The final score stored in $scores[i][j]$ is the maximal achievable score $\theta$ produced by one of these pairs. $backpointers[i][j]$ is set to the to the index-pair $(i', j')$ responsible for producing this score. The recursive formulas for the three arrays are defined by:\\
-\par
-$indexes[i][j] = x$\quad for $n_x \in V'_i$\par
-$scores[i][j] = \underset{i', j'}{max}$ $\theta((i, j), (i', j'))$\quad for $0$<=$i'$<=$i$, $0$<=$j'$<$length(scores[i'])$\par
-$backPointers[i][j] = \underset{i', j'}{arg max}$ $\theta((i, j), (i', j'))$\quad \textcolor{red}{--||--}\par
-\par\noindent
-where $\theta$ is a scoring function defined as:\\
-\par
-$\theta((x_1, y_1), (x_2, y_2))=scores[x_2][y_2] + gapPenalty(x_1-x_2) +$\par$ gapPenalty(distance(n_{indexes[x_2][y_2]}, n_{indexes[x_1][y_1]})) + mappingScore(b(n_{indexes[x_1][y_1]}), s_{x_1}))$
-\par\noindent
-When the iteration ends we will have a score for every candidate vertice in every candidate set. We can iterate over the indexes corresponding to the last candidate set, identify the highest score and set the index in the corresponding cell in $indexes$ as the last vertice in our alignment. We then move backwards along the backpointers, storing the indexes along the way, to end up with the final alignment. The total complexity of the operation is $O(\textcolor{red}{something i didnt push to GIT})$.
-\subsubsection{Finding all optimal alignments}
-\label{sec:all_optimal_alignments}
-\subsection{Handling invalid threshold values}
-\section{Merging aligned sequences}
+There is one important aspect to be considered when using this merge procedure: Every sequence which is merged in is considered a stand-alone sequence which starts at the beginning of the graph and ends at the end. This is important because it shows that even though the tool is designed for aligning short reads against a large graph it should not also be used to merge these in. The result would be a long full path representing a chromosome, genome or similar and several short full paths representing the individual paths. The imagined usage of the tool consists of more steps:
+\begin{enumerate}
+  \item Create a graph by merging several known genetic sequences
+  \item Align individual reads against the graph
+  \item Combine the reads to a sequence similar to the originating sequences
+  \item Merge the result of the combination
+\end{enumerate}
+The tractability of the non-implemented combination process is discussed in Section \textcolor{red}{SOMEWHERE}
 \end{document}
