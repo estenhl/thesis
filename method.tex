@@ -2,10 +2,7 @@
 
 \begin{document}
 \chapter{Experiments}
-The following chapter describes the details of the experiments conducted to produce the results in the succeeding chapter. The experiments are divided along a natural border, decided by the size of the input data, into two classes. Each class has its own section describing the motivation behind the experiments and the details specific to that class. Elements which are common to both classes are described once in the section preceding the class-specific sections.
-\section{Common elements}
-\subsection{Scoring schema}
-\subsection{Hardware/runtime environment}
+The following chapter describes the details of the experiments conducted to produce the results in the succeeding chapter. The experiments are divided along a natural border, decided by the size of the input data, into two classes. Each class has its own section describing the motivation behind the experiments and the details specific to that class. Elements which are shared among the classes are discussed in once in the last section of the chapter.
 \section{Proof of concept}
 Whenever a graph is built from a set of sequences one can get an intuition concering what the final result should look like. These experiments are attempts to formalize the notion of intuition into stable, testable results. Due to readability and shortcomings of printed media only a small set of the experiments are presented here. A more exhaustive set of tests can be found as unit tests in the tool (Appendix \ref{sec:tool}).
 \subsection{Test data}
@@ -114,4 +111,10 @@ In order to do an alignment there needs to exists reads aswell as the reference 
 Because this thesis is concerned with the mathematical properties of the model the noise in the reads does not necessarily depict the true nature of either genetic variation (Section \ref{sec:genetic_variation}) or read errors (Section \ref{sec:sequencing}). \textcolor{red}{why is this ok}. In order to provide reproducability the randomness in the reads are generated from a seed.
 \subsection{Validation}
 When an alignment is produced for a read it is classified either as optimal or not optimal. Intuitively this can be determined by whether the generated read aligns back to the path it was generated from. However, when noise is introduced an interesting phenomenon can occur: The modified read can be more similar to another path than its origin. This can also occur whenever there exists actual equal paths in the graph, typically in the case of repeats. In order to stick with mathemathical properties, optimality holds no relation to the origin of a read but is purely defined as the path which produces the highest possible alignment score. As PO-MSA is an exhaustive search we define optimally aligned as alignments which produce the same alignment score as the highest score found by PO-MSA. Consequently, as only the scores are compared, even when the approaches produce different alignments than PO-MSA these can be classified as optimal. This falls within the problem definition (Definition \ref{def:bounded_alignment_problem}).
+\section{Common elements}
+\subsection{Scoring schema}
+\subsection{Hardware/runtime environment}
+\textcolor{red}{Briefly about hardware/environment}\\
+\par\noindent
+There is one important aspect of the efficiency experiments which should be taken into consideration: The PO-MSA and ``Fuzzy context-based search'' algorithms are both own implementations, which means the time capturing mechanisms are wrapped closely around the algorithms themselves to rule out unrelated noise. This could lead to unfair overhead with regards to the running times of two other tools which are tested. Even though the data sets provided should be large enough to minimize this overhead and depict the true functions underlying the algorithms this is a consideration which is taken when discussing the results.
 \end{document}
