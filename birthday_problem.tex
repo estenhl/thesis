@@ -1,6 +1,33 @@
 \documentclass[thesis.tex]{subfiles}
 
 \begin{document}
-\chapter{The birthday problem}
+\chapter{The "birthday problem" and context lengths}
 \label{sec:birthday_problem}
+The "birthday problem" is the problem of deciding the probability $B(n)$ that two people in a group of $n$ share a birthday. We can let $B'(n)$ represent the opposing probability, that there is noone amongst the $n$ which share birthdays. As the two are both exhaustive and exclusive we know that $B(n)+B'(n)=1$ and thus that $B(n)=1-B'(n)$.\\
+\par\noindent
+Deciding the probability that noone is sharing a birthday can be broken down to the individual people making up the selection. When we add a person to the selection we multiply the probability for the previous selection with the probability that the given person does not share a birthday, which is given by the probability of selecting an available day from the total number of days, $365$. As we already know we are not interested in selections where two people share birthdays, the available days are equal to $365$ minus the number of people in the selection, $n-1$.
+\begin{equation}
+	B'(n)=\dfrac{365-0}{365} * \dfrac{365-1}{365} * \dfrac{365-2}{365} * ... * \dfrac{365-(n-2)}{365} * \dfrac{365-(n-1)}{365}
+\end{equation}
+which can be approximated using taylor series \cite{understanding_the_birthday_problem}
+\begin{equation}
+	B'(n)=e^{-(n^2/(2*365))}
+\end{equation}
+which gives
+\begin{equation}
+	B(n)=1-e^{-(n^2/(2*365))}
+\end{equation}
+Conveniently, we can apply the approximations used in the birthday problem to determine the probability of contexts being shared by two or more vertices. We let the number of actual contexts $x$ replace the number of people, and the number of possible contexts $y$ replace the days of the year. $y$ is easily calculated to $4^|c|$, which is the number of all possible strings over the alphabet $\{A, C, G, T\}$.
+\begin{equation}
+	y=4^{|c|}
+\end{equation}
+Computing $x$ requires more work, so we chose to do another approximation to avoid complex calculations. If we again let $b$ be the branching factor, every vertice has approximately $b$ neighbours. Every one of these neighbours has approximately $b$ neighbours again, and so on for every one of the $|c|$ vertices which make up a context. This leads $b^|c|$ contexts for each vertice and $|G|b^|c|$ total contexts. If we assume our graphs are mostly linear we can set $b=1$ to end up with a total of $|G|$ contexts. 
+\begin{equation}
+	c=|G|
+\end{equation}
+Plugging these values into the previous formula we search for the smallest context length $|c|$ which gives us less than $1\%$ probability of shared contexts\\
+\par\noindent
+\textcolor{red}{FIND SOME NICE NOTATION}\\
+\par\noindent
+This approximations might seem crude, but as we know the length of the contexts does not affect the correctness of the final result. The functions made by the approximation have the property of "jolting" from $1$ so logaritmically approaching $0$ (See fig. \ref{fig:context_lengths}). The values of $|c|$ which gives values close to $1$ have alot of overlap, which increases the complexity of the searching part of the algorithm. The values close to $0$ gives deep suffix trees. Thus we chose what might seem like the arbitrary cut-off point at $1\%$ to assure we are still within the jolt, but as close to the end as possible.
 \end{document}

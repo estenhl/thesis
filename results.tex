@@ -100,10 +100,36 @@ We start out by building a graph from a single sequence:\\
   \end{subfigure}
   \caption{The result of aligning (a) and merging (b) the sequence ``ACGTTTAC'' against the reference graph seen in Fig. \ref{fig:output_ref}}
   \label{fig:output_deletion}
-\end{figure}
+\end{figure}[H]
 \subsection{Structural variations}
+\clearpage
 \section{Efficiency}
 \subsection{Building the index}
+\begin{figure}
+  \begin{subfigure}[t]{0.5\textwidth}
+    \includegraphics[width=\textwidth]{plots/build_index_build_graph.png}
+    \subcaption{}
+  \end{subfigure}
+  \begin{subfigure}[t]{0.49\textwidth}
+    \includegraphics[width=\textwidth]{plots/build_index_build_index.png}
+    \subcaption{}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.5\textwidth}
+    \includegraphics[width=\textwidth]{plots/build_index_write_index.png}
+    \subcaption{}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.49\textwidth}
+    \includegraphics[width=\textwidth]{plots/build_index_total_time.png}
+    \subcaption{}
+  \end{subfigure}
+  \caption{The running time of the constituents of the build index procedure, build graph (a), build index (b), write index (c) and total (d) as a function of graph size}
+  \label{fig:build_index}
+\end{figure}
+\begin{figure}
+  \includegraphics[width=\textwidth]{plots/build_index_constituents.png}
+  \caption{The portions of the runtime split amongst the indicidual constituents}
+  \label{fig:build_constituents}
+\end{figure}
 \subsection{Alignment}
 \subsubsection{Runtime as a function of |G|}
 \subsubsection{Runtime as a function of |s|}
