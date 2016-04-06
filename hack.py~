@@ -1,0 +1,4 @@
+start = 1
+while (start <= 25.0):
+    print(start)
+    start += 0.25

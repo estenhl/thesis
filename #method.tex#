@@ -1,0 +1,120 @@
+\documentclass[thesis.tex]{subfiles}
+
+\begin{document}
+\chapter{Experiments}
+The following chapter describes the details of the experiments conducted to produce the results in the succeeding chapter. The experiments are divided along a natural border, decided by the size of the input data, into two classes. Each class has its own section describing the motivation behind the experiments and the details specific to that class. Elements which are shared among the classes are discussed in once in the last section of the chapter.
+\section{Proof of concept}
+Whenever a graph is built from a set of sequences one can get an intuition concering what the final result should look like. These experiments are attempts to formalize the notion of intuition into stable, testable results. Due to readability and shortcomings of printed media only a small set of the experiments are presented here. A more exhaustive set of tests can be found as unit tests in the tool (Appendix \ref{sec:tool}).
+\subsection{Test data}
+Because the motivation behind these tests are to determine the behaviour of the algorithm, the input data consists of small, handcrafted sequences which for each experiment contains exactly one easily identifiable trait. These traits are crafted in a way which reflects the nature of variation in genetic sequences. Because the negated edit distance scoring schema is a flat scoring schema which penalizes all errors the same it is prone to display order of operations characteristics of the underlying algorithm. Because the order of operations of the implementation is well known to the authors this is taken into account when creating the data.
+\subsection{Validation}
+There are two main concepts which the validation of this experiment class wish to capture: The intuition and the formalization. The intuition is captured through visualizable results. Every experiment will provide a visualization of both the inputs and the outputs. When the inputs are visualized, one of the sequences will be chosen as a basis for the graph. The output visualizations will be directly produced by the tool using the -print parameter, followed by porting the resulting dot-file to the tikz syntax used in this thesis\ref{fig:visual_output}. The formalization is carried out through a set of statements from first order logic concerning the state of either the resulting graph or the alignment, which are verifyable in the visual outputs. The mentioned unit tests are created to represent these statements through Java syntax.
+\begin{figure}[b]
+  \begin{mdframed}
+    \begin{subfigure}[b]{0.32\textwidth}
+      \begin{mdframed}
+        \begin{center}
+          \begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=1.4cm]
+            \node[state,scale=0.5] (q0){$s$};
+            \node[state,scale=0.5] [right of=q0] (q1) {$A$};
+            \node[state,scale=0.5] [right of=q1] (q2) {$C$};
+            \node[state,scale=0.5] [right of=q2] (q3) {$A$};
+            \node[state,scale=0.5] [right of=q3] (q4) {$e$};
+            \node[state,scale=0.5] [above=0.452cm of q1] (q5) {$A$};
+            \node[state,scale=0.5] [above=0.452cm of q2] (q6) {$T$};
+            \node[state,scale=0.5] [above=0.452cm of q3] (q7) {$A$};
+
+            \path
+            (q0) edge node {} (q1)
+            (q1) edge node {} (q2)
+            (q2) edge node {} (q3)
+            (q3) edge node {} (q4)
+            (q5) edge node {} (q6)
+            (q6) edge node {} (q7);
+          \end{tikzpicture}
+        \end{center}
+      \end{mdframed}
+      \caption{}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.32\textwidth}
+      \begin{mdframed}
+        \begin{center}
+          \begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=1.4cm]
+            \node[state,scale=0.5] (q0){$s$};
+            \node[state,scale=0.5] [right of=q0] (q1) {$A$};
+            \node[state,scale=0.5] [right of=q1] (q2) {$C$};
+            \node[state,scale=0.5] [right of=q2] (q3) {$A$};
+            \node[state,scale=0.5] [right of=q3] (q4) {$e$};
+            \node[state,scale=0.5] [above=0.452cm of q1] (q5) {$A$};
+            \node[state,scale=0.5] [above=0.452cm of q2] (q6) {$T$};
+            \node[state,scale=0.5] [above=0.452cm of q3] (q7) {$A$};
+
+            \path
+            (q0) edge node {} (q1)
+            (q1) edge node {} (q2)
+            (q2) edge node {} (q3)
+            (q3) edge node {} (q4)
+            (q5) edge node {} (q6)
+            edge[color=red] node {} (q1)
+            (q6) edge node {} (q7)
+            edge[color=red] node {} (q2)
+            (q7) edge[color=red] node {} (q3);
+          \end{tikzpicture}
+        \end{center}
+      \end{mdframed}
+      \caption{}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.32\textwidth}
+      \begin{mdframed}
+        \begin{center}
+          \begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=1.4cm]
+            \node[state,scale=0.5] (q0) {$s$};
+            \node[state,scale=0.5] [right of=q0] (q1) {$A$};
+            \node[state,scale=0.5] [above right of=q1] (q2) {$C$};
+            \node[state,scale=0.5] [below right of=q1] (q3) {$T$};
+            \node[state,scale=0.5] [below right of=q2] (q4) {$A$};
+            \node[state,scale=0.5] [right of=q4] (q5) {$e$};
+
+            \path
+            (q0) edge node {} (q1)
+            (q1) edge node {} (q2)
+            edge node {} (q3)
+            (q2) edge node {} (q4)
+            (q3) edge node {} (q4)
+            (q4) edge node {} (q5);
+          \end{tikzpicture}
+        \end{center}
+      \end{mdframed}
+      \caption{}
+    \end{subfigure}
+  \end{mdframed}
+  \caption{The syntax of the visual outputs. Two input sequences ``ACA'' and ``ATA'' are given, and the first is chosen as a basis for the reference graph (a). Then the second sequence is mapped against the graph (b) and merged (c)}
+  \label{fig:visual_output}
+\end{figure}
+\clearpage
+\section{Efficiency}
+In order to determine the usefulness of a new approach it should be compared to other already available approaches. The goal of these experiments is to run the implementation in the tool against similar applications to determine the grade of correctness and the computational feasibility of the approach. Because of its guarantee for optimality PO-MSA (Section \ref{sec:po_msa}) is chosen as a baseline, through an own implementation in Java. The results are compared with the vg implementation\cite{vg} and the tool corresponding to the article ``Canonical, Stable, General Mapping using Context Schemes''\cite{sequence_graphs}.
+\subsection{Test data}
+Because the experiements are meant to reflect usage in an everyday situation the tests are run on real genetic data fetched from the vg github repo\cite{vg}, and from the test-set provided forthe previously mentioned tool made by Noval et al. The sequences correspond to allelles of the MHC region\ref{sec:mhc} and chromosome 6 in the human genome. All the data used can be found in the github of the ``Fuzzy context-based search'' tool (Appendix \ref{sec:tool}).\\
+\par\noindent
+In order to do an alignment there needs to exists reads aswell as the reference graph itself. A read for a graph $G$ is generated by the following procedure:
+\begin{enumerate}
+  \item Choose a read length $l$, an SNP-probability $p_s$ a deletion probability $p_d$ and an insertion probability $p_i$
+  \item Choose a random vertice $v_x \in G$ where every path to the end vertice $t_G$ has a length $\geq l$
+  \item For $r$ steps:
+  \begin{enumerate}
+    \item Append $b(v_x)$ to the read $r$
+    \item Set the new $v_x$ as a random neighbour of the old $v_x$
+  \end{enumerate}
+  \item Add noise to $r$ according to $p_s$, $p_i$ and $p_d$.
+\end{enumerate}
+Because this thesis is concerned with the mathematical properties of the model the noise in the reads does not necessarily depict the true nature of either genetic variation (Section \ref{sec:genetic_variation}) or read errors (Section \ref{sec:sequencing}). \textcolor{red}{why is this ok}. In order to provide reproducability the randomness in the reads are generated from a seed.
+\subsection{Validation}
+When an alignment is produced for a read it is classified either as optimal or not optimal. Intuitively this can be determined by whether the generated read aligns back to the path it was generated from. However, when noise is introduced an interesting phenomenon can occur: The modified read can be more similar to another path than its origin. This can also occur whenever there exists actual equal paths in the graph, typically in the case of repeats. In order to stick with mathemathical properties, optimality holds no relation to the origin of a read but is purely defined as the path which produces the highest possible alignment score. As PO-MSA is an exhaustive search we define optimally aligned as alignments which produce the same alignment score as the highest score found by PO-MSA. Consequently, as only the scores are compared, even when the approaches produce different alignments than PO-MSA these can be classified as optimal. This falls within the problem definition (Definition \ref{def:bounded_alignment_problem}).
+\section{Common elements}
+\subsection{Scoring schema}
+\subsection{Hardware/runtime environment}
+\textcolor{red}{Briefly about hardware/environment}\\
+\par\noindent
+There is one important aspect of the efficiency experiments which should be taken into consideration: The PO-MSA and ``Fuzzy context-based search'' algorithms are both own implementations, which means the time capturing mechanisms are wrapped closely around the algorithms themselves to rule out unrelated noise. This could lead to unfair overhead with regards to the running times of two other tools which are tested. Even though the data sets provided should be large enough to minimize this overhead and depict the true functions underlying the algorithms this is a consideration which is taken when discussing the results.
+\end{document}

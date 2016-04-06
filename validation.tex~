@@ -1,0 +1,97 @@
+\documentclass[thesis.tex]{subfiles}
+
+\begin{document}
+\chapter{Validation of the approach}
+\section{Test data}
+\section{Validation}
+\section{Tests}
+\subsection{Equal sequences}
+\begin{figure}[H]
+  \begin{subfigure}[t]{\textwidth}
+    \begin{mdframed}
+      \includegraphics[width=\textwidth]{outputs/equal-alignment.png}
+    \end{mdframed}
+    \subcaption{}
+  \end{subfigure}
+  \begin{subfigure}[t]{\textwidth}
+    \begin{mdframed}
+      \includegraphics[width=\textwidth]{outputs/equal-merge.png}
+    \end{mdframed}
+    \subcaption{}
+  \end{subfigure}
+  \caption{The result of aligning (a) and merging (b) the sequence ``ACGTATTAC'' against the reference graph seen in Fig. \ref{fig:output_ref}}
+  \label{fig:output_equal}
+\end{figure}
+\subsection{SNPs}
+\begin{figure}[H]
+  \begin{subfigure}[t]{\textwidth}
+    \begin{mdframed}
+      \includegraphics[width=\textwidth]{outputs/snp-no-margin-alignment.png}
+    \end{mdframed}
+    \subcaption{}
+  \end{subfigure}
+  \begin{subfigure}[t]{\textwidth}
+    \begin{mdframed}
+      \includegraphics[width=\textwidth]{outputs/snp-no-margin-merge.png}
+    \end{mdframed}
+    \subcaption{}
+  \end{subfigure}
+ \caption{The result of aligning (a) and merging (b) the sequence ``ACGGATTAC'' against the reference graph seen in Fig. \ref{fig:output_ref} with $\lambda=0$}
+\end{figure}
+\begin{figure}[H]
+  \begin{subfigure}[t]{\textwidth}
+    \begin{mdframed}
+      \includegraphics[width=\textwidth]{outputs/snp-alignment.png}
+    \end{mdframed}
+    \subcaption{}
+  \end{subfigure}
+  \begin{subfigure}[t]{\textwidth}
+    \begin{mdframed}
+      \includegraphics[width=\textwidth]{outputs/snp-merge.png}
+    \end{mdframed}
+    \subcaption{}
+  \end{subfigure}
+  \begin{subfigure}[t]{\textwidth}
+    \begin{mdframed}
+      \includegraphics[width=\textwidth]{outputs/snp-merge-two.png}
+    \end{mdframed}
+    \subcaption{}
+  \end{subfigure}
+  \caption{The result of aligning (a) and merging (b) the sequence ``ACGGATTAC'' against the reference graph seen in Fig. \ref{fig:output_ref} and then merging the sequence ``ACGCATTAC'' (c) with $\lambda=1$}
+  \label{fig:output_snp}
+\end{figure}
+\subsection{Indels}
+\begin{figure}[H]
+  \begin{subfigure}[t]{\textwidth}
+    \begin{mdframed}
+      \includegraphics[width=\textwidth]{outputs/insertion-alignment.png}
+    \end{mdframed}
+    \subcaption{}
+  \end{subfigure}
+  \begin{subfigure}[t]{\textwidth}
+    \begin{mdframed}
+      \includegraphics[width=\textwidth]{outputs/insertion-merge.png}
+    \end{mdframed}
+    \subcaption{}
+  \end{subfigure}
+  \caption{The result of aligning (a) and merging (b) the sequence ``ACGTAATTAC'' against the reference graph seen in Fig. \ref{fig:output_ref}}
+  \label{fig:output_insertion}
+\end{figure}
+\begin{figure}[H]
+  \begin{subfigure}[t]{\textwidth}
+    \begin{mdframed}
+      \includegraphics[width=\textwidth]{outputs/deletion-alignment.png}
+    \end{mdframed}
+    \subcaption{}
+  \end{subfigure}
+  \begin{subfigure}[t]{\textwidth}
+    \begin{mdframed}
+      \includegraphics[width=\textwidth]{outputs/deletion-merge.png}
+    \end{mdframed}
+    \subcaption{}
+  \end{subfigure}
+  \caption{The result of aligning (a) and merging (b) the sequence ``ACGTTTAC'' against the reference graph seen in Fig. \ref{fig:output_ref}}
+  \label{fig:output_deletion}
+\end{figure}
+\subsection{Structural variation}
+\end{document}

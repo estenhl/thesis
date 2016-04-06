@@ -1,6 +1,52 @@
 \documentclass[thesis.tex]{subfiles}
 
 \begin{document}
-\chapter{Complexity analysis}
+\chapter{Average case complexity analysis}
 \label{sec:complexity_analysis}
+We let $G$ be a reference graph and $s$ and input sequence. $\lambda$ denotes the allowed error margin under the negated edit distance scoring schema.\\
+\par\noindent
+For every candidate vertice $v_x$ in every candidate set $V'_i$, $0<=i<|s|$, we need to find the distance to every preceding vertice in every preceding candidate set $V'_{i-j}$ for $1<=j<=\lambda + 1$. We let this number be denoted by $dist(G, s)$
+\begin{equation}
+  dist(G, s)= \Sigma^{(|s|-1)}_{i=0}|V'_i|\Sigma^{(\lambda + 1)}_{j=1}|V'_{i-j}
+\end{equation}
+If we assume the contexts in $G$ and the substrings in $s$ are both normally distributed over the space of all possible contexts, the size of any two candidate sets are interchangable. This is not an entirely true assumption in the cases of shorter contexts at the beginning and end of $s$, but the impact fo these fades as $|s|$ grows compared to $|c|$. We let $avg(V'_x)$ denote the average size of the candidate sets. We can use this approximation to contract the previous equation
+\begin{equation}
+  \begin{split}
+  dist(G, s)&=\Sigma^{(|s|-1)}_{i=0}|V'_i|\Sigma^{(\lambda+1)}_{j=1}|V'_{i-j}\\
+  &=(|s|-1)avg(V'_x)(\lambda +1) avg(V'_x)\\
+  &=(|s|-1)(\lambda +1)avg(V'_x)^2
+  \end{split}
+\end{equation}
+The sizes of these sets are given by the number of valid contexts, $num(c, \lambda)$, multiplied by the probability that a context exists, $prob(c)$. If we set $\lambda=0$ we allow no fuzzyness and are thus looking for a single context
+\begin{equation}
+  num(c, 0)=1
+\end{equation}
+When increasing $\lambda$ by one we are allowing the search to branch out exactly once from the existing branches. There are $3$ possibilities for branching out in the suffix tree at each of the $|c|$ levels, one possibility for each other character. Each of the branches adds another legal context to the search
+\begin{equation}
+  num(c, \lambda) = 1 + 3|c|*num(c, \lambda - 1)
+\end{equation}
+If we overestimate the number of possible branches by letting the search include every branch which has already been searched this number can be simplified
+\begin{equation}
+  num(c, \lambda) = 1 + 3|c|^{\lambda}
+\end{equation}
+The probability of a context existing in the suffix tree is given by the number of actual contexts divided by the number of possible contexts. We approximate the number of actual contexts by the branching factor of the graph $b$ raised to $|c|$ for every vertice. If we assume the branching factor is close to $1$ this can be contracted to $|G|$
+\begin{equation}
+  prob(c)=\dfrac{|G|}{4^{|c|}}
+\end{equation}
+which means
+\begin{equation}
+  avg(V'_x)=(1 + 3|c|^{\lambda})*\dfrac{|G|}{4^{|c|}}
+\end{equation}
+and
+\begin{equation}
+  dist(G, s) = (|s|-1)(\lambda +1)((1 + 3|c|^{\lambda})*\dfrac{|G|}{4^{|c|}})^2
+\end{equation}
+The distance search itself consists of doing a simple comparison in every vertice which is reachable by the searching algorithm. If we again assume $b \approx 1$ and we let $\lambda$ put an upper bound on the length of the paths which are searched the searching algorithm visits exactly $\lambda$ vertices. The final complexity for the entire operation is found by multiplying the complexity of the distance search with the times it is executed
+\begin{equation}
+  O(search(G', s, \lambda)) = \lambda( (|s|-1)(\lambda +1)((1 + 3|c|^{\lambda})*\dfrac{|G|}{4^{|c|}})^2)
+\end{equation}
+which can be shortened to
+\begin{equation}
+  O(search(G', s, \lambda)) = \dfrac{\lambda^2|s|(|c|^{\lambda}|G|)^2}{4^{|c|^2}}
+\end{equation}
 \end{document}
