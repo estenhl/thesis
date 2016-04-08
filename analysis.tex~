@@ -1,5 +1,0 @@
-\documentclass[thesis.tex]{subfiles}
-
-\begin{document}
-\chapter{Complexity analysis}
-\end{document}

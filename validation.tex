@@ -2,98 +2,143 @@
 
 \begin{document}
 \chapter{Validation of the approach}
+In the previous two chapters we have described the approach we developed and how we chose to implement it. This chapter is concerned with showing the behaviour of the approach. When a set of sequences are combined into a graph there should be an expectation as to what the result should look like. This expectation is grounded in the underlying formalism of the approach: The definitions of the involved elements, the scoring schema used and even smaller details like the order of some operations. We now increase the level of abstraction from the realm of formal details into "What results can we expect from using this approach".\\
+\par\noindent
+Throughout the chapter we will be doing example runs of the tool on some input data coupled with the graphical output. Additionally we will present some statements regarding the state of the data structures to represent the formalization of the expectation of the results. Importantly, this is not an attempt to show whether the tool acts correctly or not, that part is covered by the next chapter. This is a chapter determined to show the reader what it is we actually deem as correct behaviour, and how this behaviour is manifested through the input/output pairs. Throughout the development and implementation process these expectations and many more have been used as a requirement specification, realized through a test set which can be found in the github repo\ref{sec:tool}.\\
+\par\noindent
+The scoring schema used throughout the chapter is the negated edit distance scoring schema. This is used because of the flat structure of both the scores and the penalties, which gives intuitive results for alignments. 
 \section{Test data}
-Because the motivation behind these tests are to determine the behaviour of the algorithm, the input data consists of small, handcrafted sequences which for each experiment contains exactly one easily identifiable trait. These traits are crafted in a way which reflects the nature of variation in genetic sequences. Because the negated edit distance scoring schema is a flat scoring schema which penalizes all errors the same it is prone to display order of operations characteristics of the underlying algorithm. Because the order of operations of the implementation is well known to the authors this is taken into account when creating the data.
-\section{Validation}
-There are two main concepts which the validation of this experiment class wish to capture: The intuition and the formalization. The intuition is captured through visualizable results. Every experiment will provide a visualization of both the inputs and the outputs. When the inputs are visualized, one of the sequences will be chosen as a basis for the graph. The output visualizations will be directly produced by the tool using the -print parameter, followed by porting the resulting dot-file to the tikz syntax used in this thesis\ref{fig:visual_output}. The formalization is carried out through a set of statements from first order logic concerning the state of either the resulting graph or the alignment, which are verifyable in the visual outputs. The mentioned unit tests are created to represent these statements through Java syntax.
+As mentioned, the behaviour of the approach is determined by a relatively small set of formal instructions as to how it should behave in different circumstances. However, these instructions can be nested. This is a step which is cruical in order to graphs complex enough to represent genetic variation. As the nesting goes on and the structures involved grow more and more complex, finding the underlying formal rules becomes non-trivial. In order to avoid any ambiguity the test data in this chapter consists of small, hand-crafted sequences. The tests are divided into sections, the sequences in each section are designed to represent exactly one trait of genetic data which the algorithm should handle in a specific way.\\
+\par\noindent
+Although negated edit distance provide a good basis for intuitive results, the glat structure also presents a possible weakness: The scoring schema yields results which are susceptible to order of operations characteristics of the implementation. The test sequences provided are constructed to avoid any ambiguity concerning the order of the instructions given.
 \section{Tests}
-\subsection{Equal sequences}
-\begin{figure}[H]
-  \begin{subfigure}[t]{\textwidth}
-    \begin{mdframed}
-      \includegraphics[width=\textwidth]{outputs/equal-alignment.png}
-    \end{mdframed}
-    \subcaption{}
-  \end{subfigure}
-  \begin{subfigure}[t]{\textwidth}
-    \begin{mdframed}
-      \includegraphics[width=\textwidth]{outputs/equal-merge.png}
-    \end{mdframed}
-    \subcaption{}
-  \end{subfigure}
-  \caption{The result of aligning (a) and merging (b) the sequence ``ACGTATTAC'' against the reference graph seen in Fig. \ref{fig:output_ref}}
-  \label{fig:output_equal}
+We start out with the most basic operation: Turning a sequence into a reference graph. We first show the command, or commands, which is run:\\
+\par\noindent
+\texttt{./build\_index.sh -{}-input-sequences=ACGTATTAC -{}-png=build}\\
+\par\noindent
+The input sequence is given through the \texttt{-{}-input-sequences} argument. We then show the graphical result which is stored in a png-file with the name given as a \texttt{-{}-png} argument:\\
+\begin{figure}[!h]
+  \includegraphics[height=2cm]{example-image-b} 
+  \caption{The reference graph made from the sequence "ACGTATTAC"}
+  \label{fig:validation_ref}
 \end{figure}
-\subsection{SNPs}
-\begin{figure}[H]
+\par\noindent
+At last we provide a set of statements regarding the result:
+\begin{itemize}
+  \item A reference graph made from a string $s$ should have exactly $|s|+2$ vertices
+\end{itemize}
+These statements are not exhaustive with regards to the output, as such a list would be very long and not particulary interesting. The statements provided will be what we classify as important details which follow from the inner workings of the algorithm, which in part means we omit statements which are exceedingly trivial.\\
+\par\noindent
+The graph built in this example will provide a basis for all of the following examples. In order to provide a working setup to readers who use this chapter as an introduction to the tool the different tests are separated by their index-file, determined by the \texttt{-{}-index} parameter.
+\subsection*{Equal sequences}
+We move on the the most trivial alignment operation, aligning a sequence against itself:\\
+\par\noindent
+ \texttt{./build\_index.sh -{}-input-sequences=ACGTATTAC -{}-index=equal.index}\\
+ \texttt{./align\_sequence.sh -{}-index=equal.index -{}-align-sequence=ACGTATTAC -{}-png=equal-align}\\
+ \texttt{./align\_sequence.sh -{}-index=equal.index -{}-align-sequence=ACGTATTAC -{}-merge=true -{}-png=equal-merge}\\
+ \begin{figure}[!h]
   \begin{subfigure}[t]{\textwidth}
-    \begin{mdframed}
-      \includegraphics[width=\textwidth]{outputs/snp-no-margin-alignment.png}
-    \end{mdframed}
+    \includegraphics[height=2cm]{example-image-b}
     \subcaption{}
   \end{subfigure}
   \begin{subfigure}[t]{\textwidth}
-    \begin{mdframed}
-      \includegraphics[width=\textwidth]{outputs/snp-no-margin-merge.png}
-    \end{mdframed}
+    \includegraphics[height=2cm]{example-image-b}
     \subcaption{}
-  \end{subfigure}
- \caption{The result of aligning (a) and merging (b) the sequence ``ACGGATTAC'' against the reference graph seen in Fig. \ref{fig:output_ref} with $\lambda=0$}
+  \end{subfigure} 
+  \caption{The result of aligning (a) and merging (b) the sequence "ACGTATTAC" against the reference seen in figure \ref{fig:validation_ref}}
+  \label{fig:validation_equal}
 \end{figure}
-\begin{figure}[H]
+\begin{itemize}
+  \item Aligning a sequence against itself should provide an alignment with the indexes of continuous vertices
+  \item Merging a sequence with itself should result in a graph with the same number of vertices as before the merge
+\end{itemize}
+\subsection*{SNPs}
+We let SNPs be the first point mutation. At first we align and merge without setting the error margin $\lambda$:\\
+\par\noindent
+\texttt{./build\_index.sh -{}-input-sequences=ACGTATTAC -{}-index=snp-no-errors.index}\\
+\texttt{./align\_sequence.sh -{}-index=snp-no-errors.index -{}-align-sequence=ACGGATTAC -{}-png=snp-no-errors-align}\\
+\texttt{./align\_sequence.sh -{}-index=snp-no-errors.index -{}-align-sequence=ACGGATTAC -{}-merge=true -{}-png=snp-no-errors-merge}\\
+\begin{figure}[!h]
   \begin{subfigure}[t]{\textwidth}
-    \begin{mdframed}
-      \includegraphics[width=\textwidth]{outputs/snp-alignment.png}
-    \end{mdframed}
+    \includegraphics[height=2cm]{example-image-b}
     \subcaption{}
   \end{subfigure}
   \begin{subfigure}[t]{\textwidth}
-    \begin{mdframed}
-      \includegraphics[width=\textwidth]{outputs/snp-merge.png}
-    \end{mdframed}
+    \includegraphics[height=2cm]{example-image-b}
     \subcaption{}
-  \end{subfigure}
-  \begin{subfigure}[t]{\textwidth}
-    \begin{mdframed}
-      \includegraphics[width=\textwidth]{outputs/snp-merge-two.png}
-    \end{mdframed}
-    \subcaption{}
-  \end{subfigure}
-  \caption{The result of aligning (a) and merging (b) the sequence ``ACGGATTAC'' against the reference graph seen in Fig. \ref{fig:output_ref} and then merging the sequence ``ACGCATTAC'' (c) with $\lambda=1$}
-  \label{fig:output_snp}
+  \end{subfigure} 
+  \caption{The result of aligning (a) and merging (b) the sequence "ACGTATTAC" against the reference seen in figure \ref{fig:validation_ref}}
+  \label{fig:validation_snp_no_error}
 \end{figure}
-\subsection{Indels}
-\begin{figure}[H]
+\begin{itemize}
+  \item Aligning a sequence with an error compared to the reference and no error margin should result in an empty alignment
+  \item Merging an empty alignment should result in a new full path
+\end{itemize}
+We then align the same sequence while allowing an error margin through the \texttt{-{}-error-margin} parameter:\\
+\par\noindent
+\texttt{./build\_index.sh -{}-input-sequences=ACGTATTAC -{}-index=single-snp.index}\\
+\texttt{./align\_sequence.sh -{}-index=single-snp.index -{}-align-sequence=ACGGATTAC -{}-error-margin=1 -{}-png=single-snp-align}\\
+\texttt{./align\_sequence.sh -{}-index=single-snp.index -{}-align-sequence=ACGGATTAC -{}-error-margin=1 -{}-merge=true -{}-png=single-snp-merge}\\
+\begin{figure}[!h]
   \begin{subfigure}[t]{\textwidth}
-    \begin{mdframed}
-      \includegraphics[width=\textwidth]{outputs/insertion-alignment.png}
-    \end{mdframed}
+    \includegraphics[height=2cm]{example-image-b}
     \subcaption{}
   \end{subfigure}
   \begin{subfigure}[t]{\textwidth}
-    \begin{mdframed}
-      \includegraphics[width=\textwidth]{outputs/insertion-merge.png}
-    \end{mdframed}
+    \includegraphics[height=2cm]{example-image-b}
     \subcaption{}
-  \end{subfigure}
-  \caption{The result of aligning (a) and merging (b) the sequence ``ACGTAATTAC'' against the reference graph seen in Fig. \ref{fig:output_ref}}
-  \label{fig:output_insertion}
+  \end{subfigure} 
+  \caption{The result of aligning (a) and merging (b) the sequence "ACGGATTAC" against the reference seen in figure \ref{fig:validation_ref}}
+  \label{fig:validation_single_snp}
 \end{figure}
-\begin{figure}[H]
+\begin{itemize}
+  \item Aligning a sequence with a SNP compared to the reference should provide an alignment with the indexes of continuous vertices
+  \item Merging a sequence with exactly one SNP should yield a graph with exactly one vertice more than the old graph, where exactly one vertice has one more outgoing edge and exactly one vertice has one more incoming edge.
+\end{itemize}
+\subsection*{Indels}
+First we test a deletion by removing the fifth character in the alignment sequence:\\
+\par\noindent
+\texttt{./build\_index.sh -{}-input-sequences=ACGTATTAC -{}-index=deletion.index}\\
+\texttt{./align\_sequence.sh -{}-index=deletion.index -{}-align-sequence=ACGTTTAC -{}-error-margin=1 -{}-png=deletion-align}\\
+\texttt{./align\_sequence.sh -{}-index=deletion.index -{}-align-sequence=ACGTTTAC -{}-error-margin=1 -{}-merge=true -{}-png=deletion-merge}\\
+\begin{figure}[!h]
   \begin{subfigure}[t]{\textwidth}
-    \begin{mdframed}
-      \includegraphics[width=\textwidth]{outputs/deletion-alignment.png}
-    \end{mdframed}
+    \includegraphics[height=2cm]{example-image-b}
     \subcaption{}
   \end{subfigure}
   \begin{subfigure}[t]{\textwidth}
-    \begin{mdframed}
-      \includegraphics[width=\textwidth]{outputs/deletion-merge.png}
-    \end{mdframed}
+    \includegraphics[height=2cm]{example-image-b}
     \subcaption{}
-  \end{subfigure}
-  \caption{The result of aligning (a) and merging (b) the sequence ``ACGTTTAC'' against the reference graph seen in Fig. \ref{fig:output_ref}}
-  \label{fig:output_deletion}
+  \end{subfigure} 
+  \caption{The result of aligning (a) and merging (b) the sequence "ACGTTTAC" against the reference seen in figure \ref{fig:validation_ref}}
+  \label{fig:validation_deletion}
 \end{figure}
-\subsection{Structural variation}
+\begin{itemize}
+  \item Aligning a sequence with a deletion compared to the reference should provide an alignment where exactly one pair of consecutive indexes does not represent neighbouring vertices
+  \item Merging a sequence with a deletion should result in a graph with the same number of vertices as the old graph, but one additional edge
+\end{itemize}
+Secondly we test an insertion by inserting an extra 'A' after the fifth character:\\
+\par\noindent
+\texttt{./build\_index.sh -{}-input-sequences=ACGTATTAC -{}-index=insertion.index}\\
+\texttt{./align\_sequence.sh -{}-index=insertion.index -{}-align-sequence=ACGTAATTAC -{}-error-margin=1 -{}-png=insertion-align}\\
+\texttt{./align\_sequence.sh -{}-index=insertion.index -{}-align-sequence=ACGTAATTAC -{}-error-margin=1 -{}-merge=true -{}-png=insertion-merge}\\
+\begin{figure}[!h]
+  \begin{subfigure}[t]{\textwidth}
+    \includegraphics[height=2cm]{example-image-b}
+    \subcaption{}
+  \end{subfigure}
+  \begin{subfigure}[t]{\textwidth}
+    \includegraphics[height=2cm]{example-image-b}
+    \subcaption{}
+  \end{subfigure} 
+  \caption{The result of aligning (a) and merging (b) the sequence "ACGTAATTAC" against the reference seen in figure \ref{fig:validation_ref}}
+  \label{fig:validation_insertion}
+\end{figure}
+\begin{itemize}
+  \item Aligning a sequence with an insertion compared to the reference should provide an alignment of indexes of consecutive vertices split apart by exactly one unmapped index
+  \item Merging a sequence with an insertion should result in a graph with exactly one more vertice and two more edges
+\end{itemize}
+\subsection*{Structural variation}
+In the section \ref{sec:genetic_variation} of the background chapter we present structural variation as mutations which occur over "larger areas of the genome". In this section we treat any case which is not explicitly covered by one of the preceding cases as a structural variation: Any combination of SNPs, insertions and deletions of any size. Conventiently, as the already mentioned cases cover all the base cases, any structural variation can be seen as 
+\subsection*{Complex graphs}
 \end{document}
