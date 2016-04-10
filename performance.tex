@@ -256,6 +256,36 @@ During the introduction in section \ref{sec:po_msa}, PO-MSA was said to be vulne
 \end{figure}
 \begin{figure}
   \begin{tikzpicture}
+    \begin{axis}[scale only axis,height=\textwidth,width=\textwidth,xmin=0,ymin=0,xmax=5,ymax=35000000000,scaled ticks=false, legend pos=north west, xlabel={$\lambda$}, ylabel={Nanoseconds},xtick={0,1,2,3,4,5}]
+      \addplot[color=blue,mark=*] coordinates {
+        (0, 39421262)
+        (1, 207661867)
+        (2, 1109580502)
+        (3, 4438734683)
+        (4, 15048629538)
+        (5, 31101186953)
+      };
+      \addplot[color=green,mark=*] {
+      	(0,1043852734)
+      	(1,1614193125)
+      	(2,2637929367)
+      	(3,8895260120)
+      	(4,0)
+      	(5,0)
+      }
+      \addplot[color=black,mark=*] coordinates {
+        (0, 2008561551)
+        (5, 2008561551)
+      };
+      \addlegendentry{Fuzzy}
+      \addlegendentry{PO-MSA}
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Runtime of the alignment process as a function of $\lambda$ with $|G|=150.000$ and parallellization}
+  \label{fig:runtime_lambda_large}
+\end{figure}
+\begin{figure}
+  \begin{tikzpicture}
     \begin{axis}[scale only axis,height=\textwidth,width=\textwidth,xmin=0,ymin=0,xmax=5,ymax=6000000000,scaled ticks=false, legend pos=north west, xlabel={$\lambda$}, ylabel={Nanoseconds},xtick={0,1,2,3,4,5}]
       \addplot[color=blue,mark=*] coordinates {
         (0,31397620)
