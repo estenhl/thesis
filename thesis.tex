@@ -21,9 +21,45 @@
 \urlstyle{sf}
 \usepackage{babel,textcomp,csquotes,ifimasterforside,varioref,graphicx}
 \usepackage[backend=biber,style=numeric-comp]{biblatex}
-\usetikzlibrary{automata,arrows,positioning}
+\usetikzlibrary{automata,arrows,positioning,matrix}
 \usepgfplotslibrary{fillbetween}
-\pgfplotsset{compat=1.9}
+\usepackage{ifthen}
+
+\newcommand{\trimmed}{foo}
+\newcommand{\bgcolor}{foo}
+\newcommand{\hmValue}{0}
+\newcommand{\transparency}{0}
+\newcommand{\hmColor}{}
+
+\newcommand{\HeatmapNode}[1]{
+  \ifthenelse{#1 < -200}
+  {
+    \renewcommand{\trimmed}{-200}
+  }
+  % else
+  {
+    \ifthenelse{#1 > 200}
+    {
+      \renewcommand{\trimmed}{200}
+    }
+    % else
+    {
+      \renewcommand{\trimmed}{#1}
+    }
+  }
+
+  \ifthenelse{#1 < 0}
+  {
+    \pgfmathparse{round(\trimmed * -0.5)}
+    \node [fill=red!\pgfmathresult] {#1};
+  }
+  % else
+  {
+    \pgfmathparse{round(\trimmed * 0.5)}
+    \node [fill=blue!\pgfmathresult] {#1};
+  }
+}
+
 
 \newtheoremstyle{break}
   {\topsep}{\topsep}%
