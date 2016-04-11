@@ -2,7 +2,7 @@
 
 \begin{document}
 \chapter{Performance testing}
-This chapter is concerned with testing the efficiency of the approach by running tests on the implemented tool. There are two metrics which will be presented: The running time of the algorithm and the correctness of the result. How correctness is determined is covered in section \ref{sec:performance_validation}. Most of the results are compared against running the same alignment with an own PO-MSA implementation. PO-MSA is chosen because of its intuitive nature, the easily deducible relationship between graph complexity and running time, and, most importantly, because it is not a heuristical approach which means it guarantees a correct result every time.
+This chapter is concerned with testing the efficiency of the approach by running tests on the implemented tool. There are two metrics which will be presented: The running time of the algorithm and the correctness of the result. How correctness is determined is covered in section \ref{sec:performance_validation}. Most of the results are compared against running the same alignment with an own PO-MSA implementation. PO-MSA is chosen because of its intuitive nature, the easily deducible relationship between graph complexity and running time and, most importantly, because it is a non-heuristical approach which means it guarantees a correct result every time.
 \section{Test data}
 These tests are meant to reflect usage in a what would be an every day situation, and does therefore use real genetic data. All of the sequences are FASTA-files from the MHC region, most fetched from the vg github repo\cite{vg}, some from the test-set provided by the sequence graphs tool\cite{sequence_graphs}. The exact test sets are chosen to provide a variety of sequence lengths. In order to cover lengths where we found no sequences there are created artificial sequences by cutting out suitable regions from longer sequences. All the sequences which are used can be found in the test-folder of the github repo of the tool (Appendix \ref{sec:tool}).\\
 \par\noindent
@@ -27,9 +27,9 @@ In order to do alignments we needed reads aswell as the reference data itself. T
   \begin{enumerate}
     \item Choose a random floating point value $0<=v<=1$
     \begin{itemize}
-      \item If $v<p$ delete $r_i$
-      \item Else if $v<2p$ add a random base $b \in \{A, C, G, T\}$ before $r_i$
-      \item Else if $v<3p$ substitue $r_i$ with a random base $b \in \{A, C, G, T\} \\ \{r_i\}$
+      \item If $v<(p/3)$ delete $r_i$
+      \item Else if $v<(2p/3)$ insert a random base $b \in \{A, C, G, T\}$ before $r_i$
+      \item Else if $v<p$ substitue $r_i$ with a random base $b \in \{A, C, G, T\} \\ \{r_i\}$
     \end{itemize}
   \end{enumerate}
   \item Output $r$
@@ -352,7 +352,7 @@ Regulating sequence length is done by varying the \texttt{-{}-len} parameter sen
 \end{figure}
 \subsection*{Runtime as a function of graph complexity}
 \subsection*{Correctness as a function of noise}
-There are two reasons for running these tests: Finding bugs in the tool and learning about statistical distributions. The approach is correct whenever $\lambda$ is greater than the edit distance to the most similar path in the graph, and wrong when it is not. These results are thus an projection of the probability of generating a read $r$ such that $\lambda>=maxscore(r)$ given an error probability $p$. For the first set of tests we set $\lambda=2$, as this is the cutoff-point where a fuzzy search is still more efficient than PO-MSA. The results can be seen in table \ref{tab:correctness}
+There are two reasons for running these tests: Finding bugs in the tool and learning about statistical distributions. The approach is shown to be correct whenever $\lambda$ is greater than the edit distance to the most similar path in the graph, and wrong when it is not. These results are thus an projection of the probability of generating a read $r$ such that $\lambda>=maxscore(r)$ given an error probability $p$. We do however include these results as they reflect usage in an everyday, non-controlled environment. For the first set of tests we set $\lambda=2$, as this is the cutoff-point where a fuzzy search is still more efficient than PO-MSA. The results can be seen in table \ref{tab:correctness}
 \begin{wraptable}{r}{0.3\textwidth}
   \begin{tabular}{|c|c|}
     \hline $p$ & \textbf{Correctness} \\ \hline
@@ -364,23 +364,27 @@ There are two reasons for running these tests: Finding bugs in the tool and lear
     0.08 & 20\% \\ \hline
     0.1 & 10\% \\ \hline
   \end{tabular}
-  \caption{Correctness as $p$ varies and $\lambda$ is fixed}
+  \caption{Percentage of correctly aligned reads as $p$ varies and $\lambda$ is fixed}
   \label{tab:correctness}
 \end{wraptable}
-
+A more interesting experiment is looking at the correctness while both varying $p$ and $\lambda$. In table \ref{fig:correctness_both} we can see the results from such an experiment. Every cell represents the number of correct runs out of 100 tests, which conveniently is equivalent to the error percentage. Every row represents one table corresponding to table \ref{tab:correctness}. More interestingly, every column corresponds to a single mutation-probability which would typically be correlated with an entire data-set. Although the sample is small there seems to be a trend where the number of correctly mapped reads logarithmically increases as the error-margin is increased.
 \begin{figure}
-  \begin{tikzpicture}
-    \matrix(A) [nodes={rectangle}] {
-        \node {5}; & \HeatmapNode{100} & \HeatmapNode{50} & \HeatmapNode{50} & \HeatmapNode{50} & \HeatmapNode{50} & \HeatmapNode{50} \\
-        \node {4}; & \HeatmapNode{100} & \HeatmapNode{99} & \HeatmapNode{96} & \HeatmapNode{83} & \HeatmapNode{50} & \HeatmapNode{50} \\
+  \begin{center}
+    \begin{tikzpicture}[every node/.style={anchor=base,text depth=.5ex,text height=2em,text width=2em},align=center,text centered]
+      \matrix(A) [nodes={rectangle}] {
+        \node {5}; & \HeatmapNode{100} & \HeatmapNode{100} & \HeatmapNode{99} & \HeatmapNode{96} & \HeatmapNode{83} & \HeatmapNode{50} \\
+        \node {4}; & \HeatmapNode{100} & \HeatmapNode{99} & \HeatmapNode{96} & \HeatmapNode{83} & \HeatmapNode{73} & \HeatmapNode{61} \\
         \node {3}; & \HeatmapNode{100} & \HeatmapNode{97} & \HeatmapNode{87} & \HeatmapNode{76} & \HeatmapNode{52} & \HeatmapNode{45} \\
         \node {2}; & \HeatmapNode{100} & \HeatmapNode{93} & \HeatmapNode{73} & \HeatmapNode{59} & \HeatmapNode{44} & \HeatmapNode{41} \\
         \node {1}; & \HeatmapNode{100} & \HeatmapNode{84} & \HeatmapNode{55} & \HeatmapNode{38} & \HeatmapNode{36} & \HeatmapNode{25} \\
         \node {0}; & \HeatmapNode{100} & \HeatmapNode{79} & \HeatmapNode{38} & \HeatmapNode{18} & \HeatmapNode{10} & \HeatmapNode{4} \\
         \node {};  & \node{0}; & \node{0.01}; & \node{0.02}; & \node{0.03}; & \node{0.04}; & \node{0.05}; \\
-    };
-  \end{tikzpicture}
-  \caption{Correctness as both $p$ and $\lambda$ varies}
+      };
+      \node[draw=none] at (0.5, -0.75) {$p$};
+      \node[draw=none] at (-4, 3.85) {$\lambda$};
+    \end{tikzpicture}
+  \end{center}
+  \caption{Percentage of correctly aligned reads as a function of both $p$ and $\lambda$ varies}
   \label{fig:correctness_both}
 \end{figure}
 \section{Comparison with other tools}

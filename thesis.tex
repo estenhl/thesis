@@ -18,6 +18,7 @@
 \usepackage{float}
 \usepackage{mathtools}
 \usepackage[]{algorithm2e}
+\usepackage[nomessages]{fp}
 \urlstyle{sf}
 \usepackage{babel,textcomp,csquotes,ifimasterforside,varioref,graphicx}
 \usepackage[backend=biber,style=numeric-comp]{biblatex}
@@ -28,11 +29,13 @@
 \newcommand{\HeatmapNode}[1]{
   \ifthenelse{#1 < 50}
   {
-    \node [fill=red!#1] {#1};
+    \FPeval\col{100-2*#1}
+    \node [fill=red!\col] {#1};
   }
   % else
   {
-    \node [fill=green!#1] {#1};
+    \FPeval\col{100-2*(100-#1)}
+    \node [fill=green!\col] {#1};
   }
 }
 

@@ -359,10 +359,12 @@ The article ``Multiple sequence alignment using partial order graphs'' proposes 
 Using an approach which is this closely related to the known approaches for regular string alignment has its advantages. Alignments and scores are verifiable through existing tools and the principle of optimality is contained through the dynamic programming. Techniques for handling the different types of alignments, for instance local or global, can be inherited from the domain of strings. The algorithm is however susceptible to the inherent complexity of graphs.
 \label{sec:po_msa}
 \subsubsection{Context-based alignment}
+\label{sec:canonical}
 In the article ``Canonical, Stable, General Mapping using Context Schemes''\cite{canonical_stable_general_mapping_using_context_schemes} the concept of context-based mapping is used for aligning strings. The algorithm works by identifying substrings of the input string which maps uniquely to a context in the reference. Overlapping contexts are combined into longer \textit{Maximal Unique Substrings} (MUMs) which uniquely align to a region of the reference. Finally the aligned substrings are combined in chains into $\beta$-synteny blocks, paths along the graph where exactly $\beta$ mismatches are allowed between the uniquely mapped elements. Any remaining bases are mapped \textit{on credit}, for instance as a graph search through the region represented by the gap between the end and start of to consecutive uniquely mapped sequences. The conceptual idea is that any string mapping to a region of the graph should share a number of unique paths, which can be combined into a larger result. The authors name their heuristical approach the \textit{$\alpha-\beta$-Natural Context-Driven Mapping Scheme} where the $\alpha$ refers to the level of uniqueness required in a context to be considered unique and the $\beta$ refers to the degree of similarity between a substring and a context in order to classifiy the two as equal.
 \section{Tools and frameworks}
-\subsection{Graph representations}
 \subsection{Generics in java}
+\subsection{Serialization}
+\subsection{The JUnit library}
 \subsection{Visualizing graphs: The dot-format}
 \end{document}
 
