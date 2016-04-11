@@ -25,38 +25,14 @@
 \usepgfplotslibrary{fillbetween}
 \usepackage{ifthen}
 
-\newcommand{\trimmed}{foo}
-\newcommand{\bgcolor}{foo}
-\newcommand{\hmValue}{0}
-\newcommand{\transparency}{0}
-\newcommand{\hmColor}{}
-
 \newcommand{\HeatmapNode}[1]{
-  \ifthenelse{#1 < -200}
+  \ifthenelse{#1 < 50}
   {
-    \renewcommand{\trimmed}{-200}
+    \node [fill=red!#1] {#1};
   }
   % else
   {
-    \ifthenelse{#1 > 200}
-    {
-      \renewcommand{\trimmed}{200}
-    }
-    % else
-    {
-      \renewcommand{\trimmed}{#1}
-    }
-  }
-
-  \ifthenelse{#1 < 0}
-  {
-    \pgfmathparse{round(\trimmed * -0.5)}
-    \node [fill=red!\pgfmathresult] {#1};
-  }
-  % else
-  {
-    \pgfmathparse{round(\trimmed * 0.5)}
-    \node [fill=blue!\pgfmathresult] {#1};
+    \node [fill=green!#1] {#1};
   }
 }
 

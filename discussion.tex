@@ -2,6 +2,22 @@
 
 \begin{document}
 \chapter{Discussion}
-\section{Discussing the results}
+\section{Is the approach correct?}
+We will start out by discussing the results from Chapter 6, specifilcally whether the approach are able to produce the intuitively pleasing feeling mentioned in the beginning of the Chapter. For the creators this is an easy question: Yes, because we designed it to do so. A more interesting formulation of the question could be\\
+\par\noindent
+\centerline{\textit{"Is the intuition behind the approach correct?"}}\\
+\par\noindent
+This might be a harder question to answer, probably particularily for the people who inhibits this intuition. \\
+\par\noindent
+The results from the approach exhibit a set of traits, determined by the underlying definitions and design choices. One could imagine the presence of other traits: Maybe the only paths valid for alignment contain vertices exclusively from a single individual, a set of individuals displaying a common phenotype or a demographically bounded subset of the population. Or maybe one would want to score an alignment not purely based on the alignment score but also include the probability of traversing exactly that given path. We would argue these are variants of extensions to the traits seen in the results from our approach. We have tried developing a solution to a more fundamental problem which can hopefully be used either as a starting point or at least as insipiration when solving more specific biological problems. 
+\section{Discussing the performance}
+We will move on to discuss the results from Chapter 7. Specifically there are three characteristics with these results we find interesting: The efficieny of the approach under optimal condititions, the explosion in complexity in relation to introducing fuzzyness and the indexation process. Shortly these can be described as good, bad and bad: The three subsequent sections will discuss each of these in detail.
+\subsection{Optimal conditions}
+We let optimal conditions describe the operation of aligning unaltered reads back to their origin. The results from this can for example be seen in figure \ref{results_g} and they look very good. This is in itself not an exceptionally interesting result. We could for instance solve this even more efficiently by indexing k-mers with the same length as the reads in a hashmap. What is interesting is that this characteristic is not what is sought out individually. It emerges from a solution to a more general problem. This lays a very good foundation for how the algorithm should behave in more specific situations. 
+\subsection{???}
+\subsection{Slow indexation: A death blow?}
+A short answer to this question is no. Most of the time spent by the indexation is used doing slow interactions with the file system, reading and writing a large index. There exists solutions both for better compression\textcolor{red}{[ref]}, better serialization\textcolor{red}{[ref]} and smarter interactions with slower hardware\textcolor{red}{[ref]}. If all else fails one could argue the index should be kept in memory on a supercomputer somewhere\textcolor{red}{[ref]}.\\
+\par\noindent
+The indexation process has not at all been a priority in this project or this thesis, which has a protruding effect on the runtimes. The results from the tool comparison were classified as very ambiguous and hard to decipher, but atleast they show that there exist smarter solutions to indexation.
 \section{A comparison between the sequence graphs tool and the "fuzzy context-based alignment" tool}
 \end{document}
