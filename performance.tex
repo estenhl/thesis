@@ -179,10 +179,10 @@ Additionally we include one more variable:
 \end{itemize}
 As each of the subsequent sections are concerned with the impact of exactly one of these variables, the ``non-important'' variables are locked to a standard value:
 \begin{itemize}
-  \item \textbf{$|G|=35.000$} Representing the mid-range of our test-sets
-  \item \textbf{$\lambda=0, p=0.0$} We let alignment back to the origin represent the base case in the study
-  \item \textbf{$|s|=100$} Common read length for the Illumina HiSeq2000 technology
-  \item \textbf{$b=1$} \textcolor{red}{Argument for this}
+  \item \textbf{$|G|=35.000$} Representing the mid-range of our test-sets.
+  \item \textbf{$\lambda=0, p=0.0$} We let alignment back to the origin represent the base case in the study.
+  \item \textbf{$|s|=100$} Common read length for the Illumina HiSeq2000 technology.
+  \item \textbf{$b=1$} Calculations can be found in section \ref{sec:runtime_complexity}.
 \end{itemize}
 In every section a set of 50 alignments has been run with each setting that is tested. The alignments are produced through the previously mentioned read generation process and the results are averaged over all the runs.
 \subsection*{Runtime as a function of graph size}
@@ -351,6 +351,48 @@ Regulating sequence length is done by varying the \texttt{-{}-len} parameter sen
   \label{fig:runtime_s}
 \end{figure}
 \subsection*{Runtime as a function of graph complexity}
+\label{sec:runtime_complexity}
+The graph complexity is decided by the number of variants featured in the graph. We have let the branching factor $b$ be our benchmark with regards to the complexity. This section will feature testing on two distinct datasets. A set of real allelles for different genes in the MHC region and a set of generated variation for the 35k.fasta sequence. Both datasets contain what could be considered rather moderate values of $b$, the real life data in particular. This is a reflection of genetic variation. Using the numbers from section \ref{sec:human_genome}, assuming every variant creates a new branch and that every human has a unique set of variants, a reference graph of the entire human genome would have a branching factor of approximately $1 + |p|*0.000007$ where $|p|$ is the population size \textcolor{red}{footnote with values}. This is the reason we often use the approximate value $b=1$. It is important to remember that this number is concerned with branching on a vertex level, the actual number of variants grow exponentially with regards to the graph size.
+\begin{figure}
+  \begin{tikzpicture}
+    \begin{axis}[scale only axis,height=\textwidth,width=\textwidth,xmin=1,ymin=0,xmax=900,ymax=2500000000,xmax=1.2,scaled ticks=false, legend pos=north west, xlabel={$\lambda$}, ylabel={Nanoseconds}, legend cell align=left]
+      \addplot[color=blue,mark=*] coordinates {
+        (1,30924263)
+        (1.009,36332244)
+        (1.019,38308170)
+        (1.04,37368688)
+        (1.07,33923728)
+      };
+      \addplot[color=green,mark=*] coordinates {
+        (1,0)
+        (1.009,190239910)
+        (1.019,186633216)
+        (1.04,220772316)
+        (1.07,232592316)
+      };
+      \addplot[color=purple,mark=*] coordinates {
+        (1,0)
+        (1.009,1230413913)
+        (1.019,1305138234)
+        (1.04,1238580349)
+        (1.07,1126601179)
+      };
+      \addplot[color=black,mark=*] coordinates {
+        (1,0)
+        (1.009,503079694)
+        (1.019,500920971)
+        (1.04,0)
+        (1.07,527164014)
+      };
+      \addlegendentry{Fuzzy, \texttt{-{}-error-margin=0}}
+      \addlegendentry{Fuzzy, \texttt{-{}-error-margin=1}}
+      \addlegendentry{Fuzzy, \texttt{-{}-error-margin=2}}
+      \addlegendentry{PO-MSA}
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Runtime of the alignment process as a function of $b$}
+  \label{fig:runtime_s}
+\end{figure}
 \subsection*{Correctness as a function of noise}
 There are two reasons for running these tests: Finding bugs in the tool and learning about statistical distributions. The approach is shown to be correct whenever $\lambda$ is greater than the edit distance to the most similar path in the graph, and wrong when it is not. These results are thus an projection of the probability of generating a read $r$ such that $\lambda>=maxscore(r)$ given an error probability $p$. We do however include these results as they reflect usage in an everyday, non-controlled environment. For the first set of tests we set $\lambda=2$, as this is the cutoff-point where a fuzzy search is still more efficient than PO-MSA. The results can be seen in table \ref{tab:correctness}
 \begin{wraptable}{r}{0.3\textwidth}
