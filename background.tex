@@ -17,6 +17,7 @@ Because there are more possible combinations of nucleotide triplets than there a
 \subsection{Reference genomes}
 A \textit{reference genome} is a data structure which contains genetic information for a population, typically for a given species. The reference genome has a set of continuous nucleotide sequences, called \textit{contigs}, combined into larger \textit{scaffolds} which again are combined to form the \textit{genome} for a species. The first reference genomes collapsed samples from several individuals into a linear \textit{consensus sequence} which was representable for the species as a whole. Later reference genomes have been built more flexibly to allow positions on the genome, called \textit{loci}, to have several variants, termed \textit{alternate loci}. A specific variant of a gene is called an \textit{allele}. A \textit{haplotype} is a set of alleles which tend to be inherited together. Reference genomes form what can be seen as a dictionary for the genome of a species and can be used in sequencing (Section \ref{sec:sequencing}).
 \subsection{The human genome}
+\label{sec:human_genome}
 The human genome consists of roughly 3 billion base pairs (bp). These base pairs are spread over 46 chromosomes and is assumed to contain about 23 000 genes \cite{introduction_to_genomics}. The current human reference genome is GRCh38\cite{grch38}, developed and maintained by the \textit{Genome Reference Consortium} \cite{genome_reference_consortium}. GRCh38 contains 261 alternate loci, spread over 178 out of a total of 238 regions. An average human is estimated to deviate from the reference genome in 10.000-11.000 synonymous sites and 10.000-12.000 non-synonymous sites \cite{a_map_of_human_genome_variation_from_population_scale_sequencing}.
 \subsubsection{Major Histocompatibility Complex}
 \label{sec:mhc}
@@ -362,10 +363,20 @@ Using an approach which is this closely related to the known approaches for regu
 \label{sec:canonical}
 In the article ``Canonical, Stable, General Mapping using Context Schemes''\cite{canonical_stable_general_mapping_using_context_schemes} the concept of context-based mapping is used for aligning strings. The algorithm works by identifying substrings of the input string which maps uniquely to a context in the reference. Overlapping contexts are combined into longer \textit{Maximal Unique Substrings} (MUMs) which uniquely align to a region of the reference. Finally the aligned substrings are combined in chains into $\beta$-synteny blocks, paths along the graph where exactly $\beta$ mismatches are allowed between the uniquely mapped elements. Any remaining bases are mapped \textit{on credit}, for instance as a graph search through the region represented by the gap between the end and start of to consecutive uniquely mapped sequences. The conceptual idea is that any string mapping to a region of the graph should share a number of unique paths, which can be combined into a larger result. The authors name their heuristical approach the \textit{$\alpha-\beta$-Natural Context-Driven Mapping Scheme} where the $\alpha$ refers to the level of uniqueness required in a context to be considered unique and the $\beta$ refers to the degree of similarity between a substring and a context in order to classifiy the two as equal.
 \section{Tools and frameworks}
+This section will very briefly present some of the technical concepts and tools mentioned throughout the thesis. The thesis requires no understanding of these elements: They are only mentioned to provide a backbone for non-technical readers interested in the implementation section and exploring the developed tool.
 \subsection{Generics in java}
 \subsection{Serialization}
+Serialization is the process of writing data structures and objects stored in memory while executing a program to a file. The state of the program is saved through writing the values of the variables involved. The execution can later be resumed in any given state by reading and recreating the serialized objects. Java provides their own off-the-shelf serialization through the Serialization interface which contains functionality for reading and writing objects to file through filestreams. The serialized objects are transformed to sequences of bytes containing both information regarding the semantics of the type of the object and values stored in variables. More specifics regarding the serialization process can be read in the Java API documentation \cite{java_doc_serialization}.
 \subsection{The JUnit library}
+JUnit\cite{junit} is a Java library which provides utilities for testing components. The testing is done through asserting a set of first order logical statements, intuitively written in Java syntax, and the checking whether these assertions are correct. Examples of statements can be:
+\begin{itemize}
+  \item assertEquals(x, y)
+  \item assertTrue(x > y)
+  \item assertNotNull(object)
+\end{itemize}
+The library presents an opportunity to test the \textit{correctness} of a system through checking it's state. The library is however not concerned with whether this correctness is a valid measurement of the expected behaviour of the system.
 \subsection{Visualizing graphs: The dot-format}
+This thesis is concerned with building graphs and searching through them. Often we want to display the graphs and the results from searches to have a reference when discussing their properties. This in itself is not an easy task: Visualization of complex graphs quickly turn into an combinatorical problem of where the elements should be placed. Graphviz\cite{graphviz} is a set of tools created for solving this problem, including a stand-alone tool for Linux platforms. .dot is one of the 
 \end{document}
 
 
