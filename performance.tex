@@ -436,20 +436,20 @@ In this section we have compared the GraphGenome tool with the sequence graphs t
 Unfortunately, the sequence graphs tool did not handle the larger datasets used previously in testing. In order to get a more detailed picture of the space in which both tools produce results we ran tests of several of the smaller sequences found in the data-folder of the docker project. The results from building the index can be seen in table \ref{tab:comparison_build} and figure \ref{fig:comparison_build}. The results from alignment can be found in table \ref{tab:comparison_align} and figure \ref{fig:comparison_align}. All results are taken as an average over 50 runs.
 \begin{figure}
   \begin{tikzpicture}[trim axis left]
-    \begin{axis}[scale only axis,height=\textwidth,width=\textwidth,xmin=0,ymin=0,xmax=7000,ymax=2050636347,scaled ticks=false,xtick]
-      \addplot[color=blue, name path=index] coordinates {
-      	(140,5152980+12078614)
-        (700,0)
-        (2000,0)
-        (3345,0)
-        (7000,0)
+    \begin{axis}[scale only axis,height=\textwidth,width=\textwidth,xmin=140,ymin=0,xmax=7000,ymax=2563031551,scaled ticks=false,xtick={140,1000,3000,5000,7000}, legend pos=north west]
+      \addplot[color=blue,mark=*, name path=index] coordinates {
+      	(140,4489488+11282628)
+        (700,8135746+22973337)
+        (2000,20029169+57785340)
+        (3345,29047859+61984755)
+        (7000,64993790+81623625)
       };
       \addplot[color=red, name path=total,mark=*] coordinates {
-      	(140,555466240)
-        (700,0)
-        (2000,0)
-        (3345,0)
-        (7000,0)
+      	(140,515689436)
+        (700,559241699)
+        (2000,1128971607)
+        (3345,1408628008)
+        (7000,2563031551)
       };
       \addplot[color=black, name path=vg,mark=*] coordinates {
       	(140,1087249638)
@@ -464,8 +464,8 @@ Unfortunately, the sequence graphs tool did not handle the larger datasets used 
       };
       \addplot[red!30] fill between[of=index and total];
       \addplot[blue!30] fill between[of=axis and index];
-      \addlegendentry{Fuzzy tool time}
       \addlegendentry{Fuzzy algorithm time}
+      \addlegendentry{Fuzzy tool time}
       \addlegendentry{Sequence graphs tool time}
     \end{axis}
   \end{tikzpicture}
@@ -474,21 +474,20 @@ Unfortunately, the sequence graphs tool did not handle the larger datasets used 
 \end{figure}
 \begin{figure}
   \begin{tikzpicture}[trim axis left]
-    \begin{axis}[scale only axis,height=\textwidth,width=\textwidth,xmin=140,ymin=0,xmax=3345,ymax=1338106045,scaled ticks=false]
-      \addplot[color=blue, name path=index] coordinates {
-      	(140,0)
-        (700,24601275)
-        (2000,0)
-        (3345,28554977)
-        (7000,0)
-        (21070, 31282803)
+    \begin{axis}[scale only axis,height=\textwidth,width=\textwidth,xmin=140,ymin=0,xmax=7000,ymax=2241645198,scaled ticks=false,xtick={140,1000,3000,5000,7000}, legend pos=north west]
+      \addplot[color=blue,mark=*, name path=index] coordinates {
+      	(140,28018035)
+        (700,28893900)
+        (2000,29239255+5000000)
+        (3345,28611678)
+        (7000,31094903)
       };
       \addplot[color=red, name path=total,mark=*] coordinates {
-      	(140,848416911)
-        (700,1322979428)
-        (2000,0)
-        (3345,0)
-        (7000,0)
+      	(140,364716528)
+        (700,539453102)
+        (2000,948561937)
+        (3345,1272551796)
+        (7000,2241645198)
       };
       \addplot[color=black, name path=vg,mark=*] coordinates {
       	(104,1015797972)
@@ -503,8 +502,8 @@ Unfortunately, the sequence graphs tool did not handle the larger datasets used 
       };
       \addplot[red!30] fill between[of=index and total];
       \addplot[blue!30] fill between[of=axis and index];
-      \addlegendentry{Fuzzy tool time}
       \addlegendentry{Fuzzy algorithm time}
+      \addlegendentry{Fuzzy tool time}
       \addlegendentry{Sequence graphs tool time}
     \end{axis}
   \end{tikzpicture}
