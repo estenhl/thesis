@@ -431,4 +431,82 @@ A more interesting experiment is looking at the correctness while both varying $
 \end{figure}
 \section{Comparison with other tools}
 \label{sec:comparison_tools}
+In this section we have compared the GraphGenome tool with the sequence graphs tool maintained by Adam Novak. We have timed the process strictly by running a clock on the execution time of each of the tools. For our own tool we have included the clock which is run on the algorithm itself. When running a clock on the entire execution we are extremely prone to overhead, specially in the case where there is I/O with large files involved. This makes doing analysis on the results a futile effort where there is hard to draw conclusions. We did the tests with the intention of discovering underlying growth factors in each of the algorithms which would hopefully still shine through.\\
+\par\noindent
+Unfortunately, the sequence graphs tool did not handle the larger datasets used previously in testing. In order to get a more detailed picture of the space in which both tools produce results we ran tests of several of the smaller sequences found in the data-folder of the docker project. The results from building the index can be seen in table \ref{tab:comparison_build} and figure \ref{fig:comparison_build}. The results from alignment can be found in table \ref{tab:comparison_align} and figure \ref{fig:comparison_align}. All results are taken as an average over 50 runs.
+\begin{figure}
+  \begin{tikzpicture}[trim axis left]
+    \begin{axis}[scale only axis,height=\textwidth,width=\textwidth,xmin=0,ymin=0,xmax=7000,ymax=2050636347,scaled ticks=false,xtick]
+      \addplot[color=blue, name path=index] coordinates {
+      	(140,5152980+12078614)
+        (700,0)
+        (2000,0)
+        (3345,0)
+        (7000,0)
+      };
+      \addplot[color=red, name path=total,mark=*] coordinates {
+      	(140,555466240)
+        (700,0)
+        (2000,0)
+        (3345,0)
+        (7000,0)
+      };
+      \addplot[color=black, name path=vg,mark=*] coordinates {
+      	(140,1087249638)
+      	(700,1084725831)
+      	(2000,1091623191)
+        (3345,1093076902)
+        (7000,1125346207)
+      };
+      \addplot[name path=axis] coordinates {
+        (0, 0)
+        (7000, 0)
+      };
+      \addplot[red!30] fill between[of=index and total];
+      \addplot[blue!30] fill between[of=axis and index];
+      \addlegendentry{Fuzzy tool time}
+      \addlegendentry{Fuzzy algorithm time}
+      \addlegendentry{Sequence graphs tool time}
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Time spent building the index by the different tools}
+  \label{fig:comparison_build}
+\end{figure}
+\begin{figure}
+  \begin{tikzpicture}[trim axis left]
+    \begin{axis}[scale only axis,height=\textwidth,width=\textwidth,xmin=140,ymin=0,xmax=3345,ymax=1338106045,scaled ticks=false]
+      \addplot[color=blue, name path=index] coordinates {
+      	(140,0)
+        (700,24601275)
+        (2000,0)
+        (3345,28554977)
+        (7000,0)
+        (21070, 31282803)
+      };
+      \addplot[color=red, name path=total,mark=*] coordinates {
+      	(140,848416911)
+        (700,1322979428)
+        (2000,0)
+        (3345,0)
+        (7000,0)
+      };
+      \addplot[color=black, name path=vg,mark=*] coordinates {
+      	(104,1015797972)
+      	(700,1018260083)
+      	(2000,1022342313)
+        (3345,1024211899)
+        (7000,1032607478)
+      };
+      \addplot[name path=axis] coordinates {
+        (0, 0)
+        (7000, 0)
+      };
+      \addplot[red!30] fill between[of=index and total];
+      \addplot[blue!30] fill between[of=axis and index];
+      \addlegendentry{Fuzzy tool time}
+      \addlegendentry{Fuzzy algorithm time}
+      \addlegendentry{Sequence graphs tool time}
+    \end{axis}
+  \end{tikzpicture}
+\end{figure}
 \end{document}
