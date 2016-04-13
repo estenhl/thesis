@@ -21,14 +21,14 @@ Conveniently, we can apply the approximations used in the birthday problem to de
 \begin{equation}
 	y=4^{|c|}
 \end{equation}
-Computing $x$ requires more work, so we chose to do another approximation to avoid complex calculations. We let $b$ be the branching factor, such that every vertice has approximately $b$ neighbours. Every one of these neighbours has approximately $b$ neighbours again, and so on for every one of the $|c|$ vertices which make up a context. This leads $b^{|c|}$ contexts for each vertice and $|G|b^|c|$ total contexts. If we assume our graphs are mostly linear we can set $b=1$ to end up with a total of $|G|$ contexts. 
+Computing $x$ requires more work, so we chose to do another approximation to avoid complex calculations. We let $b$ be the branching factor, such that every vertice has approximately $b$ neighbours. Every one of these neighbours has approximately $b$ neighbours again, and so on for every one of the $|c|$ vertices which make up a context. This leads $b^{|c|}$ contexts for each vertice and $|G|b^{|c|}$ total contexts. If we assume our graphs are mostly linear we can set $b=1$ to end up with a total of $|G|$ contexts. 
 \begin{equation}
-	c=|G|
+	x=|G|
 \end{equation}
 Plugging these values into the previous formula we search for the smallest context length $|c|$ which gives us less than $1\%$ probability of shared contexts\\
-\par\noindent
-\textcolor{red}{FIND SOME NICE NOTATION}\\
-\par\noindent
+\begin{equation}
+|c|=\underset{c}{min} (1-e^{-|G|^2/2*4^c}) < 0.01
+\end{equation}
 These approximations might seem crude, but as previously stated the length of the contexts does not affect the correctness of the final result and thus we are only trimming efficiency. The functions made by varying $|c|$ in the approximation seem to do a jump from values exponentially decreasing from $1$ to values logaritmically approaching $0$ (See fig. \ref{fig:context_lengths}). The values close to $1$ represent contexts with a low probability of overlap, which gives deep suffix trees. Values close to $0$ represent contexts with a lot of overlap, which gives high complexity in the search part done by the algorithm. A clear goal is to be a part of the ``jumping section'' as laying to close to either of the boundaries run a danger of overcompensating for the opposite effect. The somewhat arbitrarily chosen value $1\%$ was decided as a means to avoid bloated indexes at the cost of a small runtime increase.
 \begin{figure}[!b]
   \begin{tikzpicture}
