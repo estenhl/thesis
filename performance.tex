@@ -160,6 +160,7 @@ When splitting up the runtime into the individual constituents an interesting pa
     \end{axis}
   \end{tikzpicture}
   \subcaption{Total run time as a combination of the individual steps}
+  \label{fig:index_constituents_explicit}
   \end{subfigure}
   \caption{Time (ns) used by the indexation process as a function of the number of vertices}
   \label{fig:index_constituents}
@@ -230,7 +231,7 @@ We first start by varying the size of the graph by using different fasta files a
 \clearpage
 \subsection*{Runtime as a function of error margin}
 \textcolor{red}{GRAPH HAS VALUES FROM 3345 SIZE}
-These tests are separated by varying the \texttt{-{}-error-margin} parameter. The results can be seen in figure \ref{fig:runtime_lambda}. The approach explodes in complexity as the number of allowed contexts increase exponentially. Already at \texttt{-{}-error-margin=1} the approach is slower than a regular PO-MSA search. Interestingly, we can see that the starting point for the exponential function is dependant on the graph sizes. When increasing the number of vertices to $150.000$ the approach is suddenly more efficient than PO-MSA up to $\lambda=2$ (Figure \ref{fig:runtime_lambda_large}). Additionally, if we utilize the parallellization through the \texttt{-{}-parallellization=true} we manage to put a linear bound on the exponential growth (Figure \ref{fig:runtime_lambda_parallell}).
+These tests are separated by varying the \texttt{-{}-error-margin} parameter. The results can be seen in figure \ref{fig:runtime_lambda}. The approach explodes in complexity as the number of allowed contexts increase exponentially. Already at \texttt{-{}-error-margin=1} the approach is slower than a regular PO-MSA search. It is important to state that this growth is not directly correspondant to the actual number given as an error margin. It is rather correlated to the number of possibilities within the given scoring schema given the error margin. For negated edit distance, the two coincide. Interestingly, we can recognize that the starting point for the exponential function is dependant on the graph sizes. When increasing the number of vertices to $150.000$ the approach is suddenly more efficient than PO-MSA up to $\lambda=2$ (Figure \ref{fig:runtime_lambda_parallell}). Additionally, if we utilize the parallellization through the \texttt{-{}-parallellization=true} we manage to put a linear bound on the exponential growth.
 \begin{figure}
   \begin{tikzpicture}
     \begin{axis}[scale only axis,height=0.5\textwidth,width=0.5\textwidth,xmin=0,ymin=0,xmax=5,ymax=4000000000,scaled ticks=false, legend pos=north west, xlabel={$\lambda$}, ylabel={Nanoseconds},xtick={0,1,2,3,4,5}, legend cell align=left]
@@ -252,28 +253,6 @@ These tests are separated by varying the \texttt{-{}-error-margin} parameter. Th
   \end{tikzpicture}
   \caption{Runtime of the alignment process as a function of $\lambda$}
   \label{fig:runtime_lambda}
-\end{figure}
-\begin{figure}
-  \begin{tikzpicture}
-    \begin{axis}[scale only axis,height=0.5\textwidth,width=0.5\textwidth,xmin=0,ymin=0,xmax=5,ymax=35000000000,scaled ticks=false, legend pos=north west, xlabel={$\lambda$}, ylabel={Nanoseconds},xtick={0,1,2,3,4,5}, legend cell align=left]
-      \addplot[color=blue,mark=*] coordinates {
-        (0, 39421262)
-        (1, 207661867)
-        (2, 1109580502)
-        (3, 4438734683)
-        (4, 15048629538)
-        (5, 31101186953)
-      };
-      \addplot[color=black,mark=*] coordinates {
-        (0, 2008561551)
-        (5, 2008561551)
-      };
-      \addlegendentry{Fuzzy}
-      \addlegendentry{PO-MSA}
-    \end{axis}
-  \end{tikzpicture}
-  \caption{Runtime of the alignment process as a function of $\lambda$ with $|G|=150.000$}
-  \label{fig:runtime_lambda_large}
 \end{figure}
 \begin{figure}
   \begin{tikzpicture}
@@ -391,7 +370,7 @@ The graph complexity is decided by the number of variants featured in the graph.
     \end{axis}
   \end{tikzpicture}
   \caption{Runtime of the alignment process as a function of $b$}
-  \label{fig:runtime_s}
+  \label{fig:runtime_b}
 \end{figure}
 \subsection*{Correctness as a function of noise}
 There are two reasons for running these tests: Finding bugs in the tool and learning about statistical distributions. The approach is shown to be correct whenever $\lambda$ is greater than the edit distance to the most similar path in the graph, and wrong when it is not. These results are thus an projection of the probability of generating a read $r$ such that $\lambda>=maxscore(r)$ given an error probability $p$. We do however include these results as they reflect usage in an everyday, non-controlled environment. For the first set of tests we set $\lambda=2$, as this is the cutoff-point where a fuzzy search is still more efficient than PO-MSA. The results can be seen in table \ref{tab:correctness}
@@ -507,5 +486,7 @@ Unfortunately, the sequence graphs tool did not handle the larger datasets used 
       \addlegendentry{Sequence graphs tool time}
     \end{axis}
   \end{tikzpicture}
+  \caption{Time spent building aligning by the different tools}
+  \label{fig:comparison_align}
 \end{figure}
 \end{document}
