@@ -39,7 +39,7 @@ In order to provide reproducability the randomness in the reads are generated fr
 Because this thesis is concerned with the mathematical properties of the model the noise in the reads does not necessarily depict the true nature of either genetic variation (Section \ref{sec:genetic_variation}) or read errors (Section \ref{sec:sequencing}). This is one of the points where we have chosen to limit the complexity of the problem. We argue is an acceptable limitation by seeing these as specifications of a more general problem, \textcolor{red}{more}
 \section{Validation}
 \label{sec:performance_validation}
-When an alignment is produced for a read we classify it as either as correct or not correct. Intuitively one could imagine this can be figured out by determining whether the generated read aligns back to the path it was generated from. However, when noise is introduced an interesting phenomenon can occur: The modified read can become more similar to another path in the graph than its origin. This can also occur whenever there exists actual equal paths in the graph, typically in the case of repeats. In order to stick with mathemathical properties, our definition of optimality holds no relation to the origin of a read but is purely defined as the path which produces the highest possible alignment score. As PO-MSA is an exhaustive search we define optimally aligned as alignments which produce the same alignment score as the highest score found by PO-MSA. Consequently, as only the scores are compared, even when the approach produces a different alignment than PO-MSA, this is be classified as optimal behaviour.\\
+When an alignment is produced for a read we classify it as either as correct or not correct. Intuitively one could imagine this can be figured out by determining whether the generated read aligns back to the path it was generated from. However, when noise is introduced an interesting phenomenon can occur: The modified read can become more similar to another path in the graph than its origin. This can also occur whenever there exists actual equal paths in the graph, typically in the case of repeats. In order to stick with mathemathical properties, our definition of optimality holds no relation to the origin of a read but is purely defined as the path which produces the highest possible alignment score. As PO-MSA is an exhaustive search we define optimally aligned as alignments which produce the same alignment score as the highest score found by PO-MSA. Consequently, as only the scores are compared, even when the approach produces a different alignment than PO-MSA, this is be classified as optimal behaviour. Correctness is only discussed in the later stages of the chapter. 
 \par\noindent
 \section{Time capturing mechanisms}
 For both the "Fuzzy context-based search" and the PO-MSA algorithm the time capturing mechanisms are built into the tool, using the Java System object. This allows us to wrap the time capturing of each individual constituent as close to the functional parts as possible in order to avoid unecessary overhead. When comparing tools the time was taken from the tool was started until the tool ended. Doing it this way has several disadvantages, which are discussed in Section \ref{sec:comparison_tools}. The time unit used throughout the chapter is milliseconds.
@@ -47,7 +47,7 @@ For both the "Fuzzy context-based search" and the PO-MSA algorithm the time capt
 The building of the index is the first step of the process realized through the build\_index.sh script. To summarize this step consists of reading the input files, building the graph and generating the suffix trees. The build process was run 50 times on 6 different data sets, the averaged results can be seen in figure \ref{fig:build_index}. All of these are linear operations which is clearly visible.\\
 
 \begin{figure}[!ht]
-    \begin{tikzpicture}
+    \begin{tikzpicture}[trim axis left, trim axis left]
       \begin{axis}[scale only axis,height=0.4\textwidth,width=0.4\textwidth,xmin=0,ymin=0,xmax=144480,ymax=125000,scaled ticks=false, xlabel={Number of vertices}, ylabel={Milliseconds}, max space between ticks=50pt, ylabel near ticks]
         \addplot[color=black,mark=*] coordinates {
           (700,597)
@@ -63,7 +63,7 @@ The building of the index is the first step of the process realized through the 
     \label{fig:build_index}
 \end{figure}
 \par\noindent
-When splitting up the runtime into the individual constituents an interesting pattern emerges (Fig. \ref{fig:index_constituents}): The main load of the indexation lies in writing to file. The data structure used is a large tree of nested complex structures, which the standard Java serialization does not handle well \textcolor{red}{PROB SHUD REFERENCE SOMETHING. API MAYBE}. Putting effort into improved serialization or reducing the size of the index will thus have a dramatic effect on the time complexity.
+When splitting up the runtime into the individual constituents an interesting pattern emerges: The main load of the indexation lies in writing to file (Figure \ref{fig:index_constituents}). The data structure used is a large tree of nested complex structures, which the standard Java serialization does not handle well \textcolor{red}{PROB SHUD REFERENCE SOMETHING. API MAYBE}. Putting effort into improved serialization or reducing the size of the index will thus have a dramatic effect on the time complexity.
 \begin{figure}[!t]
   \begin{subfigure}[t]{0.4\textwidth}
     \begin{tikzpicture}[trim axis left]
@@ -172,16 +172,16 @@ Additionally we include one more variable:
 \end{itemize}
 As each of the subsequent sections are concerned with the impact of exactly one of these variables, the ``non-important'' variables are locked to a standard value:
 \begin{itemize}
-  \item \textbf{$|G|=35.000$} Representing the mid-range of our test-sets.
-  \item \textbf{$\lambda=0, p=0.0$} We let alignment back to the origin represent the base case in the study.
-  \item \textbf{$|s|=100$} Common read length for the Illumina HiSeq2000 technology.
-  \item \textbf{$b=1$} Calculations can be found in section \ref{sec:runtime_complexity}.
+  \item $\mathbf{|G|=35.000}$ Representing the mid-range of our test-sets.
+  \item $\lambda\mathbf{=0, p=0.0}$ We let alignment back to the origin represent the base case in the study.
+  \item $\mathbf{|s|=100}$ Common read length for the Illumina HiSeq2000 technology.
+  \item $\mathbf{b=1}$ Calculations can be found in section \ref{sec:runtime_complexity}, where complexity tests are presented.
 \end{itemize}
 \subsection*{Runtime as a function of graph size}
-We start by comparing the two alignment algorithms on different graph sizes. Figure \ref{fig:runtime_G} shows the averaged results over 50 runs of each algorithm on the smallest 6 datasets. As expected PO-MSA is completely linear with regards to the number of vertices. The fuzzy search is only dependant on graph size for deciding the suffix tree depth, and the very logarithmical relationship looks almost constant in comparison.
+We start by comparing the two alignment algorithms on different graph sizes. Figure \ref{fig:runtime_G} shows the averaged results over 50 runs of each algorithm on the smallest 6 datasets. As expected PO-MSA is completely linear with regards to the number of vertices. The fuzzy search is only dependant on the graph size to decide the depth of the suffix tree which needs to be searched in the first step, and the extremely logarithmical relationship comes across almost as constant in comparison.
 \clearpage
 \begin{figure}[!ht]
-  \begin{tikzpicture}
+  \begin{tikzpicture}[trim axis left, trim axis right]
     \begin{axis}[scale only axis,height=0.5\textwidth,width=0.5\textwidth,xmin=0,ymin=0,xmax=144480,ymax=2000,scaled ticks=false, legend pos=north west, xlabel={$|G|$}, ylabel={Milliseconds}, legend cell align=left, xtick={50000,100000,150000},ylabel near ticks]
       \addplot[color=blue,mark=*] coordinates {
         (700, 24)
@@ -207,21 +207,23 @@ We start by comparing the two alignment algorithms on different graph sizes. Fig
   \label{fig:runtime_G}
 \end{figure}
 \subsection*{Runtime as a function of error margin}
-\textcolor{red}{GRAPH HAS VALUES FROM 3345 SIZE}
+We vary the error margin by giving the algorithm different $\lambda$-values through the \texttt{-{}-error-margin} parameter. The results from 50 runs at 5 different values are seen in figure \ref{fig:runtime_lambda}. We can see an exponential growth, which is expected from the calculations in Appendix \ref{sec:calculation}. Disconcertingly, the algorithm quickly overtakes PO-MSA, already at $\lambda=2$ the straight forward search is more efficient. Interestingly we can identify that the starting point of the exponential growth is dependant on the graph size. Figure \ref{fig:runtime_lambda_parallell} shows the same experiment on a larger graph size, where we see that the approach is more efficient up to $\lambda=2$. In the same figure we can see that the naive parallellization can soften the exponential growth by a linear factor, at the cost of an initial overhead.\\
+\par\noindent
+It is important to point out that the extreme growth in relation to the small numbers is in part determined by the flat scoring system. The exponential growth is related to the number of possibilities given $\lambda$, not necessarily $\lambda$ itself.\\
 \begin{figure}[!hb]
-  \begin{tikzpicture}
-    \begin{axis}[scale only axis,height=0.5\textwidth,width=0.5\textwidth,xmin=0,ymin=0,xmax=5,ymax=4000000000,scaled ticks=false, legend pos=north west, xlabel={$\lambda$}, ylabel={Nanoseconds},xtick={0,1,2,3,4,5}, legend cell align=left]
+  \begin{tikzpicture}[trim axis left, trim axis right]
+    \begin{axis}[scale only axis,height=0.5\textwidth,width=0.5\textwidth,xmin=0,ymin=0,xmax=5,ymax=15000,scaled ticks=false, legend pos=north west, xlabel={$\lambda$}, ylabel={Milliseconds},xtick={0,1,2,3,4,5}, legend cell align=left, ylabel near ticks]
       \addplot[color=blue,mark=*] coordinates {
-        (0, 26977841)
-        (1, 120987192)
-        (2, 350870315)
-        (3, 947601415)
-        (4, 1741219879)
-        (5, 3496580015)
+        (0, 29)
+        (1, 152)
+        (2, 636)
+        (3, 1700)
+        (4, 8856)
+        (5, 27642)
       };
       \addplot[color=black,mark=*] coordinates {
-        (0, 88628194)
-        (5, 88628194)
+        (0, 460)
+        (5, 460)
       };
       \addlegendentry{Fuzzy}
       \addlegendentry{PO-MSA}
@@ -229,29 +231,29 @@ We start by comparing the two alignment algorithms on different graph sizes. Fig
   \end{tikzpicture}
   \caption{Runtime of the alignment process as a function of $\lambda$}
   \label{fig:runtime_lambda}
-\end{figure}[ht]
+\end{figure}
 \begin{figure}
-  \begin{tikzpicture}
-    \begin{axis}[scale only axis,height=0.5\textwidth,width=0.5\textwidth,xmin=0,ymin=0,xmax=5,ymax=35000000000,scaled ticks=false, legend pos=north west, xlabel={$\lambda$}, ylabel={Nanoseconds},xtick={0,1,2,3,4,5}, legend cell align=left]
+  \begin{tikzpicture}[trim axis left, trim axis right]
+    \begin{axis}[scale only axis,height=0.5\textwidth,width=0.5\textwidth,xmin=0,ymin=0,xmax=5,ymax=35000,scaled ticks=false, legend pos=north west, xlabel={$\lambda$}, ylabel={Milliseconds},xtick={0,1,2,3,4,5}, legend cell align=left, ylabel near ticks]
       \addplot[color=blue,mark=*] coordinates {
-        (0, 39421262)
-        (1, 207661867)
-        (2, 1109580502)
-        (3, 4438734683)
-        (4, 15048629538)
-        (5, 31101186953)
+        (0, 39)
+        (1, 207)
+        (2, 1109)
+        (3, 4438)
+        (4, 15048)
+        (5, 31101)
       };
       \addplot[color=green,mark=*] coordinates {
-        (0,217309155)
-        (1,541668285)
-        (2,1327223214)
-        (3,3649467422)
-        (4,10466121646)
-        (5,21725713902)
+        (0,217)
+        (1,541)
+        (2,1327)
+        (3,3649)
+        (4,10466)
+        (5,21725)
       };
       \addplot[color=black,mark=*] coordinates {
-        (0, 2008561551)
-        (5, 2008561551)
+        (0, 2008)
+        (5, 2008)
       };
       \addlegendentry{Fuzzy}
       \addlegendentry{Fuzzy with parallellization}
@@ -261,42 +263,43 @@ We start by comparing the two alignment algorithms on different graph sizes. Fig
   \caption{Runtime of the alignment process as a function of $\lambda$ with $|G|=150.000$ and \texttt{-{}-parallellization=true}}
   \label{fig:runtime_lambda_parallell}
 \end{figure}
+\clearpage
 \subsection*{Runtime as a function of sequence length}
-Regulating sequence length is done by varying the \texttt{-{}-len} parameter sent to the read generator. The values used are approximations towards values found by actual sequencing technologies\cite{comparison_sequencing_systems}, the results can be found in table \ref{tab:runtimes_s}. As expected both algorithms are very linear with respect to read length, the fuzzy search growing seemingly slower than PO-MSA.
-\begin{table}
+We vary the sequence lengths through changing the lengths produced by the read generator. The read lengths are taken from a set of sequencing machines, chosen to portray a diversity of read lengths\textcolor{red}{ref}. Both the technologies, the lengths and the runtimes are listed in table \ref{tab:runtimes_s}. The number are visualized in figure \ref{fig:runtime_s}
+\begin{table}[!h]
   \begin{tabular}{|l|l|r|r|}
     \hline \textbf{Technology} & \textbf{Read length} & \textbf{PO-MSA time} & \textbf{Fuzzy time} \\ \hline
-    HiSeq2000 (min) & 50 & 171961927 & 19347780 \\ \hline
-    HiSeq2000 & 90 & 264031377 & 30038511 \\ \hline
-    SOLiDv4 & 100 & 294027088 & 36927650 \\ \hline
-    Ion PGM & 200 & 676355995 & 59767319 \\ \hline
-    Sanger 3730xl (min) & 400 & 1117436847 & 98570092 \\ \hline
-    454 GS FLX & 700 & 1600069004 & 167703497 \\ \hline
-    Sanger 3730xl (max) & 900 & 2121961653 & 194846761 \\ \hline
+    HiSeq2000 (min) & 50 & 171 & 19 \\ \hline
+    SOLiDv4 & 100 & 294 & 36 \\ \hline
+    HiSeq3000/4000 & 120 & 0 & 0 \\ \hline
+    Ion PGM & 200 & 676 & 59 \\ \hline
+    Sanger 3730xl (min) & 400 & 1117 & 98 \\ \hline
+    454 GS FLX & 700 & 1600 & 167 \\ \hline
+    Sanger 3730xl (max) & 900 & 2121 & 194 \\ \hline
   \end{tabular}
   \caption{Running times for different read lengths for the PO-MSA and fuzzy algorithms}
   \label{tab:runtimes_s}
 \end{table}
-\begin{figure}
-  \begin{tikzpicture}
-    \begin{axis}[scale only axis,height=\textwidth,width=\textwidth,xmin=0,ymin=0,xmax=900,ymax=2500000000,scaled ticks=false, legend pos=north west, xlabel={$\lambda$}, ylabel={Nanoseconds}, legend cell align=left]
+\begin{figure}[!hb]
+  \begin{tikzpicture}[trim axis left, trim axis right]
+    \begin{axis}[scale only axis,height=0.5\textwidth,width=0.5\textwidth,xmin=0,ymin=0,xmax=900,ymax=2500,scaled ticks=false, legend pos=north west, xlabel={$\lambda$}, ylabel={Milliseconds}, legend cell align=left, ylabel near ticks]
       \addplot[color=blue,mark=*] coordinates {
-        (50,19347780)
-        (90,30038511)
-        (100,36927650)
-        (200,59767319)
-        (400,98570092)
-        (700,167703497)
-        (900,194846761)
+        (50,19)
+        (100,36)
+        (120,0)
+        (200,59)
+        (400,98)
+        (700,167)
+        (900,194)
       };
       \addplot[color=black,mark=*] coordinates {
-        (50,171961927)
-        (90,264031377)
-        (100,294027088)
-        (200,676355995)
-        (400,1117436847)
-        (700,1600069004)
-        (900,2121961653)
+        (50,171)
+        (100,294)
+        (120,0)
+        (200,676)
+        (400,1117)
+        (700,1600)
+        (900,2121)
       };
       \addlegendentry{Fuzzy}
       \addlegendentry{PO-MSA}
@@ -305,39 +308,40 @@ Regulating sequence length is done by varying the \texttt{-{}-len} parameter sen
   \caption{Runtime of the alignment process as a function of $|s|$}
   \label{fig:runtime_s}
 \end{figure}
+\clearpage
 \subsection*{Runtime as a function of graph complexity}
+\textcolor{red}{TEXT}
 \label{sec:runtime_complexity}
-The graph complexity is decided by the number of variants featured in the graph. We have let the branching factor $b$ be our benchmark with regards to the complexity. This section will feature testing on two distinct datasets. A set of real allelles for different genes in the MHC region and a set of generated variation for the 35k.fasta sequence. Both datasets contain what could be considered rather moderate values of $b$, the real life data in particular. This is a reflection of genetic variation. Using the numbers from section \ref{sec:human_genome}, assuming every variant creates a new branch and that every human has a unique set of variants, a reference graph of the entire human genome would have a branching factor of approximately $1 + |p|*0.000007$ where $|p|$ is the population size \textcolor{red}{footnote with values}. This is the reason we often use the approximate value $b=1$. It is important to remember that this number is concerned with branching on a vertex level, the actual number of variants grow exponentially with regards to the graph size.
-\begin{figure}
-  \begin{tikzpicture}
-    \begin{axis}[scale only axis,height=\textwidth,width=\textwidth,xmin=1,ymin=0,xmax=900,ymax=2500000000,xmax=1.2,scaled ticks=false, legend pos=north west, xlabel={$\lambda$}, ylabel={Nanoseconds}, legend cell align=left]
+\begin{figure}[!hb]
+  \begin{tikzpicture}[trim axis left, trim axis right]
+    \begin{axis}[scale only axis,height=0.5\textwidth,width=0.5\textwidth,xmin=1,ymin=0,xmax=900,ymax=2500,xmax=1.2,scaled ticks=false, legend pos=north west, xlabel={$\lambda$}, ylabel={Nanoseconds}, legend cell align=left, ylabel near ticks]
       \addplot[color=blue,mark=*] coordinates {
-        (1,30924263)
-        (1.009,36332244)
-        (1.019,38308170)
-        (1.04,37368688)
-        (1.07,33923728)
+        (1,30)
+        (1.009,36)
+        (1.019,38)
+        (1.04,37)
+        (1.07,33)
       };
       \addplot[color=green,mark=*] coordinates {
         (1,0)
-        (1.009,190239910)
-        (1.019,186633216)
-        (1.04,220772316)
-        (1.07,232592316)
+        (1.009,190)
+        (1.019,186)
+        (1.04,220)
+        (1.07,232)
       };
       \addplot[color=purple,mark=*] coordinates {
         (1,0)
-        (1.009,1230413913)
-        (1.019,1305138234)
-        (1.04,1238580349)
-        (1.07,1126601179)
+        (1.009,1230)
+        (1.019,1305)
+        (1.04,1238)
+        (1.07,1126)
       };
       \addplot[color=black,mark=*] coordinates {
         (1,0)
-        (1.009,503079694)
-        (1.019,500920971)
+        (1.009,503)
+        (1.019,500)
         (1.04,0)
-        (1.07,527164014)
+        (1.07,527)
       };
       \addlegendentry{Fuzzy, \texttt{-{}-error-margin=0}}
       \addlegendentry{Fuzzy, \texttt{-{}-error-margin=1}}
@@ -348,10 +352,11 @@ The graph complexity is decided by the number of variants featured in the graph.
   \caption{Runtime of the alignment process as a function of $b$}
   \label{fig:runtime_b}
 \end{figure}
+\clearpage
 \subsection*{Correctness as a function of noise}
 \begin{wraptable}{r}{0.3\textwidth}
   \begin{tabular}{|c|c|}
-    \hline $p$ & \textbf{Correctness} \\ \hline
+    \hline $p$ & \textbf{Correctly mapped reads} \\ \hline
     0.00 & 100\% \\ \hline
     0.01 & 93\% \\ \hline
     0.02 & 73\% \\ \hline
@@ -363,16 +368,17 @@ The graph complexity is decided by the number of variants featured in the graph.
   \caption{Percentage of correctly aligned reads as $p$ varies and $\lambda$ is fixed}
   \label{tab:correctness}
 \end{wraptable}
-\begin{figure}
+In the previous tests we have guaranteed correct results through tuning the parameters to specific values. We now introduce randomness to these parameters, through the noise parameter $p$. This is in a way a pointless exercise: The results will be mirroring the underlying probability distribution behind the randomness. However it is interesting as a way of visualizing performance in a real life scenario where the amount of noise is to some degree uncertain. Table \ref{tab:correctness} shows the accuracy of the algorithm averaged over 100 runs with a fixed error-margin parameter for certain degrees of noise. Figure \ref{fig:correctness_both} shows a more detailed picture as we let both the amount of noise and $\lambda$ vary.
+\begin{figure}[!hb]
   \begin{center}
-    \begin{tikzpicture}[every node/.style={anchor=base,text depth=.5ex,text height=2em,text width=2em},align=center,text centered]
+    \begin{tikzpicture}[every node/.style={anchor=base,text depth=.5ex,text height=2em,text width=2em},align=center,text centered, trim axis left, trim axis right]
       \matrix(A) [nodes={rectangle}] {
-        \node {5}; & \HeatmapNode{100} & \HeatmapNode{100} & \HeatmapNode{99} & \HeatmapNode{96} & \HeatmapNode{83} & \HeatmapNode{80} \\
-        \node {4}; & \HeatmapNode{100} & \HeatmapNode{99} & \HeatmapNode{96} & \HeatmapNode{83} & \HeatmapNode{73} & \HeatmapNode{61} \\
-        \node {3}; & \HeatmapNode{100} & \HeatmapNode{97} & \HeatmapNode{87} & \HeatmapNode{76} & \HeatmapNode{52} & \HeatmapNode{45} \\
-        \node {2}; & \HeatmapNode{100} & \HeatmapNode{93} & \HeatmapNode{73} & \HeatmapNode{59} & \HeatmapNode{44} & \HeatmapNode{41} \\
-        \node {1}; & \HeatmapNode{100} & \HeatmapNode{84} & \HeatmapNode{55} & \HeatmapNode{38} & \HeatmapNode{36} & \HeatmapNode{25} \\
-        \node {0}; & \HeatmapNode{100} & \HeatmapNode{79} & \HeatmapNode{38} & \HeatmapNode{18} & \HeatmapNode{10} & \HeatmapNode{4} \\
+        \node {5}; & \HeatmapNode{100} & \HeatmapNode{100} & \HeatmapNode{99} & \HeatmapNode{96} & \HeatmapNode{83} & \HeatmapNode{80} & \HeatmapNode{64}\\
+        \node {4}; & \HeatmapNode{100} & \HeatmapNode{99} & \HeatmapNode{96} & \HeatmapNode{83} & \HeatmapNode{73} & \HeatmapNode{61} & \HeatmapNode{41} \\
+        \node {3}; & \HeatmapNode{100} & \HeatmapNode{97} & \HeatmapNode{87} & \HeatmapNode{76} & \HeatmapNode{52} & \HeatmapNode{45} & \HeatmapNode{36} \\
+        \node {2}; & \HeatmapNode{100} & \HeatmapNode{93} & \HeatmapNode{73} & \HeatmapNode{59} & \HeatmapNode{44} & \HeatmapNode{41} & \HeatmapNode{29}\\
+        \node {1}; & \HeatmapNode{100} & \HeatmapNode{84} & \HeatmapNode{55} & \HeatmapNode{38} & \HeatmapNode{36} & \HeatmapNode{25} & \HeatmapNode{16} \\
+        \node {0}; & \HeatmapNode{100} & \HeatmapNode{79} & \HeatmapNode{38} & \HeatmapNode{18} & \HeatmapNode{10} & \HeatmapNode{4} & \HeatmapNode{0} \\
         \node {};  & \node{0}; & \node{0.01}; & \node{0.02}; & \node{0.03}; & \node{0.04}; & \node{0.05}; \\
       };
       \node[draw=none] at (0.5, -0.75) {$p$};
@@ -382,31 +388,33 @@ The graph complexity is decided by the number of variants featured in the graph.
   \caption{Percentage of correctly aligned reads as a function of both $p$ and $\lambda$ varies}
   \label{fig:correctness_both}
 \end{figure}
-\section{Comparison with other tools}
+\clearpage
+\section{Comparison with the sequence graphs tool}
+In this section we will compare the GraphGenome tool with the sequence graphs tool (sg) created as an implementation of the algorithm presented in the article "Canonical, Stable, General Mapping using Context Schemes" by Novak et al. This might seem like a section which should have been granted more space in this chapter. There are several specific reasons this is not the case: First off the tool is listed as unfinished by the creators on their github page. Secondly, we only got the tool running on graphs a fraction of the size compared to the remaining tests in this section. Lastly we previously discovered a large overhead following the serialization of the index, a process we have not focused on in this thesis. The time comparison between the tools are found by timing the entire execution, where we see alot of space for overhead such as this. However, the comparison is still included as we hope to see underlying factors which can create a setting for the conceptual comparison done in section \ref{sec:conceptual_comparison}. The two tools were compared in building the index and doing an alignment, the results can be seen in respectively figure \ref{fig:comparison_build} and \ref{fig:comparison_align}. The time spent by our tool has been divided into "functional parts" and file I/O to indicate the amount of overhead expected in the operations. Because the sg tool has limitations with regards to graph size, we have introduced several smaller sample fasta-files found in their test-folder as input data. The huge amount of overhead make us only conclude with the fact that the sg tool has a indexation structure and serialization which is exceedingly superior.\\
 \label{sec:comparison_tools}
-\begin{figure}
-  \begin{tikzpicture}[trim axis left]
-    \begin{axis}[scale only axis,height=\textwidth,width=\textwidth,xmin=140,ymin=0,xmax=7000,ymax=2563031551,scaled ticks=false,xtick={140,1000,3000,5000,7000}, legend pos=north west]
+\begin{figure}[!hb]
+  \begin{tikzpicture}[trim axis left, trim axis right]
+    \begin{axis}[scale only axis,height=0.5\textwidth,width=0.5\textwidth,xmin=140,ymin=0,xmax=7000,ymax=2750,scaled ticks=false,xtick={140,1000,3000,5000,7000}, legend pos=north west]
       \addplot[color=blue,mark=*, name path=index] coordinates {
-      	(140,4489488+11282628)
-        (700,8135746+22973337)
-        (2000,20029169+57785340)
-        (3345,29047859+61984755)
-        (7000,64993790+81623625)
+      	(140,4+11)
+        (700,8+22)
+        (2000,20+57)
+        (3345,29+61)
+        (7000,64+81)
       };
       \addplot[color=red, name path=total,mark=*] coordinates {
-      	(140,515689436)
-        (700,559241699)
-        (2000,1128971607)
-        (3345,1408628008)
-        (7000,2563031551)
+      	(140,515)
+        (700,559)
+        (2000,1128)
+        (3345,1408)
+        (7000,2563)
       };
       \addplot[color=black, name path=vg,mark=*] coordinates {
-      	(140,1087249638)
-      	(700,1084725831)
-      	(2000,1091623191)
-        (3345,1093076902)
-        (7000,1125346207)
+      	(140,1087)
+      	(700,1084)
+      	(2000,1091)
+        (3345,1093)
+        (7000,1125)
       };
       \addplot[name path=axis] coordinates {
         (0, 0)
@@ -422,29 +430,30 @@ The graph complexity is decided by the number of variants featured in the graph.
   \caption{Time spent building the index by the different tools}
   \label{fig:comparison_build}
 \end{figure}
-\begin{figure}
-  \begin{tikzpicture}[trim axis left]
-    \begin{axis}[scale only axis,height=\textwidth,width=\textwidth,xmin=140,ymin=0,xmax=7000,ymax=2241645198,scaled ticks=false,xtick={140,1000,3000,5000,7000}, legend pos=north west]
+\clearpage\noindent
+\begin{figure}[H]
+  \begin{tikzpicture}[trim axis left, trim axis right]
+    \begin{axis}[scale only axis,height=0.5\textwidth,width=0.5\textwidth,xmin=140,ymin=0,xmax=7000,ymax=2500,scaled ticks=false,xtick={140,1000,3000,5000,7000}, legend pos=north west]
       \addplot[color=blue,mark=*, name path=index] coordinates {
-      	(140,28018035)
-        (700,28893900)
-        (2000,29239255+5000000)
-        (3345,28611678)
-        (7000,31094903)
+      	(140,28)
+        (700,28)
+        (2000,29)
+        (3345,28)
+        (7000,31)
       };
       \addplot[color=red, name path=total,mark=*] coordinates {
-      	(140,364716528)
-        (700,539453102)
-        (2000,948561937)
-        (3345,1272551796)
-        (7000,2241645198)
+      	(140,364)
+        (700,539)
+        (2000,948)
+        (3345,1272)
+        (7000,2241)
       };
       \addplot[color=black, name path=vg,mark=*] coordinates {
-      	(104,1015797972)
-      	(700,1018260083)
-      	(2000,1022342313)
-        (3345,1024211899)
-        (7000,1032607478)
+      	(104,1015)
+      	(700,1018)
+      	(2000,1022)
+        (3345,1024)
+        (7000,1032)
       };
       \addplot[name path=axis] coordinates {
         (0, 0)
@@ -460,9 +469,11 @@ The graph complexity is decided by the number of variants featured in the graph.
   \caption{Runtimes of the two tools}
   \label{fig:comparison_align}
 \end{figure}
-\begin{figure}
-  \begin{tikzpicture}[trim axis left]
-    \begin{axis}[scale only axis,height=\textwidth,width=\textwidth,xmin=0,ymin=0,xmax=0.05,ymax=100,scaled ticks=false, legend pos=north east,xtick={0,0.01,0.02,0.03,0.04,0.05}]
+\noindent
+The sg tool has a \texttt{-{}-mismatch} parameter which works somewhat similarly to our \texttt{-{}-error-margin} parameter by putting a bound on the allowed number of mismatches. The accuracy of the two tools over varying amounts of noise with a set mismatch and error-margin parameter can be seen in figure \ref{fig:comparison_correctness}.
+\begin{figure}[H]
+  \begin{tikzpicture}[trim axis left,trim axis right]
+    \begin{axis}[scale only axis,height=0.5\textwidth,width=0.5\textwidth,xmin=0,ymin=0,xmax=0.05,ymax=100,scaled ticks=false, legend pos=north east,xtick={0.01,0.03,0.05}, ylabel={Correctly mapped reads}, xlabel={$p$}]
       \addplot[color=blue] coordinates {
         (0, 100-0)
         (0.01,100-7)

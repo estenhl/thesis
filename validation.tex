@@ -2,6 +2,7 @@
 
 \begin{document}
 \chapter{Validation of the approach}
+\label{sec:validation}
 In the previous two chapters we have described the approach we developed and how we chose to implement it. This chapter is concerned with showing the behaviour of the approach. When a set of sequences are combined into a graph there should be an expectation as to what the result should look like. This expectation is grounded in the underlying formalism of the approach: The definitions of the involved elements, the scoring schema used and even smaller details like the order of some operations. We now increase the level of abstraction from the realm of formal details into "What results can we expect from using this approach".\\
 \par\noindent
 Throughout the chapter we will be doing example runs of the tool on some input data coupled with the graphical output. Additionally we will present some statements regarding the state of the data structures to represent the formalization of the expectation of the results. Importantly, this is not an attempt to show whether the tool acts correctly or not, that part is covered by the next chapter. This is a chapter determined to show the reader what it is we actually deem as correct behaviour, and how this behaviour is manifested through the input/output pairs. Throughout the development and implementation process these expectations and many more have been used as a requirement specification, realized through a test set which can be found in the github repo (Appendix \ref{tool}).\\
@@ -12,12 +13,12 @@ As mentioned, the behaviour of the approach is determined by a relatively small 
 \par\noindent
 Although negated edit distance provide a good basis for intuitive results, the glat structure also presents a possible weakness: The scoring schema yields results which are susceptible to order of operations characteristics of the implementation. The test sequences provided are constructed to avoid any ambiguity concerning the order of the instructions given.
 \section{Tests}
-We start out with the most basic operation: Turning a sequence into a reference graph. We first show the command, or commands, which is run:\\
+We start out with the most basic operation: Turning a sequence into a reference graph. The input sequence is given through the \texttt{-{}-input-sequences} argument. Throughout the chapter we will first show the command, or commands, which is run:\\
 \par\noindent
 \texttt{./build\_index.sh -{}-input-sequences=ACGTATTAC\\
 -{}-png=build}\\
 \par\noindent
-The input sequence is given through the \texttt{-{}-input-sequences} argument. We then show the graphical result which is stored in a png-file with the name given as a \texttt{-{}-png} argument:\\
+We will then show the graphical result which is stored in a png-file with the name given as a \texttt{-{}-png} argument:\\
 \begin{figure}[!h]
   \begin{mdframed}
     \includegraphics[width=\textwidth]{output/build.png} 
@@ -181,12 +182,13 @@ We start out by combining an insertion with an SNP:\\
 \texttt{./align\_sequence.sh -{}-index=structural1.index \\
 -{}-align-sequence=ACGTGGTTAC -{}-error-margin=2 -{}-merge=true \\
 -{}-png=structural1-merge}\\
-\begin{figure}[!h]
+\begin{figure}[H]
   \begin{mdframed}
   \includegraphics[width=\textwidth]{output/structural1-merge.png}
   \caption{The result of merging the sequence ``ACGTGGTTAC'' with the reference seen in figure \ref{fig:validation_ref}}
   \end{mdframed}
 \end{figure}
+\noindent
 We then try a number of consecutive SNPs:\\
 \par\noindent
 \texttt{./build\_index.sh -{}-input-sequences=ACGTATTAC \\
@@ -194,27 +196,29 @@ We then try a number of consecutive SNPs:\\
 \texttt{./align\_sequence.sh -{}-index=structural2.index \\
 -{}-align-sequence=ACGTACCTT -{}-error-margin=4 -{}-merge=true \\
 -{}-png=structural2-merge}\\
-\begin{figure}[!h]
+\begin{figure}[H]
   \begin{mdframed}
   \includegraphics[width=\textwidth]{output/structural2-merge.png}
   \end{mdframed}
   \caption{The result of merging the sequence ``ACGTACCTT'' with the reference seen in figure \ref{fig:validation_ref}}
 \end{figure}
+\noindent
 At this point we get a result which might not be expected. Instead of four SNPs the alignment contains two deletions and two insertions. This is the previously mentioned effect of the order of operations kicking in. Importantly the somewhat suprising alignment has the exactly same alignment score as the expected one. This is also an example 
 \subsection*{Complex graphs}
 The last snippet of examples will be concerned with building more complex graphs. Although the previous examples are great displays of the functionality of the algorithm they don't exhibit the expressive power of the approach to any degree. This section will demonstrate this flexibility through a series of consecutive alignments and merges against the same graph.\\
 \par\noindent
 We start by building a graph from all the sequences from the first set of tests:\\
 \par\noindent
-\texttt{./build\_index.sh -{}-input-sequences=ACGTATTAC,ACGGATTAC,\\ACGTTTAC,ACGTAATTAC -{}-index=complex.index -{}-error-margin=1 -{}-png=complex1}\\
+\texttt{./build\_index.sh -{}-input-sequences=ACGTATTAC,ACGGATTAC,\\ACGTTTAC,ACGTAATTAC -{}-index=complex.index -{}-error-margin=1 \\-{}-png=complex1}\\
 \par\noindent
-\begin{figure}[!h]
+\begin{figure}[H]
   \begin{mdframed}
   \includegraphics[width=\textwidth]{output/complex1.png}
   \caption{The reference graph made from the sequences ``ACGTATTAC'', ''ACGGATTAC'', ``ACGTTTAC'', ``ACGTAATTAC''}
   \label{fig:validation_complex_ref}
   \end{mdframed}
 \end{figure}
+\noindent
 We then merge in the sequences from the previous section:\\
 \par\noindent
 \texttt{./align\_sequence.sh -{}-index=complex.index \\
@@ -222,20 +226,21 @@ We then merge in the sequences from the previous section:\\
 \texttt{./align\_sequence.sh -{}-index=complex.index \\
 -{}-align-sequence=ACGTACCTT -{}-error-margin=4 -{}-merge=true \\
 -{}-png=complex-merge}\\
-\begin{figure}[!h]
+\clearpage\noindent
+\begin{figure}[H]
   \begin{mdframed}
     \includegraphics[width=\textwidth]{output/complex-merge.png}
   \end{mdframed}
   \caption{The two sequences ``ACGTGGTTAC'' and ``ACGTACCTT'' merged into the graph reference from figure \ref{fig:validation_complex_ref}}
   \label{fig:complex_2}
 \end{figure}
-\par\noindent
-At this point it gets hard to reason about the graphs. The overview of the graph does not intuitively give us a trace back to its origins as quickly as earlier. We are still able to provide statements regarding this state by looking at the definitions used in building the algorithm. One of these statements could for instance be that every originating sequence should have a full pathin the graph. We can comfirm this by aligning one of the original sequences against the reference:\\
+\noindent
+We now get to the point where it gets harder to reason about the graphs. The visualization does not provide an intuitive trace back to its origins as quickly as earlier. We are still able to provide statements regarding this state by looking at the definitions used in building the algorithm. One of these statements could for instance be that every originating sequence should have a full path in the graph. We can comfirm this by aligning one of the original sequences against the reference:\\
 \par\noindent
 \texttt{./align\_sequence -{}-index=complex.index \\
   -{}-align-sequence=ACGTGGTTAC -{}-error-margin=0 \\
   -{}-png=complex-align}
-\begin{figure}[!h]
+\begin{figure}[H]
   \begin{mdframed}
     \includegraphics[width=\textwidth]{output/complex-align.png}
   \end{mdframed}

@@ -11,7 +11,7 @@ The graphs used as reference genome graphs will be built iteratively by starting
 \begin{defn}[Graph-based reference genome (Graph)]
   A pair $G=\{V,E\}$ where $V$ is a set of vertices and $E$ is a set of edges. $|G|$ denotes the number of vertices in $G$.
 \end{defn}
-The involved graphs will be sequence graphs (Section \ref{sec:sequence_graphs}) where every vertice correspond to a single nucleotide from a one or more input sequences used in building the graph. Whether the vertice originates from a single or several sequences is based on whether any new bases has been mapped, and consecutively merged into the vertice. In addition to the nucleobase the vertices will contain an index which is unique to the graph. Every graph $G$ will have two special vertices $s_G=\{s, 0\}$ and $t_G=\{e, -1\}$ which represents unique start and end vertices. 
+The involved graphs will be sequence graphs\footnote{Discussed in section \ref{sec:sequence_graphs}} where every vertice correspond to a single nucleotide from a one or more input sequences used in building the graph. Whether the vertice originates from a single or several sequences is based on whether any new bases has been mapped, and consecutively merged into the vertice. In addition to the nucleobase the vertices will contain an index which is unique to the graph. Every graph $G$ will have two special vertices $s_G=\{s, 0\}$ and $t_G=\{e, -1\}$ which represents unique start and end vertices. 
 \begin{defn}[Graph genome vertice (Vertice)]
   A pair $v=\{b, i\}$ where $b \in \{A, C, T, G\}$ and $i$ is a unique index. The vertice at index $i$ is denoted $v_i$. The notation $b(v_i)$ references the first element in the pair (the nucleotide).
 \end{defn}
