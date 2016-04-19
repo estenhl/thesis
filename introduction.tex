@@ -2,16 +2,18 @@
 
 \begin{document}
 \chapter{Introduction}
-This thesis is the final result of a master project in Informatics: Programming and networks. The project has been supervised by the Biomedical Informatics research group at the Department of Informatics, University of Oslo and was a part of the start phase of a larger project regarding graph-based reference genomes.
+This thesis is the final result of a master project in Informatics: Programming and networks. The project has been supervised by the Biomedical Informatics research group at the Department of Informatics, University of Oslo and was a part of the early phases of a larger project regarding graph-based reference genomes.
 \section{Motivation}
-The project started out as an exploration of graph representations of reference genome. Throughout the early phases the need for an alignment algorithm presented itself heavily. Even something as basic as deciding what the graphs should look like would be solved through defining this process, by implicitly deciding how the data should be combined. Alignment stood out as the most pressing problem to solve to get the ball rolling, and the existing straight-forward approach was not satisfying. 
+We started out with an open exploration of the possibilities of using graph representations for reference genomes. Throughout the early phases the need for a formalization of the alignment process became apparent. Even something as basic as deciding what the graphs would look like could be solved through defining this process, by implicitly deciding how the input data should be compared and combined. The existing straight-forward approach was not satisfying, and alignment stood out as the most pressing problem to solve to get the ball rolling. 
 \section{Aims of the thesis}
 The project in itself had a clear goal: Develop an algorithm for aligning against graph-based reference genomes. This thesis will not be concerned with the chronological events of the development process. Instead the thesis will be concerned with presenting the result of the project: The algorithm ``Fuzzy context-based search''. Interesting design choices taken throughout the process will be presented through the algorithm itself, the reasoning behind these choices given as formal arguments underway. Additionally, the thesis has two smaller goals:
 \begin{itemize}
   \item Validate the correctness of the approach
   \item Perform performance testing and comparisons to other tools on larger datasets
 \end{itemize}
-In order to succeed with the two smaller goals, a tool was created which implements the algorithm. This tool is available online, instructions on retrieving and using the tool can be found in section \ref{sec:tool} of the appendix.
+In order to succeed with the two smaller goals, a tool was created which implements the algorithm. This tool is available online, instructions on retrieving and using the tool can be found in Appendix \ref{sec:tool}.\\
+\par\noindent
+Throughtout the development process we were faced with several decisions regarding the conceptual complexity of the problem. In many of these situations we chose to put an upper bound to the complexity. This was done in order to end up with a simple, general, formally strict proof-of-concept, which should work as a base for later expansions into more specific tools. Some of these might seem as ``shortcuts'' to the reader: We assure this is not the case. Every time the result of such a bound is presented we defend it. In the later parts of the thesis we reintroduce many of the when discussing the feasibility of the approach in relation to more specific biological problems.\\
 \par\noindent
 During the master project the article ``Canonical, Stable, General Mapping using Context Schemes'' was published, discussing an approach to alignment which is similar to the one presented in this thesis. The similarities and differences between the two is granted a large part of the discussion section of the thesis.
 \section{Contents}

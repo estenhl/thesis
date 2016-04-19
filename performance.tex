@@ -152,6 +152,7 @@ When splitting up the runtime into the individual constituents an interesting pa
     \end{axis}
   \end{tikzpicture}
   \subcaption{Total run time as a combination of the individual steps}
+  \label{fig:index_constituents_explicit}
   \end{subfigure}
   \caption{Time used by the indexation process as a function of the number of vertices}
   \label{fig:index_constituents}
@@ -229,28 +230,6 @@ We start by comparing the two alignment algorithms on different graph sizes. Fig
   \caption{Runtime of the alignment process as a function of $\lambda$}
   \label{fig:runtime_lambda}
 \end{figure}[ht]
-\begin{figure}
-  \begin{tikzpicture}
-    \begin{axis}[scale only axis,height=0.5\textwidth,width=0.5\textwidth,xmin=0,ymin=0,xmax=5,ymax=35000000000,scaled ticks=false, legend pos=north west, xlabel={$\lambda$}, ylabel={Nanoseconds},xtick={0,1,2,3,4,5}, legend cell align=left]
-      \addplot[color=blue,mark=*] coordinates {
-        (0, 39421262)
-        (1, 207661867)
-        (2, 1109580502)
-        (3, 4438734683)
-        (4, 15048629538)
-        (5, 31101186953)
-      };
-      \addplot[color=black,mark=*] coordinates {
-        (0, 2008561551)
-        (5, 2008561551)
-      };
-      \addlegendentry{Fuzzy}
-      \addlegendentry{PO-MSA}
-    \end{axis}
-  \end{tikzpicture}
-  \caption{Runtime of the alignment process as a function of $\lambda$ with $|G|=150.000$}
-  \label{fig:runtime_lambda_large}
-\end{figure}[hb]
 \begin{figure}
   \begin{tikzpicture}
     \begin{axis}[scale only axis,height=0.5\textwidth,width=0.5\textwidth,xmin=0,ymin=0,xmax=5,ymax=35000000000,scaled ticks=false, legend pos=north west, xlabel={$\lambda$}, ylabel={Nanoseconds},xtick={0,1,2,3,4,5}, legend cell align=left]
@@ -367,7 +346,7 @@ The graph complexity is decided by the number of variants featured in the graph.
     \end{axis}
   \end{tikzpicture}
   \caption{Runtime of the alignment process as a function of $b$}
-  \label{fig:runtime_s}
+  \label{fig:runtime_b}
 \end{figure}
 \subsection*{Correctness as a function of noise}
 \begin{wraptable}{r}{0.3\textwidth}
