@@ -97,7 +97,7 @@ If more than two sequences are aligned the result is a \textit{Multiple sequence
   \caption{The 2-dimensional array used for solving the edit distance problem for the strings S=``algorithm'' and P=``logarithm'' (Note: This follows regular ED scoring where every operation is penalized +1)}
   \label{fig:edit_distance_array}
 \end{wraptable}
-A problem which is typically solved by dynamic programming is the previously mentioned edit distance problem which utilizes a 2-dimensional array to store the computed values (Fig. \ref{fig:edit_distance_array}).For two strings $S$ and $P$, every index $[i,j]$ in the edit distance table represents the problem instance of the strings $S[0:i],P[0:j]$. The base cases can be seen in the first row and column. There are often dropped from the table itself due to the simple nature of their computations. The remainder of the table is filled out with the following recurrence relation:
+A problem which is typically solved by dynamic programming is the previously mentioned edit distance problem which utilizes a 2-dimensional array to store the computed values (Fig. \ref{fig:edit_distance_array}).For two strings $S$ and $P$, every index $[i,j]$ in the edit distance table represents the problem instance of the substrings $S[0:i],P[0:j]$. The base cases can be seen in the first row and column. These are often dropped from the table itself due to the simple nature of their computations. The remainder of the table is filled out with the following recurrence relation:
 \begin{equation}
   D[i,j] = min
   \begin{cases}

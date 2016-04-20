@@ -1,0 +1,15 @@
+[INFO]    Using default scoring configuration (edit distance)
+[INFO]    Read 1000 lines
+[INFO]    Read 2000 lines
+[INFO]    Read 3000 lines
+[INFO]    Read 4000 lines
+[INFO]    Read 5000 lines
+[INFO]    Read 6000 lines
+[INFO]    Sat context length to 22
+[INFO]    Time used building graph: 123721915913
+[INFO]    Building index
+[INFO]    Finished building indexes
+[INFO]    Time used creating index: 4571663178
+[INFO]    Storing index to file 500k.index
+[INFO]    Time used writing the index: 181495420710
+[INFO]    Time used building the index: 309791445561
