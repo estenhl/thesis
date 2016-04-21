@@ -252,6 +252,7 @@ These interesting regions contain the information we would want to use when crea
 Of the two steps of the algorithm, one stand out as a text book case for possible parallelization. Searching for the candidate vertices for an index is done completely separate from the other indexes. An extremly trivial parallellization of this step is implemented through splitting up the indexes into separate threads, reachable through the \texttt{-{}-parallellization=true} flag. Further parallellization is possible as the recursive searches through the trees are only dependant on the results from the vertices higher up in the trees, there is no exchange of data between the vertices of a layer. This is not implemented in the tool to keep the proof-of-concept presentation of the approach as conceptually simple as possible.
 \clearpage
 \section{Merging aligned sequences}
+\label{sec:merge}
 \begin{wrapfigure}{r}{0.5\textwidth}
   \begin{mdframed}
     \begin{subfigure}[t]{\textwidth}
