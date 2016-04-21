@@ -5,18 +5,17 @@
 \label{sec:validation}
 In the previous two chapters we have described the approach we developed and how we chose to implement it. This chapter is concerned with showing the behaviour of the approach. When a set of sequences are combined into a graph there should be an expectation as to what the result should look like. This expectation is grounded in the underlying formalism of the approach: The definitions of the involved elements, the scoring schema used and even smaller details like the order of some operations. We now increase the level of abstraction from the realm of formal details into "What results can we expect from using this approach".\\
 \par\noindent
-Throughout the chapter we will be doing example runs of the tool on some input data coupled with the graphical output. Additionally we will present some statements regarding the state of the data structures to represent the formalization of the expectation of the results. Importantly, this is not an attempt to show whether the tool acts correctly or not, that part is covered by the next chapter. This is a chapter determined to show the reader what it is we actually deem as correct behaviour, and how this behaviour is manifested through the input/output pairs. Throughout the development and implementation process these expectations and many more have been used as a requirement specification, realized through a test set which can be found in the github repo (Appendix \ref{tool}).\\
+Throughout the chapter we will be doing example runs of the tool on some input data coupled with the actual graphical output. Additionally we will present some statements regarding the state of the data structures to represent the formalization of the expectation of the results. Importantly, this is not an attempt to show whether the tool acts correctly or not, that part is covered by the next chapter. This is a chapter determined to show the reader what it is we actually deem as correct behaviour, and how this behaviour is manifested through the input/output pairs. Throughout the development and implementation process these expectations and many more have been used as a requirement specification, realized through a test set which can be found in the github repo (Appendix \ref{sec:tool}).\\
 \par\noindent
-The scoring schema used throughout the chapter is the negated edit distance scoring schema. This is used because of the flat structure of both the scores and the penalties, which gives intuitive results for alignments. 
+The scoring schema used throughout the chapter is the negated edit distance scoring schema. This is used because of the intuituve results provided by the flat scoring structure. 
 \section{Test data}
-As mentioned, the behaviour of the approach is determined by a relatively small set of formal instructions as to how it should behave in different circumstances. However, these instructions can be nested. This is a step which is cruical in order to graphs complex enough to represent genetic variation. As the nesting goes on and the structures involved grow more and more complex, finding the underlying formal rules becomes non-trivial. In order to avoid any ambiguity the test data in this chapter consists of small, hand-crafted sequences. The tests are divided into sections, the sequences in each section are designed to represent exactly one trait of genetic data which the algorithm should handle in a specific way.\\
+In order to avoid any ambiguity the test data in this chapter consists of small, hand-crafted sequences. As mentioned, the behaviour of the approach is determined by a relatively small set of formal instructions as to how it should behave in different circumstances. However, these instructions can be nested. This is a step which is cruical in order to produce graphs complex enough to fairly represent genetic variation. As the nesting goes on and the structures involved grow more and more complex, finding the underlying formal rules becomes non-trivial. The subsequent tests are divided into sections, the sequences in each section are designed to represent exactly one trait of genetic data which the algorithm should handle in a specific way.\\
 \par\noindent
-Although negated edit distance provide a good basis for intuitive results, the glat structure also presents a possible weakness: The scoring schema yields results which are susceptible to order of operations characteristics of the implementation. The test sequences provided are constructed to avoid any ambiguity concerning the order of the instructions given.
+Although negated edit distance provide a good basis for intuitive results, the flat structure also presents a possible weakness: The scoring schema yields results which are susceptible to order of operations characteristics of the implementation. The test sequences provided are constructed to avoid any ambiguity concerning the order of the instructions given.
 \section{Tests}
 We start out with the most basic operation: Turning a sequence into a reference graph. The input sequence is given through the \texttt{-{}-input-sequences} argument. Throughout the chapter we will first show the command, or commands, which is run:\\
 \par\noindent
-\texttt{./build\_index.sh -{}-input-sequences=ACGTATTAC\\
--{}-png=build}\\
+\texttt{./build\_index.sh -{}-input-sequences=ACGTATTAC -{}-png=build}\\
 \par\noindent
 We will then show the graphical result which is stored in a png-file with the name given as a \texttt{-{}-png} argument:\\
 \begin{figure}[!h]
@@ -33,7 +32,7 @@ At last we provide a set of statements regarding the result:
 \end{itemize}
 These statements are not exhaustive with regards to the output, as such a list would be very long and not particulary interesting. The statements provided will be what we classify as important details which follow from the inner workings of the algorithm, which in part means we omit statements which are exceedingly trivial.\\
 \par\noindent
-The graph built in this example will provide a basis for all of the following examples. In order to provide a working setup to readers who use this chapter as an introduction to the tool the different tests are separated by their index-file, determined by the \texttt{-{}-index} parameter.
+The graph built in this example will provide a basis for all of the following examples. In order to provide a working setup to readers who use this chapter as an introduction to the tool the different tests are separated by their index-file, determined by the \texttt{-{}-index} parameter, and the png filename.
 \subsection*{Equal sequences}
 We move on the the most trivial alignment operation, aligning a sequence against itself:\\
 \par\noindent
@@ -61,6 +60,7 @@ We move on the the most trivial alignment operation, aligning a sequence against
 \item Aligning a sequence against itself should provide an alignment with the indexes of continuous vertices
 \item Merging a sequence with itself should result in a graph with the same number of vertices as before the merge
 \end{itemize}
+\clearpage
 \subsection*{SNPs}
 We let SNPs be the first point mutation. At first we align and merge without setting the error margin $\lambda$:\\
 \par\noindent
@@ -86,8 +86,9 @@ We let SNPs be the first point mutation. At first we align and merge without set
 \end{figure}
 \begin{itemize}
 \item Aligning a sequence with an error compared to the reference and no error margin should result in an empty alignment
-\item Merging an empty alignment should result in a new full path
+\item Merging in an empty alignment should result in a new full path
 \end{itemize}
+\clearpage\noindent
 We then align the same sequence while allowing an error margin through the \texttt{-{}-error-margin} parameter:\\
 \par\noindent
 \texttt{./build\_index.sh -{}-input-sequences=ACGTATTAC\\
@@ -113,8 +114,9 @@ We then align the same sequence while allowing an error margin through the \text
 \end{figure}
 \begin{itemize}
 \item Aligning a sequence with a SNP compared to the reference should provide an alignment with the indexes of continuous vertices
-\item Merging a sequence with exactly one SNP should yield a graph with exactly one vertice more than the old graph, where exactly one vertice has one more outgoing edge and exactly one vertice has one more incoming edge.
+\item Merging in a sequence with exactly one SNP should yield a graph with exactly one vertice more than the old graph, where exactly one vertice has one more outgoing edge and exactly one vertice has one more incoming edge.
 \end{itemize}
+\clearpage
 \subsection*{Indels}
 First we test a deletion by removing the fifth character in the alignment sequence:\\
 \par\noindent
