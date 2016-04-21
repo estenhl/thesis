@@ -44,11 +44,11 @@ When an alignment is produced for a read we classify it as either as correct or 
 \section{Time capturing mechanisms}
 For both the "Fuzzy context-based search" and the PO-MSA algorithm the time capturing mechanisms are built into the tool, using the Java System object. This allows us to wrap the time capturing of each individual constituent as close to the functional parts as possible in order to avoid unecessary overhead. When comparing tools the time was taken from the tool was started until the tool ended. Doing it this way has several disadvantages, which are discussed in Section \ref{sec:comparison_tools}. The time unit used throughout the chapter is milliseconds.
 \section{Building the index}
-The building of the index is the first step of the process realized through the build\_index.sh script. To summarize this step consists of reading the input files, building the graph and generating the suffix trees. The build process was run 50 times on 6 different data sets, the averaged results can be seen in figure \ref{fig:build_index}. All of these are linear operations which is clearly visible.\\
+The building of the index is the first step of the process realized through the build\_index.sh script. To summarize this step consists of reading the input files, building the graph and generating the suffix trees. The build process was run 50 times on 6 different data sets, the averaged results can be seen in figure \ref{fig:build_index}. All of these are linear operations, a trend which is clearly visible.\\
 
 \begin{figure}[!ht]
     \begin{tikzpicture}[trim axis left, trim axis left]
-      \begin{axis}[scale only axis,height=0.4\textwidth,width=0.4\textwidth,xmin=0,ymin=0,xmax=144480,ymax=125000,scaled ticks=false, xlabel={Number of vertices}, ylabel={Milliseconds}, max space between ticks=50pt, ylabel near ticks]
+      \begin{axis}[scale only axis,height=0.4\textwidth,width=0.4\textwidth,xmin=0,ymin=0,xmax=448490,ymax=320000,scaled ticks=false, xlabel={Number of vertices}, ylabel={Milliseconds}, max space between ticks=50pt, ylabel near ticks]
         \addplot[color=black,mark=*] coordinates {
           (700,597)
           (3345,2050)
@@ -56,6 +56,7 @@ The building of the index is the first step of the process realized through the 
           (35770,25401)
           (101570,77928)
           (144480,122654)
+          (448490,309791)
         };
       \end{axis}
     \end{tikzpicture}
@@ -67,7 +68,7 @@ When splitting up the runtime into the individual constituents an interesting pa
 \begin{figure}[!t]
   \begin{subfigure}[t]{0.4\textwidth}
     \begin{tikzpicture}[trim axis left]
-      \begin{axis}[scale only axis,height=\textwidth,width=\textwidth,xmin=0,ymin=0,xmax=144480,ymax=125000,scaled ticks=false]
+      \begin{axis}[scale only axis,height=\textwidth,width=\textwidth,xmin=0,ymin=0,xmax=448490,ymax=320000,scaled ticks=false]
         \addplot coordinates {
           (700,9)
           (3345,51)
@@ -86,7 +87,7 @@ When splitting up the runtime into the individual constituents an interesting pa
       \begin{axis}[scale only axis,height=\textwidth,width=\textwidth,xmin=0,ymin=0,xmax=144480,ymax=125000,scaled ticks=false]
         \addplot[color=green,mark=*] coordinates {
           (701,65)
-          (3416,138)
+          (3345,138)
           (21070,269)
           (35770,2788)
           (101570,6905)
@@ -102,7 +103,7 @@ When splitting up the runtime into the individual constituents an interesting pa
         \addplot[color=red,mark=*] coordinates {
           (700,522)
           (3345,1860)
-          (21070,1296)
+          (21070,12960)
           (35770,21581)
           (101570,65535)
           (144480,101317)
@@ -314,20 +315,22 @@ We vary the sequence lengths through changing the lengths produced by the read g
 \label{sec:runtime_complexity}
 \begin{figure}[!hb]
   \begin{tikzpicture}[trim axis left, trim axis right]
-    \begin{axis}[scale only axis,height=0.5\textwidth,width=0.5\textwidth,xmin=1,ymin=0,xmax=900,ymax=2500,xmax=1.2,scaled ticks=false, legend pos=north west, xlabel={$\lambda$}, ylabel={Nanoseconds}, legend cell align=left, ylabel near ticks]
+    \begin{axis}[scale only axis,height=0.5\textwidth,width=0.5\textwidth,xmin=1,ymin=0,xmax=900,ymax=2500,xmax=1.1,scaled ticks=false, legend pos=north west, xlabel={$\lambda$}, ylabel={Nanoseconds}, legend cell align=left, ylabel near ticks]
       \addplot[color=blue,mark=*] coordinates {
         (1,30)
         (1.009,36)
         (1.019,38)
         (1.04,37)
         (1.07,33)
+        (1.1,34)
       };
       \addplot[color=green,mark=*] coordinates {
-        (1,0)
+        (1,152)
         (1.009,190)
         (1.019,186)
         (1.04,220)
         (1.07,232)
+        (1.1,227)
       };
       \addplot[color=purple,mark=*] coordinates {
         (1,0)
@@ -335,6 +338,7 @@ We vary the sequence lengths through changing the lengths produced by the read g
         (1.019,1305)
         (1.04,1238)
         (1.07,1126)
+        (1.1,1233)
       };
       \addplot[color=black,mark=*] coordinates {
         (1,0)
@@ -342,6 +346,7 @@ We vary the sequence lengths through changing the lengths produced by the read g
         (1.019,500)
         (1.04,0)
         (1.07,527)
+        (1.1,562)
       };
       \addlegendentry{Fuzzy, \texttt{-{}-error-margin=0}}
       \addlegendentry{Fuzzy, \texttt{-{}-error-margin=1}}

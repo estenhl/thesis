@@ -3,46 +3,51 @@
 \begin{document}
 \chapter{The algorithm ``Fuzzy context-based search''}
 {\parindent0pt
-In this chapter we introduce the algorithm ``Fuzzy context-based search'' as a solution to the problem of aligning text strings against graph-based reference genomes. In order to do this we will first present formal definitions of the elements and structures involved aswell as the problem itself. The following description of the algorithm will be a conceptual overview where the motivation behind the steps taken are also described. A more detailed introduction to an implementation of the algorithm will follow in the succeeding chapter, in which space and time complexity will also be discussed. Due to the abstract nature of this chapter the reader is advised to use the coming chapter as a reference whenever needed. The two have corresponding sections, and the latter contain exact details and concrete examples. There can also be value in looking up the visualizations of actual results shown in Chapter \ref{sec:validation}\\
+In this chapter we introduce the algorithm ``Fuzzy context-based search'' ("fuzzy search" or "fuzzy" for short) as a solution to the problem of aligning text strings against graph-based reference genomes. In order to do this we will first present formal definitions of the elements and structures involved aswell as the problem itself. The following description of the algorithm will be a conceptual overview where the motivation behind the steps taken are also described. A more detailed introduction to a precise implementation of the algorithm will follow in the succeeding chapter, in which space and time complexity will also be discussed. Due to the abstract nature of this chapter the reader is advised to use the coming chapter as a reference whenever needed. The two have corresponding sections, and the latter contain exact details and concrete examples. There can also be value in looking up the visualizations of actual results shown in Chapter \ref{sec:validation}.\\
 \par\noindent
 In order to avoid ambiguity when dealing with already existing concepts, the terms which are defined are given problem-specific names. For several of the terms there also follows a shorthand notation behind the original name in the definition title. Whenever these shorthand names are used in the subsequent explanatory sections we refer exclusively to the definitions done in this thesis.
 \section{The graphs}
-The graphs used as reference genome graphs will be built iteratively by starting out with an empty graph and sequentially merging in input sequences aligned against the existing structure. How the sequences are merged, and thus what the graphs look like, are decided entirely through the alignment procedure, which in part relies on the scoring schema. This first section is dedicated to precisely defining the involved graphs. 
+The graphs used as reference genome graphs will be built iteratively by starting out with an empty graph and sequentially merging in input sequences aligned against the existing structure. How the sequences are merged, and thus what the graphs look like, are decided entirely through the alignment procedure, which in part relies on the scoring schema. This first section is dedicated to precisely defining the involved graphs through definitions of their constituents. 
+\clearpage
 \begin{defn}[Graph-based reference genome (Graph)]
   A pair $G=\{V,E\}$ where $V$ is a set of vertices and $E$ is a set of edges. $|G|$ denotes the number of vertices in $G$.
 \end{defn}
-The involved graphs will be sequence graphs\footnote{Discussed in section \ref{sec:sequence_graphs}} where every vertice correspond to a single nucleotide from a one or more input sequences used in building the graph. Whether the vertice originates from a single or several sequences is based on whether any new bases has been mapped, and consecutively merged into the vertice. In addition to the nucleobase the vertices will contain an index which is unique to the graph. Every graph $G$ will have two special vertices $s_G=\{s, 0\}$ and $t_G=\{e, -1\}$ which represents unique start and end vertices. 
-\begin{defn}[Graph genome vertice (Vertice)]
-  A pair $v=\{b, i\}$ where $b \in \{A, C, T, G\}$ and $i$ is a unique index. The vertice at index $i$ is denoted $v_i$. The notation $b(v_i)$ references the first element in the pair (the nucleotide).
+The involved graphs will be sequence graphs\footnote{Discussed in section \ref{sec:sequence_graphs}} where every vertex correspond to a single nucleotide from a one or more input sequences used in building the graph. Whether the vertex originates from a single or several sequences is based on whether any new bases has been mapped, and consequently merged, into the vertex. In addition to the nucleotide the vertices will contain an index which is unique to the graph. 
+\begin{defn}[Graph genome vertex (Vertex)]
+  A pair $v=\{b, i\}$ where $b \in \{A, C, T, G\}$ and $i$ is a unique index. The vertice at index $i$ is denoted $v_i$. The notation $b(v_i)$ is used to reference the first element in the pair (the nucleotide).
 \end{defn}
-The edges model the relationships between the vertices and thus the relationships between the elements of the input sequences. Every edge has its origin from a consecutive pair of nucleotides in one or more input sequences.
+Every graph $G$ will have two special vertices $s_G=\{s, 0\}$ and $t_G=\{e, -1\}$ which represents unique start and end vertices.\\
+\par\noindent
+The edges in the graph model the relationships between the vertices and thus the relationships between the elements of the input sequences. Every edge has its origin from a consecutive pair of nucleotides in one or more input sequences.
 \begin{defn}[Graph genome edge (Edge)]
   An ordered pair $e=\{i_s, i_e\}$ where both elements are indexes for vertices. 
 \end{defn}
 There exists no information storing the origin of an edge, or whether an edge originates from one or more input sequences, and all edges are thus seen as equally probable when aligning a sequence. A sequence of vertices where there exists an edge for every pair of consecutive vertices is called a \textit{path}. The introduction of paths is a a way of capturing the combination of several individual characters into text strings in the domain of our graphs.
 \begin{defn}[Graph genome path (Path)]
-  A list $P$ of indexes such that for all consecutive pairs $p_x, p_{x+1}\ \in P$, where $p_n$ denotes the n-th element of the list, there exists an edge $e=\{p_x, p_{x+1}\}$. The notation $p_{-1}$ denotes the last element in the list. The length of $P$, $l(P)$, is equal to the number of indexes in the list. The distance $d(P)$ between $p_0$ and $p_{-1}$ is $l(P) - 2$.
+  A list $P$ of indexes such that for all consecutive pairs $(p_x, p_{x+1}) \in P$, where $p_n$ denotes the n-th element of the list, there exists an edge $e=\{p_x, p_{x+1}\}$. The notation $p_{-1}$ denotes the last element in the list. The length of $P$, $l(P)$, is equal to the number of indexes in the list. We define the distance $d(P)$ between $p_0$ and $p_{-1}$ is $l(P) - 2$.
 \end{defn}
-\begin{corollary}
-  Every edge $e$ is also a path $P$ with $l(P)=2$ and $d(P)=0$.
+\begin{corollary}[Distance between neighbours]
+  Every edge $e$ is also a path $P$ with $d(P)=0$.
 \end{corollary}
-Paths spanning the entire length of a graph $G$, from $s_G$ to $t_G$ are named full paths. Every input sequence used to build the graph has a corresponding full path.
+Paths spanning the entire length of a graph $G$, from $s_G$ to $t_G$, are named full paths. Every input sequence used to build the graph has a corresponding full path.
 \begin{defn}[Full path]
   A path $P$ through a graph $G$ where $p_0=0$ and $p_{-1}=-1$
 \end{defn}
-There is no correspondence the other way, meaning there can exist full paths which does not originate from a single input sequence (Fig. \ref{fig:example_reference}). When aligning regular text strings against each other the introduction of gaps is a key element. The concept of strings with gaps is translated to graphs through \textit{incomplete paths}.
+There is no correspondence the other way, meaning there can exist full paths which does not originate from a single input sequence. An example of this can be seen in figure \ref{fig:example_reference} where a reference graph made from three sequences has 9 valid full paths. When aligning regular text strings against each other the introduction of gaps is a key element. We translate the concept of strings with gaps to our graph domain through \textit{incomplete paths}.
 \begin{defn}[Incomplete path]
-  A list $P*$ of indexes such that for all consecutive pairs $\{p*_x, p*_{x+1}\} \in P*$ there exists a path $P$ such that $p_0=p*_x$ and $p_{-1}=p*_{x+1}$.
+  A list $P*$ of indexes such that for all consecutive pairs $(p*_x, p*_{x+1}) \in P*$ there exists a path $P$ such that $p_0=p*_x$ and $p_{-1}=p*_{x+1}$.
 \end{defn}
-Conceptually incomplete paths can be seen as regular paths where some of the vertices are removed to reflect gaps. We can score an incomplete path by looking solely at the gaps present and avoiding the nucleobases contained in the vertices to produce a \textit{path score}. 
+Conceptually incomplete paths can be seen as regular paths where some of the vertices are removed to reflect gaps. One of the incomplete paths seen in figure \ref{fig:example_reference} is $[1, 2, 4, 5]$. We can score an incomplete path by looking solely at the gaps present and avoiding mapping scores for the nucleotides contained in the vertices to produce a \textit{path score}. 
 \begin{defn}[Path score]
   The total score of all gaps present in an incomplete path $P*$ according to a scoring schema
 \end{defn}
-In an incomplete path there exists two possible relationships between consecutive elements: Either they are neighbours and there exists an edge between them, or they are not neighbours and are at the beginning and end of a path. Because the edges have distance $0$ and are thus not penalized, the path score of an incomplete path can be found by summarizing gap penalties for gaps between every pair of consecutive vertices.
-\begin{corollary}
-  $pathScore(P*)=\Sigma^{|P*|-2}_{i=0} gapPenalty(distance(p*_i, p*_{i+1}))$ where $distance(x, y)$ denotes the distance of the shortest path $P$ where $P_0=x$ and $P_{-1}=y$.
-\end{corollary}
-\begin{figure}[t]
+In an incomplete path there exists two possible relationships between consecutive elements: Either they are neighbours and there exists an edge between them, or they are not neighbours and are at the beginning and end of a path. Because the edges have distance $0$ and are thus not penalized, the path score of an incomplete path can be found by summarizing gap penalties for gaps between every pair of consecutive vertices:
+\begin{equation}
+  \label{eq:path_score}
+  pathScore(P*)=\Sigma^{|P*|-2}_{i=0} gapPenalty(distance(p*_i, p*_{i+1}))
+\end{equation}
+where $distance(x, y)$ denotes the distance of the shortest path $P$ where $P_0=x$ and $P_{-1}=y$. If we continue with the incomplete path $[1, 2, 4, 5]$ from the figure, we can see one pair on consecutive vertices which are not neighbours: $(2, 4)$. We can see that the only path between them, the path $[2, 3, 4]$, has a distance of $1$.
+\begin{figure}[b]
   \begin{mdframed}
     \begin{center}
       \begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=1.4cm,scale=0.5]
@@ -74,40 +79,79 @@ In an incomplete path there exists two possible relationships between consecutiv
       \end{tikzpicture}
     \end{center}
   \end{mdframed}
-  \caption{An example reference graph $G$ made from the three sequences ``ATATA'', ``AGAGA'' and ``ACAA''. Although the graph is made from 3 sequences, 9 full paths can be found}
+  \caption{An example reference graph $G$ made from the three sequences ``ATATA'', ``AGAGA'' and ``ACAA''}
   \label{fig:example_reference}
 \end{figure}
 }
 \clearpage
 \section{The alignment problem}
 {\parindent0pt
-Because the alignment problem is concerned with aligning text strings against graphs we need to define a second component alongside the graphs: The \textit{input sequences}.
+Following the description of alignment from section \ref{sec:mapping}, defining the graphs presents us with a formal notion of half of the input data to the problem. We also need to define the other half: The \textit{input sequences}.
 \begin{defn}[Input sequence]
   A string $s$ over the alphabet $\{A, C, T, G\}$. The length of the string is given by $|s|$. The individual character on position $0<=x<|s|$ is referenced by $s_x$
 \end{defn}
-Once we have a clear definition of a graph $G$ and an input sequence $s$ we can try to find an \textit{alignment} between the two, which model the relationship between them. In order to do this, the alignments should provide relations between the smallest constituents of the two input structures, the vertices of the graph and the characters of the string, in a way such that the interal structures of the two are reflected against eachother. We can model an alignment as a special variant of an incomplete path, which allows for \textit{unmapped elements}. These elements are recognized as elements of $|s|$ which is mapped to $0$, the index of the start-vertice and thus always an invalid mapping. The remaining elements of $s$ is mapped to indexes of valid vertices of $G$ which form an incomplete path $P*$. Moving forward through the individual positions $s_x$ which are mapped corresponds to traversing $P*$.
+Once we have a clear definition of a graph $G$ and an input sequence $s$ we can specify an \textit{alignment} between the two, as a model of the relationship between them. In order to do this, the alignments should provide relations between the smallest constituents of the two input structures, the vertices of the graph and the characters of the string, in a way such that the interal structures of the two are reflected against eachother. We can model an alignment as a special variant of an incomplete path, which allows for \textit{unmapped elements}. These elements are recognized as elements of $s$ which is mapped to $0$, the index of the start-vertice and thus always an invalid mapping. The remaining elements of $s$ is mapped to indexes of valid vertices of $G$ which form an incomplete path $P*$. Moving forward through the individual positions $s_x$ which are mapped corresponds to traversing $P*$.
 \begin{defn}[Alignment]
   Given a graph $G$ and a string $s$, an alignment $A$ is an ordered list of length $|s|$ such that every element $a_x \in A$ is either $0$ or the index for a valid vertice of $G$ such that for every consecutive pair of valid indexes $a_n, a_m$ there exists a path $P$ where $p_0=a_n$ and $p_{-1}=a_m$. A $0$ represents an unmapped character in $s$.
 \end{defn}
 When we have defined the alignments we can start scoring them. The scoring happens according to a scoring schema and should be the sum of three different scores:
 \begin{enumerate}
   \item The mapping scores of the mapped elements
-  \item The gap penalties for gaps in the graph, represented by the distance of the shortest path between consecutive pairs of mapped elements
+  \item The gap penalties for gaps in the graph, represented by the path score of the incomplete path P*
   \item The gap penalties for gaps in the string, represented by unmapped positions
 \end{enumerate}
-The first two can be looked up through the standard functionality provided by the scoring schema. The last can be found by summing up the gap penalties for all the gaps in the input sequence. A gap in the input sequence can be identified by a continuous subsequence $A*_{x:y} \in A$ spanning the indexes $x$ to $y-1$ where every element is unmapped. An important aspect here is that every unmapped element should only be considered part of exactly one gap. We cover this aspect by only considering \textit{maximal unmapped subsequences}
+The first two can be looked up through the standard functionality provided by the scoring schema and equation \ref{eq:path_score}. The last can be found by summing up the gap penalties for all the gaps in the input sequence. A gap in the input sequence can be identified by a continuous subsequence $A*_{x:y} \in A$ spanning the indexes $x$ to $y-1$ where every element is unmapped. An important aspect here is that every unmapped element should only be considered part of exactly one gap. We cover this aspect by only considering \textit{maximal unmapped subsequences}
 \begin{defn}[Maximal unmapped subsequence]
   A subsequence $A*_{x:y} \in A$, such that every $a*=0$ for every $a* \in A*$ and $x$ is either $0$ or $a_{x-1} \neq 0$ and $y$ is either $|s|-1$ or $a_{y+1} \neq 0$.
 \end{defn}
-The gap penalties for gaps in the string is then defined as $\Sigma_{a* \in A*} gapPenalty(|a*|)$ where $A*$ is the maximal unmapped subsequences of $A$.
+The gap penalties for gaps in the string is then defined as 
+\begin{equation}
+  stringGap(A)=\Sigma_{a* \in A*} gapPenalty(|a*|)
+\end{equation}
+where $A*$ is the set of maximal unmapped subsequences in $A$. Once all these elements are defined we can define the score itself:
 \begin{defn}[Alignment score]
-  Given a sequence $s$, a graph $G$ and an alignment $A$, the score produced by combining mapping scores for the pairs $\{b(v_{a_x}), s_x\} for 0<=x<|s|$ with the path score for the incomplete path provided by consecutive mapped indexes of $A$ and the gap penalties for the string gaps in $A$. We reference this score by $alignmentScore(A)$.
+  Given a sequence $s$, a graph $G$ and an alignment $A$, the score produced by combining mapping scores for the pairs $\{b(v_{a_x}), s_x\}$ for $0<=x<|s|$ with the path score for the incomplete path provided by consecutive mapped indexes of $A$ and the gap penalties for the string gaps in $A$. We reference this score by $alignmentScore(A)$.
 \end{defn}
-We can then easily define the alignment problem itself:
+We can then easily define our graph-based adaptation\footnote{The regular alignment problem for strings was presented in section \ref{sec:alignment}} of the alignment problem:
 \begin{defn}[The optimal alignment score problem]
   For any pair $\{G, s\}$, where $G$ is a graph and $s$ is an input sequence, find one of the alignments $A$ which produces the highest possible alignment score.
 \end{defn}
-Notice that the definition only calls for finding one of the alignments which produce a highest possible score. This is done in order to simplify the abstract explanations of the algorithm. Implementation-wise this can trivially be changed to find all optimal alignments. The necessary adjustments is discussed as a part of the succeding chapter in section \ref{sec:all_optimal_alignments}. Additionally we have defined a bounded version of the problem, which we call \textit{The bounded optimal alignment score problem}. This second version also considers a score threshold value $T$ and deems a string $s$ \textit{unalignable} if the optimal alignment produces a score lower than T.
+Notice that the definition only calls for finding one of the alignments which produce a highest possible score. This is done in order to simplify the conceptual explanations of the algorithm. Implementation-wise this can trivially be changed to finding all optimal alignments. The necessary adjustments is discussed as a part of the succeding chapter in section \ref{sec:all_optimal_alignments}.
+\begin{figure}[H]
+  \begin{mdframed}
+    \begin{center}
+  \begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=1.4cm]
+    \node[state] (q0) {$s$};
+    \node[state] [right of=q0] (q1) {$A$};
+    \node[state] [right of=q1] (q2) {$T$};
+    \node[state] [right of=q2] (q3) {$T$};
+    \node[state] [right of=q3] (q4) {$G$};
+    \node[state] [right of=q4] (q5) {$T$};
+    \node[state] [right of=q5] (q6) {$C$};
+    \node[state] [right of=q6] (q7) {$e$};
+    \node[state,draw=none] [above of=q4] (q8) {$G$};
+    \node[state,draw=none] [left of=q8] (q9) {$T$};
+    \node[state,draw=none] [left of=q9] (q10) {$A$};
+    \node[state,draw=none] [above of=q5] (q11) {$A$};
+    \node[state,draw=none] [above of=q6] (q12) {$A$};
+
+    \path (q0) edge node {} (q1)
+    (q1) edge node {} (q2)
+    (q2) edge node {} (q3)
+    (q3) edge node {} (q4)
+    (q4) edge node {} (q5)
+    (q5) edge node {} (q6)
+    (q6) edge node {} (q7)
+    (q8) edge[color=red] node {} (q4)
+    (q9) edge[color=red] node {} (q2)
+    (q10) edge[color=red] node {} (q1);
+  \end{tikzpicture}
+    \end{center}
+  \end{mdframed}
+  \caption{A visualization of an example alignment of the string "ATGAA" against a reference genome made from the string "ATTGTC". We can see two unmapped elements and an incomplete path with one gap}
+\end{figure}
+\clearpage\noindent
+Additionally we have defined a bounded version of the problem, which we call \textit{The bounded optimal alignment score problem}. This second version also considers a score threshold value $T$ and deems a string $s$ \textit{unalignable} if the optimal alignment produces a score lower than T.
 \begin{defn}[The bounded optimal alignment score problem]
   \label{def:bounded_alignment_problem}
   Given a triplet $\{G, s, T\}$ where $G$ and $s$ are as before and $T$ is a numeric value, find the alignment $A$ which produces the highest alignment score, if and only if the alignment score for $A$ is higher than $T$. If no such alignment exists, $s$ should be classified as unalignable.
