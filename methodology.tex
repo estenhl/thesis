@@ -226,7 +226,115 @@ The recurrence relation of the dynamic programming algorithm is concerned with s
 When the scores have been computed for every candidate vertice we can start looking for the highest score, which represents the alignment score for the optimal alignments. We will find this score as a score for one of the vertices in the candidate set corresponding to the last index of the string. At this point we just have to backtrack the procedure which lead to the score to find the actual alignment, which is guaranteed to be one of the optimal alignments. If we find no score higher than the threshold $T$ we can simply deem the string as unalignable.
 \section{Heuristical applications}
 \label{sec:heuristical_conceptual}
-In this chapter we have presented a strict non-heuristical algorithm which is guaranteed to give the correct results whenever it is fed the correct parameters. This is a concept which provides formally steady ground when discussing the tractability of the conceptual solution to the problem. When nothing else is specifically stated, the remainder of the thesis will be concerned with the approach presented up to this point, in all its formally provable glory. However, we now want to take a brief detour to examine some of the heuristical possibilities which has emerged. In the approach, if we are not able to find a good enough score for a vertex in the last candidate set we simply classify the string as unalignable. This might seem a bit rash, as we have already completed a strenuous search for similarities between the two input entities. As previously mentioned this is a design choice taken to land at an easily perceivable, formally strict, proof-of-concept algorithm. If one were to imagine the strict optimality restriction were dropped, it is fair to assume that there exists a set of "good" solutions in the combination of the entities we have found so far. A more specific explanation on the details of doing this transition can be found in section \ref{sec:implementation_heuristic}.\\
+In this chapter we have presented a strict non-heuristical algorithm which is guaranteed to give the correct results whenever it is fed the correct parameters. This is a concept which provides formally steady ground when discussing the tractability of the conceptual solution to the problem. When nothing else is specifically stated, the remainder of the thesis will be concerned with the approach presented up to this point, in all its formally provable glory. However, we now want to take a brief detour to examine some of the heuristical possibilities which emerges. In the approach, if we are not able to find a good enough score for a vertex in the last candidate set we simply classify the string as unalignable. This might seem a bit rash, as we have already completed a strenuous search for similarities between the two structures. As previously mentioned this is a design choice taken to land at an easily perceivable, formally strict, proof-of-concept algorithm. If one were to imagine the strict optimality restriction were dropped, it is fair to assume that there exists a set of "good" solutions in the combination of the entities we have found in the search. We can see one such example in figure \ref{fig:heuristic_encouragement}: Because there are three mismatches the regular approach would need an error-margin $\lambda\geq3$ to find the alignment\footnote{Assuming regular edit distance scoring}. If we set the context length $|c|\leq2$ there are no vertices which has more then a single mismatch in their contexts. Because of this we are able find all the candidate vertices, and the path through them, for the optimal alignment with $\lambda=1$. The algorithm will however drop it as a solution because of the alignment score dropping below the threshold. We propose a heuristical approach would present the found, and in this case optimal, solution. The technical details on how this can be implemented is described in section \ref{sec:implementation_heuristic} of the next chapter.\\
 \par\noindent
-It might seem silly deeming strings unalignable when the exhaustive search done in the second part of the algorithm is bound to find an optimal alignment through the vertices found in the first step. The reason for this hard cut-off is the similarily hard pruning done during this first search for candidate vertices. The pruning is done strictly as a function of $\lambda$: If we start utilizing a different error-margin during the final search we can no longer guarantee this search is done on a complete set of candidate vertices. This means an optimal alignment for the candidate vertices is no longer equivalent to an optimal alignment for all vertices.
+There is a specific reason for devising an algorithm which sometimes discards the optimal solution. In figure \ref{fig:heuristic_encouragement_b} we can see an alignment with two mismatches. If we let set $|c|=2$ and $\lambda=1$ there will be candidate vertices which are dropped due to pruning in the initial context search. If we imagine the two reference graphs in the figure are actually two different paths in the same graph, this will result in the heuristical algorithm we propose discovering the path with three mismatches and not the one with two, thus ending in a non-optimal alignment. If we utilize different error margins for the first and the second step of the algorithm, it is no longer given that the optimal path through the candidate graph is equivalent to the best path through the original graph. For the approach proposed up to this section we have shown guaranteed optimality by setting some constraints. This is the reason, when nothing else is specified, we will be concerned with the non-heuristical algorithm for the remainder of the thesis.
+\begin{figure}[!hb]
+    \begin{subfigure}[t]{\textwidth}
+  \begin{mdframed}
+  \begin{center}
+  \begin{tikzpicture}[->,auto,node distance=1.2cm]
+    \node[state,scale=0.67] (q0) {$s$};
+    \node[state,scale=0.67] [right of=q0] (q1) {$A$};
+    \node[state,scale=0.67] [right of=q1] (q2) {$A$};
+    \node[state,scale=0.67] [right of=q2] (q3) {$A$};
+    \node[state,scale=0.67] [right of=q3] (q4) {$A$};
+    \node[state,scale=0.67] [right of=q4] (q5) {$A$};
+    \node[state,scale=0.67] [right of=q5] (q6) {$A$};
+    \node[state,scale=0.67] [right of=q6] (q7) {$A$};
+    \node[state,scale=0.67] [right of=q7] (q8) {$A$};
+    \node[state,scale=0.67] [right of=q8] (q9) {$A$};
+    \node[state,scale=0.67] [right of=q9] (q10) {$A$};
+    \node[state,scale=0.67] [right of=q10] (q11) {$A$};
+    \node[state,scale=0.67] [right of=q11] (q12) {$A$};
+    \node[state,scale=0.67] [right of=q12] (q13) {$A$};
+    \node[state,scale=0.67] [right of=q13] (q14) {$e$};
+    \node[state,scale=0.67,draw=none] [above of=q1] (q15) {$T$};
+    \node[state,scale=0.67,draw=none] [right of=q15] (q16) {$A$};
+    \node[state,scale=0.67,draw=none] [right of=q16] (q17) {$A$};
+    \node[state,scale=0.67,draw=none] [right of=q17] (q18) {$A$};
+    \node[state,scale=0.67,draw=none] [right of=q18] (q19) {$A$};
+    \node[state,scale=0.67,draw=none] [right of=q19] (q20) {$A$};
+    \node[state,scale=0.67,draw=none] [right of=q20] (q21) {$T$};
+    \node[state,scale=0.67,draw=none] [right of=q21] (q22) {$A$};
+    \node[state,scale=0.67,draw=none] [right of=q22] (q23) {$A$};
+    \node[state,scale=0.67,draw=none] [right of=q23] (q24) {$A$};
+    \node[state,scale=0.67,draw=none] [right of=q24] (q25) {$A$};
+    \node[state,scale=0.67,draw=none] [right of=q25] (q26) {$A$};
+    \node[state,scale=0.67,draw=none] [right of=q26] (q27) {$T$};
+
+    \path (q0) edge node {} (q1)
+    (q1) edge node {} (q2)
+    (q2) edge node {} (q3)
+    (q3) edge node {} (q4)
+    (q4) edge node {} (q5)
+    (q5) edge node {} (q6)
+    (q6) edge node {} (q7)
+    (q7) edge node {} (q8)
+    (q8) edge node {} (q9)
+    (q9) edge node {} (q10)
+    (q10) edge node {} (q11)
+    (q11) edge node {} (q12)
+    (q12) edge node {} (q13)
+    (q13) edge node {} (q14);
+  \end{tikzpicture}
+  \end{center}
+  \end{mdframed}
+  \caption{A sequence with three apparent SNPs aligned against a reference graph}
+  \label{fig:heuristic_encouragement}
+  \end{subfigure}
+  \begin{subfigure}[b]{\textwidth}
+  \begin{mdframed}
+  \begin{center}
+  \begin{tikzpicture}[->,auto,node distance=1.2cm]
+    \node[state,scale=0.67] (q0) {$s$};
+    \node[state,scale=0.67] [right of=q0] (q1) {$T$};
+    \node[state,scale=0.67] [right of=q1] (q2) {$A$};
+    \node[state,scale=0.67] [right of=q2] (q3) {$A$};
+    \node[state,scale=0.67] [right of=q3] (q4) {$A$};
+    \node[state,scale=0.67] [right of=q4] (q5) {$A$};
+    \node[state,scale=0.67] [right of=q5] (q6) {$A$};
+    \node[state,scale=0.67] [right of=q6] (q7) {$A$};
+    \node[state,scale=0.67] [right of=q7] (q8) {$G$};
+    \node[state,scale=0.67] [right of=q8] (q9) {$A$};
+    \node[state,scale=0.67] [right of=q9] (q10) {$A$};
+    \node[state,scale=0.67] [right of=q10] (q11) {$A$};
+    \node[state,scale=0.67] [right of=q11] (q12) {$A$};
+    \node[state,scale=0.67] [right of=q12] (q13) {$T$};
+    \node[state,scale=0.67] [right of=q13] (q14) {$e$};
+    \node[state,scale=0.67,draw=none] [above of=q1] (q15) {$T$};
+    \node[state,scale=0.67,draw=none] [right of=q15] (q16) {$A$};
+    \node[state,scale=0.67,draw=none] [right of=q16] (q17) {$A$};
+    \node[state,scale=0.67,draw=none] [right of=q17] (q18) {$A$};
+    \node[state,scale=0.67,draw=none] [right of=q18] (q19) {$A$};
+    \node[state,scale=0.67,draw=none] [right of=q19] (q20) {$A$};
+    \node[state,scale=0.67,draw=none] [right of=q20] (q21) {$T$};
+    \node[state,scale=0.67,draw=none] [right of=q21] (q22) {$A$};
+    \node[state,scale=0.67,draw=none] [right of=q22] (q23) {$A$};
+    \node[state,scale=0.67,draw=none] [right of=q23] (q24) {$A$};
+    \node[state,scale=0.67,draw=none] [right of=q24] (q25) {$A$};
+    \node[state,scale=0.67,draw=none] [right of=q25] (q26) {$A$};
+    \node[state,scale=0.67,draw=none] [right of=q26] (q27) {$T$};
+
+    \path (q0) edge node {} (q1)
+    (q1) edge node {} (q2)
+    (q2) edge node {} (q3)
+    (q3) edge node {} (q4)
+    (q4) edge node {} (q5)
+    (q5) edge node {} (q6)
+    (q6) edge node {} (q7)
+    (q7) edge node {} (q8)
+    (q8) edge node {} (q9)
+    (q9) edge node {} (q10)
+    (q10) edge node {} (q11)
+    (q11) edge node {} (q12)
+    (q12) edge node {} (q13)
+    (q13) edge node {} (q14);
+  \end{tikzpicture}
+  \end{center}
+  \end{mdframed}
+  \caption{The same sequence aligned against a different reference graph, showing two apparent SNPs}
+  \label{fig:heuristic_encouragement_b}
+  \end{subfigure}
+\end{figure}
 \end{document}
