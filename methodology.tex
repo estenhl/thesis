@@ -3,13 +3,13 @@
 \begin{document}
 \chapter{The algorithm ``Fuzzy context-based search''}
 {\parindent0pt
-In this chapter we introduce the algorithm ``Fuzzy context-based search'' ("fuzzy search" or "fuzzy" for short) as a solution to the problem of aligning text strings against graph-based reference genomes. In order to do this we will first present formal definitions of the elements and structures involved as well as the problem itself. The following description of the algorithm will be a conceptual overview where the motivation behind the steps taken are also described. A more detailed introduction to a precise implementation of the algorithm will follow in the succeeding chapter, in which space and time complexity will also be discussed. Due to the abstract nature of this chapter the reader is advised to use the coming chapter as a reference whenever needed. The two have corresponding sections, and the latter contain exact details and concrete examples. There can also be value in looking up the visualizations of actual runtime examples shown in Chapter \ref{sec:validation}.\\
+In this chapter we introduce the algorithm ``Fuzzy context-based search'' ("fuzzy search" or "fuzzy" for short) as a solution to the problem of aligning text strings against graph based reference genomes. In order to do this we will first present formal definitions of the elements and structures involved as well as the problem itself. The following description of the algorithm will be a conceptual overview where the motivation behind the steps taken are also described. A more detailed introduction to a precise implementation of the algorithm will follow in the succeeding chapter, in which space and time complexity will also be discussed. Due to the abstract nature of this chapter the reader is advised to use the coming chapter as a reference whenever needed. The two have corresponding sections, the latter contain exact details and concrete examples. There can also be value in looking up the visualizations of actual runtime examples shown in Chapter \ref{sec:validation}.\\
 \par\noindent
 In order to avoid ambiguity when dealing with already existing concepts, the terms which are defined are given problem-specific names. For several of the terms there also follows a shorthand notation behind the original name in the definition title. Whenever these shorthand names are used in the subsequent explanatory sections we refer exclusively to the definitions done in this thesis.
 \section{The graphs}
 The graphs used as reference genome graphs will be built iteratively by starting out with an empty graph and sequentially merging in input sequences aligned against the existing structure. How the sequences are merged, and thus what the graphs look like, are decided entirely through the alignment procedure, which in part relies on the scoring schema. This first section is dedicated to precisely defining the involved graphs through definitions of their constituents. 
 \clearpage
-\begin{defn}[Graph-based reference genome (Graph)]
+\begin{defn}[Graph based reference genome (Graph)]
   A pair $G=\{V,E\}$ where $V$ is a set of vertices and $E$ is a set of edges. $|G|$ denotes the number of vertices in $G$.
 \end{defn}
 The involved graphs will be sequence graphs\footnote{Discussed in section \ref{sec:sequence_graphs}} where every vertex correspond to a single nucleotide from a one or more input sequences used in building the graph. Whether the vertex originates from a single or several sequences is based on whether any new bases has been mapped, and consequently merged, into the vertex. In addition to the nucleotide the vertices will contain an index which is unique to the graph. 
@@ -114,7 +114,7 @@ where $A_{MUS}$ is the set of maximal unmapped subsequences in $A$. Once we have
 \begin{defn}[Alignment score]
   Given a sequence $s$, a graph $G$ and an alignment $A$, the score produced by combining mapping scores for the pairs $\{b(v_{a_x}), s_x\}$ for $0<=x<|s|$ with the path score for the incomplete path provided by consecutive mapped indexes of $A$ and the gap penalties for the string gaps in $A$. We reference this score by $alignmentScore(A)$.
 \end{defn}
-We can then easily define our graph-based adaptation\footnote{The regular alignment problem for strings was presented in section \ref{sec:alignment}} of the alignment problem:
+We can then easily define our graph based adaptation\footnote{The regular alignment problem for strings was presented in section \ref{sec:alignment}} of the alignment problem:
 \begin{defn}[The optimal alignment score problem]
   For any pair $\{G, s\}$, where $G$ is a graph and $s$ is an input sequence, find one of the alignments $A$ which produces the highest possible alignment score.
 \end{defn}
