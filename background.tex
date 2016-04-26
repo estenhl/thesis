@@ -2,11 +2,11 @@
 
 \begin{document}
 \chapter{Background}
-This chapter will build the foundation for understanding the theory necessary for the remainder of the thesis. We start out with a brief introduction to general biology. Because of the vastness of this field we only cover a small set of elements necessary for understanding the motivation behind the structure and approach presented later. A more thorough presentation can be found in the bibliography\textcolor{red}{[FIND SOURCES]}. We then step into the realm of technology and bioinformatics presenting techniques and concepts necessary in our own algorithm. We finish with a more specific presentation on the subject of graph based reference genomes, through discussing a set of articles, the solutions they provide and what we still see as unresolved problems.
+This chapter will build the foundation for understanding the theory necessary for the remainder of the thesis. We start out with a brief introduction to general biology. Because of the vastness of this field we only cover a small set of elements necessary for understanding the motivation behind the structure and approach presented later. A more thorough presentation can be found in the bibliography \textcolor{red}{[FIND SOURCES]}. We then step into the realm of technology and bioinformatics presenting techniques and concepts necessary in our own algorithm. We finish with a more specific presentation on the subject of graph based reference genomes, through discussing a set of articles, the solutions they provide and what we still see as unresolved problems.
 \section{Genetics}
-\textit{Deoxyribonucleic acid} (DNA) is a molecular structure in which living organisms store genetic information. The information is encoded by \textit{nucleotides} bound together by a sugar-phosphate backbone into strands. The nucleotides are smaller molecules which vary based on the nitrogenous base they contain: \textit{Adenine} (A), \textit{Cytosine} (C), \textit{Guanine} (G) or \textit{Thymine} (T). Each of the nucleotides has a \textit{complementary base}, A has T and C has G, with which it can bind to form a \textit{base pair} (bp). Larger numbers of base pairs are typically numbered with standard SI units (kb, mb, gb). Due to the chemical structure of the nucleotides, a DNA strand can be said to have a direction: Upstream towards the 5' end or downstream towards the 3' end. The DNA molecule is composed of two reverse complementary which strands are connected in a double helix structure. The two strands will have opposing directions, and every base in one of the strands will be connected to its completment. Because either of the strands are easily deduced from the other, DNA is usually represented by only one of them. We can then view DNA as a linear sequence of discrete units and represent it by text strings containing the four leading letters representing the nucleotides. The text strings representations often also contain the letter N, referencing \textit{aNy base}. The genetic sequence of an individual is called the \textit{genotype}. Observable traits of the individual is called the \textit{phenotype}.
+\textit{Deoxyribonucleic acid} (DNA) is a molecular structure in which living organisms store genetic information. The information is encoded by \textit{nucleotides} bound together by a sugar-phosphate backbone into strands. The nucleotides are smaller molecules which vary based on the nitrogenous base they contain: \textit{Adenine} (A), \textit{Cytosine} (C), \textit{Guanine} (G) or \textit{Thymine} (T). Each of the nucleotides has a \textit{complementary base}, A has T and C has G, with which it can bind to form a \textit{base pair} (bp). Larger numbers of base pairs are typically prefixed as standard SI units\footnote{1.000bp=kb, 1.000.000bp=Mb, 1.000.000.000bp=Gb}. Due to the chemical structure of the nucleotides, a DNA strand can be said to have a direction: Upstream towards the 5' end or downstream towards the 3' end. The DNA molecule is composed of two reverse complementary strands which are connected in a double helix structure. The two strands will have opposing directions, and every base in one of the strands will be connected to its completment in the other. Because either of the strands are easily deduced from the other, DNA is usually represented by only one of them. We can then view DNA as a linear sequence of discrete units and represent it by text strings containing the four leading letters representing the nucleotides. The text strings representations often also contain the letter N, referencing \textit{aNy base}. The genetic sequence of an individual is called the \textit{genotype}. Observable traits of the individual is called the \textit{phenotype}.
 \subsection{The central dogma}
-The process of transforming the genetic information into large functional biomolecules is called \textit{the central dogma} of molecular biology. The central dogma states that DNA is transcribed into \textit{messenger RNA} (mRNA) which in turn is translated into proteins. mRNA is, like DNA, a sequence of nucleotides consisting of the three bases A, C and G and \textit{Uracil} (U) instead of T. The mRNA can be divided into triplets of nucleotides called \textit{codons}. The cell decodes the mRNA codons and create strings of amino acids which are transformed into functional proteins. The relationship between codons and amino acids can be lookep up in a table called \textit{The standard genetic code}\cite[Chapter 1, p. 6]{introduction_to_genomics}. Only a portion of the nucleotides in DNA act as \textit{coding regions} which make it through the transcription process and code for actual protein sequences. These are also called \textit{exons}. The remaining \textit{non-coding regions} of the genetic sequence are known as \textit{introns}. In humans about 1.3\% of the genome is coding regions\cite[Chapter 4]{introduction_to_genomics}, the rest used to be referred to as \textit{junk DNA}. We now know that the non-coding regions also holds important information.\textcolor{red}{[REF]}
+The process of transforming the genetic information into large functional biomolecules is called \textit{the central dogma} of molecular biology. The central dogma states that DNA is transcribed into \textit{messenger RNA} (mRNA) which in turn is translated into proteins. mRNA is, like DNA, a sequence of nucleotides consisting of the three bases A, C and G and \textit{Uracil} (U) instead of T. The mRNA can be divided into triplets of nucleotides called \textit{codons}. The cell decodes the mRNA codons and create strings of amino acids which are transformed into functional proteins. The relationship between codons and amino acids can be looked up in a table called \textit{The standard genetic code} \cite[Chapter 1, p. 6]{introduction_to_genomics}. Only a portion of the nucleotides in DNA act as \textit{coding regions} which make it through the transcription process and code for actual protein sequences. These are also called \textit{exons}. The remaining \textit{non-coding regions} of the genetic sequence are known as \textit{introns}. In humans about 1.3\% of the genome is coding regions \cite[Chapter 4]{introduction_to_genomics}, the rest used to be referred to as \textit{junk DNA}. We now know that the non-coding regions also holds important information \textcolor{red}{[REF]}.
 \subsection{Variation}
 \label{sec:genetic_variation}
 Genetic information is prone to mutations, either as a result of environmental influence or as a consequence of imperfections during DNA transcription. The simplest mutations are \textit{point mutations} which affect a single nucleotide base. Point mutations can either be \textit{Single-nucleotide polymorphisms} (SNPs) where a single base is substituted for another, or \textit{insertions} or \textit{deletions} (indels) where a single nucleotide is removed or inserted into the genetic sequence. Mutations can also occur over larger areas of the genome, where longer subsequences can be deleted, inserted, moved or reversed. A final type of mutations is \textit{Copy number variations}, or \textit{repeats}, where a longer sequence of DNA, typically at least 1 kb \cite{copy_number_variation_new_insights_in_genome_diversity}, is repeated a variable number of times.\\
@@ -15,26 +15,26 @@ As mutations happen randomly to individuals in a population, a diversity of geno
 \par\noindent
 Because there are more possible combinations of nucleotide triplets than there are amino acids there exists some overlap between the codons and the resulting amino acid. For instance the DNA triplets ``CGA'', ``CGC'', ``CGG'',``CGT'', ``AGA'' and ``AGG''  all encode for the amino acid Arginine. In these cases point mutations can occur without affecting the resulting protein. These mutations are called \textit{synonymous}, the opposing case which alters the amino acid sequence are called \textit{non-synonymous}.
 \section{Genetic data, sequencing and string algorithms}
-\textcolor{red}{As genetic information is vital for determining the function of an individual, there is an obvious wish to understand this data. A large set of technologies and methods have been developed to collect and analyze the information. This section will present some of the most important concepts in handling this data and the field of bioinformatics. We will also present the MHC region, a genetic region which we used when testing our approach.}
+As genetic information is vital for determining the function of an individual, there is an obvious wish to understand this data. A large set of technologies and methods have been developed to collect and analyze the information. This section will present some of the most important concepts for interaction with this data. We will also present the MHC region, the genetic region we used when testing our approach.
 \subsection{Reference genomes}
-A \textit{reference genome} is a data structure which contains genetic information for a population, typically for a given species. The reference genome has a set of continuous nucleotide sequences, called \textit{contigs}, combined into larger \textit{scaffolds} which again are combined to form the \textit{genome} for a species. The first reference genomes collapsed samples from several individuals into a linear \textit{consensus sequence} which was representable for the species as a whole. Later reference genomes have been built more flexibly to allow positions on the genome, called \textit{loci}, to have several variants, termed \textit{alternate loci}. A specific variant of a gene is called an \textit{allele}. A \textit{haplotype} is a set of alleles which tend to be inherited together. Reference genomes form what can be seen as an index for the genome of a species and can be used as a reference map when sequencing new genomes\footnote{Covered in section \ref{sec:sequencing}}. The structure of a reference genome can increase computational tractability compared to storing a set of indivvidual genomes, by reducing the double-storage of equal regions. The reference also provides a mosaic representing genetic variation, which can be useful when doing genetic analysis.\\
+A \textit{reference genome} is a data structure which contains genetic information for a population, typically for a given species. The reference genome has a set of continuous nucleotide sequences, called \textit{contigs}, combined into larger \textit{scaffolds} which again are combined to form the \textit{genome} for a species. The first reference genomes collapsed samples from several individuals into a linear \textit{consensus sequence} which was representable for the species as a whole. Later reference genomes have been built more flexibly to allow positions on the genome, called \textit{loci}, to have several variants, termed \textit{alternate loci}. A specific variant of a gene is called an \textit{allele}. A \textit{haplotype} is a set of alleles which tend to be inherited together. Reference genomes form what can be seen as an index for the genome of a species and can be used as a reference map when sequencing new genomes\footnote{Covered in section \ref{sec:sequencing}}. The structure of a reference genome can increase computational tractability compared to storing a set of individual genomes, by reducing double-storage of equal regions. The reference also provides a mosaic representing genetic variation, which can be useful when doing genetic analysis.\\
 \par\noindent
 \subsection{The human genome}
 \label{sec:human_genome}
 The human genome consists of roughly 3gb. The base pairs are spread over 46 chromosomes and are assumed to contain about 23 000 genes \cite{introduction_to_genomics}. The human reference genome is developed and maintained by the \textit{Genome Reference Consortium}\cite{genome_reference_consortium}, the current version is called the GRCh38\cite{grch38}. GRCh38 contains 261 alternate loci, spread over 178 out of a total of 238 regions. An average human is estimated to deviate from the reference genome in 10.000-11.000 synonymous sites and 10.000-12.000 non-synonymous sites \cite{a_map_of_human_genome_variation_from_population_scale_sequencing}.
 \subsubsection{Major Histocompatibility Complex}
 \label{sec:mhc}
-The \textit{Major Histocompatibility Complex} (MHC) is a genetic region spanning approximately 4.5-5 million base pairs (mb)\cite{improved_genome_inference_in_the_mhc_using_a_population_reference_graph}\cite{canonical_stable_general_mapping_using_context_schemes}. In humans it is located on chromosome 6 and contains about 200 genes. MHC is a region known to contain genes which affect the functionality of the immune system \cite{the_importance_of_immune_gene_variability_in_evolutionary_ecology_and_conservation}. Even more so MHC is known to be a highly variable region, containing variants that are directly associated with disease \cite{variation_analysis_and_gene_annotation_of_eight_mhc_haplotypes}. The high variability creates difficulties when comparing DNA sequences to determine genetic causes for the observed disorders.
+The \textit{Major Histocompatibility Complex} (MHC) is a genetic region spanning approximately 4.5-5mb \cite{improved_genome_inference_in_the_mhc_using_a_population_reference_graph}\cite{canonical_stable_general_mapping_using_context_schemes}. In humans it is located on chromosome 6 and contains rouglhy 200 genes \textcolor{red}{[REF]}. MHC is a region known to contain genes which affect the functionality of the immune system \cite{the_importance_of_immune_gene_variability_in_evolutionary_ecology_and_conservation}. Even more so MHC is known to be a highly variable region, containing variants that are directly associated with disease \cite{variation_analysis_and_gene_annotation_of_eight_mhc_haplotypes}. The high variability creates difficulties when comparing DNA sequences to determine genetic causes for the observed disorders and when determining the origin of a sequence during \textit{sequencing}.
 \subsection{Sequencing}
 \label{sec:sequencing}
-During \textit{sequencing} a \textit{sequencing machine} is used on a physical DNA fragment to find the underlying nucleotide sequence. The machines produce short \textit{reads}, typically in the order of a hundred bp\cite{sequencing_platforms} which are combined into longer sequences through a process called \textit{assembly}. When the sequenced individual belongs to a specie with a reference genome, reads are typically mapped to positions in the reference to determine their underlying order in what is called \textit{mapping assembly}. In the opposing case overlap techniques\cite{an_eulerian_path_approach_to_dna_fragment_assembly} or de Bruijn graphs\footnote{Presented in \ref{sec:de_bruijn_graphs}} are often used in what is known as \textit{de novo assembly}\cite[Chapter 1, p. 19]{introduction_to_genomics}.\\
+During sequencing a \textit{sequencing machine} is used on a physical DNA fragment to find the underlying nucleotide sequence. The machines produce short \textit{reads}, typically in the order of a hundred bp \cite{sequencing_platforms} which are combined into longer sequences through a process called \textit{assembly}. When the sequenced individual belongs to a specie with a reference genome, reads are typically mapped to positions in the reference to determine their underlying order in what is called \textit{mapping assembly}. In the opposing case overlap techniques \cite{an_eulerian_path_approach_to_dna_fragment_assembly} or de Bruijn graphs\footnote{The concept is presented in section \ref{sec:de_bruijn_graphs}} are often used in what is known as \textit{de novo assembly} \cite[Chapter 1, p. 19]{introduction_to_genomics}.\\
 \par\noindent
-The different sequencing technologies have varying degrees of errors introduced in their reads, often closely related to the sequencing cost\cite{sequencing_platforms}. The errors can take the form of both point mutations and larger structural variations. Reads produced by sequencing machines are typically prone to contain more errors in their peripherals. There exists efficient strategies for both estimating error rates \cite{estimation_of_sequencing_error_rates_in_short_reads} and correcting the reads\cite{error_correction_of_datasets_with_non_uniform_coverage} \textcolor{red}{Can probably provide more citations}.
+The different sequencing technologies have varying degrees of errors introduced in their reads, often closely related to the sequencing cost\cite{sequencing_platforms}. The errors can take the form of both point mutations and larger structural variations. Reads produced by sequencing machines are typically prone to contain more errors in their peripherals. There exists efficient strategies for both estimating error rates \cite{estimation_of_sequencing_error_rates_in_short_reads} and correcting the reads\cite{error_correction_of_datasets_with_non_uniform_coverage}. These techniques can simplify the process of finding the origin of a read, which in a mapping assembly is done by an \textit{alignment} algorithm.\textcolor{red}{Can probably provide more citations}
 \subsection{Alignment}
 \label{sec:alignment}
-\textit{Sequence alignment} is the process of determining correspondence between text strings, in this case representing DNA, by mapping the elements from one to the elements of the other according to a \textit{substitution matrix} (Table \ref{fig:substitution_matrix}) providing a \textit{mapping score}. Throughout this thesis we will let the notation $mappingScore(c_1,c_2)$ denote the score for mapping two characters $c_1, c_2$ against eachother. Alignment of DNA strings has several important applications, as previously mentioned it is utilized as a tool for assembly as well as in genetic analysis and comparison.\\
+Sequence alignment is the process of determining correspondence between text strings, in this case representing DNA, by mapping the elements from one to the elements of the other according to a \textit{substitution matrix} (Table \ref{fig:substitution_matrix}) to provide a \textit{mapping score}. Throughout this thesis we will let the notation $mappingScore(c_1,c_2)$ denote the score for mapping two characters $c_1, c_2$ against eachother. Alignment of DNA strings has several important applications: As previously mentioned it is utilized as a tool for assembly as well as in genetic analysis and comparison.\\
 \par\noindent
-The alignment prodecure is never allowed to change the order of the elements in the two strings, but can introduce \textit{gaps}. A gap occurs when one element in one of the string does not have a counterpart in the opposing string (Figure \ref{fig:alignments}). When a gap occurs the resulting alignment is penalized according to the length of the gap, by a \textit{gap penalty}. We will similarily let the notation $gapPenalty(distance)$ denote the gap penalty achieved for a gap of length $distance$. Gap penalties come in different shapes, often according to the origin of the data involved. A \textit{linear gap penalty} gives linear penalties related to the gap length. An \textit{affine gap penalty} distinguishes between opening and continuing a gap. A \textit{logarithmic gap penalty} lets the increase in penalty fade as the gap expands. We let which one of these is used, along with the choice of substitution matrix be defined in a \textit{scoring schema}. A scoring schema can thus also be seen as any structure which provides the $mappingScore$ and $gapPenalty$ functions. The scoring schemas can be based around simple match/mismatch scores, which corresponds to the mathematical \textit{Edit distance problem}\footnote{Presented in detail in the next section}, or more complex scores (Table \ref{fig:substitution_matrix}). These complex models typically try to model the probabilities behind the physical processes responsible for change. The computational sequence alignment problem consists of finding the highest scoring alignment for any two strings. There exists two main variants of the problem: Finding \textit{global alignments}, where two entire strings are aligned against each other, and finding \textit{local alignments}, where a string is aligned against a substring of the other. The two are traditionally solved respectively by the Needleman-Wunsch and Smith-Waterman algorithms which both are based on \textit{dynamic programming}.\\
+The alignment prodecure is never allowed to change the order of the elements in the two strings, but can introduce \textit{gaps}. A gap occurs when one element in one of the strings does not have a counterpart in the opposing string (Figure \ref{fig:alignments}). When a gap occurs the resulting alignment is penalized according to the length of the gap, by a \textit{gap penalty}. We will similarily let the notation $gapPenalty(distance)$ denote the gap penalty achieved for a gap of length $distance$. Gap penalties come in different shapes, often according to the origin of the data involved. A \textit{linear gap penalty} gives linear penalties related to the gap length. An \textit{affine gap penalty} distinguishes between opening and continuing a gap. A \textit{logarithmic gap penalty} lets the increase in penalty fade as the gap expands. We let which one of these is used, along with the choice of substitution matrix be defined in a \textit{scoring schema}. A scoring schema can thus also be seen as any structure which provides the $mappingScore$ and $gapPenalty$ functions. The scoring schemas can be based around simple match/mismatch scores, which corresponds to the mathematical \textit{Edit distance problem}\footnote{Covered in detail in the following section}, or more complex scores (As depicted in table \ref{fig:substitution_matrix}). The complex models typically try to model the probabilities behind the physical processes responsible for change. The computational sequence alignment problem consists of finding the highest scoring alignment for any two strings.\\
 \par\noindent
 \setlength{\intextsep}{0mm}
 \begin{wrapfigure}[15]{l}{0.3\textwidth}
@@ -63,14 +63,16 @@ The alignment prodecure is never allowed to change the order of the elements in 
     \end{subfigure}
   \end{mdframed}
   \vspace*{-5mm}
-  \caption{Examples of aligned text strings}
+  \caption[Examples of aligned text strings]{Examples of aligned text strings}
   \label{fig:alignments}
 \end{wrapfigure}
-If more than two sequences are aligned the result is a \textit{Multiple sequence alignment} (MSA). This is typically done on sequences which are expected to share a common ancestor. The goal is to determine which traits in the individuals arised from the same origins and how the involved species have diverged genetically over time. A final variant of the alignment problem is one involving large databases of sequences, where the algorithms does not only need to find the best alignment between two sequences, but also determine which sequence should be chosen in order to maximize the result. Both of the preceding techniques typically utilize heuristical methods in order to decrease the computational complexity.
+If more than two sequences are aligned the result is a \textit{Multiple sequence alignment} (MSA). This is typically done on sequences which are expected to share a common ancestor. The goal is to determine which traits in the individuals arose from the same origins and how the involved species have diverged genetically over time. A final variant of the alignment problem is one involving large databases of sequences, where the algorithms does not only need to find the best alignment between two sequences, but also determine which sequence should be chosen in order to maximize the result. Algorithms for both of the preceding variants typically utilize heuristical methods in order to decrease the computational complexity.\\
+\par\noindent
+There exists two main variants of the problem: Finding \textit{global alignments}, where two entire strings are aligned against each other, and finding \textit{local alignments}, where a string is aligned against a substring of the other. The two are traditionally solved respectively by the Needleman-Wunsch and Smith-Waterman algorithms which both are based on \textit{dynamic programming}.
 \clearpage
 \begin{table}[H]
   \centering
-  \caption{The HOXD70 substitution matrix}
+  \caption[The HOXD70 substitution matrix]{The HOXD70 substitution matrix}
   \label{fig:substitution_matrix}
   \makebox[\linewidth]{
     \begin{tabular}{ccccc}
@@ -83,10 +85,10 @@ If more than two sequences are aligned the result is a \textit{Multiple sequence
 \end{table}
 \subsection{Dynamic programming}
 \label{sec:dynamic_programming}
-\textit{Dynamic programming} (DP) is a problem-solving technique where a problem instance is solved by breaking it into smaller subproblems and combining their results. DP is similar to recursion in that every instance is solved by a \textit{recurrence relation} (An example can be seen in equation \ref{eq:ed_recurrence_relation}) which recurses on smaller and smaller problems until a \textit{base case} is found. A base case represent the bottom of the recursion and is a value which can easily be computed without further lookups. The main difference between recursion and DP is that the latter usually stores its intermediate results to allow for fast lookups for reoccuring instances. DP is often used as an approach for optimization problems in order to minimize computational complexity while giving a guarantee for optimal results \cite[Chapter 9]{algorithms_sequential_parallell_and_distributed}.\\
+\textit{Dynamic programming} (DP) is a problem-solving technique where a problem instance is solved by breaking it into smaller subproblems and combining their results. DP is similar to recursion in that every instance is solved by a \textit{recurrence relation} (An example can be seen in equation \ref{eq:ed_recurrence_relation}) which recurses on smaller and smaller problems until a \textit{base case} is found. A base case represent the bottom of the recursion and is a value which can easily be computed without further lookups. The main difference between recursion and DP is that the latter usually stores its intermediate results to allow for fast lookups for reoccuring instances. DP is often used as an approach for optimization problems in order to minimize complexity while giving a guarantee for optimal results \cite[Chapter 9]{algorithms_sequential_parallell_and_distributed}.\\
 \par\noindent
-\begin{wraptable}{r}{0.67\textwidth}
-  \begin{center}
+\begin{table}[!b]
+  \centering
     \begin{tabularx}{\textwidth}{ccccccccccc}
       &&a&l&g&o&r&i&t&h&m \\ \cline{2-11}
       &\multicolumn{1}{|c|}{0}&1&\multicolumn{1}{|c|}{2}&3&\multicolumn{1}{|c|}{4}&5&\multicolumn{1}{|c|}{6}&7&\multicolumn{1}{|c|}{8}&\multicolumn{1}{c|}{9}\\ \cline{2-11}
@@ -100,13 +102,12 @@ If more than two sequences are aligned the result is a \textit{Multiple sequence
       h &\multicolumn{1}{|c|}{8}&7&\multicolumn{1}{|c|}{7}&7&\multicolumn{1}{|c|}{7}&6&\multicolumn{1}{|c|}{5}&4&\multicolumn{1}{|c|}{3}&\multicolumn{1}{c|}{4}\\ \cline{2-11}
       m &\multicolumn{1}{|c|}{9}&8&\multicolumn{1}{|c|}{8}&8&\multicolumn{1}{|c|}{8}&7&\multicolumn{1}{|c|}{6}&5&\multicolumn{1}{|c|}{4}&\multicolumn{1}{c|}{3}\\ \cline{2-11}
     \end{tabularx}
-  \end{center}
-  \caption{The 2-dimensional array used for solving the edit distance problem for the strings S=``algorithm'' and P=``logarithm'' (Note: This follows regular ED scoring where every operation is penalized +1)}
+  \caption[An array used to solve the edit distance problem]{The 2-dimensional array used for solving the edit distance problem for the strings S=``algorithm'' and P=``logarithm''.\textcolor{red}{CENTER}}
   \label{fig:edit_distance_array}
-\end{wraptable}
-A problem which is typically solved by dynamic programming is the previously mentioned edit distance problem (ED). ED is concerned with finding the minimal amount of substitutions, deletions and insertions needed to transform one string into another. The algorithm utilizes a 2-dimensional array to store the computed values (Figure \ref{fig:edit_distance_array}). For two strings $S$ and $P$, every index $[i,j]$ in the edit distance table represents the problem instance of the substrings $S[0:i],P[0:j]$. 
+\end{table}
+A problem which is typically solved by dynamic programming is the previously mentioned edit distance problem (ED). ED is concerned with finding the minimal amount of substitutions, deletions and insertions needed to transform one string into another. The algorithm utilizes a two-dimensional array to store the computed values. For two strings $S$ and $P$, every index $[i,j]$ in the table represents the subproblem of finding the edit distance of the substrings $S[0:i]$ and $P[0:j]$. 
 \clearpage\noindent
-The base cases can be found in the first row and column. These are often dropped from the table itself due to the simple nature of their computations. The remainder of the table is filled out with the following recurrence relation:
+In the figure, the base cases can be found in the first row and column. These are often dropped from the table itself due to the simple nature of their computations. The remainder of the table is filled out with the following recurrence relation:
 \begin{equation}
   D[i,j] = min
   \begin{cases}
@@ -116,14 +117,14 @@ The base cases can be found in the first row and column. These are often dropped
   \end{cases}
   \label{eq:ed_recurrence_relation}
 \end{equation}
-where $score(x, y)$ is an equality function returning 0 if the two elements are equal. The score for the entire problem instance can be found in the cell with the highest indexes in the bottom right corner.\\
+where $score(x, y)$ is an equality function returning 0 if the two elements are equal and 1 in all other cases. The score for the given instance of the problem can be found in the cell with the highest indexes in the bottom right corner.\\
 \par\noindent
-There are two distinct ways of utilizing Dynamic Programming. A \textit{bottom-up} approach starts at the smallest cases and computes everything until it reaches the actual given problem instance. This corresponds to starting in the top left corner of the edit distance array and computing the cells iteratively moving downwards to the right. A \textit{top-down} procedure starts at the given problem instance and recursively computes every subproblem that is needed. This means starting in the bottom right corner of the 2-dimensional array and recursing upwards to the right. For the edit distance problem the choice of approach bears no big significance as every cell has to be computed either way, but there are problems where using top-down can avoid some computations which are irrelevant to the final result. The latter can also be efficient for heuristical methods where an area of the search space can be overlooked.
+There are two distinct ways of utilizing Dynamic Programming. A \textit{bottom-up} approach starts at the smallest cases and computes everything until it reaches the actual given problem instance. This corresponds to starting in the top left corner of the edit distance array and computing the cells iteratively moving downwards to the right. A \textit{top-down} procedure starts at the given problem instance and recursively computes every subproblem that is needed. This means starting in the bottom right corner of the 2-dimensional array and recursing upwards to the right. For the edit distance problem the choice of approach bears no big significance as every cell has to be computed either way, but there are problems where using top-down can avoid some computations which are irrelevant to the final result. The latter can also be efficient for heuristical methods where an area of the search space can be overlooked \textcolor{red}{[REF]}.
 \subsection{Suffix trees}
-A \textit{suffix trie} is a special tree constructed specifically for strings of text, containing vertices representing characters (Figure \ref{fig:suffix_trie}). When creating a suffix trie for a given string, every suffix has a corresponding leaf vertice such that where the vertices along path from the root to the vertice contains the characters of that suffix. Consequently, every substring has a path starting in the root node. A \textit{compressed suffix trie}, or\textit{suffix tree}, is a suffix trie in which every linear path is compressed into a single vertice (Figure \ref{fig:suffix_tree}). Both suffix tries and suffix trees can easily be extended to hold collections of strings\cite[Chapter 20]{algorithms_sequential_parallell_and_distributed}. A simple implementation has a space complexity of $O(s)$, where $s$ is the length of the string (or the total length of all strings if the tree is built from a collection), and a string of length $m$ can be looked up in $O(km)$ time for an alphabet of size $k$\cite[Section 20.6.1]{algorithms_sequential_parallell_and_distributed}. The tree can be constructed in linear time\cite{online_construction_of_suffix_trees}.
-\par\noindent
+A \textit{suffix trie} is a special tree constructed specifically for strings of text, containing vertices representing characters (Figure \ref{fig:suffix_trie}). When creating a suffix trie for a given string, every suffix has a corresponding leaf vertice such that the vertices along the path from root to leaf contains the characters of that suffix. Consequently, every substring has a path starting in the root node. A \textit{compressed suffix trie}, or \textit{suffix tree}, is a suffix trie in which every linear path is compressed into a single vertice (Figure \ref{fig:suffix_tree}). Both suffix tries and suffix trees can easily be extended to hold collections of strings \cite[Chapter 20]{algorithms_sequential_parallell_and_distributed}. A simple implementation has a space complexity of $O(s)$ \textcolor{red}{[REF]}, where $s$ is the length of the string (or the total length of all strings if the tree is built from a collection), and a string of length $m$ can be looked up in $O(km)$ time for an alphabet of size $k$ \cite[Section 20.6.1]{algorithms_sequential_parallell_and_distributed}. The tree can be constructed in linear time\cite{online_construction_of_suffix_trees}.
+\clearpage\noindent
 \subsection{Compression}
-One major challenge when dealing with large amounts of genetic data is storage. In 1994, M. Burrows and D.J. Wheeler presented the "Burrows-Wheeler Transform" as an efficient compression scheme for text strings\cite{a_block_sorting_lossless_data_compression_algorithm}. The algorithm rearranges the string by grouping together equal elements, a trait which is favorable for compression algorithms. The operation is reversible, meaning the original string can be easily computed from the transformed one. The approach has later been used for developing efficient, accurate alignment algorithms\cite{read_alignment_with_bwt}.
+One major challenge when dealing with large amounts of genetic data is storage. In 1994, M. Burrows and D.J. Wheeler presented the \textit{Burrows-Wheeler Transform} as an efficient compression scheme for text strings \cite{a_block_sorting_lossless_data_compression_algorithm}. The algorithm rearranges the string by grouping together equal elements, a trait which is favorable for compression algorithms. The operation is reversible, meaning the \textcolor{red}{original string can be easily computed from the transformed one}. The approach has later been used for developing efficient, accurate alignment algorithms\cite{read_alignment_with_bwt}.
 \begin{figure}[!b]
   \begin{subfigure}[t]{0.49\textwidth}
     \begin{mdframed}
@@ -183,48 +184,49 @@ One major challenge when dealing with large amounts of genetic data is storage. 
     \label{fig:suffix_trie}
   \end{subfigure}
   \begin{minipage}[t]{0.49\textwidth}
-  \begin{subfigure}[t]{\textwidth}
-    \begin{mdframed}
-      \begin{center}
-        \begin{tikzpicture}
-          \node[state,scale=0.8] (q0) {};
-          \node[state,scale=0.8] [below left=0.6cm and -0.05cm of q0] (q1) {$a$};
-          \node[rectangle,draw,inner sep=0.2cm,scale=0.8] [left=0.25cm of q1] (q3) {$bananas$};
-          \node[state,scale=0.8] (q3) [below right=0.6cm and -0.05cm of q0] (q4) {$s$};
-          \node[rectangle,draw,inner sep=0.2cm,scale=0.8] [right=0.5cm of q4] (q2) {$na$};
-          \node[rectangle,draw,inner sep=0.2cm,scale=0.8] [below left=0.67cm and -0.05cm of q1] (q5) {$na$};
-          \node[state,scale=0.8] (q6) [below right=0.6cm and -0.05cm of q1]{$s$};
-          \node[rectangle,draw,inner sep=0.2cm,scale=0.8] [below left=0.67cm and -0.05cm of q2] (q7) {$nas$};
-          \node[state,scale=0.8] [below right=0.6cm and -0.05cm of q2] (q8) {$s$};
-          \node[rectangle,draw,inner sep=0.2cm,scale=0.8] [below left=0.67cm and -0.05cm of q5] (q9) {$nas$};
-          \node[state,scale=0.8] [below right=0.6cm and -0.05cm of q5] (q10) {$s$};
+    \begin{subfigure}[t]{\textwidth}
+      \begin{mdframed}
+        \begin{center}
+          \begin{tikzpicture}
+            \node[state,scale=0.8] (q0) {};
+            \node[state,scale=0.8] [below left=0.6cm and -0.05cm of q0] (q1) {$a$};
+            \node[rectangle,draw,inner sep=0.2cm,scale=0.8] [left=0.25cm of q1] (q3) {$bananas$};
+            \node[state,scale=0.8] (q3) [below right=0.6cm and -0.05cm of q0] (q4) {$s$};
+            \node[rectangle,draw,inner sep=0.2cm,scale=0.8] [right=0.5cm of q4] (q2) {$na$};
+            \node[rectangle,draw,inner sep=0.2cm,scale=0.8] [below left=0.67cm and -0.05cm of q1] (q5) {$na$};
+            \node[state,scale=0.8] (q6) [below right=0.6cm and -0.05cm of q1]{$s$};
+            \node[rectangle,draw,inner sep=0.2cm,scale=0.8] [below left=0.67cm and -0.05cm of q2] (q7) {$nas$};
+            \node[state,scale=0.8] [below right=0.6cm and -0.05cm of q2] (q8) {$s$};
+            \node[rectangle,draw,inner sep=0.2cm,scale=0.8] [below left=0.67cm and -0.05cm of q5] (q9) {$nas$};
+            \node[state,scale=0.8] [below right=0.6cm and -0.05cm of q5] (q10) {$s$};
 
-          \path
-          (q0) edge node {} (q1)
-          edge node {} (q2)
-          edge node {} (q3)
-          edge node {} (q4)
-          (q1) edge node {} (q5)
-          edge node {} (q6)
-          (q2) edge node {} (q7)
-          edge node {} (q8)
-          (q5) edge node {} (q9)
-          edge node {} (q10);
-        \end{tikzpicture}
-      \end{center}
-    \end{mdframed}
-    \caption{}
-    \label{fig:suffix_tree}
-  \end{subfigure}
-  \begin{minipage}[t]{0.49\textwidth}
-    \caption{The suffix tree (a) and suffix trie  (b) of the string ``bananas''}
-  \end{minipage}
+            \path
+            (q0) edge node {} (q1)
+            edge node {} (q2)
+            edge node {} (q3)
+            edge node {} (q4)
+            (q1) edge node {} (q5)
+            edge node {} (q6)
+            (q2) edge node {} (q7)
+            edge node {} (q8)
+            (q5) edge node {} (q9)
+            edge node {} (q10);
+          \end{tikzpicture}
+        \end{center}
+      \end{mdframed}
+      \caption{}
+      \label{fig:suffix_tree}
+    \end{subfigure}
+    \begin{minipage}[t]{0.49\textwidth}
+      \caption[Examples of suffix trees]{The suffix tree (a) and suffix trie  (b) of the string ``bananas''}
+    \end{minipage}
   \end{minipage}
   \label{fig:suffix_trees}
 \end{figure}
+\subsection{\textcolor{red}{Approximate string searching}}
 \clearpage
 \section{Graph based genome representations}
-In the previous sections we have been introduced to the variable nature of genetic data. The linear model provided by text strings seems suboptimal for representing this variation due to its innate lack of flexibility. In this section we will present graphs as an alternative model for genetic data. Graphs are far more expressive, and thus able to represent more complex relationships between the elements involved. If we are able to rephrase biological questions in graph theoretical settings, we can also benefit from the extensive mathematical field of graph theory when searching for solutions to the arising problems. However, when changing the underlying structure a major problem appears: In order to avoid a drop in functionality, the more complex model calls for more sophisticated variants of existing methods. Graph based approaches have been used for some time in the assembly process, and more recently in relation to reference genomes. We will present the work done on both these subjects alongside what we see as some of the remaining unsolved problems. The contents of the section is presented in a way which should not require any previous knowledge of graph theory beyond elementary terms, but readers interested in a more complete introduction is referred to the bibliography\cite[Chapter 9]{data_structures_and_algorithm_analysis_in_java}\cite[Chapter 11]{algorithms_sequential_parallell_and_distributed}\cite[Chapter 0]{introduction_to_the_theory_of_computation}. Complexity in regards to the graphs and their operations is discussed using \textit{big-O} notation\cite[Chapter 2]{data_structures_and_algorithm_analysis_in_java}\cite[Section 3.1]{algorithms_sequential_parallell_and_distributed}
+In the ``Genetics'' sections we have been introduced to the variable nature of genetic data. The linear model provided by text strings seems suboptimal for representing this variation due to its innate lack of flexibility. In this section we will present graphs as an alternative model for genetic data. Graphs are far more expressive, and thus able to represent more complex relationships between the elements involved. Additionaly, if we are able to rephrase biological questions in graph theoretical settings, we can benefit from the extensive mathematical field of graph theory when searching for solutions to the arising problems. However, when changing the underlying structure a major problem appears: In order to avoid a decline in functionality, the more complex model calls for more sophisticated variants of existing methods for interacting with the data. Graph based approaches have been used for some time in the assembly process, and more recently in relation to reference genomes. We will present the work done on both these subjects alongside what we see as some of the remaining unsolved problems. The contents of the section is presented in a way which should not require any prior knowledge of graph theory beyond elementary terms, but readers interested in a more complete introduction is referred to the bibliography \cite[Chapter 9]{data_structures_and_algorithm_analysis_in_java}\cite[Chapter 11]{algorithms_sequential_parallell_and_distributed} \cite[Chapter 0]{introduction_to_the_theory_of_computation}. Complexity in regards to the graphs and their operations will throughout the thesis be discussed using \textit{big-O} notation \cite[Chapter 2]{data_structures_and_algorithm_analysis_in_java}\cite[Section 3.1]{algorithms_sequential_parallell_and_distributed}
 \subsection{Model}
 \setlength{\intextsep}{0mm}
 \begin{wrapfigure}{r}{0.65\textwidth}
@@ -282,7 +284,7 @@ In the previous sections we have been introduced to the variable nature of genet
             \node[state,scale=0.7] [right of=q9] (q10) {$T$};
             \node[state,scale=0.7] [right of=q10] (q11) {$C$};
             \node[state,scale=0.7] [below of=q1] (q12) {$A$};
-            \node[state,scale=0.7] [right of=q12] (q13) {$G$};
+            \node[state,scale=0.7] [right of=q12] (q13) {$T$};
             \node[state,scale=0.7] [right of=q13] (q14) {$C$};
             \node[state,scale=0.7] [right of=q14] (q15) {$T$};
             \node[state,scale=0.7] [right of=q15] (q16) {$C$};
@@ -309,114 +311,114 @@ In the previous sections we have been introduced to the variable nature of genet
         \end{center}
       \end{mdframed}
       \captionsetup{skip=-8pt}
-      \subcaption{A graph which is built through alignments without allowing variation}
+      \subcaption{A graph modelling three distinct genetic sequences}
     \end{subfigure}
   \end{mdframed}
   \vspace*{-5mm}
-  \caption{Two proposed graph models displaying flexibility (a) and rigidity (b)}
+  \caption[Two proposed graph models]{Two proposed graph models displaying flexibility (a) and rigidity (b)}
   \label{fig:flexibility_rigidness_tradeoff}
 \end{wrapfigure}
-Deciding upon the representation of the graph consists of defining the structure of the elements involved, namely the vertices and edges. As the graphs are built from genetic information the basic building blocks, the nucleotides, should obviously be represented. If the input data are more complex than single nucleotides, we must represent the relationships between them. Because the input data has variation, the structure needs to tolerate flexibility. There is however a risk of making the structures so flexible they present no consistency, and a flexibility/rigidness-tradeoff becomes apparent (Figure \ref{fig:flexibility_rigidness_tradeoff}). How the structures are defined in detailed should be determined through a requirement specification based on the operations which are desirable to perform on them.
+Deciding upon the representation of the graph consists of defining the structure of the elements involved, namely the vertices and edges. As the graphs are built from genetic information the basic building blocks, the nucleotides, should obviously be represented. If the input data is more complex than singlular nucleotides, we must represent the relationships between them. Because the input data has variation, the structure needs to tolerate flexibility. There is however a risk of making the structures so flexible they present no consistency, and a flexibility/rigidness-tradeoff becomes apparent (Visualized in figure \ref{fig:flexibility_rigidness_tradeoff}). How the structures are defined in detail should be determined through a requirement specification based on the operations which are desirable to perform on them.
 \subsubsection{De Bruijn graphs}
 \label{sec:de_bruijn_graphs}
-In the article ``An Eulerian path approach to DNA fragment assembly''\cite{an_eulerian_path_approach_to_dna_fragment_assembly}, Pevzner, Tang and Waterman proposes \textit{de Bruijn} graphs as a solution to the problem of finding the correct assembly of repeats during fragment assembly. A de Bruijn graph is a structure where vertices represent \textit{k-mers} from an alphabet and edges represent relationships between the k-mers of two vertices (Figure \ref{fig:de_bruijn_graph_example}). Pevzner et al. lets the vertices contain strings of length $l-1$ and connects vertices with an edge wherever there exists a read of length $l$ containing the two substrings. Formulating the problem in this fashion makes us able to see it as a \textit{Eulerian path} problem, solvable in polynomial time, rather than the traditional ``overlap-layout-consensus'' method which is equivalent to the NP-complete problem of finding a \textit{Hamiltonian path}\cite[Section 11.1]{algorithms_sequential_parallell_and_distributed}. A great benefit with de Bruijn graphs is that there is no disambiguity: Any legal k-mer has at no point more than one vertice representing it.\\
+In the article ``An Eulerian path approach to DNA fragment assembly'' \cite{an_eulerian_path_approach_to_dna_fragment_assembly}, Pevzner, Tang and Waterman proposes \textit{de Bruijn} graphs as a solution to the problem of finding the correct origin of repeats during fragment assembly. A de Bruijn graph is a structure where vertices represent \textit{k-mers} from an alphabet and edges represent relationships between the k-mers of two vertices (Figure \ref{fig:de_bruijn_graph_example}). Pevzner et al. lets the vertices contain strings of length $l-1$ and connects vertices with an edge wherever there exists a read of length $l$ containing both of the substrings. Formulating the problem in this fashion turns it into an \textit{Eulerian path} problem, solvable in polynomial time, rather than the traditional ``overlap-layout-consensus'' method which is equivalent to the NP-complete problem of finding a \textit{Hamiltonian path} \cite[Section 11.1]{algorithms_sequential_parallell_and_distributed}. A great benefit with de Bruijn graphs is that there is no disambiguity: Any legal k-mer has at no point more than one vertice representing it.\\
 \par\noindent
 A more detailed type of de Bruijn graphs is the colored variant where the origins of edges and vertices are visualized as colors. The entire sequence originating from a single individual sample can be seen by following a path with a given color. Similarities between samples can be seen as multicolored stretches, variation take the form of bubbles. Colored de Bruijn graphs can be used for de novo assembly as a more powerful method for detecting variation than traditional assembly techniques\cite{de_novo_assembly_and_genotyping_of_variants_using_colored_de_bruijn_graphs}.
 \subsubsection{Sequence graphs}
 \label{sec:sequence_graphs}
-The relationship between a de Bruijn graph and the sequences it represents is not immediately apparent. A more intuitively pleasing representation is a graph where every vertice contains exactly one nucleotide (Figure \ref{fig:sequence_graph_example}), a concept called \textit{partially ordered graphs} by Lee et al.\cite{improved_genome_inference_in_the_mhc_using_a_population_reference_graph} and \textit{sequence graphs} by Paten et al.\cite{mapping_to_a_reference_genome_structure}. In this representation the underlying connection between the characters of a text string and the vertices of the graph is more obvious. The representation does however have a major drawback compared to de Bruijn graphs: The concept of uniqueness. A vertice can no longer be identified solely by the data it contains. To solve this problem the vertices can be given ids, for instance UUIDs as propsed by Paten et al., for uniqueness. Even though these ids can be used to identify a vertex they contain no information regarding the relationships between the elements. The difficulties presented by this problem will be the basis for the subsequent section on mapping. 
+The relationship between a de Bruijn graph and the sequences it represents is not immediately apparent. A more intuitively pleasing representation is a graph where every vertice contains exactly one nucleotide (Figure \ref{fig:sequence_graph_example}), a concept called \textit{partially ordered graphs} by Lee et al. \cite{improved_genome_inference_in_the_mhc_using_a_population_reference_graph} and \textit{sequence graphs} by Paten et al. \cite{mapping_to_a_reference_genome_structure}. In this representation the underlying connection between the characters of the text string and the vertices of the graph is more apparent. The representation does however have a major disadvantage when compared to de Bruijn graphs: The concept of uniqueness. A vertice can no longer be identified solely by the data it contains. To solve this problem the vertices can be given ids, for instance UUIDs as propsed by Paten et al., for uniqueness. Even though these ids can be used to identify a vertex they contain no information regarding the relationships between the elements. The difficulties presented by this problem will be the basis for the subsequent section on \textit{mapping}. 
 \subsubsection{Cactus graphs}
 The article ``Cactus Graphs for Genome Comparisons''\cite{cactus_graphs_for_genome_comparisons} introduces \textit{cactus graphs} as a model for alignment of multiple genomes. A cactus graph has vertices representing sets of homologous DNA sequences and edges representing adjacendies between the strings in any of the genomes used as input (Figure \ref{fig:cactus_graph_example}). In cases where there exists several adjacencies between two vertices these are combined into a single edge with several labels. The result is a graph where every \textit{simple cycle}, cycles where no vertice is repeated, has at most one vertice in common. A similarity between this representation and de Bruijn graphs is that the vertices contain subsequences of the original input sequences. Additionally this representations allows some flexibility, controllable through the definition of homology and thus the strictness of ``equality'' between strings represented in a single vertex. If the strictest possible restriction is set, a requirement of equal strings, the vertices would contain an exact k-mer from an input sequence just like the de Bruijn vertices.
 \begin{figure}[!b]
   \begin{subfigure}[t]{\textwidth}
     \begin{mdframed}
-		\begin{center}
-		  \begin{tikzpicture}[->,auto,node distance=1.5cm]
-		    \node[state] (q0) {$ACG$};
-		    \node[state] [right of=q0] (q1) {$CGT$};
-		    \node[state] [right of=q1] (q2) {$GTT$};
-		    \node[state] [right of=q2] (q3) {$TTT$};
-		    \node[state] [right of=q3] (q4) {$TTA$};
-		    \node[state] [right of=q4] (q5) {$TAC$};
-		    \node[state] [right of=q5] (q6) {$ACG$};
-		    \node[state] [below of=q2] (q7) {$GTG$};
-		    \node[state] [below of=q3] (q8) {$TGT$};
-		    \node[state] [below of=q4] (q9) {$GTA$};
+      \begin{center}
+        \begin{tikzpicture}[->,auto,node distance=1.5cm]
+          \node[state] (q0) {$ACG$};
+          \node[state] [right of=q0] (q1) {$CGT$};
+          \node[state] [right of=q1] (q2) {$GTT$};
+          \node[state] [right of=q2] (q3) {$TTT$};
+          \node[state] [right of=q3] (q4) {$TTA$};
+          \node[state] [right of=q4] (q5) {$TAC$};
+          \node[state] [right of=q5] (q6) {$ACG$};
+          \node[state] [below of=q2] (q7) {$GTG$};
+          \node[state] [below of=q3] (q8) {$TGT$};
+          \node[state] [below of=q4] (q9) {$GTA$};
 
-		    \path (q0) edge node {} (q1)
-		      (q1) edge node {} (q2)
-		      edge node {} (q7)
-		      (q2) edge node {} (q3)
-		      edge[bend left=50,->] node {} (q4)
-		      (q3) edge node {} (q4)
-		      (q4) edge node {} (q5)
-		      (q5) edge node {} (q6)
-		      (q7) edge node {} (q8)
-		      (q8) edge node {} (q9)
-		      (q9) edge node {} (q5);
-		  \end{tikzpicture}
-		\end{center}
-	\end{mdframed}
-	\subcaption{A de Bruijn graph with $k=3$}
-	\label{fig:de_bruijn_graph_example}
+          \path (q0) edge node {} (q1)
+          (q1) edge node {} (q2)
+          edge node {} (q7)
+          (q2) edge node {} (q3)
+          edge[bend left=50,->] node {} (q4)
+          (q3) edge node {} (q4)
+          (q4) edge node {} (q5)
+          (q5) edge node {} (q6)
+          (q7) edge node {} (q8)
+          (q8) edge node {} (q9)
+          (q9) edge node {} (q5);
+        \end{tikzpicture}
+      \end{center}
+    \end{mdframed}
+    \subcaption{A de Bruijn graph with $k=3$}
+    \label{fig:de_bruijn_graph_example}
   \end{subfigure}
   \begin{subfigure}[t]{\textwidth}
-  	\begin{mdframed}
-	  \begin{center}
-	    \begin{tikzpicture}[->,auto,node distance=1.3cm]
-	      \node[state] (q0) {$A$};
-	      \node[state] [right of=q0] (q1) {$C$};
-	      \node[state] [right of=q1] (q2) {$G$};
-	      \node[state] [right of=q2] (q3) {$T$};
-	      \node[state] [right of=q3] (q4) {$T$};
-	      \node[state] [right of=q4] (q5) {$T$};
-	      \node[state] [right of=q5] (q6) {$A$};
-	   	  \node[state] [right of=q6] (q7) {$C$};
-	   	  \node[state] [right of=q7] (q8) {$G$};
-	   	  \node[state] [below of=q4] (q9) {$G$};
+    \begin{mdframed}
+      \begin{center}
+        \begin{tikzpicture}[->,auto,node distance=1.3cm]
+          \node[state] (q0) {$A$};
+          \node[state] [right of=q0] (q1) {$C$};
+          \node[state] [right of=q1] (q2) {$G$};
+          \node[state] [right of=q2] (q3) {$T$};
+          \node[state] [right of=q3] (q4) {$T$};
+          \node[state] [right of=q4] (q5) {$T$};
+          \node[state] [right of=q5] (q6) {$A$};
+          \node[state] [right of=q6] (q7) {$C$};
+          \node[state] [right of=q7] (q8) {$G$};
+          \node[state] [below of=q4] (q9) {$G$};
 
-	      \path (q0) edge node {} (q1)
-	      	(q1) edge node {} (q2)
-	        (q2) edge node {} (q3)
-	        (q3) edge node {} (q4)
-	       	edge[bend left=50,->] node {} (q5)
-	       	edge node {} (q9)
-	        (q4) edge node {} (q5)
-	        (q5) edge node {} (q6)
-	        (q6) edge node {} (q7)
-	        (q7) edge node {} (q8)
-	        (q9) edge node {} (q5);
-	      \end{tikzpicture}
-	    \end{center}
-	  \end{mdframed}
-	 \subcaption{Sequence graph}
-	 \label{fig:sequence_graph_example}
-  	\end{subfigure}
-  	\begin{subfigure}[t]{\textwidth}
-  		\subcaption{\textcolor{red}{Cactus graph}}
-  		\label{fig:cactus_graph_example}
-  	\end{subfigure}
-  \caption{Various graph representations of the strings "ACGTTTACG", "ACGTGTCA" and "ACGTTACG"}
+          \path (q0) edge node {} (q1)
+          (q1) edge node {} (q2)
+          (q2) edge node {} (q3)
+          (q3) edge node {} (q4)
+          edge[bend left=50,->] node {} (q5)
+          edge node {} (q9)
+          (q4) edge node {} (q5)
+          (q5) edge node {} (q6)
+          (q6) edge node {} (q7)
+          (q7) edge node {} (q8)
+          (q9) edge node {} (q5);
+        \end{tikzpicture}
+      \end{center}
+    \end{mdframed}
+    \subcaption{Sequence graph}
+    \label{fig:sequence_graph_example}
+  \end{subfigure}
+  \begin{subfigure}[t]{\textwidth}
+    \subcaption{\textcolor{red}{Cactus graph}}
+    \label{fig:cactus_graph_example}
+  \end{subfigure}
+  \caption[Various graph representations]{Various graph representations of the strings "ACGTTTACG", "ACGTGTCA" and "ACGTTACG"}
 \end{figure}
 \clearpage
 \subsection{Mapping}
 \label{sec:mapping}
-One of the previously mentioned operations which can control the properties of the model is mapping. Although the two terms are often used isomorphically we will in this thesis define mapping and alignment as two separate concepts. We let mapping be the process of finding relationships between single characters of a string and single elements of a reference genome. Alignment is concerned with finding relationships between consecutive elements of an input string and substructures in the reference genome. In comparison of linear strings, mapping is easy: Every string has the same underlying coordinate system, represented by the positions of the characters. This means two elements from two separate sequences are either in the same position or they are not. When they are not, the difference in position can be derived from the difference between the indexes. If we assume the indexation system proposed in the last section, the indexes of a graph has only one property: Uniqueness. They do not hold the intrinsic value of describing relations between vertices. Any mapping system which uses fixed coordinates would face problems when dealing with a fluent graph able to merge in new information, as the internal relationships are bound to change. In de Bruijn graphs the problem is solved by moving the mappable quality away from positions and into the data: For any possible k-mer there either is a corresponding vertice or there is not. In sequence graphs, where nucleotides are the most basic information, there exists an equal number of identically scoring positions for every base as there are vertices containing that vertice in the graph.\\
+One of the previously mentioned operations which can decide the properties of the model is mapping. Although the two terms are often used isomorphically we will in this thesis define mapping and alignment as two separate concepts. We let mapping be the process of finding relationships between single characters of a string and single elements of a reference genome. Alignment is concerned with finding relationships between consecutive elements of an input string and substructures in the reference genome. In comparison of linear strings, mapping is easy: Every string has the same underlying coordinate system, represented by the positions of the characters. This means two elements from two separate sequences are either in the same position or they are not. When they are not, the difference in position can be derived from the difference between the indexes. If we assume the indexation system proposed in the last section, the indexes of a graph has only one property: Uniqueness. They do not hold the intrinsic value of describing relations between vertices. Any mapping system which uses fixed coordinates would face problems when dealing with a fluent graph able to merge in new information, as the internal relationships are bound to change. In de Bruijn graphs the problem is solved by moving the mappable quality away from positions and into the data: For any possible k-mer there either is a corresponding vertice or there is not. In sequence graphs, where singular nucleotides are the most basic building block, there exists an equal number of identically scoring positions for every base as there are vertices containing that base in the graph.\\
 \par\noindent
-Paten et al.\cite{mapping_to_a_reference_genome_structure} introduce the concept of \textit{context-based mapping} as a solution to the mapping problem when the reference is modeled as a sequence graph. Context-based mapping is an approach where a vertex is identified by the surrounding environment in the graph. More technically a vertex has a set of \textit{contexts} which are tuples (L, B, R). The L references the left side, a path going in to the vertice, B is the base contained in the vertice and R is an outgoing path from the vertice (Fig. \textcolor{red}{figure}). More conceptually, contexts can be seen as paths which pass through a given vertice. Because these paths are linear and passes through vertices containing characters, the contexts can be treated as text strings. There are two concrete examples of approaches presented in the article: The \textit{general left-right exact match mapping scheme} and the \textit{central exact match mapping scheme}. The key words left-right and central refer to how a vertice defines its contexts based on the surrondings. The former defines separate contexts for incoming and outcoming paths whereas the latter defines the vertice as a center of a path where the differences of the lengths of the two contexts are minimized. A  \textit{balanced central exact match mapping scheme} is a special case of the latter where both contexts are the same length, and the vertice thus is the center of a k-mer. This is a concept closely related to de Bruijn graphs.\\
+Paten et al. \cite{mapping_to_a_reference_genome_structure} introduce the concept of \textit{context-based mapping} as a solution to the mapping problem when the reference is modeled as a sequence graph. Context-based mapping is an approach where a vertex is identified by the surrounding environment in the graph. More technically a vertex has a set of \textit{contexts} which are tuples (L, B, R). The L references the left side, a path coming in to the vertex. B is the base contained in the vertex itself. R is an outgoing path from the vertex (Fig. \textcolor{red}{figure}). More conceptually, contexts can be seen as all paths which pass through a given vertex. Because these paths are linear and passes through vertices containing characters, the contexts can be treated as text strings. There are two concrete examples of approaches presented in the article: The \textit{general left-right exact match mapping scheme} and the \textit{central exact match mapping scheme}. The keywords left-right and central refer to how a vertex defines its contexts based on the surrondings. The former examples defines separate contexts for incoming and outcoming paths whereas the latter defines the vertex as the center of a path where the differences of the lengths of the two contexts are minimized. A  \textit{balanced central exact match mapping scheme} is a special case of the latter where both contexts are the same length, and the vertice thus is the center of a k-mer. This is a concept closely related to de Bruijn graphs.\\
 \par\noindent
-Both of the examples use the word \textit{exact} in their definitions. The term refers to the fact that every context is \textit{unique} to a single vertice, meaning every possible context either maps unambiguously to a single vertice or does not map at all. Because the graphs have the possibility of branching, a vertice can have several contexts contained in a \textit{context set}. Because every context is unique a collection of such will also be unique, which means context-based mapping leads to a two-way unique mapping schema. This is an even stronger notion of mappability than positions in strings, as a character of a string does not necessarily map uniquely back to its position. Being this precise in the definition has a drawback: If a vertice does not have a unique context it is no longer mappable. In spite of this the context-based approach presents a precise and efficient solution to the mapping problem. This is knowledge we will bring with us when we move on to considering the more complex alignment problem.
+Both of the examples use the word \textit{exact} in their definitions. The term refers to the fact that every context is \textit{unique} to a single vertex, meaning every possible context either maps unambiguously to a single vertex or does not map at all. Because the graphs have the possibility of branching, a vertex can have several contexts contained in a \textit{context set}. Because every context is unique a collection of such will also be unique, which means context-based mapping leads to a two-way unique mapping schema. This is an even stronger notion of mappability than positions in strings, as a character of a string does not necessarily map uniquely back to its position. Being this precise in the definition has a drawback: If a vertex does not have a unique context set it is no longer mappable. In spite of this the context-based approach presents a precise and efficient solution to the mapping problem. This is knowledge we will bring with us when we move on to considering the more complex alignment problem.
 \subsection{Alignment}
-As previously discussed, alignment of text strings has for some time been considered solved. We let the two strings represent each their dimension in a two-dimensional space and search for a path through the space which yields an optimal score. When one of the strings is replaced with a graph a simple two-dimensional representation is no longer sufficient. The ``3 steps before'' or ``11 steps after'' relationship found in strings is no longer as easily derivable. A solution to this problem can be to imagine alignments agains graphs like alignments against sequences in a database: There exists several possible sequences which can be aligned two-dimensionally, find the one yielding the highest score. But, unlike individual sequences in a database, the paths through a graph can have overlapping regions. Creating all possible paths results in an exponential number of possibilities which does not necessarily portray a fair picture of the underlying structure.
+As previously discussed, alignment of text strings has for some time been considered solved. We let the two strings represent each their dimension in a two-dimensional space and search for a path through the space which yields an optimal score. When one of the strings is replaced with a graph a simple two-dimensional representation is no longer sufficient. The ``3 steps before'' or ``11 steps after'' relationship found in strings is no longer as easily derivable. A solution to this problem can be to imagine alignments agains graphs like alignments against sequences in a database: There exists several possible sequences which can be aligned two-dimensionally, find the one yielding the highest score. But, unlike individual sequences in a database, the paths through a graph can have overlapping regions. Creating all possible paths would result in an exponential number of possibilities which does not necessarily portray a fair picture of the underlying structure.
 \subsubsection{Dynamic programming on graphs}
 \label{sec:dp_on_graphs}
-The article ``Multiple sequence alignment using partial order graphs''\cite{multiple_sequence_alignment_using_partial_order_graphs} proposes a direct adaptation of the regular two-dimensional dynamic programming solution for graphs through the \textit{Partial Order Multiple Sequence alignment} (PO-MSA) algorithm. Every vertex contains a one-dimensional array representing the string which is to be aligned. Just like an array-index in the edit distance problems, the vertice looks at smaller subproblems to decide what the values of the array should be. However, because this is a graph and not a string, it is no longer sufficient to look up the preceding index. The vertex has to look at every preceding vertex as a single instance of the two-dimensional problem, to determine which of the incoming vertices represents the linear path which presents the highest score. After filling out every index $i$ of the array in the vertex $v$ in this fashion, the array represents the highest score possible for the substring $S[0:i]$ for all paths ending in $v$.\\
+The article ``Multiple sequence alignment using partial order graphs'' \cite{multiple_sequence_alignment_using_partial_order_graphs} proposes a direct adaptation of the regular two-dimensional dynamic programming solution for graphs through the \textit{Partial Order Multiple Sequence alignment} (PO-MSA) algorithm. Every vertex contains a one-dimensional array representing the string which is to be aligned. Just like a single array-index in the edit distance problem, the vertex looks at smaller subproblems to decide what the values of the array should be. However, because this is a graph and not a string, it is no longer sufficient to look up the preceding index. The vertex has to look at every preceding vertex as a single instance of the two-dimensional problem, to determine which of the incoming vertices represents the linear path which presents the highest score. After filling out every index $i$ of the array in the vertex $v$ in this fashion, the array represents the highest score possible for the substring $S[0:i]$ for all paths ending in $v$.\\
 \par\noindent
 Using an approach which is this closely related to the known approaches for regular string alignment has its advantages. Alignments and scores are verifiable through existing tools and the principle of optimality is contained through the dynamic programming. Techniques for handling the different types of alignments, for instance local or global, can be inherited from the domain of strings. The algorithm is however a crude adaptation and thus susceptible to the inherent complexity of graphs.
 \label{sec:po_msa}
 \subsubsection{Context-based alignment}
 \label{sec:canonical}
-In the article ``Canonical, Stable, General Mapping using Context Schemes''\cite{canonical_stable_general_mapping_using_context_schemes} the previously mentioned concept of context-based mapping is used for aligning entire strings. The algorithm works by identifying substrings of the input string which maps uniquely to a context in the reference. Overlapping contexts are combined into longer \textit{Maximal Unique Substrings} (MUMs) which uniquely align to a region of the reference. Finally the aligned substrings are combined in chains into $\beta$-synteny blocks, paths along the graph where exactly $\beta$ mismatches are allowed between the uniquely mapped elements. Any remaining bases are mapped \textit{on credit}, for instance as a graph search through the region represented by the gap between the end and start of to consecutive uniquely mapped sequences. The conceptual idea is that any string mapping to a region of the graph should share a number of unique paths, which can be combined into a larger result. The authors name their heuristical approach the \textit{$\alpha-\beta$-Natural Context-Driven Mapping Scheme}. The introduction of the $\alpha$ and $\beta$ variables allows for a regulation of the strictness of uniqueness and presents a powerful approach for alignment against complex reference structures. However it is still a heuristic, based on a non-tautological assumption of the involved input data.
+In the article ``Canonical, Stable, General Mapping using Context Schemes''\cite{canonical_stable_general_mapping_using_context_schemes} the previously mentioned concept of context-based mapping is used for aligning entire strings. The algorithm works by identifying substrings of the input string which maps uniquely to a context in the reference. Overlapping contexts are combined into longer \textit{Maximal Unique Substrings} (MUMs) which uniquely align to a region of the reference. Finally the aligned substrings are combined in chains into $\beta$-synteny blocks, paths along the graph where exactly $\beta$ mismatches are allowed between the uniquely mapped elements. Any remaining bases are mapped \textit{on credit}, for instance as a regular graph search through the region represented by the gap between the end and start of to consecutive uniquely mapped subsequences. The conceptual idea is that any string mapping to a region of the graph should share a number of unique paths, which can be combined into a larger result. The authors name their heuristical approach the \textit{$\alpha-\beta$-Natural Context-Driven Mapping Scheme}. The introduction of the $\alpha$ and $\beta$ variables allows for a regulation of the strictness of uniqueness and presents a powerful approach for alignment against complex reference structures. However it is still a heuristic, based on a non-tautological assumption for the input data.\textcolor{red}{MORE}
 \end{document}
 
 

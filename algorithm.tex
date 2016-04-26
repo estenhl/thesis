@@ -68,7 +68,7 @@ As sets per definition do not allow duplicates the impact of a branching occurin
       \end{tikzpicture}
     \end{mdframed}
   \end{center}
-  \caption{A small reference graph with left contexts (top) and right contexts (bottom) of length 2 shown}
+  \caption[A small, explicit reference graph]{A small reference graph with left contexts (top) and right contexts (bottom) of length 2 shown}
   \label{fig:explicit_contexts}
 \end{figure}
 \par\noindent
@@ -151,7 +151,7 @@ In theory every leaf vertex has to be visited in order to check the score for ev
     \end{mdframed}
     \caption{$\lambda=1$}
   \end{subfigure}
-  \caption{The resulting candidate sets for mapping the string "ATA" against the reference genome from fig. ~\ref{fig:explicit_contexts} with varying T values}
+  \caption[Candidate vertices for aligning a string against \ref{fig:explicit_contexts}]{The resulting candidate sets for mapping the string "ATA" against the reference genome from fig. ~\ref{fig:explicit_contexts} with varying T values}
   \label{fig:candidate_nodes}
 \end{wrapfigure}
 
@@ -205,7 +205,7 @@ Once we have created the graph we can start the setup for the subsequent search.
       \end{center}
     \end{subfigure}
   \end{mdframed}
-  \caption{The 4 arrays used by the searching algorithm when using the candidate sets from Fig \ref{fig:candidate_nodes} and $T=-1$}
+  \caption[The 4 arrays used by the searching algorithm]{The 4 arrays used by the searching algorithm when using the candidate sets from Fig \ref{fig:candidate_nodes} and $T=-1$}
   \label{fig:scoring_arrays}
 \end{wraptable}
 The search is initialized by looping over every node $v_x \in V'_0$ with a counter $j$, setting\\
@@ -245,9 +245,11 @@ Whenever the algorithm is not able to find any alignments with a score higher th
 Yielding an empty alignment for the first case might seem strange as the algorithm does a full computation and finds a legal path. There is however one important consideration: Vertices which are parts of an optimal path might have been dropped during the pruning of the candidate sets. There is one very interesting case where this occurs, namely when the difference between the threshold $T$ and the highest scoring alignment is exactly 1 (or the minimal penalty possible for generalized context shemes). In this case we know there are no paths which yield a score of $T$, because we would have found them, and there are no unfound alignments scoring higher than the one we found because there exists no such possible scores. In order to stay in line with the strict problem definition these cases are also classified unmappable.\\
 \par\noindent
 The second case is often less interesting as it usually leads to vastly less coherent alignments and as a result typically lower scores. Even so, there are interesting concepts touched upon also here: Because of the distinct penalty given to invalid edges we have no real way of knowing how the proposed alignment is really scored. Thus it can, much like the case discussed above, contain interesting regions which are aligned well within the threshold.
-\section{The \textt{-{}-heuristical} parameter}
+\section{The heuristical parameter}
 \label{sec:implementation_heuristic}
-We have implemented a parameter which allows us to utilize this information. Running the tool with \texttt{--heuristical=true} will prevent the algorithm from doing its regular, strict validation and subsequent cut-off depending on whether the found alignment is good enough. Instead it will provide the best alignment found, which will represent the optimal path through the candidate vertices. Because of this the algorithm will perform as normal whenever all actual candidate vertices are present. This also means the heuristical approach will work well when the mismatches are evenly spread across the entire string: No cluster of mismatches contained in the same context will result in a candidate vertex being "incorrectly" pruned away. Whether or not this is the case is impossible to determine a priori, which is why 
+We have implemented a parameter which allows us to utilize this information. Running the tool with \texttt{--heuristical=true} will prevent the algorithm from doing its regular, strict validation and subsequent cut-off depending on whether the found alignment is good enough. Instead it will provide the best alignment found, which will represent the optimal path through the candidate vertices. Because this search is exhaustive, the algorithm will perform as normal whenever all actual candidate vertices are present. This also means the heuristical approach will do well when the mismatches are evenly spread across the entire string: No cluster of mismatches contained in the same context will result in a candidate vertex being "incorrectly" pruned away. Whether or not this is the case is impossible to determine a priori and we can no longer prove an equivalence between the optimal alignment in the candidate graph and the optimal alignment in the original graph. This which is why we classify this as a heuristical modification to our algorithm\footnote{A further discussion on this subject can be found in section \ref{sec:heuristical_applications} and to some degree in Chapter \ref{sec:future_work}}.\\
+\par\noindent
+In order to provide a heuristical result there are some necessary implementation details in addition to skipping the cut-off of the final alignment. We have previously measured gaps which are not interesting with a length of $\lambda*2$, which puts them right under the limit of being considered. If we remove this limit, they will often be favoured because of the small penalty. We have no information concering how much they actually should be penalized, and need to find a default value. We have chosen to penalize this heavily in order to get as coherent alignments as possible, choosing a length of $|G|$. Another issue which can arise is trailing, empty candidate sets. This is trivially fixed by iterating backwards through the sets until we find a starting point. Through these small adjustments we are able to adapt our algorithm to provide educated guesses whenever it is not able to find a provable optimal result.
 \section{Parallelization}
 Of the two steps of the algorithm, one stand out as a text book case for possible parallelization. Searching for the candidate vertices for an index is done completely separate from the other indexes. An extremly trivial parallellization of this step is implemented through splitting up the indexes into separate threads, reachable through the \texttt{-{}-parallellization=true} flag. Further parallellization is possible as the recursive searches through the trees are only dependant on the results from the vertices higher up in the trees, there is no exchange of data between the vertices of a layer. This is not implemented in the tool to keep the proof-of-concept presentation of the approach as conceptually simple as possible.
 \clearpage

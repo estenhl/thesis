@@ -22,7 +22,7 @@ We will then show the graphical result which is stored in a png-file with the na
   \begin{mdframed}
     \includegraphics[width=\textwidth]{output/build.png} 
   \end{mdframed}
-  \caption{The reference graph made from the sequence "ACGTATTAC"}
+  \caption[A reference graph made from the sequence ``ACGTATTAC'']{The reference graph made from the sequence "ACGTATTAC"}
   \label{fig:validation_ref}
 \end{figure}
 \par\noindent
@@ -53,7 +53,7 @@ We move on the the most trivial alignment operation, aligning a sequence against
     \subcaption{}
   \end{subfigure} 
   \end{mdframed}
-  \caption{The result of aligning (a) and merging (b) the sequence "ACGTATTAC" against the reference seen in figure \ref{fig:validation_ref}}
+  \caption[Aligning and merging an equal sequence into \ref{fig:validation_ref}]{The result of aligning (a) and merging (b) the sequence "ACGTATTAC" against the reference seen in figure \ref{fig:validation_ref}}
   \label{fig:validation_equal}
 \end{figure}
 \begin{itemize}
@@ -81,7 +81,7 @@ We let SNPs be the first point mutation. At first we align and merge without set
     \subcaption{}
   \end{subfigure}
   \end{mdframed}
-  \caption{The result of aligning (a) and merging (b) the sequence "ACGTATTAC" against the reference seen in figure \ref{fig:validation_ref}}
+  \caption[Aligning and merging an SNP with \ref{fig:validation_ref} with no error margin]{The result of aligning (a) and merging (b) the sequence "ACGTATTAC" against the reference seen in figure \ref{fig:validation_ref}}
   \label{fig:validation_snp_no_error}
 \end{figure}
 \begin{itemize}
@@ -109,7 +109,7 @@ We then align the same sequence while allowing an error margin through the \text
     \subcaption{}
   \end{subfigure} 
 \end{mdframed}
-  \caption{The result of aligning (a) and merging (b) the sequence "ACGGATTAC" against the reference seen in figure \ref{fig:validation_ref}}
+  \caption[Aligning and merging an SNP with \ref{fig:validation_ref} with a sufficient error margin]{The result of aligning (a) and merging (b) the sequence "ACGGATTAC" against the reference seen in figure \ref{fig:validation_ref}}
   \label{fig:validation_single_snp}
 \end{figure}
 \begin{itemize}
@@ -138,7 +138,7 @@ First we test a deletion by removing the fifth character in the alignment sequen
     \subcaption{}
   \end{subfigure}
   \end{mdframed}
-  \caption{The result of aligning (a) and merging (b) the sequence "ACGTTTAC" against the reference seen in figure \ref{fig:validation_ref}}
+  \caption[Aligning and merging a deletion with \ref{fig:validation_ref}]{The result of aligning (a) and merging (b) the sequence "ACGTTTAC" against the reference seen in figure \ref{fig:validation_ref}}
   \label{fig:validation_deletion}
 \end{figure}
 \begin{itemize}
@@ -165,7 +165,7 @@ Secondly we test an insertion by inserting an extra 'A' after the fifth characte
     \subcaption{}
   \end{subfigure} 
 \end{mdframed}
-  \caption{The result of aligning (a) and merging (b) the sequence "ACGTAATTAC" against the reference seen in figure \ref{fig:validation_ref}}
+  \caption[Aligning and merging an insertion with \ref{fig:validation_ref}]{The result of aligning (a) and merging (b) the sequence "ACGTAATTAC" against the reference seen in figure \ref{fig:validation_ref}}
   \label{fig:validation_insertion}
 \end{figure}
 \begin{itemize}
@@ -187,7 +187,7 @@ We start out by combining an insertion with an SNP:\\
 \begin{figure}[H]
   \begin{mdframed}
   \includegraphics[width=\textwidth]{output/structural1-merge.png}
-  \caption{The result of merging the sequence ``ACGTGGTTAC'' with the reference seen in figure \ref{fig:validation_ref}}
+  \caption[Aligning and merging a complex variation with \ref{fig:validation_ref}]{The result of merging the sequence ``ACGTGGTTAC'' with the reference seen in figure \ref{fig:validation_ref}}
   \end{mdframed}
 \end{figure}
 \noindent
@@ -205,7 +205,7 @@ When we are dealing with the "non-standard" cases we can see a statement which i
   \begin{mdframed}
   \includegraphics[width=\textwidth]{output/structural2-merge.png}
   \end{mdframed}
-  \caption{The result of merging the sequence ``ACGTACCTT'' with the reference seen in figure \ref{fig:validation_ref}}
+  \caption[Aligning and merging a second complex variation with \ref{fig:validation_ref}]{The result of merging the sequence ``ACGTACCTT'' with the reference seen in figure \ref{fig:validation_ref}}
 \end{figure}
 \noindent
 At this point we do not achieve the result we expected. Instead of four SNPs the alignment contains two deletions and two insertions. Importantly, this is not a wrong result. The score for the alignment is exactly the same as the four SNPs we expected. This is a result of ambiguity created by the previously mentioned order of operations built in to the implementation. It is suboptimal that this kind of ambiguity exists, but it is a burden carried by the scoring schema and the problem definition rather than the approach itself.
@@ -219,7 +219,7 @@ We start by building a graph from all the sequences from the first set of tests:
 \begin{figure}[H]
   \begin{mdframed}
   \includegraphics[width=\textwidth]{output/complex.png}
-  \caption{The reference graph made from the sequences ``ACGTATTAC'', "ACGGATTAC", ``ACGTTTAC'', ``ACGTAATTAC''}
+  \caption[A complex reference graph]{The reference graph made from the sequences ``ACGTATTAC'', "ACGGATTAC", ``ACGTTTAC'', ``ACGTAATTAC''}
   \label{fig:validation_complex_ref}
   \end{mdframed}
 \end{figure}
@@ -238,7 +238,7 @@ We then merge in the sequences from the previous section:\\
   \begin{mdframed}
     \includegraphics[width=\textwidth]{output/complex-merge.png}
   \end{mdframed}
-  \caption{The two sequences ``ACGTGGTTAC'' and ``ACGTACCTT'' merged into the graph reference from figure \ref{fig:validation_complex_ref}}
+  \caption[The result of merging several sequences into \ref{fig:validation_complex_ref}]{The two sequences ``ACGTGGTTAC'' and ``ACGTACCTT'' merged into the graph reference from figure \ref{fig:validation_complex_ref}}
   \label{fig:complex_2}
 \end{figure}
 \noindent
@@ -251,7 +251,7 @@ Although it is small, this is what we would consider to be an extremely complex 
   \begin{mdframed}
     \includegraphics[width=\textwidth]{output/complex-align.png}
   \end{mdframed}
-  \caption{Aligning the sequence ``ACGTGGTTAC'' against the reference graph seen in figure \ref{fig:complex_2}}
+  \caption[Aligning a sequence against \ref{fig:complex_2}]{Aligning the sequence ``ACGTGGTTAC'' against the reference graph seen in figure \ref{fig:complex_2}}
 \end{figure}
 Because of the quick growth in complexity we will let this be the last visualized result. We will in the next chapter move on to large datasets and automated validation when testing the efficiency of the approach.
 \end{document}

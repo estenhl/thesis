@@ -156,7 +156,7 @@ When splitting up the runtime into the individual constituents an interesting pa
   \subcaption{Total run time as a combination of the individual steps}
   \label{fig:index_constituents_explicit}
   \end{subfigure}
-  \caption{Time used by the indexation process as a function of the number of vertices}
+  \caption{Time used by the individual constituents of the build index process}
   \label{fig:index_constituents}
 \end{figure}
 \clearpage
@@ -262,7 +262,7 @@ It is important to point out that the extreme growth in relation to the small nu
       \addlegendentry{PO-MSA}
     \end{axis}
   \end{tikzpicture}
-  \caption{Runtime of the alignment process as a function of $\lambda$ with $|G|=150.000$ and \texttt{-{}-parallellization=true}}
+  \caption[Runtime of the alignment process as a function of $\lambda$ with a larger data set]{Runtime of the alignment process as a function of $\lambda$ with $|G|=150.000$ and \texttt{-{}-parallellization=true}}
   \label{fig:runtime_lambda_parallell}
 \end{figure}
 \clearpage
@@ -401,7 +401,7 @@ In the previous tests we have guaranteed correct results through the tuning of i
   \subcaption{\texttt{-{}-heuristical=true}}
   \label{fig:correctness_both_heur}
   \end{subfigure}
-  \caption{Percentage of correctly aligned reads as a function of both $p$ and $\lambda$ varies}
+  \caption[Percentage of correctly mapped reads]{Percentage of correctly aligned reads as a function of both $p$ and $\lambda$ varies}
   \label{fig:correctness}
 \end{figure}
 \clearpage
@@ -443,7 +443,7 @@ In this section we will compare the GraphGenome tool with the sequence graphs to
       \addlegendentry{Sequence graphs tool time}
     \end{axis}
   \end{tikzpicture}
-  \caption{Time spent building the index by the different tools}
+  \caption{Time spent building the index by the two tools}
   \label{fig:comparison_build}
 \end{figure}
 \clearpage\noindent
@@ -482,7 +482,7 @@ In this section we will compare the GraphGenome tool with the sequence graphs to
       \addlegendentry{Sequence graphs tool time}
     \end{axis}
   \end{tikzpicture}
-  \caption{Runtimes of the two tools}
+  \caption{Runtimes of alignment by the two tools}
   \label{fig:comparison_align}
 \end{figure}
 \noindent
