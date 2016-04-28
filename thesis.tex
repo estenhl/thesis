@@ -7,6 +7,7 @@
 \usepackage{pgfplots}
 \usepackage{amsthm}
 \usepackage{amsmath}
+\usepackage{color,soul}
 \usepackage{wrapfig}
 \usepackage{subcaption}
 \usepackage{listings}
@@ -26,6 +27,8 @@
 \usepgfplotslibrary{fillbetween}
 \usepackage{ifthen}
 \usepackage[noend]{algpseudocode}
+
+\newcommand{\hlcyan}[1]{{\sethlcolor{cyan}\hl{#1}}}
 
 \newcommand{\HeatmapNode}[1]{
   \ifthenelse{#1 < 50}
