@@ -69,7 +69,7 @@ When splitting up the runtime into the individual constituents an interesting pa
 \begin{figure}[!t]
   \begin{subfigure}[t]{0.4\textwidth}
     \begin{tikzpicture}[trim axis left]
-      \begin{axis}[scale only axis,height=\textwidth,width=\textwidth,xmin=0,ymin=0,xmax=144480,ymax=320000,scaled ticks=false]
+      \begin{axis}[scale only axis,height=\textwidth,width=\textwidth,xmin=0,ymin=0,xmax=448490,ymax=320000,scaled ticks=false]
         \addplot coordinates {
           (700,9)
           (3345,51)
@@ -77,6 +77,7 @@ When splitting up the runtime into the individual constituents an interesting pa
           (35770,1031)
           (101570,5487)
           (144480,11328)
+          (448490,124724)
         };
       \end{axis}
     \end{tikzpicture}
@@ -85,7 +86,7 @@ When splitting up the runtime into the individual constituents an interesting pa
   \hfill
   \begin{subfigure}[t]{0.4\textwidth}
     \begin{tikzpicture}[trim axis left]
-      \begin{axis}[scale only axis,height=\textwidth,width=\textwidth,xmin=0,ymin=0,xmax=144480,ymax=125000,scaled ticks=false]
+      \begin{axis}[scale only axis,height=\textwidth,width=\textwidth,xmin=0,ymin=0,xmax=448490,ymax=320000,scaled ticks=false, legend pos=north west]
         \addplot[color=green,mark=*] coordinates {
           (701,65)
           (3345,138)
@@ -93,6 +94,7 @@ When splitting up the runtime into the individual constituents an interesting pa
           (35770,2788)
           (101570,6905)
           (144480,10007)
+          (448490,15301)
         };
       \end{axis}
     \end{tikzpicture}
@@ -100,7 +102,7 @@ When splitting up the runtime into the individual constituents an interesting pa
   \end{subfigure}
   \begin{subfigure}[b]{0.4\textwidth}
     \begin{tikzpicture}[trim axis left]
-      \begin{axis}[scale only axis,height=\textwidth,width=\textwidth,xmin=0,ymin=0,xmax=144480,ymax=125000,scaled ticks=false]
+      \begin{axis}[scale only axis,height=\textwidth,width=\textwidth,xmin=0,ymin=0,xmax=448490,ymax=320000,scaled ticks=false]
         \addplot[color=red,mark=*] coordinates {
           (700,522)
           (3345,1860)
@@ -108,6 +110,7 @@ When splitting up the runtime into the individual constituents an interesting pa
           (35770,21581)
           (101570,65535)
           (144480,101317)
+          (448490,188685)
         };
       \end{axis}
     \end{tikzpicture}
@@ -116,7 +119,7 @@ When splitting up the runtime into the individual constituents an interesting pa
   \hfill
   \begin{subfigure}[b]{0.4\textwidth}
   \begin{tikzpicture}[trim axis left]
-    \begin{axis}[scale only axis,height=\textwidth,width=\textwidth,xmin=0,ymin=0,xmax=144480,ymax=125000,scaled ticks=false]
+    \begin{axis}[scale only axis,height=\textwidth,width=\textwidth,xmin=0,ymin=0,xmax=448490,ymax=320000,scaled ticks=false, legend pos=north west]
       \addplot[color=blue,name path=graph] coordinates {
         (700,9)
         (3345,51)
@@ -124,6 +127,7 @@ When splitting up the runtime into the individual constituents an interesting pa
         (35770,1031)
         (101570,5487)
         (144480,11328)
+        (448490,124724)
       };
       \addplot[color=green, name path=index] coordinates {
         (700,9 + 65)
@@ -132,6 +136,15 @@ When splitting up the runtime into the individual constituents an interesting pa
         (35770,1031 + 2788)
         (101570,5487 + 6905)
         (144480,11328 + 10007)
+        (448490,15301 + 124724)
+      };
+      \addplot[color=red] coordinates {
+        (700,597)
+        (3345,2050)
+        (21070,13858)
+        (35770,25401)
+        (101570,77928)
+        (144480,122654)
       };
       \addplot[color=black, name path=total,mark=*] coordinates {
         (700,597)
@@ -140,17 +153,20 @@ When splitting up the runtime into the individual constituents an interesting pa
         (35770,25401)
         (101570,77928)
         (144480,122654)
+        (448490,309791)
       };
       \addplot[name path=axis] coordinates {
         (0, 0)
-        (144480, 0)
+        (448490, 0)
       };
       \addplot[red!30] fill between[of=index and total];
       \addplot[green!30] fill between[of=graph and index];
       \addplot[blue!30] fill between[of=graph and axis];
+      \addlegendimage{only marks, mark=square}
       \addlegendentry{Build graph}
       \addlegendentry{Build index}
       \addlegendentry{Write index}
+      \addlegendentry{Total time}
     \end{axis}
   \end{tikzpicture}
   \subcaption{Total run time as a combination of the individual steps}
@@ -288,7 +304,7 @@ We vary the sequence lengths through changing the lengths produced by the read g
       \addplot[color=blue,mark=*] coordinates {
         (50,19)
         (100,36)
-        (120,0)
+        (120,39)
         (200,59)
         (400,98)
         (700,167)
@@ -297,7 +313,7 @@ We vary the sequence lengths through changing the lengths produced by the read g
       \addplot[color=black,mark=*] coordinates {
         (50,171)
         (100,294)
-        (120,0)
+        (120,545)
         (200,676)
         (400,1117)
         (700,1600)
@@ -345,7 +361,7 @@ We let the branching probability $b$ denote the complexity of our graph. We gene
         (1,454)
         (1.009,503)
         (1.019,500)
-        (1.04,0)
+        (1.04,530)
         (1.07,527)
         (1.1,562)
       };
