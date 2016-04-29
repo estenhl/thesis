@@ -194,7 +194,7 @@ We start out by combining an insertion with an SNP:\\
 \begin{itemize}
   \item Merging in a sequence of length 10 should yield a graph with atleast one full path with length 12
 \end{itemize}
-When we are dealing with the "non-standard" cases we can see a statement which is fairly more vague then previously. This is not because the approach lacks precision. It is moreso because we are not sure whether our intuition is precise, and if so whether the precision handles ambiguous cases equally. This becomes even more apparent when we align a sequence with a number of consecutive SNPs:\\
+When we are dealing with the "non-standard" cases we can see a statement which is \hlcyan{less exhaustive than earlier. This represent a correlation with the complexity of the input data: When the sequence consists of a combination of cases, so does the result. There is no longer a distinct relationship between a case and a rule, which can result in graphs which are not so easily deducible.} This becomes even more apparent when we align a sequence with a number of consecutive SNPs:\\
 \par\noindent
 \texttt{./build\_index.sh -{}-input-sequences=ACGTATTAC \\
 -{}-index=structural2.index}\\
