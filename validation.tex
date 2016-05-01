@@ -243,7 +243,7 @@ We then merge in the sequences from the previous section:\\
 \end{figure}
 \noindent
 \hlcyan{
-Although it is small, this is what we would consider to be a complex graph in the domain of genetic information. A set of six sequences results in a branching factor of \textasciitilde1.4, indicating an average probability of variation of approximately 10\% for every base. The large amount of variation displays the expressiveness of the model. Because the graph is a result of several levels of complex nesting it is even harder to provide intuitive statements as to what it should look like. We can still depend on the definitions to provide them for us. For instance we can again expect every input sequence to have a full path. Weconfirm this by aligning one of the sequences against the graph:}
+Although it is small, this is what we would consider to be a complex graph in the domain of genetic information. If we let branching factor denote the relationship between the number of vertices and the number of edges, the set of six sequences result in the branching factor $b\approx1.4$. This indicates an average probability of variation of approximately 10\% for every base, a level of variation which display the expressiveness of the model. Because the graph is a result of several levels of complex nesting it is even harder to provide intuitive statements as to what it should look like. We can still depend on the definitions to provide them for us. For instance we can again expect every input sequence to have a full path. Weconfirm this by aligning one of the sequences against the graph:}
 \clearpage\noindent
 \texttt{./align\_sequence -{}-index=complex.index \\
   -{}-align-sequence=ACGTGGTTAC -{}-error-margin=0 \\
