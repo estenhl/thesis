@@ -1,0 +1,481 @@
+@article{extending_reference_assembly_models,
+	author={Church, Deanna M. and Schneider, Valeria A. and Steinberg, Karyn Meltz and Schatz, Michael C. and Quinlan, Aaron R. and Chin, Chen-Shan and Kitts, Paul A. and Aken, Bronwen and Marth, Gabor T. and Hoffman, Michael M. and Herrero, Javier and Mendoza, M. Lisandra Zepeda and Durbin, Richard and Flicek, Paul},
+	title={Extending reference assembly models},
+journal={Genome Biology},
+url={http://doi.org/10.1186/s13059-015-0587-3},
+	year=2015,
+volume=16,
+number=13
+}
+
+
+@article{mapping_to_a_reference_genome_structure,
+   author = {{Paten}, B. and {Novak}, A. and {Haussler}, D.},
+    title = "{Mapping to a Reference Genome Structure}",
+  journal = {ArXiv e-prints},
+archivePrefix = "arXiv",
+   eprint = {1404.5010},
+ primaryClass = "q-bio.GN",
+ keywords = {Quantitative Biology - Genomics},
+     year = 2014,
+    month = apr,
+   adsurl = {http://adsabs.harvard.edu/abs/2014arXiv1404.5010P},
+  adsnote = {Provided by the SAO/NASA Astrophysics Data System}
+}
+
+@Inbook{building_a_pan-genome_reference_for_a_population,
+author="Nguyen, Ngan
+and Hickey, Glenn
+and Zerbino, Daniel R.
+and Raney, Brian
+and Earl, Dent
+and Armstrong, Joel
+and Haussler, David
+and Paten, Benedict",
+editor="Sharan, Roded",
+chapter="Building a Pangenome Reference for a Population",
+title="Research in Computational Molecular Biology: 18th Annual International Conference, RECOMB 2014, Pittsburgh, PA, USA, April 2-5, 2014, Proceedings",
+year="2014",
+publisher="Springer International Publishing",
+address="Cham",
+pages="207--221",
+isbn="978-3-319-05269-4",
+doi="10.1007/978-3-319-05269-4_17",
+url="http://dx.doi.org/10.1007/978-3-319-05269-4_17"
+}
+
+
+@article{improved_genome_inference_in_the_mhc_using_a_population_reference_graph,
+	author={Dilthey, Alexander and Cox, Charles and Iqbal, Zamin and Nelson, Matthew R. and McVean, Gil},
+	title={Improved genome inference in the MHC using a population reference graph},
+	year=2015,
+journal={Nature Genetics},
+volume=47,
+issue=6,
+url={http://dx.doi.org/10.1038/ng.3257}
+}
+
+@article{de_novo_assembly_and_genotyping_of_variants_using_colored_de_bruijn_graphs,
+	author={Iqbal, Zamin and Caccamo, Mario and Turner, Isaac and Flicek, Paul and McVean, Gil},
+	title={De novo assembly and genotyping of variants using colored de Bruijn graphs},
+	year=2012,
+journal={Nature Genetics},
+volume=44,
+url={http://dx.doi.org/10.1038/ng.1028}
+}
+
+@article{canonical_stable_general_mapping_using_context_schemes,
+   author = {{Novak}, A. and {Rosen}, Y. and {Haussler}, D. and {Paten}, B.
+	},
+    title = "{Canonical, Stable, General Mapping using Context Schemes}",
+  journal = {ArXiv e-prints},
+archivePrefix = "arXiv",
+   eprint = {1501.04128},
+ primaryClass = "q-bio.GN",
+ keywords = {Quantitative Biology - Genomics},
+     year = 2015,
+    month = jan,
+   adsurl = {http://adsabs.harvard.edu/abs/2015arXiv150104128N},
+  adsnote = {Provided by the SAO/NASA Astrophysics Data System}
+}
+
+@Inbook{suffix_array_of_alignment,
+	author={Nal, Joong Chae and Park, Heejin and Lee, Sunho and Hong, Minsung and Lecroq, Thierry and Mouchard, Laurent and Park, Kunsoo},
+chapter={Suffix Array of Alignment: A Practical Index for Similar Data},
+	title={String Processing and Information Retrieval: 20th International Symposium, SPIRE 2013, Jerusalem, Israel, October 7-9, 2013, Proceedings},
+	year=2013,
+url={http://dx.doi.org/10.1007/978-3-319-02432-5_27}
+}
+
+@article{﻿simultaneous_alignment_of_short_reads_against_multiple_genomes,
+author="Schneeberger, Korbinian
+and Hagmann, J{\"o}rg
+and Ossowski, Stephan
+and Warthmann, Norman
+and Gesing, Sandra
+and Kohlbacher, Oliver
+and Weigel, Detlef",
+title="Simultaneous alignment of short reads against multiple genomes",
+journal="Genome Biology",
+year="2009",
+volume="10",
+number="9",
+pages="1--12",
+abstract="Genome resequencing with short reads generally relies on alignments against a single reference. GenomeMapper supports simultaneous mapping of short reads against multiple genomes by integrating related genomes (e.g., individuals of the same species) into a single graph structure. It constitutes the first approach for handling multiple references and introduces representations for alignments against complex structures. Demonstrated benefits include access to polymorphisms that cannot be identified by alignments against the reference alone. Download GenomeMapper at                   http://1001genomes.org                                  .",
+issn="1465-6906",
+doi="10.1186/gb-2009-10-9-r98",
+url="http://dx.doi.org/10.1186/gb-2009-10-9-r98"
+}
+
+@article{splitmem,
+author = {Marcus, Shoshana and Lee, Hayan and Schatz, Michael C.}, 
+title = {SplitMEM: A graphical algorithm for pan-genome analysis with suffix skips},
+year = {2014}, 
+doi = {10.1093/bioinformatics/btu756}, 
+abstract ={Motivation: Genomics is expanding from a single reference per species paradigm into a more comprehensive pan-genome approach that analyzes multiple individuals together. A compressed de Bruijn graph is a sophisticated data structure for representing the genomes of entire populations. It robustly encodes shared segments, simple SNPs, and complex structural variations far beyond what can be represented in a collection of linear sequences alone.Results: We explore deep topological relationships between suffix trees and compressed de Bruijn graphs and introduce an algorithm, splitMEM, that directly constructs the compressed de Bruijn graph in time and space linear to the total number of genomes for a given maximum genome size. We introduce suffix skips to traverse several suffix links simultaneously, and use them to efficiently decompose maximal exact matches (MEMs) into graph nodes. We demonstrate the utility of splitMEM by analyzing the 9-strain pan-genome of Bacillus anthracis and up to 62 strains of Escherichia coli, revealing their core-genome properties.Availability: Source code and documentation available open-source http://splitmem.sourceforge.netContact: mschatz@cshl.edu}, 
+URL = {http://bioinformatics.oxfordjournals.org/content/early/2014/11/13/bioinformatics.btu756.abstract}, 
+eprint = {http://bioinformatics.oxfordjournals.org/content/early/2014/11/13/bioinformatics.btu756.full.pdf+html}, 
+journal = {Bioinformatics} 
+}
+
+@article{genome_alignment_with_graph_data_structures,
+author="Kehr, Birte
+and Trappe, Kathrin
+and Holtgrewe, Manuel
+and Reinert, Knut",
+title="Genome alignment with graph data structures: a comparison",
+journal="BMC Bioinformatics",
+year="2014",
+volume="15",
+number="1",
+pages="1--20",
+abstract="Recent advances in rapid, low-cost sequencing have opened up the opportunity to study complete genome sequences. The computational approach of multiple genome alignment allows investigation of evolutionarily related genomes in an integrated fashion, providing a basis for downstream analyses such as rearrangement studies and phylogenetic inference.",
+issn="1471-2105",
+doi="10.1186/1471-2105-15-99",
+url="http://dx.doi.org/10.1186/1471-2105-15-99"
+}
+
+
+@book{introduction_to_bioinformatics,
+	author={Lesk, Arthur M.},
+	title={Introduction to Bioinformatics},
+	year=2014,
+	publisher={Oxford University Press}
+}
+
+@book{introduction_to_genomics,
+	author={Lesk, Artur M.},
+	title={Introduction to genomics},
+	year=2012,
+	publisher={Oxford University Press}
+}
+
+@article{an_eulerian_path_approach_to_dna_fragment_assembly,
+	author={Pevzner, PA. and Tang, H. and Waterman, MS.},
+	title={An eulerian path approach to DNA fragment assembly},
+journal={Proceedings of the National Academy of Sciences},
+volume=98,
+	year=2001
+}
+
+@article{multiple_sequence_alignment_using_partial_order_graphs,
+author = {Lee, Christopher and Grasso, Catherine and Sharlow, Mark F.}, 
+title = {Multiple sequence alignment using partial order graphs},
+volume = {18}, 
+number = {3}, 
+pages = {452-464}, 
+year = {2002}, 
+doi = {10.1093/bioinformatics/18.3.452}, 
+abstract ={Motivation: Progressive Multiple Sequence Alignment (MSA) methods
+  depend on reducing an MSA to a linear profile for each alignment
+  step. However, this leads to loss of information needed for accurate
+  alignment, and gap scoring artifacts.Results: We present a graph representation of an MSA that can
+  itself be aligned directly by pairwise dynamic programming,
+  eliminating the need to reduce the MSA to a profile. This enables
+  our algorithm (Partial Order Alignment (POA)) to guarantee that the
+  optimal alignment of each new sequence versus each sequence in the
+  MSA will be considered. Moreover, this algorithm introduces a new
+  edit operator, homologous recombination, important for multidomain
+  sequences. The algorithm has improved speed (linear time complexity)
+  over existing MSA algorithms, enabling construction of massive and
+  complex alignments (e.g. an alignment of 5000 sequences in 4 h on a
+  Pentium II). We demonstrate the utility of this algorithm on a
+  family of multidomain SH2 proteins, and on EST assemblies containing
+  alternative splicing and polymorphism.Availability: The partial order alignment program POA is
+  available at http://www.bioinformatics.ucla.edu/poa.Contact: leec@mbi.ucla.edu
+        
+      
+        
+      }, 
+URL = {http://bioinformatics.oxfordjournals.org/content/18/3/452.abstract}, 
+eprint = {http://bioinformatics.oxfordjournals.org/content/18/3/452.full.pdf+html}, 
+journal = {Bioinformatics} 
+}
+
+@article{a_map_of_human_genome_variation_from_population_scale_sequencing,
+	author={The 1000 Genomes Project Consortium},
+	title={A map of human genome variation from population-scale sequencing},
+	year=2010,
+journal={Nature},
+volume=467,
+url={http://dx.doi.org/10.1038/nature09534}
+}
+
+@article{the_importance_of_immune_gene_variability_in_evolutionary_ecology_and_conservation,
+	author={Sommer, Simone},
+	title={The importance of immune gene variability (MHC) in evolutionary ecology and conservation},
+	year=2005,
+journal={Frontiers in Zoology},
+url={http://doi.org/10.1186/1742-9994-2-16}
+}
+
+@article{variation_analysis_and_gene_annotation_of_eight_mhc_haplotypes,
+	author={Horton, Roger and Gibson, Richard and Coggill, Penny and Miretti, Marcos and Allcock, Richard J. and Almeida, Jeff and Forbes, Simon and Gilbert, James G. R. and Halls, Karen and Harrow, Jennifer L. and Hart, Elizabeth and Howe, Kevin and Jackson, David K. and Palmer, Sophie and Roberts, Anne N. and Sims, Sarah and Stewart Andrew and Traherne, James A. and Trevanion, Steve and Wilming, Laurens and Rogers, Jane and de Jong, Pieter J. and Elliot, John F. and Sawcer, Stephen and Todd, John A. and Trowsdale John and Beck, Stephan},
+	title={Variation analysis and gene annotation of eight MHC haplotypes: The MHC Haplotype Project},
+	year=2008,
+journal={Immunogenetics},
+volume=60,
+url={http://doi.org/10.1007/s00251-007-0262-2}
+}
+
+@article{copy_number_variation_new_insights_in_genome_diversity,
+	author={Freeman, Jennifer L. and Perry, George H. and Feuk, Lars and Redon, Richard and McCarroll, Steven A. and Altshuler, David M. and Aburatani, Hiroyuki and Jones, Keith W. and Tyler-Smith, Chris and Hurles, Matthew E. and Carterm Nigel P. and Scherer, Stephen W. and Lee, Charles},
+	title={Copy number variation: New insights in genome diversity},
+	year=2006,
+journal={Genome Research},
+volume=16,
+url={http://genome.cshlp.org/content/16/8/949.long}
+}
+
+@book{algorithms_sequential_parallell_and_distributed,
+author={Berman, Kenneth A. and Paul, Jerome L.},
+title={Algoritms: Sequential, Parallell and distributed},
+  year=2005,
+  publisher={Thomson/Course Technology}
+}
+
+@book{introduction_to_the_theory_of_computation,
+author={Sipser, Michael},
+title={Introduction to the Theory of Computation},
+year=2013,
+publisher={CENGAGE Learning}
+}
+
+@book{data_structures_and_algorithm_analysis_in_java,
+author={Weiss, Mark Allen},
+title={Data Structures and Algorithm Analysis in Java},
+year=2007,
+publisher={Pearson Education}
+}
+
+@article{a_block_sorting_lossless_data_compression_algorithm,
+    author = {M. Burrows and D. J. Wheeler},
+    title = {A block-sorting lossless data compression algorithm},
+    year = {1994},
+url={http://www.hpl.hp.com/techreports/Compaq-DEC/SRC-RR-124.pdf}
+}
+
+@article{online_construction_of_suffix_trees,
+author="Ukkonen, E.",
+title="On-line construction of suffix trees",
+journal="Algorithmica",
+volume="14",
+number="3",
+pages="249--260",
+issn="1432-0541",
+doi="10.1007/BF01206331",
+url="http://dx.doi.org/10.1007/BF01206331"
+}
+
+@article{cactus_graphs_for_genome_comparisons,
+author={Paten, Benedict and Diekhans, Mark and St. John, John and Ma, Jian and Haussler, David},
+title={Cactus graphs for genome comparisons},
+year=2011,
+journal={Journal of Computational Biology},
+url={http://online.liebertpub.com/doi/abs/10.1089/cmb.2010.0252}
+}
+
+@online{genome_reference_consortium,
+title={GRC Home},
+url={http://www.ncbi.nlm.nih.gov/projects/genome/assembly/grc/},
+organization={Genome Reference Consortium}
+}
+
+@online{grch38,
+title={GRCh38},
+url={http://www.ncbi.nlm.nih.gov/projects/genome/assembly/grc/human/},
+organization={Genome Reference Consortium}
+}
+
+@online{understanding_the_birthday_problem,
+  title={Understanding the birthday paradox},
+  url={http://betterexplained.com/articles/understanding-the-birthday-paradox},
+  organization={BetterExplained}
+}
+
+@online{sg_git,
+title={Sequence graphs github},
+url={https://github.com/adamnovak/sequence-graphs},
+author={Adam Novak}
+}
+
+@online{vg,
+title={Variation graphs},
+url={https://github.com/vgteam/vg},
+organization={vgteam}
+}
+
+@online{java_doc_serialization,
+title={The Serialization interface: Java API documentation},
+url={https://docs.oracle.com/javase/7/docs/api/java/io/Serializable.html},
+organization={Java}}
+
+@online{junit,
+title={The JUnit Framework},
+url={http://junit.org/junit4/},
+organization={JUnit}}
+
+@online{ncbi,
+title={National Center for Biotechnology Information},
+url={http://www.ncbi.nlm.nih.gov/},
+organization={National center for Biotechnology Information}
+}
+
+@online{sequence_graphs,
+title={Sequence graphs},
+url={https://hub.docker.com/r/adamnovak/sequence-graphs/},
+author={Novak, Adam}
+}
+
+@online{graphviz,
+title={Graphviz},
+url={http://www.graphviz.org/}}
+﻿
+@article{sequencing_platforms,
+author="Quail, Michael A.
+and Smith, Miriam
+and Coupland, Paul
+and Otto, Thomas D.
+and Harris, Simon R.
+and Connor, Thomas R.
+and Bertoni, Anna
+and Swerdlow, Harold P.
+and Gu, Yong",
+title="A tale of three next generation sequencing platforms: comparison of Ion Torrent, Pacific Biosciences and Illumina MiSeq sequencers",
+journal="BMC Genomics",
+year="2012",
+volume="13",
+number="1",
+pages="1--13",
+abstract="Next generation sequencing (NGS) technology has revolutionized genomic and genetic research. The pace of change in this area is rapid with three major new sequencing platforms having been released in 2011: Ion Torrent's PGM, Pacific Biosciences' RS and the Illumina MiSeq. Here we compare the results obtained with those platforms to the performance of the Illumina HiSeq, the current market leader. In order to compare these platforms, and get sufficient coverage depth to allow meaningful analysis, we have sequenced a set of 4 microbial genomes with mean GC content ranging from 19.3 to 67.7\%. Together, these represent a comprehensive range of genome content. Here we report our analysis of that sequence data in terms of coverage distribution, bias, GC distribution, variant detection and accuracy.",
+issn="1471-2164",
+doi="10.1186/1471-2164-13-341",
+url="http://dx.doi.org/10.1186/1471-2164-13-341"
+}
+
+@article{estimation_of_sequencing_error_rates_in_short_reads,
+author="Victoria Wang, Xin
+and Blades, Natalie
+and Ding, Jie
+and Sultana, Razvan
+and Parmigiani, Giovanni",
+title="Estimation of sequencing error rates in short reads",
+journal="BMC Bioinformatics",
+year="2012",
+volume="13",
+number="1",
+pages="1--12",
+abstract="Short-read data from next-generation sequencing technologies are now being generated across a range of research projects. The fidelity of this data can be affected by several factors and it is important to have simple and reliable approaches for monitoring it at the level of individual experiments.",
+issn="1471-2105",
+doi="10.1186/1471-2105-13-185",
+url="http://dx.doi.org/10.1186/1471-2105-13-185"
+}
+
+@article{error_correction_of_datasets_with_non_uniform_coverage,
+author = {Medvedev, Paul and Scott, Eric and Kakaradov, Boyko and Pevzner, Pavel}, 
+title = {Error correction of high-throughput sequencing datasets with non-uniform coverage},
+volume = {27}, 
+number = {13}, 
+pages = {i137-i141}, 
+year = {2011}, 
+doi = {10.1093/bioinformatics/btr208}, 
+abstract ={Motivation: The continuing improvements to high-throughput sequencing (HTS) platforms have begun to unfold a myriad of new applications. As a result, error correction of sequencing reads remains an important problem. Though several tools do an excellent job of correcting datasets where the reads are sampled close to uniformly, the problem of correcting reads coming from drastically non-uniform datasets, such as those from single-cell sequencing, remains open.Results: In this article, we develop the method Hammer for error correction without any uniformity assumptions. Hammer is based on a combination of a Hamming graph and a simple probabilistic model for sequencing errors. It is a simple and adaptable algorithm that improves on other tools on non-uniform single-cell data, while achieving comparable results on normal multi-cell data.Availability: http://www.cs.toronto.edu/~pashadag.Contact: pmedvedev@cs.ucsd.edu}, 
+URL = {http://bioinformatics.oxfordjournals.org/content/27/13/i137.abstract}, 
+eprint = {http://bioinformatics.oxfordjournals.org/content/27/13/i137.full.pdf+html}, 
+journal = {Bioinformatics} 
+}
+
+@article{fiona,
+author = {Schulz, Marcel H. and Weese, David and Holtgrewe, Manuel and Dimitrova, Viktoria and Niu, Sijia and Reinert, Knut and Richard, Hugues}, 
+title = {Fiona: a parallel and automatic strategy for read error correction},
+volume = {30}, 
+number = {17}, 
+pages = {i356-i363}, 
+year = {2014}, 
+doi = {10.1093/bioinformatics/btu440}, 
+abstract ={Motivation: Automatic error correction of high-throughput sequencing data can have a dramatic impact on the amount of usable base pairs and their quality. It has been shown that the performance of tasks such as de novo genome assembly and SNP calling can be dramatically improved after read error correction. While a large number of methods specialized for correcting substitution errors as found in Illumina data exist, few methods for the correction of indel errors, common to technologies like 454 or Ion Torrent, have been proposed.Results: We present Fiona, a new stand-alone read error–correction method. Fiona provides a new statistical approach for sequencing error detection and optimal error correction and estimates its parameters automatically. Fiona is able to correct substitution, insertion and deletion errors and can be applied to any sequencing technology. It uses an efficient implementation of the partial suffix array to detect read overlaps with different seed lengths in parallel. We tested Fiona on several real datasets from a variety of organisms with different read lengths and compared its performance with state-of-the-art methods. Fiona shows a constantly higher correction accuracy over a broad range of datasets from 454 and Ion Torrent sequencers, without compromise in speed.Conclusion: Fiona is an accurate parameter-free read error–correction method that can be run on inexpensive hardware and can make use of multicore parallelization whenever available. Fiona was implemented using the SeqAn library for sequence analysis and is publicly available for download at http://www.seqan.de/projects/fiona.Contact: mschulz@mmci.uni-saarland.de or hugues.richard@upmc.frSupplementary information: Supplementary data are available at Bioinformatics online.}, 
+URL = {http://bioinformatics.oxfordjournals.org/content/30/17/i356.abstract}, 
+eprint = {http://bioinformatics.oxfordjournals.org/content/30/17/i356.full.pdf+html}, 
+journal = {Bioinformatics} 
+}
+
+@article{comparison_sequencing_systems,
+title={Comparison of Next-Generation Sequencing Systems},
+author={Liu, Lin and Li, Yinhu and Li, Siliang and Hu, Ni and He, Yimin and Pong, Ray and Lin, Danni and Lu, Lihua and Law, Maggie},
+journal={Journal of Biomedicine and Biotechnology},
+volume={2012},
+doi={10.1155/2012/251364},
+url={http://www.hindawi.com/journals/bmri/2012/251364/}
+}
+
+@book{information_retrieval,
+title={Introduction to Information Retrieval},
+author={Manning, Cristopher D. and Raghavam, Prabhakar and Schutze, Hindrich},
+year=2008,
+publisher={Cambridge University Press}
+}
+
+@INPROCEEDINGS{multiple_sequence_alignment_on_supercomputers, 
+author={P. C. Church and A. Goscinski and K. Holt and M. Inouye and A. Ghoting and K. Makarychev and M. Reumann}, 
+booktitle={2011 Annual International Conference of the IEEE Engineering in Medicine and Biology Society}, 
+title={Design of multiple sequence alignment algorithms on parallel, distributed memory supercomputers}, 
+year={2011}, 
+pages={924-927}, 
+keywords={Algorithm design and analysis;Bioinformatics;Educational institutions;Genomics;Hidden Markov models;Random access memory;Supercomputers;Algorithms;Base Sequence;Computers, Mainframe;DNA, Bacterial;Genome, Bacterial;Molecular Sequence Data;Sequence Alignment;Sequence Analysis, DNA;Software;Software Design}, 
+doi={10.1109/IEMBS.2011.6090208}, 
+ISSN={1094-687X}, 
+month={Aug},}
+
+@article{read_alignment_with_bwt,
+author = {Li, Heng and Durbin, Richard}, 
+title = {Fast and accurate short read alignment with Burrows–Wheeler transform},
+volume = {25}, 
+number = {14}, 
+pages = {1754-1760}, 
+year = {2009}, 
+doi = {10.1093/bioinformatics/btp324}, 
+abstract ={Motivation: The enormous amount of short reads generated by the new DNA sequencing technologies call for the development of fast and accurate read alignment programs. A first generation of hash table-based methods has been developed, including MAQ, which is accurate, feature rich and fast enough to align short reads from a single individual. However, MAQ does not support gapped alignment for single-end reads, which makes it unsuitable for alignment of longer reads where indels may occur frequently. The speed of MAQ is also a concern when the alignment is scaled up to the resequencing of hundreds of individuals.Results: We implemented Burrows-Wheeler Alignment tool (BWA), a new read alignment package that is based on backward search with Burrows–Wheeler Transform (BWT), to efficiently align short sequencing reads against a large reference sequence such as the human genome, allowing mismatches and gaps. BWA supports both base space reads, e.g. from Illumina sequencing machines, and color space reads from AB SOLiD machines. Evaluations on both simulated and real data suggest that BWA is ∼10–20× faster than MAQ, while achieving similar accuracy. In addition, BWA outputs alignment in the new standard SAM (Sequence Alignment/Map) format. Variant calling and other downstream analyses after the alignment can be achieved with the open source SAMtools software package.Availability: http://maq.sourceforge.netContact: rd@sanger.ac.uk}, 
+URL = {http://bioinformatics.oxfordjournals.org/content/25/14/1754.abstract}, 
+eprint = {http://bioinformatics.oxfordjournals.org/content/25/14/1754.full.pdf+html}, 
+journal = {Bioinformatics} 
+}
+
+@article{human_genome,
+title={Initial sequencing and analysis of the human genome},
+journal={Nature},
+volume=409,
+issue=6822,
+publisher={Macmillian Magazines Ltd.},
+url={http://dx.doi.org/10.1038/35057062},
+author={International Human Genome Sequencing Consortium}
+}
+
+@article{errors_start_end,
+author = {Schirmer, Melanie and Ijaz, Umer Z. and D'Amore, Rosalinda and Hall, Neil and Sloan, William T. and Quince, Christopher}, 
+title = {Insight into biases and sequencing errors for amplicon sequencing with the Illumina MiSeq platform},
+year = {2015}, 
+doi = {10.1093/nar/gku1341}, 
+URL = {http://nar.oxfordjournals.org/content/early/2015/01/13/nar.gku1341.abstract}, 
+eprint = {http://nar.oxfordjournals.org/content/early/2015/01/13/nar.gku1341.full.pdf+html}, 
+journal = {Nucleic Acids Research} 
+}
+
+@article{scoring_pairwise,
+author={Chiaromonte, F. and VB, Yap and Miller, W.},
+title={Scoring pairwise genomic sequence alignments},
+year=2002,
+url={http://www.ncbi.nlm.nih.gov/pubmed/11928468}
+}
+
+@ARTICLE{compression, 
+author={J. Ziv and A. Lempel}, 
+journal={IEEE Transactions on Information Theory}, 
+title={A universal algorithm for sequential data compression}, 
+year={1977}, 
+volume={23}, 
+number={3}, 
+pages={337-343}, 
+keywords={Sequential coding;Source coding;Books;Compression algorithms;Data compression;Data processing;Displays;Information theory;Jacobian matrices;Telephony;Testing;Upper bound}, 
+doi={10.1109/TIT.1977.1055714}, 
+ISSN={0018-9448}, 
+month={May},}

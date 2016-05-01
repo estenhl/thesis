@@ -45,6 +45,7 @@ When an alignment is produced for a read we classify it as either as correct or 
 \section{Time capturing mechanisms}
 For both the "Fuzzy context-based search" and the PO-MSA algorithm the time capturing mechanisms are built into the tool, using the Java System object. This allows us to wrap the time capturing of each individual constituent as close to the functional parts as possible in order to avoid unecessary overhead. When comparing tools the time was taken from the tool was started until the tool ended. Doing it this way has several disadvantages, which are discussed in Section \ref{sec:comparison_tools}. The time unit used throughout the chapter is milliseconds.
 \section{Building the index}
+\label{sec:building_the_index}
 The building of the index is the first step of the process realized through the build\_index.sh script. To summarize this step consists of reading the input files, building the graph and generating the suffix trees. The build process was run 50 times on 6 different data sets, the averaged results can be seen in figure \ref{fig:build_index}. The tool was not able to build an index for the largest input file with ~4.5Mb because of insufficient memory. Figure \ref{fig:index_constituents} shows the run time broken down into individual constituents.\\
 
 \begin{figure}[!ht]
@@ -221,9 +222,7 @@ We start by comparing the two alignment algorithms on different graph sizes. Fig
   \label{fig:runtime_G}
 \end{figure}
 \subsection*{Runtime as a function of error margin}
-We vary the error margin by giving the algorithm different $\lambda$-values through the \texttt{-{}-error-margin} parameter. The results from 50 runs at 5 different values are seen in figure \ref{fig:runtime_lambda}. We can see an exponential growth, which is expected from the complexity analysis\footnote{Found in Appendix \ref{sec:complexity_analysis}}. Disconcertingly, the algorithm quickly overtakes PO-MSA, already at $\lambda=2$ the straight forward search is more efficient. Utilizing the results from the previous experiment we can identify that the starting point of the exponential growth is dependant on the graph size. Figure \ref{fig:runtime_lambda_parallell} shows the same set of tests on the larger graph, where we can see that the approach is more efficient up to $\lambda=2$. In the same figure we can see that the naive parallellization can soften the exponential growth by a linear factor, at the cost of an initial overhead.\\
-\par\noindent
-It is important to point out that the extreme growth in relation to the small numbers is in part determined by the flat scoring system. The exponential growth is related to the number of possibilities given $\lambda$, not necessarily $\lambda$ itself. A more fine grained scoring schema might produce a less explosive growth.\\
+We vary the error margin by giving the algorithm different $\lambda$-values through the \texttt{-{}-error-margin} parameter. The results from 50 runs at 5 different values are seen in figure \ref{fig:runtime_lambda}. Figure \ref{fig:runtime_lambda_parallell} shows the same set of tests on the larger graph and includes a plot for an equivalent set of tests run with the \texttt{-{}-parallellization=true} parameter. The x-axis of both plots depict a linear increase of $\lambda$. Increasing this value linearly leads to an exponential growth in the number of acceptable possibilities.
 \begin{figure}[!hb]
   \begin{tikzpicture}[trim axis left, trim axis right]
     \begin{axis}[scale only axis,height=0.5\textwidth,width=0.5\textwidth,xmin=0,ymin=0,xmax=5,ymax=35000,scaled ticks=false, legend pos=north west, xlabel={$\lambda$}, ylabel={Milliseconds},xtick={0,1,2,3,4,5}, legend cell align=left, ylabel near ticks]
@@ -279,13 +278,13 @@ It is important to point out that the extreme growth in relation to the small nu
 \end{figure}
 \clearpage
 \subsection*{Runtime as a function of sequence length}
-We vary the sequence lengths through changing the lengths produced by the read generator. The read lengths are taken from a set of sequencing machines, chosen to portray a diversity of read lengths\textcolor{red}{ref}. Both the technologies, the lengths and the runtimes are listed in table \ref{tab:runtimes_s}. The number are visualized in figure \ref{fig:runtime_s}
+We vary the sequence lengths through changing the lengths produced by the read generator. The read lengths are chosen to reflect a variety of sequencing machines, displaying a diversity in read lengths\textcolor{red}{ref}. Both the technologies, the lengths and the runtimes are listed in table \ref{tab:runtimes_s}. The number are visualized in figure \ref{fig:runtime_s}
 \begin{table}[!h]
   \begin{tabular}{|l|l|r|r|}
     \hline \textbf{Technology} & \textbf{Read length} & \textbf{PO-MSA time} & \textbf{Fuzzy time} \\ \hline
     HiSeq2000 (min) & 50 & 171 & 19 \\ \hline
     SOLiDv4 & 100 & 294 & 36 \\ \hline
-    HiSeq3000/4000 & 120 & 0 & 0 \\ \hline
+    HiSeq3000/4000 & 120 & 545 & 39 \\ \hline
     Ion PGM & 200 & 676 & 59 \\ \hline
     Sanger 3730xl (min) & 400 & 1117 & 98 \\ \hline
     454 GS FLX & 700 & 1600 & 167 \\ \hline
@@ -325,10 +324,37 @@ We vary the sequence lengths through changing the lengths produced by the read g
 \clearpage
 \subsection*{Runtime as a function of graph complexity}
 \label{sec:runtime_complexity}
-We let the branching probability $b$ denote the complexity of our graph. We generated vcf-files with the read-generator to provide a variety of values. The results of running alignments against each of the indexes can be seen in figure \ref{fig:runtime_b}. As seen in the table, the experiment was run on rather moderate values. If we use the numbers from section \ref{sec:human_genome}, assuming all variants are singular and specific to a single individual, a population graph of the human genome would have a branching factor $b=1+|p|*0000076$, where $|p|$ denotes the number of individuals\footnote{23.000 variants/3.000.000.000bp}. In this case the largest branching factor presented in the figure would cover a a population of 10.000. In the far more probable case of overlapping and complex variants the number will be larger. \textcolor{red}{Needs more tests and more motivation behind the sizes}. It is important to remember the number of variants present in the graph is an exponential combination of both $b$ and the graph size.
+We let the branching probability $b$ denote the complexity of our graph. We created variation through generating a set of VCF files\footnote{The variant file format mentioned in section \ref{sec:sequencing} } with the read generator to provide a variety of values. The results of running alignments against each of the indexes can be seen in figure \ref{fig:runtime_b}. As seen in the table, the experiment was run on rather moderate values. If we use the numbers from section \ref{sec:human_genome}\footnote{23.000 variants/3.000.000.000bp}, an average human individual is likely to have a branching factor $b\approx1.0000076$. If we assume no variants are shared between individuals in a population we can use this number to approximate the value $b=1+|p|*0.0000076$ for a population graph where $|p|$ denotes the population size. A sample of population sizes are depicted in the top axis of the plot, calculated by this simplified approximate formula.
 \begin{figure}[!hb]
   \begin{tikzpicture}[trim axis left, trim axis right]
-    \begin{axis}[scale only axis,height=0.5\textwidth,width=0.5\textwidth,xmin=1,ymin=0,xmax=900,ymax=2500,xmax=1.1,scaled ticks=false, legend pos=north west, xlabel={$\lambda$}, ylabel={Milliseconds}, legend cell align=left, ylabel near ticks]
+
+\begin{axis}[scale only axis,height=0.5\textwidth,width=0.5\textwidth,xmin=1,ymin=0,ymax=2500,xmax=1.1,scaled ticks=false,xlabel={$|p|$}, axis x line*=top, xlabel near ticks,xtick={1.0076,1.038,1.076},xticklabels={1.000,5.000,10.000}]
+        \addplot[color=red, style=dashed] coordinates {
+          (1.0076,0)
+          (1.0076,1640)
+      };
+   \addplot[color=red] coordinates {
+          (1.0076,2500)
+          (1.0076,2420)
+      };
+        \addplot[color=red, style=dashed] coordinates {
+          (1.038,0)
+          (1.038,1640)
+      };
+   \addplot[color=red] coordinates {
+          (1.038,2500)
+          (1.038,2420)
+      };
+        \addplot[color=red, style=dashed] coordinates {
+          (1.076,0)
+          (1.076,1640)
+      };
+   \addplot[color=red] coordinates {
+          (1.076,2500)
+          (1.076,2420)
+      };
+    \end{axis}
+    \begin{axis}[scale only axis,height=0.5\textwidth,width=0.5\textwidth,xmin=1,ymin=0,ymax=2500,xmax=1.1,scaled ticks=false, legend pos=north west, xlabel={$\lambda$}, ylabel={Milliseconds}, legend cell align=left, ylabel near ticks, xtick pos=left]
       \addplot[color=blue,mark=*] coordinates {
         (1,30)
         (1.009,36)
@@ -371,9 +397,10 @@ We let the branching probability $b$ denote the complexity of our graph. We gene
   \label{fig:runtime_b}
 \end{figure}
 \clearpage
-\subsection*{Correctness as a function of noise}
-In the previous tests we have guaranteed correct results through the tuning of input parameters. We will now introduce a level of uncertainty through introducing randomness to our reads through the noise parameter $p$. To some degree this is a futile exercise: We will get correct results when the number of modifications is lower then $\lambda$ and empty alignments in the remaining cases, mirroring the distribution of the underlying randomness. This is however interesting as a depiction of a real life situation where the noise is to some degree uncertain. The percentage of correctly aligned reads over 100 runs with a variety of settings is seen in figure \ref{fig:correctness}. The regular algorithm, seen in \ref{fig:correctness_both}, shows a clear linear relationship between $p$ and $\lambda$. This will be the first set of tests where we also include the results from the heuristical algorithm, shown in \ref{fig:correctness_both_heur}
+\subsection*{Accuracy as a function of noise}
+In the previous tests we have guaranteed correct results through the tuning of input parameters. We will now introduce a level of uncertainty through introducing randomness to our reads through the noise parameter $p$. To some degree this is a futile exercise: We will get correct results when the number of modifications is lower then $\lambda$ and empty alignments in the remaining cases, mirroring the distribution of the underlying randomness. This is however interesting as a depiction of a real life situation where the noise is to some degree uncertain. The percentage of correctly aligned reads over 100 runs with the regular algorithm and a variety of settings is seen in figure \ref{fig:correctness_both}. In this set of tests we also include the results from the heuristical algorithm, shown in \ref{fig:correctness_both_heur}
 \begin{figure}[!hb]
+\captionsetup[subfigure]{justification=centering}
   \begin{subfigure}[t]{0.49\textwidth}
   \begin{center}
     \begin{tikzpicture}[every node/.style={anchor=base,text depth=.5ex,text height=1.55em,text width=1.55em},align=center,text centered, trim axis left, trim axis right]
@@ -389,8 +416,8 @@ In the previous tests we have guaranteed correct results through the tuning of i
       \node[draw=none] at (0.5, -0.75) {$p$};
       \node[draw=none] at (-3, 3.25) {$\lambda$};
     \end{tikzpicture}
-  \end{center}
-  \subcaption{\texttt{-{}-heuristical=false}}
+  \subcaption{Results from the tool with default \\settings}
+\end{center}
   \label{fig:correctness_both}
 
   \hfill
@@ -409,20 +436,24 @@ In the previous tests we have guaranteed correct results through the tuning of i
       };
       \node[draw=none] at (0.5, -0.75) {};
     \end{tikzpicture}
+  \subcaption{Results from the tool run with \\the parameter\texttt{-{}-heuristical=true}}
   \end{center}
-  \subcaption{\texttt{-{}-heuristical=true}}
   \label{fig:correctness_both_heur}
   \end{subfigure}
-  \caption[Percentage of correctly mapped reads]{Percentage of correctly aligned reads as a function of both $p$ and $\lambda$ varies}
+  \caption[Percentage of correctly mapped reads]{Percentage of correctly aligned reads as a function of both $p$ and $\lambda$}
   \label{fig:correctness}
 \end{figure}
 \clearpage
 \section{Comparison with the sequence graphs tool}
-In this section we will compare the GraphGenome tool with the sequence graphs tool (sg) created by Novak et al. as an implementation of the algorithm presented in the article "Canonical, Stable, General Mapping using Context Schemes". This might seem like a section which should have been granted more space in this chapter. There are several specific reasons this is not the case: First off the tool is listed as unfinished by the creators on their github page. Secondly, we only got the tool running on graphs a fraction of the size compared to the remaining tests in this section. Lastly we previously discovered a large overhead following the serialization of the index, a process we have not focused on in this thesis. The time comparison between the tools are found by timing the entire execution, where we see alot of room for overhead such as this. However, the comparison is still included as we hope to see underlying factors which can create a setting for the conceptual comparison done in section \ref{sec:conceptual_comparison}. The two tools were compared in building the index and doing an alignment, the results can be seen in respectively figure \ref{fig:comparison_build} and \ref{fig:comparison_align}. Because the sg tool has limitations with regards to graph size, we have introduced several smaller sample fasta-files found in their test-folder as input data. The time spent by our tool has been divided into "functional parts" and file I/O to indicate the amount of overhead expected in the operations.
+In this section we will compare the GraphGenome tool with the sequence graphs tool (sg) created by Novak et al. as an implementation of the algorithm presented in the article "Canonical, Stable, General Mapping using Context Schemes". On the github page \cite{sg_git} the creators state:
+\begin{displayquote}
+Indeed, the tool to align sequences to the index is currently unfinished.
+\end{displayquote}
+Additionally, we did not manage to run the tool on the larger datasets. We have earlier seen a large overhead related to operations we do not consider parts of the algorithm itself\footnote{The file interactions seen in section \ref{sec:building_the_index}}. Because we compare the tools based on total execution time, the results are prone to this kind of overhead. For these reasons the sg tool has not been used as a benchmark for all the tests in this thesis. The two tools were compared in building the index and doing an alignment, the results can be seen in respectively figure \ref{fig:comparison_build} and \ref{fig:comparison_align}. Because of the limitations with regards to graph size, we have introduced several smaller sample fasta-files found in their test-folder as input data. We have also divided the execution time of our tool into algorithm time and file I/O to indicate the level of overhead which is expected.
 \label{sec:comparison_tools}
 \begin{figure}[!hb]
   \begin{tikzpicture}[trim axis left, trim axis right]
-    \begin{axis}[scale only axis,height=0.5\textwidth,width=0.5\textwidth,xmin=140,ymin=0,xmax=7000,ymax=2750,scaled ticks=false,xtick={140,1000,3000,5000,7000}, legend pos=north west]
+    \begin{axis}[scale only axis,height=0.5\textwidth,width=0.5\textwidth,xmin=140,ymin=0,xmax=7000,ymax=2750,scaled ticks=false,xtick={140,1000,3000,5000,7000}, legend pos=north west, xlabel={$G$}, ylabel={Milliseconds}]
       \addplot[color=blue,mark=*, name path=index] coordinates {
       	(140,4+11)
         (700,8+22)
@@ -455,13 +486,13 @@ In this section we will compare the GraphGenome tool with the sequence graphs to
       \addlegendentry{Sequence graphs tool time}
     \end{axis}
   \end{tikzpicture}
-  \caption{Time spent building the index by the two tools}
+  \caption{Time spent building the index by the two tools. The red line indicates the total time spent by the GraphGenome tool. The red section indicates file I/O, the blue section indicates time spent by the algorithm}
   \label{fig:comparison_build}
 \end{figure}
 \clearpage\noindent
 \begin{figure}[H]
   \begin{tikzpicture}[trim axis left, trim axis right]
-    \begin{axis}[scale only axis,height=0.5\textwidth,width=0.5\textwidth,xmin=140,ymin=0,xmax=7000,ymax=2500,scaled ticks=false,xtick={140,1000,3000,5000,7000}, legend pos=north west]
+    \begin{axis}[scale only axis,height=0.5\textwidth,width=0.5\textwidth,xmin=140,ymin=0,xmax=7000,ymax=2500,scaled ticks=false,xtick={140,1000,3000,5000,7000}, legend pos=north west, xlabel={$G$}, ylabel={Milliseconds}]
       \addplot[color=blue,mark=*, name path=index] coordinates {
       	(140,28)
         (700,28)
@@ -501,7 +532,7 @@ In this section we will compare the GraphGenome tool with the sequence graphs to
 The sg tool has a \texttt{-{}-mismatch} parameter which works similarly to our \texttt{-{}-error-margin} parameter by putting a bound on the allowed number of mismatches. The accuracy of the two tools over varying amounts of noise with a set mismatch and error-margin parameter can be seen in figure \ref{fig:comparison_correctness}.
 \begin{figure}[H]
   \begin{tikzpicture}[trim axis left,trim axis right]
-    \begin{axis}[scale only axis,height=0.7\textwidth,width=0.7\textwidth,xmin=0,ymin=0,xmax=0.05,ymax=100,scaled ticks=false,xtick={0.01,0.03,0.05}, ylabel={Percentage of correctly mapped reads}, xlabel={$p$}, legend style={font=\small, at={(0.57,0.21)}}]
+    \begin{axis}[scale only axis,height=0.5\textwidth,width=0.5\textwidth,xmin=0,ymin=0,xmax=0.05,ymax=100,scaled ticks=false,xtick={0.01,0.03,0.05}, ytick={0,20,40,60,80,100}, yticklabels={0\%,20\%,40\%,60\%,80\%,100\%},ylabel={Percentage of correctly mapped reads}, xlabel={$p$}, legend style={font=\small, at={(0.85,-0.2)}}]
       \addplot[color=blue] coordinates {
         (0, 100-0)
         (0.01,100-7)
@@ -510,7 +541,7 @@ The sg tool has a \texttt{-{}-mismatch} parameter which works similarly to our \
         (0.04,100-68)
         (0.05,100-78)
       };
-      \addplot[color=green] coordinates {
+      \addplot[color=blue, style=dashed] coordinates {
         (0, 100)
         (0.01, 97)
         (0.02, 97)
@@ -531,7 +562,7 @@ The sg tool has a \texttt{-{}-mismatch} parameter which works similarly to our \
       \addlegendentry{Sequence graphs}
     \end{axis}
   \end{tikzpicture}
-  \caption{Correctly mapped reads from the two tools with $\lambda=2$}
+  \caption{Correctly mapped reads from the two tools with $\lambda=2$. The dashed line indicates the accuracy of the GraphGenome tool with the parameter \texttt{-{}-heuristical=true}}
   \label{fig:comparison_correctness}
 \end{figure}
 \end{document}
