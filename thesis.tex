@@ -1,4 +1,4 @@
-\documentclass[UKenglish]{ifimaster}  
+\documentclass[UKenglish]{ifimaster}
 \usepackage[utf8]{inputenc}           
 \usepackage[T1]{fontenc,url}
 \usepackage{mdframed}
@@ -10,6 +10,7 @@
 \usepackage{color,soul}
 \usepackage{wrapfig}
 \usepackage{subcaption}
+\usepackage{dsfont}
 \usepackage{listings}
 \usepackage{floatrow,subfig}
 \usepackage{tabularx}
@@ -21,7 +22,6 @@
 \usepackage{csquotes}
 \usepackage[]{algorithm2e}
 \usepackage[nomessages]{fp}
-\urlstyle{sf}
 \usepackage{babel,textcomp,csquotes,ifimasterforside,varioref,graphicx}
 \usepackage[backend=biber,style=numeric-comp]{biblatex}
 \usetikzlibrary{automata,arrows,positioning,matrix}
@@ -43,6 +43,12 @@
     \node [fill=green!\col] {#1};
   }
 }
+
+% Fix footnotes breaking pages
+\interfootnotelinepenalty=10000
+
+% Fix footnote indentation
+\usepackage[hang,flushmargin]{footmisc}
 
 
 \newtheoremstyle{break}
